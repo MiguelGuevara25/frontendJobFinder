@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { enviroment } from '../../enviroments/enviroment';
 import { HttpClient } from '@angular/common/http';
 import { Habilidad } from '../models/habilidad';
+import { environment } from '../../environments/environment';
 
-const base_url = enviroment.base;
+const base_url = environment.base;
 @Injectable({
   providedIn: 'root',
 })

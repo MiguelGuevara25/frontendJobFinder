@@ -1,4 +1,25 @@
-/* You can add global styles to this file, and also import other style files */
+.contenedor-titulo {
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.titulo-centrado {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1b1f23;
+}
+
+.contenedor-tabla {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.tabla-estilizada {
+  width: 100%;
+  border-collapse: collapse;
+}
