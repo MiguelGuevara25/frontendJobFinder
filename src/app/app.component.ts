@@ -5,7 +5,7 @@ import { HabilidadComponent } from "./components/habilidad/habilidad.component";
 
 @Component({
   selector: 'app-root',
-  imports: [HabilidadComponent],
+  imports: [HabilidadComponent, RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
