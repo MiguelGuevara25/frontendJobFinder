@@ -1,3 +1,19 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Estilo general */
+html, body {
+  height: 100%;
+  font-family: 'Roboto', sans-serif;
+  background-color: #f9f9f9;
+  color: #1b1f23;
+}
+
+/* Título */
 .contenedor-titulo {
   text-align: center;
   margin-top: 40px;
@@ -10,16 +26,55 @@
   color: #1b1f23;
 }
 
+/* Contenedor */
 .contenedor-tabla {
   max-width: 900px;
   margin: 0 auto;
   padding: 24px;
-  background-color: white;
+  background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.tabla-estilizada {
+/* Formulario */
+.formulario-estilizado {
   width: 100%;
-  border-collapse: collapse;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+mat-form-field {
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Botón */
+.example-button-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+button[mat-raised-button] {
+  text-transform: none;
+  font-weight: 600;
+}
+
+/* Animación shake */
+@keyframes shake {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-6px); }
+  80% { transform: translateX(6px); }
+  100% { transform: translateX(0); }
+}
+
+.shake {
+  animation: shake 0.3s ease;
 }
