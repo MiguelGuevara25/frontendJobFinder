@@ -24,7 +24,7 @@ export class HabilidadService {
   }
 
   getList() {
-    return this.listaCambio.asObservable;
+    return this.listaCambio.asObservable();
   }
 
   setList(listaNueva: Habilidad[]) {
@@ -37,5 +37,9 @@ export class HabilidadService {
 
   update(h: Habilidad) {
     return this.http.put<Habilidad>(this.url, h);
+  }
+
+  delete(id: number) {
+    return this.http.delete(`${this.url}/${id}`);
   }
 }
