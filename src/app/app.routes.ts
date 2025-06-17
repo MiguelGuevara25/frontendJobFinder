@@ -5,20 +5,22 @@ import { EstudioComponent } from './components/estudio/estudio.component';
 import { ExperienciaComponent } from './components/experiencia/experiencia.component';
 import { InsertareditarComponent } from './components/certificado/insertareditar/insertareditar.component';
 import { InsertareditarHabilidadComponent } from './components/habilidad/insertareditar/insertareditar.component';
+import { InsertareditarestudioComponent } from './components/estudio/insertareditarestudio/insertareditarestudio.component';
 
 export const routes: Routes = [
-    {
+  {
     path: 'certificados',
     component: CertificadoComponent,
     children: [
       {
-      path:'insertareditar',component:InsertareditarComponent
-    },
-    {
-      path:'ediciones/:id',component:InsertareditarComponent
-    }
-    
-  ],
+        path: 'insertareditar',
+        component: InsertareditarComponent,
+      },
+      {
+        path: 'ediciones/:id',
+        component: InsertareditarComponent,
+      },
+    ],
   },
 
   {
@@ -38,6 +40,16 @@ export const routes: Routes = [
   {
     path: 'estudios',
     component: EstudioComponent,
+    children: [
+      {
+        path: 'insertar',
+        component: InsertareditarestudioComponent,
+      },
+      {
+        path: 'ediciones/:id',
+        component: InsertareditarestudioComponent,
+      },
+    ],
   },
   {
     path: 'experiencias',
