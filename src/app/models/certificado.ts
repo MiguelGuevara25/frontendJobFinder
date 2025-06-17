@@ -1,7 +1,7 @@
 export class Certificado{
-    id: number = 0;
-    name: string= '';
-    company: string= '';
-    startDate: Date = new Date();
-    endDate: Date = new Date();
+    idCertificado: number = 0;
+    nombreCertificado: string= '';
+    entidadEmisoraCertificado: string= '';
+    fechaEmisionCertificado: Date = new Date();
+    fechaVencimientoCertificado: Date = new Date();
 }
