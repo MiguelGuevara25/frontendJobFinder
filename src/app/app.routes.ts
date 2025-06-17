@@ -3,6 +3,8 @@ import { CertificadoComponent } from './components/certificado/certificado.compo
 import { HabilidadComponent } from './components/habilidad/habilidad.component';
 import { EstudioComponent } from './components/estudio/estudio.component';
 import { ExperienciaComponent } from './components/experiencia/experiencia.component';
+import { InsertareditarComponent } from './components/certificado/insertareditar/insertareditar.component';
+import { InsertareditarHabilidadComponent } from './components/habilidad/insertareditar/insertareditar.component';
 
 export const routes: Routes = [
     {
@@ -25,11 +27,11 @@ export const routes: Routes = [
     children: [
       {
         path: 'insertar',
-        component: InsertareditarComponent,
+        component: InsertareditarHabilidadComponent,
       },
       {
         path: 'ediciones/:id',
-        component: InsertareditarComponent,
+        component: InsertareditarHabilidadComponent,
       },
     ],
   },

@@ -32,7 +32,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './insertareditar.component.html',
   styleUrl: './insertareditar.component.css',
 })
-export class InsertareditarComponent implements OnInit {
+export class InsertareditarHabilidadComponent implements OnInit {
   form: FormGroup = new FormGroup({});
   habilidad: Habilidad = new Habilidad();
   id: number = 0;
