@@ -19,7 +19,7 @@ import { MatIconModule } from '@angular/material/icon';
 export class ListarcertificadoComponent implements OnInit{
   dataSource: MatTableDataSource<Certificado> = new MatTableDataSource();
 
-  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6'];
+  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7'];
   constructor(private cS: CertificadoService) {}
   ngOnInit(): void {
     this.cS.list().subscribe((data) => {
@@ -27,6 +27,13 @@ export class ListarcertificadoComponent implements OnInit{
     });
     this.cS.getList().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
+    });
+  }
+  eliminar(id: number) {
+    this.cS.delete(id).subscribe((data) => {
+      this.cS.list().subscribe((data) => {
+        this.cS.setList(data);
+      });
     });
   }
 

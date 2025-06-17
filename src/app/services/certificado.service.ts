@@ -31,4 +31,7 @@ export class CertificadoService {
   update(c: Certificado) {
     return this.http.put(this.url, c);
   }
+  delete(id: number) {
+    return this.http.delete(`${this.url}/${id}`);
+  }
 }
