@@ -78,3 +78,6 @@ button[mat-raised-button] {
 .shake {
   animation: shake 0.3s ease;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
