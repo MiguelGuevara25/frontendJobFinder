@@ -13,6 +13,9 @@ export const routes: Routes = [
       {
       path:'insertareditar',component:InsertareditarComponent
     },
+    {
+      path:'ediciones/:id',component:InsertareditarComponent
+    }
     
   ],
   },
