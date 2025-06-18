@@ -34,4 +34,5 @@ export class CertificadoService {
   delete(id: number) {
     return this.http.delete(`${this.url}/${id}`);
   }
+ 
 }
