@@ -1,0 +1,43 @@
+<div class="contenedor-titulo">
+  <h1 class="titulo-centrado">Registro de Habilidades</h1>
+</div>
+
+<div class="contenedor-tabla">
+  <form [formGroup]="form" (submit)="aceptar()" class="formulario-estilizado">
+    @if (edicion) {
+    <mat-form-field
+      appearance="fill"
+      class="form-control-id"
+      [ngClass]="{ shake: form.get('id')?.invalid && form.get('id')?.touched }"
+    >
+      <mat-label>ID</mat-label>
+      <input matInput placeholder="ID" formControlName="id" />
+      @if (form.get('id')?.hasError('required')) {
+      <mat-error>El código es obligatorio</mat-error>
+      }
+    </mat-form-field>
+    }
+
+    <mat-form-field
+      appearance="fill"
+      class="form-control-name"
+      [ngClass]="{
+        shake: form.get('name')?.invalid && form.get('name')?.touched
+      }"
+    >
+      <mat-label>Aplicación</mat-label>
+      <input
+        matInput
+        placeholder="Nombre de la habilidad"
+        formControlName="name"
+      />
+      @if (form.get('name')?.hasError('required')) {
+      <mat-error>La aplicación es obligatoria</mat-error>
+      }
+    </mat-form-field>
+
+    <div class="example-button-row">
+      <button mat-raised-button color="primary">Guardar</button>
+    </div>
+  </form>
+</div>

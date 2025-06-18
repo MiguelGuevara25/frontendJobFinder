@@ -1,0 +1,127 @@
+<div class="contenedor-titulo">
+  <h1 class="titulo-centrado">Registro de Experiencias</h1>
+</div>
+
+<div class="contenedor-tabla">
+  <form [formGroup]="form" (ngSubmit)="aceptar()" class="formulario-estilizado">
+    <!-- Campo ID (condicional) -->
+    <div *ngIf="edicion">
+      <mat-form-field
+        appearance="fill"
+        class="form-control-id"
+        [ngClass]="{
+          shake: form.get('codigo')?.invalid && form.get('codigo')?.touched
+        }"
+      >
+        <mat-label>ID</mat-label>
+        <input matInput placeholder="ID" formControlName="codigo" />
+        <mat-error *ngIf="form.get('codigo')?.hasError('required')">
+          El código es obligatorio
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Campo Puesto del Estudio -->
+    <mat-form-field
+      appearance="fill"
+      class="form-control-name"
+      [ngClass]="{
+        shake: form.get('puesto')?.invalid && form.get('puesto')?.touched
+      }"
+    >
+      <mat-label>Puesto</mat-label>
+      <input
+        matInput
+        placeholder="Nombre del Puesto"
+        formControlName="puesto"
+      />
+      <mat-error *ngIf="form.get('puesto')?.hasError('required')">
+        El Puesto es obligatorio
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Campo de Empresa -->
+    <mat-form-field
+      class="example-full-width"
+      [ngClass]="{
+        shake: form.get('empresa')?.invalid && form.get('empresa')?.touched
+      }"
+    >
+      <mat-label>Empresa</mat-label>
+      <input
+        matInput
+        placeholder="Nombre de la empresa"
+        formControlName="empresa"
+      />
+      <mat-error *ngIf="form.get('empresa')?.hasError('required')">
+        La empresa es obligatoria
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Campo Fecha Inicio -->
+    <mat-form-field
+      [ngClass]="{
+        shake:
+          form.get('fechaInicio')?.invalid && form.get('fechaInicio')?.touched
+      }"
+    >
+      <mat-label>Fecha Inicio:</mat-label>
+      <input
+        matInput
+        [matDatepicker]="pickerInicio"
+        formControlName="fechaInicio"
+      />
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="pickerInicio"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #pickerInicio></mat-datepicker>
+      <mat-error *ngIf="form.get('fechaInicio')?.hasError('required')">
+        La fecha de inicio es obligatoria
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Campo Fecha Fin -->
+    <mat-form-field
+      [ngClass]="{
+        shake: form.get('fechaFin')?.invalid && form.get('fechaFin')?.touched
+      }"
+    >
+      <mat-label>Fecha Fin:</mat-label>
+      <input matInput [matDatepicker]="pickerFin" formControlName="fechaFin" />
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="pickerFin"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #pickerFin></mat-datepicker>
+      <mat-error *ngIf="form.get('fechaFin')?.hasError('required')">
+        La fecha de fin es obligatoria
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Campo de Descripcion -->
+    <mat-form-field
+      class="example-full-width"
+      [ngClass]="{
+        shake: form.get('descripcion')?.invalid && form.get('descripcion')?.touched
+      }"
+    >
+      <mat-label>Descripcion</mat-label>
+      <input
+        matInput
+        placeholder="Descripcion"
+        formControlName="descripcion"
+      />
+      <mat-error *ngIf="form.get('descripcion')?.hasError('required')">
+        La descripcion es obligatoria
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Botón Guardar -->
+    <div class="example-button-row">
+      <button mat-raised-button color="primary">Guardar</button>
+    </div>
+  </form>
+</div>
