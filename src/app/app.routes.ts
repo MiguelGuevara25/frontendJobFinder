@@ -6,6 +6,7 @@ import { ExperienciaComponent } from './components/experiencia/experiencia.compo
 import { InsertareditarComponent } from './components/certificado/insertareditar/insertareditar.component';
 import { InsertareditarHabilidadComponent } from './components/habilidad/insertareditar/insertareditar.component';
 import { InsertareditarestudioComponent } from './components/estudio/insertareditarestudio/insertareditarestudio.component';
+import { InsertarexperienciaComponent } from './components/experiencia/insertarexperiencia/insertarexperiencia.component';
 
 export const routes: Routes = [
   {
@@ -54,5 +55,15 @@ export const routes: Routes = [
   {
     path: 'experiencias',
     component: ExperienciaComponent,
+    children: [
+      {
+        path: 'insertar',
+        component: InsertarexperienciaComponent,
+      },
+      {
+        path: 'ediciones/:id',
+        component: InsertarexperienciaComponent
+      }
+    ],
   },
 ];
