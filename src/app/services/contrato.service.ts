@@ -10,7 +10,7 @@ const base_url = environment.base;
   providedIn: 'root',
 })
 export class ContratoService {
-  private url = `${base_url}/entrevistas`;
+  private url = `${base_url}/contratos`;
   private listaCambio = new Subject<Contrato[]>();
 
   constructor(private http: HttpClient) {}
