@@ -108,7 +108,7 @@ export class InsertarEditarContratoComponent {
           endDate: new FormControl(data.endDate),
           salary: new FormControl(data.salary),
           contractType: new FormControl(data.contractType),
-          empresa: new FormControl(data.empresa),
+          empresa: new FormControl(data.empresa.id),
         });
       });
     }

@@ -12,6 +12,8 @@ import { EntrevistaComponent } from './components/entrevista/entrevista.componen
 import { InsertarEditarEntrevistaComponent } from './components/entrevista/insertar-editar-entrevista/insertar-editar-entrevista.component';
 import { ContratoComponent } from './components/contrato/contrato.component';
 import { InsertarEditarContratoComponent } from './components/contrato/insertar-editar-contrato/insertar-editar-contrato.component';
+import { DetalleComponent } from './components/detalle/detalle.component';
+import { InsertarEditarDetalleComponent } from './components/detalle/insertar-editar-detalle/insertar-editar-detalle.component';
 
 export const routes: Routes = [
   {
@@ -109,6 +111,20 @@ export const routes: Routes = [
       {
         path: 'ediciones/:id',
         component: InsertarEditarContratoComponent,
+      },
+    ],
+  },
+  {
+    path: 'detalles',
+    component: DetalleComponent,
+    children: [
+      {
+        path: 'insertar',
+        component: InsertarEditarDetalleComponent,
+      },
+      {
+        path: 'ediciones/:id',
+        component: InsertarEditarDetalleComponent,
       },
     ],
   },
