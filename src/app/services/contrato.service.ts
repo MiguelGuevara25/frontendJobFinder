@@ -1,6 +1,6 @@
 import { environment } from '../../environments/environment';
-import { Entrevista } from '../models/entrevista';
 import { HttpClient } from '@angular/common/http';
+import { Contrato } from '../models/contrato';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
@@ -9,34 +9,34 @@ const base_url = environment.base;
 @Injectable({
   providedIn: 'root',
 })
-export class EntrevistaService {
+export class ContratoService {
   private url = `${base_url}/entrevistas`;
-  private listaCambio = new Subject<Entrevista[]>();
+  private listaCambio = new Subject<Contrato[]>();
 
   constructor(private http: HttpClient) {}
 
   list() {
-    return this.http.get<Entrevista[]>(this.url);
+    return this.http.get<Contrato[]>(this.url);
   }
 
-  insert(e: Entrevista) {
-    return this.http.post(this.url, e);
+  insert(c: Contrato) {
+    return this.http.post(this.url, c);
   }
 
   listId(id: number) {
-    return this.http.get<Entrevista>(`${this.url}/${id}`);
+    return this.http.get<Contrato>(`${this.url}/${id}`);
   }
 
   getList() {
     return this.listaCambio.asObservable();
   }
 
-  setList(listaNueva: Entrevista[]) {
+  setList(listaNueva: Contrato[]) {
     this.listaCambio.next(listaNueva);
   }
 
-  update(e: Entrevista) {
-    return this.http.put(this.url, e);
+  update(c: Contrato) {
+    return this.http.put(this.url, c);
   }
 
   delete(id: number) {

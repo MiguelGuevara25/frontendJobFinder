@@ -10,6 +10,8 @@ import { InsertareditarestudioComponent } from './components/estudio/insertaredi
 import { InsertarexperienciaComponent } from './components/experiencia/insertarexperiencia/insertarexperiencia.component';
 import { EntrevistaComponent } from './components/entrevista/entrevista.component';
 import { InsertarEditarEntrevistaComponent } from './components/entrevista/insertar-editar-entrevista/insertar-editar-entrevista.component';
+import { ContratoComponent } from './components/contrato/contrato.component';
+import { InsertarEditarContratoComponent } from './components/contrato/insertar-editar-contrato/insertar-editar-contrato.component';
 
 export const routes: Routes = [
   {
@@ -93,6 +95,20 @@ export const routes: Routes = [
       {
         path: 'ediciones/:id',
         component: InsertarEditarEntrevistaComponent,
+      },
+    ],
+  },
+  {
+    path: 'contratos',
+    component: ContratoComponent,
+    children: [
+      {
+        path: 'insertar',
+        component: InsertarEditarContratoComponent,
+      },
+      {
+        path: 'ediciones/:id',
+        component: InsertarEditarContratoComponent,
       },
     ],
   },
