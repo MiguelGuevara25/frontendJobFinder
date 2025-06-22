@@ -78,22 +78,13 @@
 
       <br />
 
-      <!-- <mat-form-field>
-        <mat-label>Favorite food</mat-label>
-        <mat-select>
-          @for (food of foods; track food) {
-          <mat-option [value]="food.value">{{ food.viewValue }}</mat-option>
-          }
-        </mat-select>
-      </mat-form-field> -->
-
-      <!-- Campo Result -->
+      <!-- Campo Empresa -->
       <mat-form-field>
         <mat-label>Empresa</mat-label>
         <mat-select formControlName="empresa">
-          <mat-option>Empresa 1</mat-option>
-          <mat-option>Empresa 2</mat-option>
-          <mat-option>Empresa 3</mat-option>
+          @for (empresa of empresas; track empresa) {
+          <mat-option [value]="empresa.id">{{ empresa.name }}</mat-option>
+          }
         </mat-select>
 
         <mat-error *ngIf="form.get('empresa')?.hasError('required')">

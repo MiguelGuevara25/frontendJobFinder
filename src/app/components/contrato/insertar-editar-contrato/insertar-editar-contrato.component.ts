@@ -18,6 +18,7 @@ import { ContratoService } from '../../../services/contrato.service';
 import { MatSelectModule } from '@angular/material/select';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { EmpresaService } from '../../../services/empresa.service';
+import { Empresa } from '../../../models/empresa';
 
 @Component({
   selector: 'app-insertar-editar-contrato',
@@ -38,6 +39,7 @@ import { EmpresaService } from '../../../services/empresa.service';
 export class InsertarEditarContratoComponent {
   form: FormGroup = new FormGroup({});
   contrato: Contrato = new Contrato();
+  empresas: Empresa[] = [];
 
   id: number = 0;
   edicion: boolean = false;
@@ -64,6 +66,10 @@ export class InsertarEditarContratoComponent {
       salary: ['', Validators.required],
       contractType: ['', Validators.required],
       empresa: ['', Validators.required],
+    });
+
+    this.eS.list().subscribe((data) => {
+      this.empresas = data;
     });
   }
 
