@@ -51,10 +51,7 @@
       <ng-container matColumnDef="c6">
         <th mat-header-cell *matHeaderCellDef>Actualizar</th>
         <td mat-cell *matCellDef="let element">
-          <button
-            mat-mini-fab
-            [routerLink]="['ediciones', element.idCertificado]"
-          >
+          <button mat-mini-fab [routerLink]="['ediciones', element.id]">
             <mat-icon>edit</mat-icon>
           </button>
         </td>
@@ -63,7 +60,7 @@
       <ng-container matColumnDef="c7">
         <th mat-header-cell *matHeaderCellDef>Eliminar</th>
         <td mat-cell *matCellDef="let element">
-          <button mat-mini-fab (click)="eliminar(element.idCertificado)">
+          <button mat-mini-fab (click)="eliminar(element.id)">
             <mat-icon>delete</mat-icon>
           </button>
         </td>

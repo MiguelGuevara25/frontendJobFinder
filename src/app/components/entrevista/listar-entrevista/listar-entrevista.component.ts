@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Entrevista } from '../../../models/entrevista';
 import { EntrevistaService } from '../../../services/entrevista.service';
@@ -21,10 +21,12 @@ import { MatIconModule } from '@angular/material/icon';
   templateUrl: './listar-entrevista.component.html',
   styleUrl: './listar-entrevista.component.css',
 })
-export class ListarEntrevistaComponent {
+export class ListarEntrevistaComponent implements OnInit {
   dataSource: MatTableDataSource<Entrevista> = new MatTableDataSource();
   displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7'];
+
   constructor(private eS: EntrevistaService) {}
+
   ngOnInit(): void {
     this.eS.list().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
