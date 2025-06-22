@@ -8,6 +8,8 @@ import { CursoComponent } from './components/curso/curso.component';
 import { InsertareditarHabilidadComponent } from './components/habilidad/insertareditar/insertareditar.component';
 import { InsertareditarestudioComponent } from './components/estudio/insertareditarestudio/insertareditarestudio.component';
 import { InsertarexperienciaComponent } from './components/experiencia/insertarexperiencia/insertarexperiencia.component';
+import { EntrevistaComponent } from './components/entrevista/entrevista.component';
+import { InsertarEditarEntrevistaComponent } from './components/entrevista/insertar-editar-entrevista/insertar-editar-entrevista.component';
 
 export const routes: Routes = [
   {
@@ -77,6 +79,20 @@ export const routes: Routes = [
       {
         path: 'ediciones/:id',
         component: InsertarexperienciaComponent,
+      },
+    ],
+  },
+  {
+    path: 'entrevista',
+    component: EntrevistaComponent,
+    children: [
+      {
+        path: 'insertar',
+        component: InsertarEditarEntrevistaComponent,
+      },
+      {
+        path: 'ediciones/:id',
+        component: InsertarEditarEntrevistaComponent,
       },
     ],
   },
