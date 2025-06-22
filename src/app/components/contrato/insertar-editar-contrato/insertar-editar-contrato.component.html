@@ -1,1 +1,110 @@
-<p>insertar-editar-contrato works!</p>
+<div class="container">
+  <div style="text-align: center; margin: 5%">
+    <h1>Registro de certificados</h1>
+  </div>
+
+  <div style="text-align: center; margin: 5%">
+    <form [formGroup]="form" (submit)="aceptar()">
+      <!-- Campo ID (solo si está en edición) -->
+      <mat-form-field class="example-full-width" *ngIf="edicion">
+        <mat-label>ID</mat-label>
+        <input matInput formControlName="idContrato" />
+        <mat-error *ngIf="form.get('idContrato')?.hasError('required')">
+          El código es obligatorio
+        </mat-error>
+      </mat-form-field>
+
+      <br />
+
+      <!-- Campo Fecha de inicio -->
+      <mat-form-field class="example-full-width">
+        <mat-label>Fecha de inicio</mat-label>
+        <input
+          matInput
+          [matDatepicker]="pickerFechaInicio"
+          formControlName="startDate"
+        />
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="pickerFechaInicio"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #pickerFechaInicio></mat-datepicker>
+        <mat-error *ngIf="form.get('startDate')?.hasError('required')">
+          La fecha de inicio es obligatoria
+        </mat-error>
+      </mat-form-field>
+
+      <br />
+
+      <!-- Campo Fecha de término -->
+      <mat-form-field class="example-full-width">
+        <mat-label>Fecha de término</mat-label>
+        <input
+          matInput
+          [matDatepicker]="pickerFechaTermino"
+          formControlName="endDate"
+        />
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="pickerFechaTermino"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #pickerFechaTermino></mat-datepicker>
+        <mat-error *ngIf="form.get('endDate')?.hasError('required')">
+          La fecha de término es obligatoria
+        </mat-error>
+      </mat-form-field>
+
+      <br />
+
+      <!-- Campo Salario -->
+      <mat-form-field class="example-full-width">
+        <mat-label>Salario</mat-label>
+        <input matInput formControlName="salary" type="number" />
+        <mat-error *ngIf="form.get('salary')?.hasError('required')">
+          El salario es obligatoria
+        </mat-error>
+      </mat-form-field>
+
+      <br />
+
+      <!-- Campo Tipo de contrato -->
+      <mat-form-field class="example-full-width">
+        <mat-label>Tipo de contrato</mat-label>
+        <input matInput formControlName="contractType" />
+        <mat-error *ngIf="form.get('contractType')?.hasError('required')">
+          El tipo de contrato es obligatoria
+        </mat-error>
+      </mat-form-field>
+
+      <br />
+
+      <!-- <mat-form-field>
+        <mat-label>Favorite food</mat-label>
+        <mat-select>
+          @for (food of foods; track food) {
+          <mat-option [value]="food.value">{{ food.viewValue }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field> -->
+
+      <!-- Campo Result -->
+      <mat-form-field>
+        <mat-label>Empresa</mat-label>
+        <mat-select formControlName="empresa">
+          <mat-option>Empresa 1</mat-option>
+          <mat-option>Empresa 2</mat-option>
+          <mat-option>Empresa 3</mat-option>
+        </mat-select>
+
+        <mat-error *ngIf="form.get('empresa')?.hasError('required')">
+          La empresa es obligatoria
+        </mat-error>
+      </mat-form-field>
+
+      <br />
+
+      <!-- Botón -->
+      <button mat-raised-button color="primary" type="submit">Aceptar</button>
+    </form>
+  </div>
+</div>

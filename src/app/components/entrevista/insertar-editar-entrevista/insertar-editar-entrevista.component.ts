@@ -83,7 +83,7 @@ export class InsertarEditarEntrevistaComponent implements OnInit {
           });
         });
       }
-      this.router.navigate(['entrevistas']);
+      this.router.navigate(['entrevista']);
     }
   }
 
