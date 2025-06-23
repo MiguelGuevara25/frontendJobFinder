@@ -1,17 +1,18 @@
 <div class="container">
   <div style="text-align: center; margin: 5%">
-    <h1>Registro de usuario</h1>
+    <h1 *ngIf="!edicion">Registro de usuario</h1>
+    <h1 *ngIf="edicion">Actualizar usuario</h1>
   </div>
 
   <div style="text-align: center; margin: 5%">
     <form [formGroup]="form" (submit)="aceptar()">
-      <mat-form-field class="example-full-width">
+      <mat-form-field class="example-full-width" *ngIf="edicion">
         <mat-label>ID</mat-label>
         <input matInput formControlName="codigo" />
         <mat-error *ngIf="form.get('codigo')?.hasError('required')">
           El código es obligatorio!!
         </mat-error>
-      </mat-form-field>
+      </mat-form-field>|
       <br />
 
       <mat-form-field class="example-full-width">
@@ -124,7 +125,9 @@
         </mat-error>
       </mat-form-field>
       <br />
+
       <button matButton="filled">Aceptar</button>
+      <button matButton="filled" (click)="cancelar()">Cancelar</button>
     </form>
   </div>
 </div>
