@@ -19,6 +19,145 @@ import { InsertareditarCertificadoComponent } from './components/certificado/ins
 import { InsertarexperienciaComponent } from './components/experiencia/insertarexperiencia/insertarexperiencia.component';
 import { EmpresaComponent } from './components/empresa/empresa.component';
 import { ListarEmpresaComponent } from './components/empresa/listar-empresa/listar-empresa.component';
+import { InsertareditarcursoComponent } from './components/curso/insertareditarcurso/insertareditarcurso.component';
+
+export const routes: Routes = [
+    {
+        path: '', redirectTo: 'usuarios', pathMatch: 'full'
+    },
+    {
+        path: 'certificados',
+        component: CertificadoComponent,
+        children: [
+            {
+                path: 'insertareditar',
+                component: InsertareditarCertificadoComponent,
+            },
+            {
+                path: 'ediciones/:id',
+                component: InsertareditarCertificadoComponent,
+            },
+        ],
+    },
+    {
+        path: 'cursos',
+        component: CursoComponent,
+        children: [
+            {
+                path: 'insertar',
+                component: InsertareditarcursoComponent,
+            }
+        ]
+    },
+    {
+        path: 'habilidades',
+        component: HabilidadComponent,
+        children: [
+            {
+                path: 'insertar',
+                component: InsertareditarHabilidadComponent,
+            },
+            {
+                path: 'ediciones/:id',
+                component: InsertareditarHabilidadComponent,
+            },
+        ],
+    },
+    {
+        path: 'estudios',
+        component: EstudioComponent,
+        children: [
+            {
+                path: 'insertar',
+                component: InsertareditarestudioComponent,
+            },
+            {
+                path: 'ediciones/:id',
+                component: InsertareditarestudioComponent,
+            },
+        ],
+    },
+    {
+        path: 'experiencias',
+        component: ExperienciaComponent,
+        children: [
+            {
+                path: 'insertar',
+                component: InsertarexperienciaComponent,
+            },
+            {
+                path: 'ediciones/:id',
+                component: InsertarexperienciaComponent,
+            },
+        ],
+    },
+    {
+        path: 'entrevista',
+        component: EntrevistaComponent,
+        children: [
+            {
+                path: 'insertar',
+                component: InsertarEditarEntrevistaComponent,
+            },
+            {
+                path: 'ediciones/:id',
+                component: InsertarEditarEntrevistaComponent,
+            },
+        ],
+    },
+    {
+        path: 'contratos',
+        component: ContratoComponent,
+        children: [
+            {
+                path: 'insertar',
+                component: InsertarEditarContratoComponent,
+            },
+            {
+                path: 'ediciones/:id',
+                component: InsertarEditarContratoComponent,
+            },
+        ],
+    },
+    {
+        path: 'detalles',
+        component: DetalleComponent,
+        children: [
+            {
+                path: 'insertar',
+                component: InsertarEditarDetalleComponent,
+            },
+            {
+                path: 'ediciones/:id',
+                component: InsertarEditarDetalleComponent,
+            },
+        ],
+    },
+    {
+        path: 'usuarios',
+        component: UsuarioComponent,
+        children: [
+            {
+                path: '', component: ListarUsuarioComponent
+            },
+            {
+                path: 'registrar', component: InsertareditarusuarioComponent
+            },
+            {
+                path: 'ediciones/:id', component: InsertareditarusuarioComponent
+            }
+        ],
+    },
+    {
+        path: 'empresa',
+        component: EmpresaComponent,
+        children: [
+            {
+                path: '', component: ListarEmpresaComponent
+            }
+        ],
+    }                                                                                                   
+
 import { ForumComponent } from './components/forum/forum.component';
 import { RolComponent } from './components/rol/rol.component';
 import { ListarrolComponent } from './components/rol/listarrol/listarrol.component';

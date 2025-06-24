@@ -15,7 +15,7 @@ import {
 } from '@angular/material/core';
 import { Certificado } from '../../../models/certificado';
 import { CertificadoService } from '../../../services/certificado.service';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router,  RouterOutlet } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatIconModule } from '@angular/material/icon';
@@ -32,9 +32,10 @@ import { MatButtonModule } from '@angular/material/button';
     MatNativeDateModule,
     MatRadioModule,
     CommonModule,
+    
+
     MatIconModule,
-    MatButtonModule,
-  ],
+    MatButtonModule ],
   templateUrl: './insertareditar.component.html',
   styleUrl: './insertareditar.component.css',
 })
