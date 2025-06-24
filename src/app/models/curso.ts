@@ -1,4 +1,5 @@
 import { Certificado } from "./certificado";
+import { Empresa } from "./empresa";
 
 export class Curso{
     idCurso: number=0;
@@ -6,5 +7,5 @@ export class Curso{
     descripcionCurso: string='';
     plataformaCurso: string='';
     linkCurso: string='';
-    empresa:Certificado= new Certificado();
+    empresa:Empresa= new Empresa();
 }

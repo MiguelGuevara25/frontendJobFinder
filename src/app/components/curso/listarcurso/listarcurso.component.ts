@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+/*import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Curso } from '../../../models/curso';
 import { CommonModule } from '@angular/common';
@@ -24,4 +24,4 @@ export class ListarcursoComponent implements OnInit{
         this.dataSource = new MatTableDataSource(data);
       });
   }
-}
+}*/

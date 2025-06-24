@@ -15,7 +15,13 @@ export class CursoService {
   list() {
       return this.http.get<Curso[]>(this.url);
   }
+  insert(c: Curso) {
+      return this.http.post(this.url, c);
+  }
   getList() {
     return this.listaCambio.asObservable();
+  }
+  setList(listaNueva: Curso[]) {
+      this.listaCambio.next(listaNueva);
   }
 }

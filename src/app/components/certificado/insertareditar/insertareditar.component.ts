@@ -6,7 +6,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, provideNativeDateAdapter } from '@angular/material/core';
 import { Certificado } from '../../../models/certificado';
 import { CertificadoService } from '../../../services/certificado.service';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router,  RouterOutlet } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 
@@ -23,7 +23,8 @@ import { MatRadioModule } from '@angular/material/radio';
     MatDatepickerModule,
     MatNativeDateModule,
     MatRadioModule,
-    CommonModule
+    CommonModule,
+    
   ],
   templateUrl: './insertareditar.component.html',
   styleUrl: './insertareditar.component.css'

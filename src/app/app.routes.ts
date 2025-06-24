@@ -4,10 +4,11 @@ import { HabilidadComponent } from './components/habilidad/habilidad.component';
 import { EstudioComponent } from './components/estudio/estudio.component';
 import { ExperienciaComponent } from './components/experiencia/experiencia.component';
 import { InsertareditarComponent } from './components/certificado/insertareditar/insertareditar.component';
-import { CursoComponent } from './components/curso/curso.component';
+/*import { CursoComponent } from './components/curso/curso.component';*/
 import { InsertareditarHabilidadComponent } from './components/habilidad/insertareditar/insertareditar.component';
 import { InsertareditarestudioComponent } from './components/estudio/insertareditarestudio/insertareditarestudio.component';
 import { InsertarexperienciaComponent } from './components/experiencia/insertarexperiencia/insertarexperiencia.component';
+/*import { InsertareditarcursoComponent } from './components/curso/insertareditarcurso/insertareditarcurso.component';*/
 
 export const routes: Routes = [
   {
@@ -24,7 +25,7 @@ export const routes: Routes = [
       },
     ],
   },
-  {
+  /*{
     path: 'cursos',
     component: CursoComponent,
     children: [
@@ -37,7 +38,7 @@ export const routes: Routes = [
         component: InsertareditarComponent,
       },
     ],
-  },
+  },*/
   {
     path: 'habilidades',
     component: HabilidadComponent,
@@ -80,4 +81,5 @@ export const routes: Routes = [
       },
     ],
   },
+  
 ];

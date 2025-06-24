@@ -1,0 +1,85 @@
+<!--<div class="contenedor-titulo">
+  <h1 class="titulo-centrado">Registro de Cursos</h1>
+</div>
+
+<div class="contenedor-tabla">
+  <form [formGroup]="form" (submit)="aceptar()" class="formulario-estilizado">
+
+    @if (edicion) {
+    <mat-form-field
+      appearance="fill"
+      class="form-control-id"
+      [ngClass]="{ shake: form.get('idCurso')?.invalid && form.get('idCurso')?.touched }"
+    >
+      <mat-label>ID</mat-label>
+      <input matInput placeholder="ID" formControlName="idCurso" />
+      @if (form.get('idCurso')?.hasError('required')) {
+      <mat-error>El código es obligatorio</mat-error>
+      }
+    </mat-form-field>
+    }
+
+    <mat-form-field
+      appearance="fill"
+      class="form-control-certificado"
+      [ngClass]="{ shake: form.get('tituloCurso')?.invalid && form.get('tituloCurso')?.touched }"
+    >
+      <mat-label>Curso</mat-label>
+      <input matInput placeholder="Nombre del curso" formControlName="tituloCurso" />
+      @if (form.get('tituloCurso')?.hasError('required')) {
+      <mat-error>El curso es obligatorio</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="fill"
+      class="form-control-entidad"
+      [ngClass]="{ shake: form.get('descripcionCurso')?.invalid && form.get('descripcionCurso')?.touched }"
+    >
+      <mat-label>Descripcion curso</mat-label>
+      <input matInput placeholder="Descripcion curso" formControlName="descripcionCurso" />
+      @if (form.get('descripcionCurso')?.hasError('required')) {
+      <mat-error>La descripcion del curso es obligatoria</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="fill"
+      class="form-control-entidad"
+      [ngClass]="{ shake: form.get('plataformaCurso')?.invalid && form.get('plataformaCurso')?.touched }"
+    >
+      <mat-label>Plataforma curso</mat-label>
+      <input matInput placeholder="Plataforma curso" formControlName="plataformaCurso" />
+      @if (form.get('plataformaCurso')?.hasError('required')) {
+      <mat-error>La plataforma del curso es obligatoria</mat-error>
+      }
+    </mat-form-field>
+
+    
+    <mat-form-field
+      appearance="fill"
+      class="form-control-entidad"
+      [ngClass]="{ shake: form.get('linkCurso')?.invalid && form.get('linkCurso')?.touched }"
+    >
+      <mat-label>Link curso</mat-label>
+      <input matInput placeholder="Link curso" formControlName="linkCurso" />
+      @if (form.get('linkCurso')?.hasError('required')) {
+      <mat-error>El link del curso es obligatoria</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Empresa</mat-label>
+        <mat-select formControlName="empresa">
+          @for (food of listaEmpresas; track food) {
+          <mat-option [value]="food.id">{{ food.name }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+    <div class="example-button-row">
+      <button mat-raised-button color="primary" type="submit">Guardar</button>
+    </div>
+
+  </form>
+</div>-->

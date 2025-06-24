@@ -1,68 +1,79 @@
-<div class="container">
-  <div style="text-align: center; margin: 5%;">
-    <h1>Registro de certificados</h1>
-  </div>
+<div class="contenedor-titulo">
+  <h1 class="titulo-centrado">Registro de Certificados</h1>
+</div>
 
-  <div style="text-align: center; margin: 5%;">
-    <form [formGroup]="form" (submit)="aceptar()">
+<div class="contenedor-tabla">
+  <form [formGroup]="form" (submit)="aceptar()" class="formulario-estilizado">
 
-      <!-- Campo ID (solo si está en edición) -->
-      <mat-form-field class="example-full-width" *ngIf="edicion">
-        <mat-label>ID</mat-label>
-        <input matInput formControlName="codigo" />
-        <mat-error *ngIf="form.get('codigo')?.hasError('required')">
-          El código es obligatorio
-        </mat-error>
-      </mat-form-field>
-      <br />
+    @if (edicion) {
+    <mat-form-field
+      appearance="fill"
+      class="form-control-id"
+      [ngClass]="{ shake: form.get('codigo')?.invalid && form.get('codigo')?.touched }"
+    >
+      <mat-label>ID</mat-label>
+      <input matInput placeholder="ID" formControlName="codigo" />
+      @if (form.get('codigo')?.hasError('required')) {
+      <mat-error>El código es obligatorio</mat-error>
+      }
+    </mat-form-field>
+    }
 
-      <!-- Campo Certificado -->
-      <mat-form-field class="example-full-width">
-        <mat-label>Certificado</mat-label>
-        <input matInput formControlName="certificado" />
-        <mat-error *ngIf="form.get('certificado')?.hasError('required')">
-          El certificado es obligatorio
-        </mat-error>
-      </mat-form-field>
-      <br />
+    <mat-form-field
+      appearance="fill"
+      class="form-control-certificado"
+      [ngClass]="{ shake: form.get('certificado')?.invalid && form.get('certificado')?.touched }"
+    >
+      <mat-label>Certificado</mat-label>
+      <input matInput placeholder="Nombre del certificado" formControlName="certificado" />
+      @if (form.get('certificado')?.hasError('required')) {
+      <mat-error>El certificado es obligatorio</mat-error>
+      }
+    </mat-form-field>
 
-      <!-- Campo Entidad -->
-      <mat-form-field class="example-full-width">
-        <mat-label>Entidad emisora</mat-label>
-        <input matInput formControlName="entidad" />
-        <mat-error *ngIf="form.get('entidad')?.hasError('required')">
-          La entidad emisora es obligatoria
-        </mat-error>
-      </mat-form-field>
-      <br />
+    <mat-form-field
+      appearance="fill"
+      class="form-control-entidad"
+      [ngClass]="{ shake: form.get('entidad')?.invalid && form.get('entidad')?.touched }"
+    >
+      <mat-label>Entidad emisora</mat-label>
+      <input matInput placeholder="Entidad emisora" formControlName="entidad" />
+      @if (form.get('entidad')?.hasError('required')) {
+      <mat-error>La entidad emisora es obligatoria</mat-error>
+      }
+    </mat-form-field>
 
-      <!-- Campo Fecha emisión -->
-      <mat-form-field class="example-full-width">
-        <mat-label>Fecha emisión</mat-label>
-        <input matInput [matDatepicker]="pickerEmision" formControlName="fecha_emision" />
-        <mat-datepicker-toggle matIconSuffix [for]="pickerEmision"></mat-datepicker-toggle>
-        <mat-datepicker #pickerEmision></mat-datepicker>
-        <mat-error *ngIf="form.get('fecha_emision')?.hasError('required')">
-          La fecha de emisión es obligatoria
-        </mat-error>
-      </mat-form-field>
-      <br />
+    <mat-form-field
+      appearance="fill"
+      class="form-control-fecha-emision"
+      [ngClass]="{ shake: form.get('fecha_emision')?.invalid && form.get('fecha_emision')?.touched }"
+    >
+      <mat-label>Fecha emisión</mat-label>
+      <input matInput [matDatepicker]="pickerEmision" formControlName="fecha_emision" placeholder="Selecciona fecha" />
+      <mat-datepicker-toggle matIconSuffix [for]="pickerEmision"></mat-datepicker-toggle>
+      <mat-datepicker #pickerEmision></mat-datepicker>
+      @if (form.get('fecha_emision')?.hasError('required')) {
+      <mat-error>La fecha de emisión es obligatoria</mat-error>
+      }
+    </mat-form-field>
 
-      <!-- Campo Fecha vencimiento -->
-      <mat-form-field class="example-full-width">
-        <mat-label>Fecha vencimiento</mat-label>
-        <input matInput [matDatepicker]="pickerVencimiento" formControlName="fecha_vencimiento" />
-        <mat-datepicker-toggle matIconSuffix [for]="pickerVencimiento"></mat-datepicker-toggle>
-        <mat-datepicker #pickerVencimiento></mat-datepicker>
-        <mat-error *ngIf="form.get('fecha_vencimiento')?.hasError('required')">
-          La fecha de vencimiento es obligatoria
-        </mat-error>
-      </mat-form-field>
-      <br />
+    <mat-form-field
+      appearance="fill"
+      class="form-control-fecha-vencimiento"
+      [ngClass]="{ shake: form.get('fecha_vencimiento')?.invalid && form.get('fecha_vencimiento')?.touched }"
+    >
+      <mat-label>Fecha vencimiento</mat-label>
+      <input matInput [matDatepicker]="pickerVencimiento" formControlName="fecha_vencimiento" placeholder="Selecciona fecha" />
+      <mat-datepicker-toggle matIconSuffix [for]="pickerVencimiento"></mat-datepicker-toggle>
+      <mat-datepicker #pickerVencimiento></mat-datepicker>
+      @if (form.get('fecha_vencimiento')?.hasError('required')) {
+      <mat-error>La fecha de vencimiento es obligatoria</mat-error>
+      }
+    </mat-form-field>
 
-      <!-- Botón -->
-      <button mat-raised-button color="primary" type="submit">Aceptar</button>
+    <div class="example-button-row">
+      <button mat-raised-button color="primary" type="submit">Guardar</button>
+    </div>
 
-    </form>
-  </div>
+  </form>
 </div>
