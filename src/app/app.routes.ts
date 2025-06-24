@@ -16,6 +16,7 @@ import { ListarUsuarioComponent } from './components/usuario/listar-usuario/list
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { InsertareditarusuarioComponent } from './components/usuario/insertareditarusuario/insertareditarusuario.component';
 import { InsertareditarCertificadoComponent } from './components/certificado/insertareditar/insertareditar.component';
+import { InsertarexperienciaComponent } from './components/experiencia/insertarexperiencia/insertarexperiencia.component';
 
 export const routes: Routes = [
     {
@@ -70,11 +71,11 @@ export const routes: Routes = [
         children: [
             {
                 path: 'insertar',
-                component: InsertarEditarEntrevistaComponent,
+                component: InsertarexperienciaComponent,
             },
             {
                 path: 'ediciones/:id',
-                component: InsertarEditarEntrevistaComponent,
+                component: InsertarexperienciaComponent,
             },
         ],
     },

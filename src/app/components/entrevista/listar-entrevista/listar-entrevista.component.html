@@ -1,10 +1,12 @@
-<div>
-  <div style="text-align: center; margin: 6%">
-    <h1>Lista de Entrevistas</h1>
-  </div>
+<div class="contenedor-titulo">
+  <h1 class="titulo-centrado">Lista de Entrevistas</h1>
+</div>
 
-  <div>
+<div class="contenedor-tabla">
+  <form class="formulario-estilizado">
+
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
       <ng-container matColumnDef="c1">
         <th mat-header-cell *matHeaderCellDef>ID</th>
         <td mat-cell *matCellDef="let element">{{ element.id }}</td>
@@ -12,46 +14,41 @@
 
       <ng-container matColumnDef="c2">
         <th mat-header-cell *matHeaderCellDef>Fecha</th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.date }}
-        </td>
+        <td mat-cell *matCellDef="let element">{{ element.date }}</td>
       </ng-container>
 
       <ng-container matColumnDef="c3">
         <th mat-header-cell *matHeaderCellDef>Hora</th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.hour }}
-        </td>
+        <td mat-cell *matCellDef="let element">{{ element.hour }}</td>
       </ng-container>
 
       <ng-container matColumnDef="c4">
         <th mat-header-cell *matHeaderCellDef>Modalidad</th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.modality }}
-        </td>
+        <td mat-cell *matCellDef="let element">{{ element.modality }}</td>
       </ng-container>
 
       <ng-container matColumnDef="c5">
         <th mat-header-cell *matHeaderCellDef>Resultado</th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.result }}
-        </td>
+        <td mat-cell *matCellDef="let element">{{ element.result }}</td>
       </ng-container>
 
-      <!-- <ng-container matColumnDef="c6">
+      <!-- Puedes descomentar estos si los necesitas -->
+      <!--
+      <ng-container matColumnDef="c6">
         <th mat-header-cell *matHeaderCellDef>Usuarios</th>
         <td mat-cell *matCellDef="let element">{{ element.user }}</td>
       </ng-container>
 
       <ng-container matColumnDef="c7">
-        <th mat-header-cell *matHeaderCellDef>Postulacion</th>
+        <th mat-header-cell *matHeaderCellDef>Postulación</th>
         <td mat-cell *matCellDef="let element">{{ element.postulacion }}</td>
-      </ng-container> -->
+      </ng-container>
+      -->
 
       <ng-container matColumnDef="c6">
         <th mat-header-cell *matHeaderCellDef>Actualizar</th>
         <td mat-cell *matCellDef="let element">
-          <button mat-mini-fab [routerLink]="['ediciones', element.id]">
+          <button mat-raised-button color="primary" [routerLink]="['ediciones', element.id]">
             <mat-icon>edit</mat-icon>
           </button>
         </td>
@@ -60,7 +57,7 @@
       <ng-container matColumnDef="c7">
         <th mat-header-cell *matHeaderCellDef>Eliminar</th>
         <td mat-cell *matCellDef="let element">
-          <button mat-mini-fab (click)="eliminar(element.id)">
+          <button mat-raised-button color="warn" (click)="eliminar(element.id)">
             <mat-icon>delete</mat-icon>
           </button>
         </td>
@@ -68,6 +65,8 @@
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
     </table>
-  </div>
+
+  </form>
 </div>
