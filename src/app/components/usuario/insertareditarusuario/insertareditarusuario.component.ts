@@ -15,7 +15,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './insertareditar.component.html',
   styleUrl: './insertareditar.component.css'
 })
-export class InsertareditarComponent implements OnInit {
+export class InsertareditarusuarioComponent implements OnInit {
   form: FormGroup = new FormGroup({});
   usuario: Usuario = new Usuario();
   estado_u: boolean = true; // Valor por defecto para el estado

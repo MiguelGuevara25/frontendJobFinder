@@ -1,0 +1,81 @@
+<div class="container">
+  <div style="text-align: center; margin: 5%">
+    <h1>Registro de certificados</h1>
+  </div>
+
+  <div style="text-align: center; margin: 5%">
+    <form [formGroup]="form" (submit)="aceptar()">
+      <!-- Campo ID (solo si está en edición) -->
+      <mat-form-field class="example-full-width" *ngIf="edicion">
+        <mat-label>ID</mat-label>
+        <input matInput formControlName="idEntrevista" />
+        <mat-error *ngIf="form.get('idEntrevista')?.hasError('required')">
+          El código es obligatorio
+        </mat-error>
+      </mat-form-field>
+
+      <br />
+
+      <!-- Campo Date -->
+      <mat-form-field class="example-full-width">
+        <mat-label>Fecha</mat-label>
+        <input
+          matInput
+          [matDatepicker]="pickerEmision"
+          formControlName="date"
+        />
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="pickerEmision"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #pickerEmision></mat-datepicker>
+        <mat-error *ngIf="form.get('date')?.hasError('required')">
+          La fecha es obligatoria
+        </mat-error>
+      </mat-form-field>
+
+      <br />
+
+      <!-- Campo Hour -->
+      <mat-form-field class="example-full-width">
+        <mat-label>Hora</mat-label>
+        <input
+          matInput
+          formControlName="hour"
+          type="time"
+          placeholder="HH:mm"
+        />
+        <mat-error *ngIf="form.get('hour')?.hasError('required')">
+          La hora es obligatoria
+        </mat-error>
+      </mat-form-field>
+
+      <br />
+
+      <!-- Campo Modality -->
+      <mat-form-field class="example-full-width">
+        <mat-label>Modalidad</mat-label>
+        <input matInput formControlName="modality" />
+        <mat-error *ngIf="form.get('modality')?.hasError('required')">
+          La modalidad es obligatoria
+        </mat-error>
+      </mat-form-field>
+
+      <br />
+
+      <!-- Campo Result -->
+      <mat-form-field class="example-full-width">
+        <mat-label>Resultado</mat-label>
+        <input matInput formControlName="result" />
+        <mat-error *ngIf="form.get('result')?.hasError('required')">
+          El resultado es obligatoria
+        </mat-error>
+      </mat-form-field>
+
+      <br />
+
+      <!-- Botón -->
+      <button mat-raised-button color="primary" type="submit">Aceptar</button>
+    </form>
+  </div>
+</div>

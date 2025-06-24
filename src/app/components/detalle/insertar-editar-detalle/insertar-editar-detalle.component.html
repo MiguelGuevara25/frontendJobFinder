@@ -1,0 +1,95 @@
+<div class="container">
+  <div style="text-align: center; margin: 5%">
+    <h1>Registro de Detalles</h1>
+  </div>
+
+  <div style="text-align: center; margin: 5%">
+    <form [formGroup]="form" (submit)="aceptar()">
+      <!-- Campo ID (solo si está en edición) -->
+      <mat-form-field class="example-full-width" *ngIf="edicion">
+        <mat-label>ID</mat-label>
+        <input matInput formControlName="idDetalle" />
+        <mat-error *ngIf="form.get('idDetalle')?.hasError('required')">
+          El código es obligatorio
+        </mat-error>
+      </mat-form-field>
+
+      <br />
+
+      <!-- Campo Experiencias -->
+      <mat-form-field>
+        <mat-label>Experiencias</mat-label>
+        <mat-select formControlName="experiencias">
+          @for (experiencia of experiencias; track experiencia) {
+          <mat-option [value]="experiencia.id">{{
+            experiencia.job
+          }}</mat-option>
+          }
+        </mat-select>
+
+        <mat-error *ngIf="form.get('experiencias')?.hasError('required')">
+          La experiencia es obligatoria
+        </mat-error>
+      </mat-form-field>
+
+      <br />
+
+      <!-- Campo Estudios -->
+      <mat-form-field>
+        <mat-label>Estudios</mat-label>
+        <mat-select formControlName="estudios">
+          @for (estudio of estudios; track estudio) {
+          <mat-option [value]="estudio.id">{{
+            estudio.title_obtained
+          }}</mat-option>
+          }
+        </mat-select>
+
+        <mat-error *ngIf="form.get('estudios')?.hasError('required')">
+          El estudio es obligatorio
+        </mat-error>
+      </mat-form-field>
+
+      <br />
+
+      <!-- Campo Habilidades -->
+      <mat-form-field>
+        <mat-label>Habilidades</mat-label>
+        <mat-select formControlName="habilidades">
+          @for (habilidad of habilidades; track habilidad) {
+          <mat-option [value]="habilidad.id_habilidad">{{
+            habilidad.nombre
+          }}</mat-option>
+          }
+        </mat-select>
+
+        <mat-error *ngIf="form.get('habilidades')?.hasError('required')">
+          La habilidad es obligatoria
+        </mat-error>
+      </mat-form-field>
+
+      <br />
+
+      <!-- Campo Certificados -->
+      <mat-form-field>
+        <mat-label>Certificados</mat-label>
+        <mat-select formControlName="certificados">
+          @for (certificado of certificados; track certificado) {
+          <mat-option [value]="certificado.idCertificado">{{
+            certificado.nombreCertificado
+          }}</mat-option>
+          }
+        </mat-select>
+
+        <mat-error *ngIf="form.get('certificados')?.hasError('required')">
+          El certificado es obligatorio
+        </mat-error>
+      </mat-form-field>
+
+      <br />
+
+      <!-- Botón -->
+      <button mat-raised-button color="primary" type="submit">Aceptar</button>
+    </form>
+  </div>
+</div>
