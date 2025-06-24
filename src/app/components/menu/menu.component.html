@@ -1,0 +1,92 @@
+<mat-toolbar class="custom-toolbar">
+  <div>
+    <button mat-button [matMenuTriggerFor]="menuCertificado" class="btn-rojo">
+      <mat-icon>verified</mat-icon>
+      Certificados
+    </button>
+  </div>
+  <div>
+    <button mat-button [matMenuTriggerFor]="menuCurso" class="btn-rojo">
+      <mat-icon>menu_book</mat-icon>
+      Cursos
+    </button>
+  </div>
+  <div>
+    <button mat-button [matMenuTriggerFor]="menuHabilidades" class="btn-rojo">
+      <mat-icon>lightbulb</mat-icon>
+      Habilidades
+    </button>
+  </div>
+  <div>
+    <button mat-button [matMenuTriggerFor]="menuEstudios" class="btn-rojo">
+      <mat-icon>school</mat-icon>
+      Estudios
+    </button>
+  </div>
+  <div>
+    <button mat-button [matMenuTriggerFor]="menuExperiencias" class="btn-rojo">
+      <mat-icon>work</mat-icon>
+      Experiencias
+    </button>
+  </div>
+  <div>
+    <button mat-button [matMenuTriggerFor]="menuEntrevistas" class="btn-rojo">
+      <mat-icon>record_voice_over</mat-icon>
+      Entrevistas
+    </button>
+  </div>
+  <div>
+    <button mat-button [matMenuTriggerFor]="menuContratos" class="btn-rojo">
+      <mat-icon>description</mat-icon>
+      Contratos
+    </button>
+  </div>
+  <div>
+    <button mat-button [matMenuTriggerFor]="menuDetalles" class="btn-rojo">
+      <mat-icon>info</mat-icon>
+      Detalles
+    </button>
+  </div>
+  <div>
+    <button mat-button [matMenuTriggerFor]="menuUsuario" class="btn-rojo">
+      <mat-icon>group</mat-icon>
+      Usuarios
+    </button>
+  </div>
+</mat-toolbar>
+<mat-menu #menuCertificado="matMenu">
+  <button mat-menu-item routerLink="/certificados">Listar</button>
+  <button mat-menu-item routerLink="/certificados/insertareditar">Registrar</button>
+</mat-menu>
+<mat-menu #menuCurso="matMenu">
+  <button mat-menu-item routerLink="/cursos">Listar</button>
+  <button mat-menu-item routerLink="/cursos/insertareditarcurso">Registrar</button>
+</mat-menu>
+<mat-menu #menuHabilidades="matMenu">
+  <button mat-menu-item routerLink="/habilidades">Listar</button>
+  <button mat-menu-item routerLink="/habilidades/insertar">Registrar</button>
+</mat-menu>
+<mat-menu #menuEstudios="matMenu">
+  <button mat-menu-item routerLink="/estudios">Listar</button>
+  <button mat-menu-item routerLink="/estudios/insertar">Registrar</button>
+</mat-menu>
+<mat-menu #menuExperiencias="matMenu">
+  <button mat-menu-item routerLink="/experiencias">Listar</button>
+  <button mat-menu-item routerLink="/experiencias/insertar">Registrar</button>
+</mat-menu>
+<mat-menu #menuEntrevistas="matMenu">
+  <button mat-menu-item routerLink="/entrevista">Listar</button>
+  <button mat-menu-item routerLink="/entrevista/insertar">Registrar</button>
+</mat-menu>
+<mat-menu #menuContratos="matMenu">
+  <button mat-menu-item routerLink="/contratos">Listar</button>
+  <button mat-menu-item routerLink="/contratos/insertar">Registrar</button>
+</mat-menu>
+<mat-menu #menuDetalles="matMenu">
+  <button mat-menu-item routerLink="/detalles">Listar</button>
+  <button mat-menu-item routerLink="/detalles/insertar">Registrar</button>
+</mat-menu>
+<mat-menu #menuUsuario="matMenu">
+  <button mat-menu-item routerLink="/usuarios">Listar</button>
+  <button mat-menu-item routerLink="/usuarios/registrar">Registrar</button>
+</mat-menu>

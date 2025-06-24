@@ -28,7 +28,7 @@ import { MatRadioModule } from '@angular/material/radio';
   templateUrl: './insertareditar.component.html',
   styleUrl: './insertareditar.component.css'
 })
-export class InsertareditarComponent implements OnInit{
+export class InsertareditarCertificadoComponent implements OnInit{
   form: FormGroup = new FormGroup({});
   certificado: Certificado = new Certificado();
 

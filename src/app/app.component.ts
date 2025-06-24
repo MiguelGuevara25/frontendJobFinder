@@ -3,10 +3,11 @@ import { RouterOutlet } from '@angular/router';
 import { CertificadoComponent } from './components/certificado/certificado.component';
 import { HabilidadComponent } from "./components/habilidad/habilidad.component";
 import { CursoComponent } from './components/curso/curso.component';
+import { MenuComponent } from "./components/menu/menu.component";
 
 @Component({
   selector: 'app-root',
-  imports: [HabilidadComponent, RouterOutlet, CertificadoComponent, CursoComponent],
+  imports: [RouterOutlet, MenuComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
