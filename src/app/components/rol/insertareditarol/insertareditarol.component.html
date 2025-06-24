@@ -23,14 +23,23 @@
       </mat-error>
     </mat-form-field>
 
-    <!-- Apellido -->
+    <!-- Usuario -->
     <mat-form-field>
       <mat-label>Usuario</mat-label>
-      <input matInput formControlName="usuario" />
+       <mat-select formControlName="apli">
+          @for (food of listaUsuario; track food) {
+          <mat-option [value]="food.idUsuario">{{ food.idUsuario }}</mat-option>
+          }
+        </mat-select>
       <mat-error *ngIf="form.get('usuario')?.hasError('required')">
-        El apellido es obligatorio
+        El usuario es obligatorio
       </mat-error>
     </mat-form-field>
 
+     <!-- Botones -->
+    <div class="example-button-row">
+      <button mat-raised-button color="primary" type="submit">Aceptar</button>
+      <button mat-raised-button color="warn" type="button" (click)="cancelar()">Cancelar</button>
+    </div>
   </form>
 </div>

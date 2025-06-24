@@ -46,23 +46,27 @@
     <mat-icon>business</mat-icon>
     <span>Empresa</span>
   </button>
+   <button mat-menu-item [matMenuTriggerFor]="menuRol">
+    <mat-icon>manage_accounts</mat-icon>
+    <span>Rol</span>
+  </button>
   <button mat-menu-item [matMenuTriggerFor]="menuForo">
     <mat-icon>forum</mat-icon>
     <span>Foros</span>
-  </button>
-  <button mat-menu-item [matMenuTriggerFor]="menuRol">
-    <mat-icon>manage_accounts</mat-icon>
-    <span>Rol</span>
   </button>
 </mat-menu>
 
 <mat-menu #menuCertificado="matMenu">
   <button mat-menu-item routerLink="/certificados">Listar</button>
-  <button mat-menu-item routerLink="/certificados/insertareditar">Registrar</button>
+  <button mat-menu-item routerLink="/certificados/insertareditar">
+    Registrar
+  </button>
 </mat-menu>
 <mat-menu #menuCurso="matMenu">
   <button mat-menu-item routerLink="/cursos">Listar</button>
-  <button mat-menu-item routerLink="/cursos/insertareditarcurso">Registrar</button>
+  <button mat-menu-item routerLink="/cursos/insertareditarcurso">
+    Registrar
+  </button>
 </mat-menu>
 <mat-menu #menuHabilidades="matMenu">
   <button mat-menu-item routerLink="/habilidades">Listar</button>
@@ -97,6 +101,7 @@
 </mat-menu>
 <mat-menu #menuRol="matMenu">
   <button mat-menu-item routerLink="/rol">Listar</button>
+  <button mat-menu-item routerLink="/rol/registrar">Registrar</button>
 </mat-menu>
 <mat-menu #menuForo="matMenu">
   <button mat-menu-item routerLink="/foros">Listar</button>

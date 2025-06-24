@@ -22,6 +22,7 @@ import { ListarEmpresaComponent } from './components/empresa/listar-empresa/list
 import { ForumComponent } from './components/forum/forum.component';
 import { RolComponent } from './components/rol/rol.component';
 import { ListarrolComponent } from './components/rol/listarrol/listarrol.component';
+import { InsertareditarolComponent } from './components/rol/insertareditarol/insertareditarol.component';
 
 export const routes: Routes = [
   {
@@ -170,6 +171,14 @@ export const routes: Routes = [
       {
         path: '',
         component: ListarrolComponent,
+      },
+      {
+        path: 'registrar',
+        component: InsertareditarolComponent,
+      },
+       {
+        path: 'ediciones/:id',
+        component: InsertareditarolComponent,
       },
     ],
   },
