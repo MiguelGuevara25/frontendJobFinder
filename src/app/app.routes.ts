@@ -17,6 +17,8 @@ import { UsuarioComponent } from './components/usuario/usuario.component';
 import { InsertareditarusuarioComponent } from './components/usuario/insertareditarusuario/insertareditarusuario.component';
 import { InsertareditarCertificadoComponent } from './components/certificado/insertareditar/insertareditar.component';
 import { InsertarexperienciaComponent } from './components/experiencia/insertarexperiencia/insertarexperiencia.component';
+import { EmpresaComponent } from './components/empresa/empresa.component';
+import { ListarEmpresaComponent } from './components/empresa/listar-empresa/listar-empresa.component';
 
 export const routes: Routes = [
     {
@@ -138,5 +140,14 @@ export const routes: Routes = [
                 path: 'ediciones/:id', component: InsertareditarusuarioComponent
             }
         ],
-    }
+    },
+    {
+        path: 'empresa',
+        component: EmpresaComponent,
+        children: [
+            {
+                path: '', component: ListarEmpresaComponent
+            }
+        ],
+    }                                                                                                   
 ];
