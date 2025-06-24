@@ -14,118 +14,136 @@ import { ContratoComponent } from './components/contrato/contrato.component';
 import { InsertarEditarContratoComponent } from './components/contrato/insertar-editar-contrato/insertar-editar-contrato.component';
 import { DetalleComponent } from './components/detalle/detalle.component';
 import { InsertarEditarDetalleComponent } from './components/detalle/insertar-editar-detalle/insertar-editar-detalle.component';
+import { ListarUsuarioComponent } from './components/usuario/listar-usuario/listar-usuario.component';
+import { UsuarioComponent } from './components/usuario/usuario.component';
+import { InsertareditarusuarioComponent } from './components/usuario/insertareditarusuario/insertareditarusuario.component';
 
 export const routes: Routes = [
-  {
-    path: 'certificados',
-    component: CertificadoComponent,
-    children: [
-      {
-        path: 'insertareditar',
-        component: InsertareditarComponent,
-      },
-      {
-        path: 'ediciones/:id',
-        component: InsertareditarComponent,
-      },
-    ],
-  },
-  {
-    path: 'cursos',
-    component: CursoComponent,
-    children: [
-      {
-        path: 'insertareditar',
-        component: InsertareditarComponent,
-      },
-      {
-        path: 'ediciones/:id',
-        component: InsertareditarComponent,
-      },
-    ],
-  },
-  {
-    path: 'habilidades',
-    component: HabilidadComponent,
-    children: [
-      {
-        path: 'insertar',
-        component: InsertareditarHabilidadComponent,
-      },
-      {
-        path: 'ediciones/:id',
-        component: InsertareditarHabilidadComponent,
-      },
-    ],
-  },
-  {
-    path: 'estudios',
-    component: EstudioComponent,
-    children: [
-      {
-        path: 'insertar',
-        component: InsertareditarestudioComponent,
-      },
-      {
-        path: 'ediciones/:id',
-        component: InsertareditarestudioComponent,
-      },
-    ],
-  },
-  {
-    path: 'experiencias',
-    component: ExperienciaComponent,
-    children: [
-      {
-        path: 'insertar',
-        component: InsertarexperienciaComponent,
-      },
-      {
-        path: 'ediciones/:id',
-        component: InsertarexperienciaComponent,
-      },
-    ],
-  },
-  {
-    path: 'entrevista',
-    component: EntrevistaComponent,
-    children: [
-      {
-        path: 'insertar',
-        component: InsertarEditarEntrevistaComponent,
-      },
-      {
-        path: 'ediciones/:id',
-        component: InsertarEditarEntrevistaComponent,
-      },
-    ],
-  },
-  {
-    path: 'contratos',
-    component: ContratoComponent,
-    children: [
-      {
-        path: 'insertar',
-        component: InsertarEditarContratoComponent,
-      },
-      {
-        path: 'ediciones/:id',
-        component: InsertarEditarContratoComponent,
-      },
-    ],
-  },
-  {
-    path: 'detalles',
-    component: DetalleComponent,
-    children: [
-      {
-        path: 'insertar',
-        component: InsertarEditarDetalleComponent,
-      },
-      {
-        path: 'ediciones/:id',
-        component: InsertarEditarDetalleComponent,
-      },
-    ],
-  },
+    {
+        path: 'certificados',
+        component: CertificadoComponent,
+        children: [
+            {
+                path: 'insertareditar',
+                component: InsertareditarComponent,
+            },
+            {
+                path: 'ediciones/:id',
+                component: InsertareditarComponent,
+            },
+        ],
+    },
+    {
+        path: 'cursos',
+        component: CursoComponent,
+        children: [
+            {
+                path: 'insertareditar',
+                component: InsertareditarComponent,
+            },
+            {
+                path: 'ediciones/:id',
+                component: InsertareditarComponent,
+            },
+        ],
+    },
+    {
+        path: 'habilidades',
+        component: HabilidadComponent,
+        children: [
+            {
+                path: 'insertar',
+                component: InsertareditarHabilidadComponent,
+            },
+            {
+                path: 'ediciones/:id',
+                component: InsertareditarHabilidadComponent,
+            },
+        ],
+    },
+    {
+        path: 'estudios',
+        component: EstudioComponent,
+        children: [
+            {
+                path: 'insertar',
+                component: InsertareditarestudioComponent,
+            },
+            {
+                path: 'ediciones/:id',
+                component: InsertareditarestudioComponent,
+            },
+        ],
+    },
+    {
+        path: 'experiencias',
+        component: ExperienciaComponent,
+        children: [
+            {
+                path: 'insertar',
+                component: InsertarexperienciaComponent,
+            },
+            {
+                path: 'ediciones/:id',
+                component: InsertarexperienciaComponent,
+            },
+        ],
+    },
+    {
+        path: 'entrevista',
+        component: EntrevistaComponent,
+        children: [
+            {
+                path: 'insertar',
+                component: InsertarEditarEntrevistaComponent,
+            },
+            {
+                path: 'ediciones/:id',
+                component: InsertarEditarEntrevistaComponent,
+            },
+        ],
+    },
+    {
+        path: 'contratos',
+        component: ContratoComponent,
+        children: [
+            {
+                path: 'insertar',
+                component: InsertarEditarContratoComponent,
+            },
+            {
+                path: 'ediciones/:id',
+                component: InsertarEditarContratoComponent,
+            },
+        ],
+    },
+    {
+        path: 'detalles',
+        component: DetalleComponent,
+        children: [
+            {
+                path: 'insertar',
+                component: InsertarEditarDetalleComponent,
+            },
+            {
+                path: 'ediciones/:id',
+                component: InsertarEditarDetalleComponent,
+            },
+        ],
+    },
+    {
+        path: 'usuarios',
+        component: UsuarioComponent,
+        children: [
+            {
+                path: '', component: ListarUsuarioComponent
+            },
+            {
+                path: 'registrar', component: InsertareditarusuarioComponent
+            },
+            {
+                path: 'ediciones/:id', component: InsertareditarusuarioComponent
+            }
+        ],
+    }
 ];
