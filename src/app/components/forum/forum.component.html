@@ -1,0 +1,22 @@
+<div class="contenedor-busqueda">
+  <label>Buscar Debate:</label>
+  <input type="text" [(ngModel)]="buscarQuery" />
+  <button (click)="buscarDebates()">Buscar</button>
+</div>
+
+<!-- Indicador de carga -->
+<div *ngIf="isLoading" class="loading-text">Cargando...</div>
+
+<!-- Mostrar resultados -->
+<div *ngIf="posts && !isLoading">
+  <div *ngFor="let post of posts" class="resultado-post">
+    <h3>{{ post.data.title }}</h3>
+    <p>{{ post.data.selftext || 'No hay descripción disponible' }}</p>
+    <a [href]="post.data.url" target="_blank">Ver publicación completa</a>
+  </div>
+</div>
+
+<!-- Sin resultados -->
+<div *ngIf="noResults && !isLoading" class="no-result">
+  <p>No se encontraron resultados para "{{ buscarQuery }}".</p>
+</div>
