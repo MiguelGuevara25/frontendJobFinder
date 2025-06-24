@@ -42,6 +42,10 @@
     <mat-icon>group</mat-icon>
     <span>Usuarios</span>
   </button>
+  <button mat-menu-item [matMenuTriggerFor]="menuEmpresa">
+    <mat-icon>business</mat-icon>
+    <span>Empresa</span>
+  </button>
 </mat-menu>
 
 
@@ -80,4 +84,7 @@
 <mat-menu #menuUsuario="matMenu">
   <button mat-menu-item routerLink="/usuarios">Listar</button>
   <button mat-menu-item routerLink="/usuarios/registrar">Registrar</button>
+</mat-menu>
+<mat-menu #menuEmpresa="matMenu">
+  <button mat-menu-item routerLink="/empresa">Listar</button>
 </mat-menu>
