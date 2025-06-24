@@ -19,6 +19,7 @@ import { InsertareditarCertificadoComponent } from './components/certificado/ins
 import { InsertarexperienciaComponent } from './components/experiencia/insertarexperiencia/insertarexperiencia.component';
 import { EmpresaComponent } from './components/empresa/empresa.component';
 import { ListarEmpresaComponent } from './components/empresa/listar-empresa/listar-empresa.component';
+import { InsertareditarcursoComponent } from './components/curso/insertareditarcurso/insertareditarcurso.component';
 
 export const routes: Routes = [
     {
@@ -41,6 +42,12 @@ export const routes: Routes = [
     {
         path: 'cursos',
         component: CursoComponent,
+        children: [
+            {
+                path: 'insertar',
+                component: InsertareditarcursoComponent,
+            }
+        ]
     },
     {
         path: 'habilidades',

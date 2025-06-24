@@ -6,22 +6,31 @@ import { HttpClient } from '@angular/common/http';
 const base_url = environment.base;
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CursoService {
   private url = `${base_url}/cursos`;
   private listaCambio = new Subject<Curso[]>();
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
   list() {
-      return this.http.get<Curso[]>(this.url);
+    return this.http.get<Curso[]>(this.url);
   }
   insert(c: Curso) {
-      return this.http.post(this.url, c);
+    return this.http.post(this.url, c);
   }
   getList() {
     return this.listaCambio.asObservable();
   }
   setList(listaNueva: Curso[]) {
-      this.listaCambio.next(listaNueva);
+    this.listaCambio.next(listaNueva);
   }
+  update(c: Curso) {
+    return this.http.put(this.url, c);
+  }
+  delete(id: number) {
+    return this.http.delete(`${this.url}/${id}`);
+  }
+  listId(id: number) {
+      return this.http.get<Curso>(`${this.url}/${id}`);
+    }
 }
