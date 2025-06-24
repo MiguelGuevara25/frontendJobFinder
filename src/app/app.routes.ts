@@ -20,6 +20,9 @@ import { InsertarexperienciaComponent } from './components/experiencia/insertare
 
 export const routes: Routes = [
     {
+        path: '', redirectTo: 'usuarios', pathMatch: 'full'
+    },
+    {
         path: 'certificados',
         component: CertificadoComponent,
         children: [
