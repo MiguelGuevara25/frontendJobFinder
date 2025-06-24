@@ -3,11 +3,9 @@ import { CertificadoComponent } from './components/certificado/certificado.compo
 import { HabilidadComponent } from './components/habilidad/habilidad.component';
 import { EstudioComponent } from './components/estudio/estudio.component';
 import { ExperienciaComponent } from './components/experiencia/experiencia.component';
-import { InsertareditarComponent } from './components/certificado/insertareditar/insertareditar.component';
 import { CursoComponent } from './components/curso/curso.component';
 import { InsertareditarHabilidadComponent } from './components/habilidad/insertareditar/insertareditar.component';
 import { InsertareditarestudioComponent } from './components/estudio/insertareditarestudio/insertareditarestudio.component';
-import { InsertarexperienciaComponent } from './components/experiencia/insertarexperiencia/insertarexperiencia.component';
 import { EntrevistaComponent } from './components/entrevista/entrevista.component';
 import { InsertarEditarEntrevistaComponent } from './components/entrevista/insertar-editar-entrevista/insertar-editar-entrevista.component';
 import { ContratoComponent } from './components/contrato/contrato.component';
@@ -17,6 +15,7 @@ import { InsertarEditarDetalleComponent } from './components/detalle/insertar-ed
 import { ListarUsuarioComponent } from './components/usuario/listar-usuario/listar-usuario.component';
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { InsertareditarusuarioComponent } from './components/usuario/insertareditarusuario/insertareditarusuario.component';
+import { InsertareditarCertificadoComponent } from './components/certificado/insertareditar/insertareditar.component';
 
 export const routes: Routes = [
     {
@@ -25,27 +24,17 @@ export const routes: Routes = [
         children: [
             {
                 path: 'insertareditar',
-                component: InsertareditarComponent,
+                component: InsertareditarCertificadoComponent,
             },
             {
                 path: 'ediciones/:id',
-                component: InsertareditarComponent,
+                component: InsertareditarCertificadoComponent,
             },
         ],
     },
     {
         path: 'cursos',
         component: CursoComponent,
-        children: [
-            {
-                path: 'insertareditar',
-                component: InsertareditarComponent,
-            },
-            {
-                path: 'ediciones/:id',
-                component: InsertareditarComponent,
-            },
-        ],
     },
     {
         path: 'habilidades',
@@ -81,11 +70,11 @@ export const routes: Routes = [
         children: [
             {
                 path: 'insertar',
-                component: InsertarexperienciaComponent,
+                component: InsertarEditarEntrevistaComponent,
             },
             {
                 path: 'ediciones/:id',
-                component: InsertarexperienciaComponent,
+                component: InsertarEditarEntrevistaComponent,
             },
         ],
     },
