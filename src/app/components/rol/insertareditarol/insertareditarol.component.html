@@ -1,0 +1,36 @@
+<div class="contenedor-titulo">
+  <h1 class="titulo-centrado" *ngIf="!edicion">Registro de Rol</h1>
+  <h1 class="titulo-centrado" *ngIf="edicion">Actualizar Rol</h1>
+</div>
+
+<div class="contenedor-tabla">
+  <form [formGroup]="form" (ngSubmit)="aceptar()" class="formulario-estilizado">
+    <!-- Campo ID (solo en edición) -->
+    <mat-form-field *ngIf="edicion">
+      <mat-label>ID</mat-label>
+      <input matInput formControlName="id" />
+      <mat-error *ngIf="form.get('id')?.hasError('required')">
+        El código es obligatorio
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Nombre -->
+    <mat-form-field>
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="nombre" />
+      <mat-error *ngIf="form.get('nombre')?.hasError('required')">
+        El nombre es obligatorio
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Apellido -->
+    <mat-form-field>
+      <mat-label>Usuario</mat-label>
+      <input matInput formControlName="usuario" />
+      <mat-error *ngIf="form.get('usuario')?.hasError('required')">
+        El apellido es obligatorio
+      </mat-error>
+    </mat-form-field>
+
+  </form>
+</div>

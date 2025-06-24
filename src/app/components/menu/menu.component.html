@@ -50,6 +50,10 @@
     <mat-icon>forum</mat-icon>
     <span>Foros</span>
   </button>
+  <button mat-menu-item [matMenuTriggerFor]="menuRol">
+    <mat-icon>manage_accounts</mat-icon>
+    <span>Rol</span>
+  </button>
 </mat-menu>
 
 <mat-menu #menuCertificado="matMenu">
@@ -90,6 +94,9 @@
 </mat-menu>
 <mat-menu #menuEmpresa="matMenu">
   <button mat-menu-item routerLink="/empresa">Listar</button>
+</mat-menu>
+<mat-menu #menuRol="matMenu">
+  <button mat-menu-item routerLink="/rol">Listar</button>
 </mat-menu>
 <mat-menu #menuForo="matMenu">
   <button mat-menu-item routerLink="/foros">Listar</button>
