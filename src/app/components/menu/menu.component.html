@@ -1,59 +1,50 @@
-<mat-toolbar class="custom-toolbar">
-  <div>
-    <button mat-button [matMenuTriggerFor]="menuCertificado" class="btn-rojo">
-      <mat-icon>verified</mat-icon>
-      Certificados
-    </button>
-  </div>
-  <div>
-    <button mat-button [matMenuTriggerFor]="menuCurso" class="btn-rojo">
-      <mat-icon>menu_book</mat-icon>
-      Cursos
-    </button>
-  </div>
-  <div>
-    <button mat-button [matMenuTriggerFor]="menuHabilidades" class="btn-rojo">
-      <mat-icon>lightbulb</mat-icon>
-      Habilidades
-    </button>
-  </div>
-  <div>
-    <button mat-button [matMenuTriggerFor]="menuEstudios" class="btn-rojo">
-      <mat-icon>school</mat-icon>
-      Estudios
-    </button>
-  </div>
-  <div>
-    <button mat-button [matMenuTriggerFor]="menuExperiencias" class="btn-rojo">
-      <mat-icon>work</mat-icon>
-      Experiencias
-    </button>
-  </div>
-  <div>
-    <button mat-button [matMenuTriggerFor]="menuEntrevistas" class="btn-rojo">
-      <mat-icon>record_voice_over</mat-icon>
-      Entrevistas
-    </button>
-  </div>
-  <div>
-    <button mat-button [matMenuTriggerFor]="menuContratos" class="btn-rojo">
-      <mat-icon>description</mat-icon>
-      Contratos
-    </button>
-  </div>
-  <div>
-    <button mat-button [matMenuTriggerFor]="menuDetalles" class="btn-rojo">
-      <mat-icon>info</mat-icon>
-      Detalles
-    </button>
-  </div>
-  <div>
-    <button mat-button [matMenuTriggerFor]="menuUsuario" class="btn-rojo">
-      <mat-icon>group</mat-icon>
-      Usuarios
-    </button>
-  </div>
+<mat-toolbar color="primary">
+  <button mat-icon-button [matMenuTriggerFor]="mainMenu">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span style="margin-left: 1rem;">Menú Principal</span>
 </mat-toolbar>
+
+<mat-menu #mainMenu="matMenu">
+  <button mat-menu-item [matMenuTriggerFor]="menuCertificado">
+    <mat-icon>verified</mat-icon>
+    <span>Certificados</span>
+  </button>
+  <button mat-menu-item [matMenuTriggerFor]="menuCurso">
+    <mat-icon>menu_book</mat-icon>
+    <span>Cursos</span>
+  </button>
+  <button mat-menu-item [matMenuTriggerFor]="menuHabilidades">
+    <mat-icon>lightbulb</mat-icon>
+    <span>Habilidades</span>
+  </button>
+  <button mat-menu-item [matMenuTriggerFor]="menuEstudios">
+    <mat-icon>school</mat-icon>
+    <span>Estudios</span>
+  </button>
+  <button mat-menu-item [matMenuTriggerFor]="menuExperiencias">
+    <mat-icon>work</mat-icon>
+    <span>Experiencias</span>
+  </button>
+  <button mat-menu-item [matMenuTriggerFor]="menuEntrevistas">
+    <mat-icon>record_voice_over</mat-icon>
+    <span>Entrevistas</span>
+  </button>
+  <button mat-menu-item [matMenuTriggerFor]="menuContratos">
+    <mat-icon>description</mat-icon>
+    <span>Contratos</span>
+  </button>
+  <button mat-menu-item [matMenuTriggerFor]="menuDetalles">
+    <mat-icon>info</mat-icon>
+    <span>Detalles</span>
+  </button>
+  <button mat-menu-item [matMenuTriggerFor]="menuUsuario">
+    <mat-icon>group</mat-icon>
+    <span>Usuarios</span>
+  </button>
+</mat-menu>
+
+
 <mat-menu #menuCertificado="matMenu">
   <button mat-menu-item routerLink="/certificados">Listar</button>
   <button mat-menu-item routerLink="/certificados/insertareditar">Registrar</button>
