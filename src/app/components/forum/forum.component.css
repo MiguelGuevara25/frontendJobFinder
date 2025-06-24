@@ -1,0 +1,82 @@
+/* Contenedor principal general */
+div {
+  margin-bottom: 20px;
+  font-family: Arial, sans-serif;
+}
+
+/* Contenedor específico de búsqueda con flex */
+.contenedor-busqueda {
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px; /* Espacio automático entre label, input y botón */
+  background-color: #f5f5f5;
+  border-radius: 6px;
+}
+
+/* Label del campo */
+.contenedor-busqueda label {
+  font-weight: bold;
+  margin: 0;
+}
+
+/* Input de búsqueda */
+.contenedor-busqueda input[type="text"] {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  flex: 1; /* Hace que el input crezca según el espacio disponible */
+  min-width: 200px;
+}
+
+/* Botón de búsqueda */
+.contenedor-busqueda button {
+  padding: 6px 12px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.contenedor-busqueda button:hover {
+  background-color: #0056b3;
+}
+
+/* Indicador de carga */
+.loading-text {
+  font-size: 1.2em;
+  color: #007BFF;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Resultado individual */
+.resultado-post {
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  background-color: #f9f9f9;
+}
+
+/* Título del post */
+.resultado-post h3 {
+  margin: 0 0 10px;
+  color: #333;
+}
+
+/* Enlace del post */
+.resultado-post a {
+  color: #007BFF;
+  text-decoration: none;
+}
+.resultado-post a:hover {
+  text-decoration: underline;
+}
+
+/* Mensaje de no resultados */
+.no-result {
+  color: #666;
+  text-align: center;
+  font-style: italic;
+}
