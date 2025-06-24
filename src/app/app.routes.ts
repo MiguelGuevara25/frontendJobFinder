@@ -23,6 +23,7 @@ import { ForumComponent } from './components/forum/forum.component';
 import { RolComponent } from './components/rol/rol.component';
 import { ListarrolComponent } from './components/rol/listarrol/listarrol.component';
 import { InsertareditarolComponent } from './components/rol/insertareditarol/insertareditarol.component';
+import { InscripcioncursoComponent } from './components/inscripcioncurso/inscripcioncurso.component';
 
 export const routes: Routes = [
   {
@@ -182,4 +183,8 @@ export const routes: Routes = [
       },
     ],
   },
+  {
+    path: 'inscripcioncurso',
+    component: InscripcioncursoComponent,
+  }
 ];
