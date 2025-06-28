@@ -1,8 +1,8 @@
-<mat-toolbar color="primary">
+<mat-toolbar class="toolbar-transparente">
   <button mat-icon-button [matMenuTriggerFor]="mainMenu">
     <mat-icon>menu</mat-icon>
   </button>
-  <span style="margin-left: 1rem;">Menú Principal</span>
+  <span>Menú Principal</span>
 </mat-toolbar>
 
 <mat-menu #mainMenu="matMenu">
@@ -46,8 +46,11 @@
     <mat-icon>business</mat-icon>
     <span>Empresa</span>
   </button>
+  <button mat-menu-item [matMenuTriggerFor]="menuForo">
+    <mat-icon>forum</mat-icon>
+    <span>Foros</span>
+  </button>
 </mat-menu>
-
 
 <mat-menu #menuCertificado="matMenu">
   <button mat-menu-item routerLink="/certificados">Listar</button>
@@ -87,4 +90,7 @@
 </mat-menu>
 <mat-menu #menuEmpresa="matMenu">
   <button mat-menu-item routerLink="/empresa">Listar</button>
+</mat-menu>
+<mat-menu #menuForo="matMenu">
+  <button mat-menu-item routerLink="/foros">Listar</button>
 </mat-menu>
