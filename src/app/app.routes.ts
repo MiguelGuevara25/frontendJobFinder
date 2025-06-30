@@ -25,6 +25,8 @@ import { RolComponent } from './components/rol/rol.component';
 import { ListarrolComponent } from './components/rol/listarrol/listarrol.component';
 import { InsertareditarolComponent } from './components/rol/insertareditarol/insertareditarol.component';
 import { InscripcioncursoComponent } from './components/inscripcioncurso/inscripcioncurso.component';
+import { ListarinscripcioncursoComponent } from './components/inscripcioncurso/listarinscripcioncurso/listarinscripcioncurso.component';
+import { InsertareditarinscripcioncursoComponent } from './components/inscripcioncurso/insertareditarinscripcioncurso/insertareditarinscripcioncurso.component';
 
 export const routes: Routes = [
   {
@@ -51,7 +53,7 @@ export const routes: Routes = [
     component: CursoComponent,
     children:[
       {
-        path:'insertar',
+        path:'insertareditarcurso',
         component: InsertareditarcursoComponent,
       },
       {
@@ -196,7 +198,17 @@ export const routes: Routes = [
     ],
   },
   {
-    path: 'inscripcioncurso',
+    path: 'inscripcioncursos',
     component: InscripcioncursoComponent,
+    children:[
+      {
+        path:'',
+        component: ListarinscripcioncursoComponent
+      },
+      {
+        path:'registrar',
+        component: InsertareditarinscripcioncursoComponent
+      }
+    ]
   }
 ];
