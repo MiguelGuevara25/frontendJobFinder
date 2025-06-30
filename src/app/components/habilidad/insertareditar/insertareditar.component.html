@@ -28,12 +28,14 @@
       <mat-label>Nombre</mat-label>
       <input
         matInput
-        placeholder="Nombre de la habilidad"
+        #message
+        maxlength="100"
         formControlName="name"
         (keypress)="soloLetras($event)"
       />
+      <mat-hint align="end">{{ message.value.length }} / 100</mat-hint>
       <mat-error *ngIf="form.get('name')?.hasError('required')">
-        La habilidad es obligatoria
+        La habilidad es obligatoria!!!
       </mat-error>
       <mat-error *ngIf="form.get('name')?.hasError('pattern')">
         Solo se permiten letras y espacios.
@@ -42,6 +44,15 @@
 
     <div class="example-button-row">
       <button mat-raised-button color="primary">Guardar</button>
+      <button
+        mat-raised-button
+        color="warn"
+        type="button"
+        (click)="cancelar()"
+        style="margin-left: 16px"
+      >
+        Cancelar
+      </button>
     </div>
   </form>
 </div>

@@ -3,6 +3,7 @@ import {
   FormBuilder,
   FormControl,
   FormGroup,
+  FormsModule,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
@@ -25,6 +26,7 @@ import { CommonModule } from '@angular/common';
     MatIconModule,
     ReactiveFormsModule,
     CommonModule,
+    FormsModule,
   ],
   providers: [provideNativeDateAdapter()],
   templateUrl: './insertareditar.component.html',
@@ -54,7 +56,7 @@ export class InsertareditarHabilidadComponent implements OnInit {
       id: [''],
       name: [
         '',
-        [Validators.required, Validators.pattern('^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$')],
+        [Validators.required, Validators.pattern('^[a-zA-ZáéíóúÉÁÍÓÚñÑ\\s]+$')],
       ],
     });
   }
@@ -115,5 +117,9 @@ export class InsertareditarHabilidadComponent implements OnInit {
     if (!regex.test(event.key)) {
       event.preventDefault();
     }
+  }
+
+  cancelar() {
+    this.router.navigate(['/habilidades']);
   }
 }
