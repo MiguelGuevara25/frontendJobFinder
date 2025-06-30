@@ -25,15 +25,19 @@
         shake: form.get('name')?.invalid && form.get('name')?.touched
       }"
     >
-      <mat-label>Aplicación</mat-label>
+      <mat-label>Nombre</mat-label>
       <input
         matInput
         placeholder="Nombre de la habilidad"
         formControlName="name"
+        (keypress)="soloLetras($event)"
       />
-      @if (form.get('name')?.hasError('required')) {
-      <mat-error>La aplicación es obligatoria</mat-error>
-      }
+      <mat-error *ngIf="form.get('name')?.hasError('required')">
+        La habilidad es obligatoria
+      </mat-error>
+      <mat-error *ngIf="form.get('name')?.hasError('pattern')">
+        Solo se permiten letras y espacios.
+      </mat-error>
     </mat-form-field>
 
     <div class="example-button-row">

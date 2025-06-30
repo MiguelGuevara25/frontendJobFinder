@@ -52,7 +52,10 @@ export class InsertareditarHabilidadComponent implements OnInit {
 
     this.form = this.formBuilder.group({
       id: [''],
-      name: ['', Validators.required],
+      name: [
+        '',
+        [Validators.required, Validators.pattern('^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$')],
+      ],
     });
   }
 
@@ -89,7 +92,10 @@ export class InsertareditarHabilidadComponent implements OnInit {
       this.hS.listId(this.id).subscribe((data) => {
         this.form = new FormGroup({
           id: new FormControl(data.id_habilidad),
-          name: new FormControl(data.nombre, Validators.required),
+          name: new FormControl(data.nombre, [
+            Validators.required,
+            Validators.pattern('^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$'),
+          ]),
         });
       });
     }
@@ -101,6 +107,13 @@ export class InsertareditarHabilidadComponent implements OnInit {
       field.classList.remove('shake');
       void (field as HTMLElement).offsetWidth; // Fuerza reflow
       field.classList.add('shake');
+    }
+  }
+
+  soloLetras(event: KeyboardEvent) {
+    const regex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]$/;
+    if (!regex.test(event.key)) {
+      event.preventDefault();
     }
   }
 }
