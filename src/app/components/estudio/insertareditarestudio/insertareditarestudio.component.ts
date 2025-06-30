@@ -3,6 +3,7 @@ import {
   FormBuilder,
   FormControl,
   FormGroup,
+  FormsModule,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
@@ -41,6 +42,7 @@ const fechasValidator: ValidatorFn = (
     ReactiveFormsModule,
     CommonModule,
     MatDatepickerModule,
+    FormsModule,
   ],
   providers: [provideNativeDateAdapter()],
   templateUrl: './insertareditarestudio.component.html',

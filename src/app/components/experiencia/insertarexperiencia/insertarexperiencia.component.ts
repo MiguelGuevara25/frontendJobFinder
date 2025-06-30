@@ -3,6 +3,7 @@ import {
   FormBuilder,
   FormControl,
   FormGroup,
+  FormsModule,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
@@ -16,6 +17,20 @@ import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
+import { ValidatorFn, AbstractControl } from '@angular/forms';
+
+const fechasValidator: ValidatorFn = (
+  control: AbstractControl
+): { [key: string]: any } | null => {
+  const inicio = control.get('fechaInicio')?.value;
+  const fin = control.get('fechaFin')?.value;
+
+  if (inicio && fin && new Date(fin) < new Date(inicio)) {
+    return { fechaFinInvalida: true };
+  }
+
+  return null;
+};
 
 @Component({
   selector: 'app-insertarexperiencia',
@@ -27,6 +42,7 @@ import { provideNativeDateAdapter } from '@angular/material/core';
     ReactiveFormsModule,
     CommonModule,
     MatDatepickerModule,
+    FormsModule,
   ],
   providers: [provideNativeDateAdapter()],
   templateUrl: './insertarexperiencia.component.html',
@@ -53,19 +69,40 @@ export class InsertarexperienciaComponent implements OnInit {
       this.init();
     });
 
-    this.form = this.formBuilder.group({
-      codigo: [''],
-      puesto: ['', Validators.required],
-      empresa: ['', Validators.required],
-      fechaInicio: ['', Validators.required],
-      fechaFin: ['', Validators.required],
-      descripcion: ['', Validators.required],
-    });
+    this.form = this.formBuilder.group(
+      {
+        codigo: [''],
+        puesto: [
+          '',
+          [
+            Validators.required,
+            Validators.pattern('^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$'),
+          ],
+        ],
+        empresa: [
+          '',
+          [
+            Validators.required,
+            Validators.pattern('^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$'),
+          ],
+        ],
+        fechaInicio: ['', Validators.required],
+        fechaFin: ['', Validators.required],
+        descripcion: [
+          '',
+          [
+            Validators.required,
+            Validators.pattern('^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$'),
+          ],
+        ],
+      },
+      { validators: fechasValidator }
+    );
   }
 
   aceptar() {
     if (this.form.valid) {
-      this.experiencia.id = this.form.value.codigo;
+      this.experiencia.id = this.form.get('codigo')?.value;
       this.experiencia.job = this.form.value.puesto;
       this.experiencia.enterprise = this.form.value.empresa;
       this.experiencia.startDate = this.form.value.fechaInicio;
@@ -89,23 +126,48 @@ export class InsertarexperienciaComponent implements OnInit {
       this.router.navigate(['/experiencias']);
     } else {
       this.form.markAllAsTouched();
-      // Forzar animación shake si hay error
-      this.triggerShake('name');
-      if (this.edicion) this.triggerShake('id');
+
+      // Temblar los campos con error
+      const controls = [
+        'puesto',
+        'empresa',
+        'fechaInicio',
+        'fechaFin',
+        'descripcion',
+      ];
+      controls.forEach((control) => {
+        if (this.form.get(control)?.invalid) {
+          this.triggerShake(control);
+        }
+      });
     }
   }
 
   init() {
     if (this.edicion) {
       this.exS.listId(this.id).subscribe((data) => {
-        this.form = new FormGroup({
-          codigo: new FormControl(data.id),
-          puesto: new FormControl(data.job, Validators.required),
-          empresa: new FormControl(data.enterprise, Validators.required),
-          fechaInicio: new FormControl(data.startDate, Validators.required),
-          fechaFin: new FormControl(data.endDate, Validators.required),
-          descripcion: new FormControl(data.description, Validators.required),
-        });
+        this.form = new FormGroup(
+          {
+            codigo: new FormControl({ value: data.id, disabled: true }),
+            puesto: new FormControl(data.job, [
+              Validators.required,
+              Validators.pattern('^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$'),
+            ]),
+            empresa: new FormControl(data.enterprise, [
+              Validators.required,
+              Validators.pattern('^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$'),
+            ]),
+            fechaInicio: new FormControl(data.startDate, Validators.required),
+            fechaFin: new FormControl(data.endDate, Validators.required),
+            descripcion: new FormControl(data.description, [
+              Validators.required,
+              Validators.pattern('^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$'),
+            ]),
+          },
+          {
+            validators: fechasValidator,
+          }
+        );
       });
     }
   }
@@ -114,8 +176,22 @@ export class InsertarexperienciaComponent implements OnInit {
     const field = document.querySelector(`.form-control-${controlName}`);
     if (field) {
       field.classList.remove('shake');
-      void (field as HTMLElement).offsetWidth; // Fuerza reflow
-      field.classList.add('shake');
+
+      // Espera a que se quite la clase antes de volver a aplicarla
+      setTimeout(() => {
+        field.classList.add('shake');
+      }, 10); // Tiempo muy corto, suficiente para reiniciar animación
     }
+  }
+
+  soloLetras(event: KeyboardEvent) {
+    const regex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]$/;
+    if (!regex.test(event.key)) {
+      event.preventDefault();
+    }
+  }
+
+  cancelar() {
+    this.router.navigate(['/experiencias']);
   }
 }

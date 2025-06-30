@@ -1,5 +1,7 @@
 <div class="contenedor-titulo">
-  <h1 class="titulo-centrado">Registro de Experiencias</h1>
+  <h1 class="titulo-centrado">
+    {{ edicion ? "Actualizar Experiencia" : "Registro de Experiencia" }}
+  </h1>
 </div>
 
 <div class="contenedor-tabla">
@@ -24,7 +26,7 @@
     <!-- Campo Puesto del Estudio -->
     <mat-form-field
       appearance="fill"
-      class="form-control-name"
+      class="form-control-puesto"
       [ngClass]="{
         shake: form.get('puesto')?.invalid && form.get('puesto')?.touched
       }"
@@ -32,17 +34,23 @@
       <mat-label>Puesto</mat-label>
       <input
         matInput
-        placeholder="Nombre del Puesto"
+        #message
+        maxlength="100"
         formControlName="puesto"
+        (keypress)="soloLetras($event)"
       />
+      <mat-hint align="end">{{ message.value.length }} / 100</mat-hint>
       <mat-error *ngIf="form.get('puesto')?.hasError('required')">
-        El Puesto es obligatorio
+        El Puesto es obligatorio!!!
+      </mat-error>
+      <mat-error *ngIf="form.get('titulo')?.hasError('pattern')">
+        Solo se permiten letras y espacios
       </mat-error>
     </mat-form-field>
 
     <!-- Campo de Empresa -->
     <mat-form-field
-      class="example-full-width"
+      class="form-control-empresa"
       [ngClass]="{
         shake: form.get('empresa')?.invalid && form.get('empresa')?.touched
       }"
@@ -50,26 +58,34 @@
       <mat-label>Empresa</mat-label>
       <input
         matInput
-        placeholder="Nombre de la empresa"
+        #message2
+        maxlength="100"
         formControlName="empresa"
+        (keypress)="soloLetras($event)"
       />
+      <mat-hint align="end">{{ message2.value.length }} / 100</mat-hint>
       <mat-error *ngIf="form.get('empresa')?.hasError('required')">
-        La empresa es obligatoria
+        La empresa es obligatoria!!!
+      </mat-error>
+      <mat-error *ngIf="form.get('centro')?.hasError('pattern')">
+        Solo se permiten letras y espacios
       </mat-error>
     </mat-form-field>
 
     <!-- Campo Fecha Inicio -->
     <mat-form-field
+      class="form-control-fechaInicio"
       [ngClass]="{
         shake:
           form.get('fechaInicio')?.invalid && form.get('fechaInicio')?.touched
       }"
     >
-      <mat-label>Fecha Inicio:</mat-label>
+      <mat-label>Fecha Inicio</mat-label>
       <input
         matInput
         [matDatepicker]="pickerInicio"
         formControlName="fechaInicio"
+        readonly
       />
       <mat-hint>MM/DD/YYYY</mat-hint>
       <mat-datepicker-toggle
@@ -78,18 +94,25 @@
       ></mat-datepicker-toggle>
       <mat-datepicker #pickerInicio></mat-datepicker>
       <mat-error *ngIf="form.get('fechaInicio')?.hasError('required')">
-        La fecha de inicio es obligatoria
+        La fecha de inicio es obligatoria!!!
       </mat-error>
     </mat-form-field>
 
     <!-- Campo Fecha Fin -->
     <mat-form-field
+      class="form-control-fechaFin"
       [ngClass]="{
         shake: form.get('fechaFin')?.invalid && form.get('fechaFin')?.touched
       }"
     >
-      <mat-label>Fecha Fin:</mat-label>
-      <input matInput [matDatepicker]="pickerFin" formControlName="fechaFin" />
+      <mat-label>Fecha Fin</mat-label>
+      <input
+        matInput
+        [matDatepicker]="pickerFin"
+        formControlName="fechaFin"
+        [min]="form.get('fechaInicio')?.value"
+        readonly
+      />
       <mat-hint>MM/DD/YYYY</mat-hint>
       <mat-datepicker-toggle
         matIconSuffix
@@ -99,29 +122,43 @@
       <mat-error *ngIf="form.get('fechaFin')?.hasError('required')">
         La fecha de fin es obligatoria
       </mat-error>
+      <mat-error *ngIf="form.hasError('fechaFinInvalida')">
+        La fecha de fin no puede ser anterior a la fecha de inicio!!!
+      </mat-error>
     </mat-form-field>
 
     <!-- Campo de Descripcion -->
     <mat-form-field
-      class="example-full-width"
+      class="form-control-descripcion"
+      (keypress)="soloLetras($event)"
       [ngClass]="{
-        shake: form.get('descripcion')?.invalid && form.get('descripcion')?.touched
+        shake:
+          form.get('descripcion')?.invalid && form.get('descripcion')?.touched
       }"
     >
       <mat-label>Descripcion</mat-label>
-      <input
-        matInput
-        placeholder="Descripcion"
-        formControlName="descripcion"
-      />
+      <input matInput #message3 maxlength="100" formControlName="descripcion" />
+      <mat-hint align="end">{{ message3.value.length }} / 100</mat-hint>
       <mat-error *ngIf="form.get('descripcion')?.hasError('required')">
         La descripcion es obligatoria
+      </mat-error>
+      <mat-error *ngIf="form.get('centro')?.hasError('pattern')">
+        Solo se permiten letras y espacios
       </mat-error>
     </mat-form-field>
 
     <!-- Botón Guardar -->
     <div class="example-button-row">
       <button mat-raised-button color="primary">Guardar</button>
+      <button
+        mat-raised-button
+        color="warn"
+        type="button"
+        (click)="cancelar()"
+        style="margin-left: 16px"
+      >
+        Cancelar
+      </button>
     </div>
   </form>
 </div>

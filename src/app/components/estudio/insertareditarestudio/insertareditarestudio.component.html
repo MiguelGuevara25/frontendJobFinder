@@ -34,10 +34,12 @@
       <mat-label>Titulo</mat-label>
       <input
         matInput
-        placeholder="Nombre del titulo"
+        #message
+        maxlength="100"
         formControlName="titulo"
         (keypress)="soloLetras($event)"
       />
+      <mat-hint align="end">{{ message.value.length }} / 100</mat-hint>
       <mat-error *ngIf="form.get('titulo')?.hasError('required')">
         El Título es obligatorio!!!
       </mat-error>
@@ -56,10 +58,12 @@
       <mat-label>Centro de Estudio</mat-label>
       <input
         matInput
-        placeholder="Nombre del centro"
+        #message2
+        maxlength="100"
         formControlName="centro"
         (keypress)="soloLetras($event)"
       />
+      <mat-hint align="end">{{ message2.value.length }} / 100</mat-hint>
       <mat-error *ngIf="form.get('centro')?.hasError('required')">
         El Centro de Estudio es obligatorio!!!
       </mat-error>
@@ -81,6 +85,7 @@
         matInput
         [matDatepicker]="pickerInicio"
         formControlName="fecha_inicio"
+        readonly
       />
       <mat-hint>MM/DD/YYYY</mat-hint>
       <mat-datepicker-toggle
@@ -106,6 +111,7 @@
         [matDatepicker]="pickerFin"
         formControlName="fecha_fin"
         [min]="form.get('fecha_inicio')?.value"
+        readonly
       />
       <mat-hint>MM/DD/YYYY</mat-hint>
       <mat-datepicker-toggle
