@@ -1,5 +1,6 @@
 <div class="contenedor-titulo">
-  <h1 class="titulo-centrado">Registro de Cursos</h1>
+  <h1 class="titulo-centrado" *ngIf="!edicion">Registro de Curso</h1>
+  <h1 class="titulo-centrado" *ngIf="edicion">Actualizar Curso</h1>
 </div>
 
 <div class="contenedor-tabla">
@@ -79,6 +80,7 @@
 
     <div class="example-button-row">
       <button mat-raised-button color="primary" type="submit">Guardar</button>
+      <button mat-raised-button color="warn" type="button" (click)="cancelar()">Cancelar</button>
     </div>
 
   </form>

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Subject } from 'rxjs';
-import { InscripcionCurso } from '../models/incripcioncurso';
 import { HttpClient } from '@angular/common/http';
+import { InscripcionCurso } from '../models/inscripcionCurso';
 const base_url = environment.base;
 
 @Injectable({
