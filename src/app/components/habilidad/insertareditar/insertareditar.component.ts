@@ -63,7 +63,8 @@ export class InsertareditarHabilidadComponent implements OnInit {
 
   aceptar() {
     if (this.form.valid) {
-      this.habilidad.id_habilidad = this.form.value.id;
+      // Asignar el ID según modo
+      this.habilidad.id_habilidad = this.edicion ? this.id : this.form.value.id;
       this.habilidad.nombre = this.form.value.name;
 
       if (this.edicion) {
@@ -83,7 +84,6 @@ export class InsertareditarHabilidadComponent implements OnInit {
       this.router.navigate(['/habilidades']);
     } else {
       this.form.markAllAsTouched();
-      // Forzar animación shake si hay error
       this.triggerShake('name');
       if (this.edicion) this.triggerShake('id');
     }
@@ -93,7 +93,7 @@ export class InsertareditarHabilidadComponent implements OnInit {
     if (this.edicion) {
       this.hS.listId(this.id).subscribe((data) => {
         this.form = new FormGroup({
-          id: new FormControl(data.id_habilidad),
+          id: new FormControl({ value: data.id_habilidad, disabled: true }),
           name: new FormControl(data.nombre, [
             Validators.required,
             Validators.pattern('^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$'),
