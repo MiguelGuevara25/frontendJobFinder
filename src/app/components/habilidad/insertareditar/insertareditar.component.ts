@@ -3,6 +3,7 @@ import {
   FormBuilder,
   FormControl,
   FormGroup,
+  FormsModule,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
@@ -15,6 +16,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-insertareditar',
@@ -25,6 +27,7 @@ import { CommonModule } from '@angular/common';
     MatIconModule,
     ReactiveFormsModule,
     CommonModule,
+    FormsModule,
   ],
   providers: [provideNativeDateAdapter()],
   templateUrl: './insertareditar.component.html',
@@ -40,7 +43,8 @@ export class InsertareditarHabilidadComponent implements OnInit {
     private hS: HabilidadService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -52,25 +56,35 @@ export class InsertareditarHabilidadComponent implements OnInit {
 
     this.form = this.formBuilder.group({
       id: [''],
-      name: ['', Validators.required],
+      name: [
+        '',
+        [Validators.required, Validators.pattern('^[a-zA-ZáéíóúÉÁÍÓÚñÑ\\s]+$')],
+      ],
     });
   }
 
   aceptar() {
     if (this.form.valid) {
-      this.habilidad.id_habilidad = this.form.value.id;
+      // Asignar el ID según modo
+      this.habilidad.id_habilidad = this.edicion ? this.id : this.form.value.id;
       this.habilidad.nombre = this.form.value.name;
 
       if (this.edicion) {
         this.hS.update(this.habilidad).subscribe(() => {
           this.hS.list().subscribe((data) => {
             this.hS.setList(data);
+            this.snackBar.open('¡Habilidad actualizada con éxito!', 'Cerrar', {
+              duration: 3000,
+            });
           });
         });
       } else {
         this.hS.insert(this.habilidad).subscribe(() => {
           this.hS.list().subscribe((data) => {
             this.hS.setList(data);
+            this.snackBar.open('¡Habilidad registrada con éxito!', 'Cerrar', {
+              duration: 3000,
+            });
           });
         });
       }
@@ -78,9 +92,10 @@ export class InsertareditarHabilidadComponent implements OnInit {
       this.router.navigate(['/habilidades']);
     } else {
       this.form.markAllAsTouched();
-      // Forzar animación shake si hay error
-      this.triggerShake('name');
-      if (this.edicion) this.triggerShake('id');
+      // Solo shake del campo 'name', ya que 'id' no se valida
+      if (this.form.get('name')?.invalid) {
+        this.triggerShake('name');
+      }
     }
   }
 
@@ -88,8 +103,11 @@ export class InsertareditarHabilidadComponent implements OnInit {
     if (this.edicion) {
       this.hS.listId(this.id).subscribe((data) => {
         this.form = new FormGroup({
-          id: new FormControl(data.id_habilidad),
-          name: new FormControl(data.nombre, Validators.required),
+          id: new FormControl({ value: data.id_habilidad, disabled: true }),
+          name: new FormControl(data.nombre, [
+            Validators.required,
+            Validators.pattern('^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$'),
+          ]),
         });
       });
     }
@@ -99,8 +117,23 @@ export class InsertareditarHabilidadComponent implements OnInit {
     const field = document.querySelector(`.form-control-${controlName}`);
     if (field) {
       field.classList.remove('shake');
-      void (field as HTMLElement).offsetWidth; // Fuerza reflow
-      field.classList.add('shake');
+      setTimeout(() => {
+        field.classList.add('shake');
+      }, 10);
     }
+  }
+
+  soloLetras(event: KeyboardEvent) {
+    const regex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]$/;
+    if (!regex.test(event.key)) {
+      event.preventDefault();
+    }
+  }
+
+  cancelar() {
+    this.snackBar.open('Operación cancelada', 'Cerrar', {
+      duration: 3000,
+    });
+    this.router.navigate(['/habilidades']);
   }
 }

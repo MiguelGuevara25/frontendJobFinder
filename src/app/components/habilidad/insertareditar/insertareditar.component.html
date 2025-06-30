@@ -1,5 +1,7 @@
 <div class="contenedor-titulo">
-  <h1 class="titulo-centrado">Registro de Habilidades</h1>
+  <h1 class="titulo-centrado">
+  {{ edicion ? 'Actualizar Habilidad' : 'Registro de Habilidad' }}
+</h1>
 </div>
 
 <div class="contenedor-tabla">
@@ -25,19 +27,34 @@
         shake: form.get('name')?.invalid && form.get('name')?.touched
       }"
     >
-      <mat-label>Aplicación</mat-label>
+      <mat-label>Nombre</mat-label>
       <input
         matInput
-        placeholder="Nombre de la habilidad"
+        #message
+        maxlength="100"
         formControlName="name"
+        (keypress)="soloLetras($event)"
       />
-      @if (form.get('name')?.hasError('required')) {
-      <mat-error>La aplicación es obligatoria</mat-error>
-      }
+      <mat-hint align="end">{{ message.value.length }} / 100</mat-hint>
+      <mat-error *ngIf="form.get('name')?.hasError('required')">
+        La habilidad es obligatoria!!!
+      </mat-error>
+      <mat-error *ngIf="form.get('name')?.hasError('pattern')">
+        Solo se permiten letras y espacios.
+      </mat-error>
     </mat-form-field>
 
     <div class="example-button-row">
       <button mat-raised-button color="primary">Guardar</button>
+      <button
+        mat-raised-button
+        color="warn"
+        type="button"
+        (click)="cancelar()"
+        style="margin-left: 16px"
+      >
+        Cancelar
+      </button>
     </div>
   </form>
 </div>
