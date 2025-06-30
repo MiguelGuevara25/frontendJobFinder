@@ -19,8 +19,12 @@ import { InsertareditarCertificadoComponent } from './components/certificado/ins
 import { InsertarexperienciaComponent } from './components/experiencia/insertarexperiencia/insertarexperiencia.component';
 import { EmpresaComponent } from './components/empresa/empresa.component';
 import { ListarEmpresaComponent } from './components/empresa/listar-empresa/listar-empresa.component';
+import { InsertareditarcursoComponent } from './components/curso/insertareditarcurso/insertareditarcurso.component';                                                                                            
 import { ForumComponent } from './components/forum/forum.component';
-import { InsertareditarcursoComponent } from './components/curso/insertareditarcurso/insertareditarcurso.component';
+import { RolComponent } from './components/rol/rol.component';
+import { ListarrolComponent } from './components/rol/listarrol/listarrol.component';
+import { InsertareditarolComponent } from './components/rol/insertareditarol/insertareditarol.component';
+import { InscripcioncursoComponent } from './components/inscripcioncurso/inscripcioncurso.component';
 
 export const routes: Routes = [
   {
@@ -173,4 +177,26 @@ export const routes: Routes = [
     path: 'foros',
     component: ForumComponent,
   },
+  {
+    path: 'rol',
+    component: RolComponent,
+    children: [
+      {
+        path: '',
+        component: ListarrolComponent,
+      },
+      {
+        path: 'registrar',
+        component: InsertareditarolComponent,
+      },
+       {
+        path: 'ediciones/:id',
+        component: InsertareditarolComponent,
+      },
+    ],
+  },
+  {
+    path: 'inscripcioncurso',
+    component: InscripcioncursoComponent,
+  }
 ];

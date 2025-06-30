@@ -1,0 +1,45 @@
+<div class="contenedor-titulo">
+  <h1 class="titulo-centrado" *ngIf="!edicion">Registro de Rol</h1>
+  <h1 class="titulo-centrado" *ngIf="edicion">Actualizar Rol</h1>
+</div>
+
+<div class="contenedor-tabla">
+  <form [formGroup]="form" (ngSubmit)="aceptar()" class="formulario-estilizado">
+    <!-- Campo ID (solo en edición) -->
+    <mat-form-field *ngIf="edicion">
+      <mat-label>ID</mat-label>
+      <input matInput formControlName="id" />
+      <mat-error *ngIf="form.get('id')?.hasError('required')">
+        El código es obligatorio
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Nombre -->
+    <mat-form-field>
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="nombre" />
+      <mat-error *ngIf="form.get('nombre')?.hasError('required')">
+        El nombre es obligatorio
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Usuario -->
+    <mat-form-field>
+      <mat-label>Usuario</mat-label>
+       <mat-select formControlName="apli">
+          @for (food of listaUsuario; track food) {
+          <mat-option [value]="food.idUsuario">{{ food.idUsuario }}</mat-option>
+          }
+        </mat-select>
+      <mat-error *ngIf="form.get('usuario')?.hasError('required')">
+        El usuario es obligatorio
+      </mat-error>
+    </mat-form-field>
+
+     <!-- Botones -->
+    <div class="example-button-row">
+      <button mat-raised-button color="primary" type="submit">Aceptar</button>
+      <button mat-raised-button color="warn" type="button" (click)="cancelar()">Cancelar</button>
+    </div>
+  </form>
+</div>
