@@ -5,8 +5,8 @@ import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { RouterLink } from '@angular/router';
-import { InscripcionCurso } from '../../../models/incripcioncurso';
 import { InscripcioncursoService } from '../../../services/inscripcioncurso.service';
+import { InscripcionCurso } from '../../../models/inscripcionCurso';
 
 @Component({
   selector: 'app-listarinscripcioncurso',
@@ -16,7 +16,7 @@ import { InscripcioncursoService } from '../../../services/inscripcioncurso.serv
 })
 export class ListarinscripcioncursoComponent {
   dataSource: MatTableDataSource<InscripcionCurso> = new MatTableDataSource();
-    displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6'];
+    displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7'];
   constructor(private iCS: InscripcioncursoService) {
   }
   ngOnInit(): void {

@@ -1,1 +1,73 @@
-<p>insertareditarinscripcioncurso works!</p>
+<div class="contenedor-titulo">
+  <h1 class="titulo-centrado" *ngIf="!edicion">Registro de Inscripcion Cursos</h1>
+  <h1 class="titulo-centrado" *ngIf="edicion">Actualizar Inscripcion Curso</h1>
+</div>
+
+<div class="contenedor-tabla">
+  <form [formGroup]="form" (submit)="aceptar()" class="formulario-estilizado">
+
+    @if (edicion) {
+    <mat-form-field
+      appearance="fill"
+      class="form-control-id"
+      [ngClass]="{ shake: form.get('idInscripcion')?.invalid && form.get('idInscripcion')?.touched }"
+    >
+      <mat-label>ID</mat-label>
+      <input matInput placeholder="ID" formControlName="idCurso" />
+      @if (form.get('idInscripcion')?.hasError('idInscripcion')) {
+      <mat-error>El código es obligatorio</mat-error>
+      }
+    </mat-form-field>
+    }
+
+
+    
+    
+
+   <mat-form-field appearance="fill">
+  <mat-label>Fecha de Inscripción</mat-label>
+  <input matInput [matDatepicker]="pickerFecha" formControlName="fechaInscripcionCurso" />
+  <mat-datepicker-toggle matSuffix [for]="pickerFecha"></mat-datepicker-toggle>
+  <mat-datepicker #pickerFecha></mat-datepicker>
+  <mat-error *ngIf="form.get('fechaInscripcionCurso')?.hasError('required')">
+    La fecha de inscripción es obligatoria
+  </mat-error>
+</mat-form-field>
+
+<mat-form-field
+  appearance="fill"
+  class="form-control-progresoInscripcionCurso"
+  [ngClass]="{ shake: form.get('progresoInscripcionCurso')?.invalid && form.get('progresoInscripcionCurso')?.touched }"
+>
+  <mat-label>Progreso</mat-label> 
+  <input matInput placeholder="Progreso" formControlName="progresoInscripcionCurso" />
+  <mat-error *ngIf="form.get('progresoInscripcionCurso')?.hasError('required')">
+    El progreso es obligatorio
+  </mat-error>
+</mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Curso</mat-label>
+        <mat-select formControlName="curso">
+          @for (food of listaCursos; track food) {
+          <mat-option [value]="food.idCurso">{{ food.tituloCurso }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Usuario</mat-label>
+        <mat-select formControlName="usuario">
+          @for (food of listaUsuarios; track food) {
+          <mat-option [value]="food.idUsuario">{{ food.nombreUsuario }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    <div class="example-button-row">
+      <button mat-raised-button color="primary" type="submit">Guardar</button>
+      <button mat-raised-button color="warn" type="button" (click)="cancelar()">Cancelar</button>
+    </div>
+
+  </form>
+</div>
+

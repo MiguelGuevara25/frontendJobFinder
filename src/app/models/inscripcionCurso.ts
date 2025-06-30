@@ -1,7 +1,7 @@
 import { Curso } from "./curso";
 import { Usuario } from "./usuario";
 
-export class inscripcionCurso{
+export class InscripcionCurso{
 idInscripcion: number=0;
 fechaInscripcionCurso: Date= new Date();
 progresoInscripcionCurso: string="";

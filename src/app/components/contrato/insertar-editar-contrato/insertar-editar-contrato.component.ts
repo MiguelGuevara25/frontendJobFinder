@@ -80,7 +80,7 @@ export class InsertarEditarContratoComponent {
       this.contrato.endDate = this.form.value.endDate;
       this.contrato.salary = this.form.value.salary;
       this.contrato.contractType = this.form.value.contractType;
-      this.contrato.empresa = this.form.value.empresa;
+      this.contrato.empresa.id = this.form.value.empresa;
 
       if (this.edicion) {
         this.cS.update(this.contrato).subscribe(() => {
