@@ -1,5 +1,7 @@
 <div class="contenedor-titulo">
-  <h1 class="titulo-centrado">Registro de Estudios</h1>
+  <h1 class="titulo-centrado">
+    {{ edicion ? "Actualizar Estudio" : "Registro de Estudio" }}
+  </h1>
 </div>
 
 <div class="contenedor-tabla">
@@ -8,7 +10,7 @@
     <div *ngIf="edicion">
       <mat-form-field
         appearance="fill"
-        class="form-control-id"
+        class="form-control-codigo"
         [ngClass]="{
           shake: form.get('codigo')?.invalid && form.get('codigo')?.touched
         }"
@@ -24,7 +26,7 @@
     <!-- Campo Título/Nombre del Estudio -->
     <mat-form-field
       appearance="fill"
-      class="form-control-name"
+      class="form-control-titulo"
       [ngClass]="{
         shake: form.get('titulo')?.invalid && form.get('titulo')?.touched
       }"
@@ -34,15 +36,19 @@
         matInput
         placeholder="Nombre del titulo"
         formControlName="titulo"
+        (keypress)="soloLetras($event)"
       />
       <mat-error *ngIf="form.get('titulo')?.hasError('required')">
-        El Titulo es obligatorio
+        El Título es obligatorio!!!
+      </mat-error>
+      <mat-error *ngIf="form.get('titulo')?.hasError('pattern')">
+        Solo se permiten letras y espacios
       </mat-error>
     </mat-form-field>
 
     <!-- Campo Centro de Estudio -->
     <mat-form-field
-      class="example-full-width"
+      class="form-control-centro"
       [ngClass]="{
         shake: form.get('centro')?.invalid && form.get('centro')?.touched
       }"
@@ -52,20 +58,25 @@
         matInput
         placeholder="Nombre del centro"
         formControlName="centro"
+        (keypress)="soloLetras($event)"
       />
       <mat-error *ngIf="form.get('centro')?.hasError('required')">
-        El centro es obligatorio
+        El Centro de Estudio es obligatorio!!!
+      </mat-error>
+      <mat-error *ngIf="form.get('centro')?.hasError('pattern')">
+        Solo se permiten letras y espacios
       </mat-error>
     </mat-form-field>
 
     <!-- Campo Fecha Inicio -->
     <mat-form-field
+      class="form-control-fecha_inicio"
       [ngClass]="{
         shake:
           form.get('fecha_inicio')?.invalid && form.get('fecha_inicio')?.touched
       }"
     >
-      <mat-label>Fecha Inicio:</mat-label>
+      <mat-label>Fecha Inicio</mat-label>
       <input
         matInput
         [matDatepicker]="pickerInicio"
@@ -78,18 +89,24 @@
       ></mat-datepicker-toggle>
       <mat-datepicker #pickerInicio></mat-datepicker>
       <mat-error *ngIf="form.get('fecha_inicio')?.hasError('required')">
-        La fecha de inicio es obligatoria
+        La fecha de inicio es obligatoria!!!
       </mat-error>
     </mat-form-field>
 
     <!-- Campo Fecha Fin -->
     <mat-form-field
+      class="form-control-fecha_fin"
       [ngClass]="{
         shake: form.get('fecha_fin')?.invalid && form.get('fecha_fin')?.touched
       }"
     >
-      <mat-label>Fecha Fin:</mat-label>
-      <input matInput [matDatepicker]="pickerFin" formControlName="fecha_fin" />
+      <mat-label>Fecha Fin</mat-label>
+      <input
+        matInput
+        [matDatepicker]="pickerFin"
+        formControlName="fecha_fin"
+        [min]="form.get('fecha_inicio')?.value"
+      />
       <mat-hint>MM/DD/YYYY</mat-hint>
       <mat-datepicker-toggle
         matIconSuffix
@@ -97,13 +114,25 @@
       ></mat-datepicker-toggle>
       <mat-datepicker #pickerFin></mat-datepicker>
       <mat-error *ngIf="form.get('fecha_fin')?.hasError('required')">
-        La fecha de fin es obligatoria
+        La fecha de fin es obligatoria!!!
+      </mat-error>
+      <mat-error *ngIf="form.hasError('fechaFinInvalida')">
+        La fecha de fin no puede ser anterior a la fecha de inicio!!!
       </mat-error>
     </mat-form-field>
 
     <!-- Botón Guardar -->
     <div class="example-button-row">
       <button mat-raised-button color="primary">Guardar</button>
+      <button
+        mat-raised-button
+        color="warn"
+        type="button"
+        (click)="cancelar()"
+        style="margin-left: 16px"
+      >
+        Cancelar
+      </button>
     </div>
   </form>
 </div>

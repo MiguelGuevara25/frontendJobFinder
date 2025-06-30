@@ -84,8 +84,10 @@ export class InsertareditarHabilidadComponent implements OnInit {
       this.router.navigate(['/habilidades']);
     } else {
       this.form.markAllAsTouched();
-      this.triggerShake('name');
-      if (this.edicion) this.triggerShake('id');
+      // Solo shake del campo 'name', ya que 'id' no se valida
+      if (this.form.get('name')?.invalid) {
+        this.triggerShake('name');
+      }
     }
   }
 
@@ -107,8 +109,9 @@ export class InsertareditarHabilidadComponent implements OnInit {
     const field = document.querySelector(`.form-control-${controlName}`);
     if (field) {
       field.classList.remove('shake');
-      void (field as HTMLElement).offsetWidth; // Fuerza reflow
-      field.classList.add('shake');
+      setTimeout(() => {
+        field.classList.add('shake');
+      }, 10);
     }
   }
 
