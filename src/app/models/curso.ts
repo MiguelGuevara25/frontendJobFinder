@@ -1,4 +1,3 @@
-import { Certificado } from './certificado';
 import { Empresa } from './empresa';
 
 export class Curso {
