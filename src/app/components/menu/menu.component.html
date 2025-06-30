@@ -54,6 +54,10 @@
     <mat-icon>forum</mat-icon>
     <span>Foros</span>
   </button>
+  <button mat-menu-item [matMenuTriggerFor]="menuInscripcionCurso">
+    <mat-icon>book</mat-icon>
+    <span>Inscripcion Curso</span>
+  </button>
 </mat-menu>
 
 <mat-menu #menuCertificado="matMenu">
@@ -105,4 +109,8 @@
 </mat-menu>
 <mat-menu #menuForo="matMenu">
   <button mat-menu-item routerLink="/foros">Listar</button>
+</mat-menu>
+<mat-menu #menuInscripcionCurso="matMenu">
+  <button mat-menu-item routerLink="/inscripcioncursos">Listar</button>
+  <button mat-menu-item routerLink="/inscripcioncursos/registrar">Registrar</button>
 </mat-menu>
