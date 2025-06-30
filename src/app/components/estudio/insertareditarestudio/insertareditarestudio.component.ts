@@ -18,6 +18,7 @@ import { CommonModule } from '@angular/common';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ValidatorFn, AbstractControl } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 const fechasValidator: ValidatorFn = (
   control: AbstractControl
@@ -59,7 +60,8 @@ export class InsertareditarestudioComponent implements OnInit {
     private eS: EstudioService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -105,12 +107,22 @@ export class InsertareditarestudioComponent implements OnInit {
         this.eS.update(this.estudio).subscribe(() => {
           this.eS.list().subscribe((data) => {
             this.eS.setList(data);
+            this.snackBar.open(
+              '¡Estudio actualizado con éxito!',
+              'Cerrar',
+              {
+                duration: 3000,
+              }
+            );
           });
         });
       } else {
         this.eS.insert(this.estudio).subscribe(() => {
           this.eS.list().subscribe((data) => {
             this.eS.setList(data);
+            this.snackBar.open('¡Estudio registrado con éxito!', 'Cerrar', {
+              duration: 3000,
+            });
           });
         });
       }
@@ -174,6 +186,9 @@ export class InsertareditarestudioComponent implements OnInit {
   }
 
   cancelar() {
+    this.snackBar.open('Operación cancelada', 'Cerrar', {
+      duration: 3000,
+    });
     this.router.navigate(['/estudios']);
   }
 }

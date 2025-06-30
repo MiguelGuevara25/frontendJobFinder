@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-listar-experiencia',
@@ -27,7 +28,7 @@ export class ListarExperienciaComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private exS: ExperienciaService) {}
+  constructor(private exS: ExperienciaService, private snackBar: MatSnackBar) {}
   ngOnInit(): void {
     this.exS.list().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
@@ -45,6 +46,10 @@ export class ListarExperienciaComponent implements OnInit {
         this.exS.setList(data);
         this.dataSource.data = data;
         this.dataSource.paginator = this.paginator;
+
+        this.snackBar.open('¡Experiencia eliminada con éxito!', 'Cerrar', {
+          duration: 3000,
+        });
       });
     });
   }

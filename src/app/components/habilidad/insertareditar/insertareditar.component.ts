@@ -16,6 +16,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-insertareditar',
@@ -42,7 +43,8 @@ export class InsertareditarHabilidadComponent implements OnInit {
     private hS: HabilidadService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -71,12 +73,18 @@ export class InsertareditarHabilidadComponent implements OnInit {
         this.hS.update(this.habilidad).subscribe(() => {
           this.hS.list().subscribe((data) => {
             this.hS.setList(data);
+            this.snackBar.open('¡Habilidad actualizada con éxito!', 'Cerrar', {
+              duration: 3000,
+            });
           });
         });
       } else {
         this.hS.insert(this.habilidad).subscribe(() => {
           this.hS.list().subscribe((data) => {
             this.hS.setList(data);
+            this.snackBar.open('¡Habilidad registrada con éxito!', 'Cerrar', {
+              duration: 3000,
+            });
           });
         });
       }
@@ -123,6 +131,9 @@ export class InsertareditarHabilidadComponent implements OnInit {
   }
 
   cancelar() {
+    this.snackBar.open('Operación cancelada', 'Cerrar', {
+      duration: 3000,
+    });
     this.router.navigate(['/habilidades']);
   }
 }

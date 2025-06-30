@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-listarhabilidad',
@@ -27,7 +28,7 @@ export class ListarhabilidadComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private hS: HabilidadService) {}
+  constructor(private hS: HabilidadService, private snackBar: MatSnackBar) {}
   ngOnInit(): void {
     this.hS.list().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
@@ -45,6 +46,10 @@ export class ListarhabilidadComponent implements OnInit {
         this.hS.setList(data);
         this.dataSource.data = data;
         this.dataSource.paginator = this.paginator;
+
+        this.snackBar.open('¡Habilidad eliminada con éxito!', 'Cerrar', {
+          duration: 3000,
+        });
       });
     });
   }

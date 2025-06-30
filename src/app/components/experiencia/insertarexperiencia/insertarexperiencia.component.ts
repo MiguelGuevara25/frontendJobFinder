@@ -18,6 +18,7 @@ import { CommonModule } from '@angular/common';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { ValidatorFn, AbstractControl } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 const fechasValidator: ValidatorFn = (
   control: AbstractControl
@@ -59,7 +60,8 @@ export class InsertarexperienciaComponent implements OnInit {
     private exS: ExperienciaService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -113,12 +115,22 @@ export class InsertarexperienciaComponent implements OnInit {
         this.exS.update(this.experiencia).subscribe(() => {
           this.exS.list().subscribe((data) => {
             this.exS.setList(data);
+            this.snackBar.open(
+              '¡Experiencia actualizada con éxito!',
+              'Cerrar',
+              {
+                duration: 3000,
+              }
+            );
           });
         });
       } else {
         this.exS.insert(this.experiencia).subscribe(() => {
           this.exS.list().subscribe((data) => {
             this.exS.setList(data);
+            this.snackBar.open('¡Experiencia registrada con éxito!', 'Cerrar', {
+              duration: 3000,
+            });
           });
         });
       }
@@ -192,6 +204,9 @@ export class InsertarexperienciaComponent implements OnInit {
   }
 
   cancelar() {
+    this.snackBar.open('Operación cancelada', 'Cerrar', {
+      duration: 3000,
+    });
     this.router.navigate(['/experiencias']);
   }
 }
