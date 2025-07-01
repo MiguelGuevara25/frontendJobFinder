@@ -55,7 +55,7 @@ export class InsertareditarolComponent {
     if (this.form.valid) {
       this.rol.id = this.form.value.id
       this.rol.rol = this.form.value.nombre
-      this.rol.user = this.form.value.usuario
+      this.rol.user = { idUsuario: this.form.value.usuario } as Usuario;
 
       if (this.edicion) {
         this.rS.update(this.rol).subscribe(() => {
@@ -78,9 +78,9 @@ export class InsertareditarolComponent {
     if (this.edicion) {
       this.rS.listId(this.id).subscribe((data) => {
         this.form = new FormGroup({
-          codigo: new FormControl(data.id),
+          id: new FormControl(data.id),
           nombre: new FormControl(data.rol),
-          apellido: new FormControl(data.user),
+          usuario: new FormControl(data.user),
 
         });
       });

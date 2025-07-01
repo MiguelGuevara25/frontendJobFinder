@@ -7,10 +7,12 @@ import { RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-listar-usuario',
-  imports: [MatTableModule, CommonModule, RouterLink, MatIconModule, MatButtonModule, MatPaginatorModule],
+  imports: [MatTableModule, CommonModule, RouterLink, MatIconModule, MatButtonModule, MatPaginatorModule, MatFormFieldModule, MatInputModule],
   templateUrl: './listar-usuario.component.html',
   styleUrl: './listar-usuario.component.css'
 })
@@ -33,14 +35,26 @@ export class ListarUsuarioComponent implements OnInit, AfterViewInit {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator; // <== aquí lo asignas
     });
-
+    this.dataSource.filterPredicate = (data: Usuario, filter: string) => {
+      const dataStr = `${data.idUsuario} ${data.apellidoUsuario} ${data.nombreUsuario} ${data.edadUsuario} ${data.usuarioUsuario}`.toLowerCase();
+      return dataStr.includes(filter);
+    };
   }
+
   eliminar(id: number) {
     this.usuServi.delete(id).subscribe((data) => {
       this.usuServi.listar().subscribe((data) => {
         this.usuServi.setList(data);
       });
     });
+  }
+
+  filtrar(event: Event) {
+    const filtro = (event.target as HTMLInputElement).value.trim().toLowerCase();
+    this.dataSource.filter = filtro;
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
