@@ -1,0 +1,14 @@
+<div>
+  <label>Escribe tu pregunta:</label>
+  <input type="text" [(ngModel)]="prompt" />
+  <button (click)="enviarPrompt()">Enviar</button>
+</div>
+
+<div *ngIf="isLoading">
+  <p>Cargando respuesta...</p>
+</div>
+
+<div *ngIf="!isLoading && respuesta">
+  <h3>Respuesta:</h3>
+  <p>{{ respuesta }}</p>
+</div>

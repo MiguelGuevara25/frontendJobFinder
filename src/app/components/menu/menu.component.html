@@ -6,7 +6,7 @@
 </mat-toolbar>
 
 <mat-menu #mainMenu="matMenu">
-  <button mat-menu-item [matMenuTriggerFor]="menuCertificado">
+  <button mat-menu-item routerLink="/certificados">
     <mat-icon>verified</mat-icon>
     <span>Certificados</span>
   </button>
@@ -38,7 +38,7 @@
     <mat-icon>info</mat-icon>
     <span>Detalles</span>
   </button>
-  <button mat-menu-item [matMenuTriggerFor]="menuUsuario">
+  <button mat-menu-item routerLink="/usuarios">
     <mat-icon>group</mat-icon>
     <span>Usuarios</span>
   </button>
@@ -46,14 +46,17 @@
     <mat-icon>business</mat-icon>
     <span>Empresa</span>
   </button>
-   <button mat-menu-item [matMenuTriggerFor]="menuRol">
+   <button mat-menu-item routerLink="/rol">
     <mat-icon>manage_accounts</mat-icon>
     <span>Rol</span>
   </button>
-  <button mat-menu-item [matMenuTriggerFor]="menuForo">
+  <button mat-menu-item routerLink="/foros">
     <mat-icon>forum</mat-icon>
     <span>Foros</span>
   </button>
+  <button mat-menu-item routerLink="/gemini">
+    <mat-icon>forum</mat-icon>
+    <span>Gemini</span>
   <button mat-menu-item [matMenuTriggerFor]="menuInscripcionCurso">
     <mat-icon>book</mat-icon>
     <span>Inscripcion Curso</span>
@@ -108,7 +111,7 @@
   <button mat-menu-item routerLink="/rol/registrar">Registrar</button>
 </mat-menu>
 <mat-menu #menuForo="matMenu">
-  <button mat-menu-item routerLink="/foros">Listar</button>
+  <button mat-menu-item >Listar</button>
 </mat-menu>
 <mat-menu #menuInscripcionCurso="matMenu">
   <button mat-menu-item routerLink="/inscripcioncursos">Listar</button>

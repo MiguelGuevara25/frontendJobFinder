@@ -9,3 +9,32 @@
   flex-direction: column;
   align-items: center;
 }
+
+.titulo-centrado {
+  font-size: 2rem;
+  color: #0d47a1; /* azul oscuro */
+  margin-bottom: 16px;
+}
+
+/* Sección superior: búsqueda + botón */
+
+.acciones-superiores {
+  width: 100%;
+  display: flex;
+  justify-content: space-between; /* separa los dos elementos */
+  align-items: center;
+  padding: 0 240px; /* margen interno hacia los lados */
+  box-sizing: border-box;
+}
+
+/* Campo de búsqueda con ancho limitado */
+.campo-busqueda {
+  max-width: 300px;
+  width: 100%;
+}
+
+.paginador-derecha {
+  display: flex;
+  align-self: start;
+  margin-top: 16px;
+}
