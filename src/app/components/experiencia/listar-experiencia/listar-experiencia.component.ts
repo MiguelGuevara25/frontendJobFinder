@@ -8,6 +8,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-listar-experiencia',
@@ -18,6 +20,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     MatButtonModule,
     RouterLink,
     MatPaginatorModule,
+    RouterLink,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   templateUrl: './listar-experiencia.component.html',
   styleUrl: './listar-experiencia.component.css',
@@ -52,5 +57,15 @@ export class ListarExperienciaComponent implements OnInit {
         });
       });
     });
+  }
+
+  filtrar(event: Event) {
+    const filtro = (event.target as HTMLInputElement).value
+      .trim()
+      .toLowerCase();
+    this.dataSource.filter = filtro;
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 }
