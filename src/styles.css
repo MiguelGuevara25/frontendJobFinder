@@ -82,3 +82,14 @@ button[mat-raised-button] {
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+.paginador-derecha {
+  display: flex;
+  justify-content: flex-end; /* Esto lo alinea a la derecha */
+  width: 100%;
+  margin-top: 16px; /* Opcional, para separación del contenido */
+}
+
+.th-centrado {
+  text-align: center !important;
+  vertical-align: middle !important;
+}

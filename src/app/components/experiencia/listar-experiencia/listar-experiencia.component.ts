@@ -1,11 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Experiencia } from '../../../models/experiencia';
 import { ExperienciaService } from '../../../services/experiencia.service';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-listar-experiencia',
@@ -15,6 +17,7 @@ import { RouterLink } from '@angular/router';
     MatIconModule,
     MatButtonModule,
     RouterLink,
+    MatPaginatorModule,
   ],
   templateUrl: './listar-experiencia.component.html',
   styleUrl: './listar-experiencia.component.css',
@@ -23,13 +26,17 @@ export class ListarExperienciaComponent implements OnInit {
   dataSource: MatTableDataSource<Experiencia> = new MatTableDataSource();
   displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8'];
 
-  constructor(private exS: ExperienciaService) {}
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  constructor(private exS: ExperienciaService, private snackBar: MatSnackBar) {}
   ngOnInit(): void {
     this.exS.list().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
+      this.dataSource.paginator = this.paginator;
     });
     this.exS.getList().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
+      this.dataSource.paginator = this.paginator;
     });
   }
 
@@ -37,6 +44,12 @@ export class ListarExperienciaComponent implements OnInit {
     this.exS.delete(id).subscribe((data) => {
       this.exS.list().subscribe((data) => {
         this.exS.setList(data);
+        this.dataSource.data = data;
+        this.dataSource.paginator = this.paginator;
+
+        this.snackBar.open('¡Experiencia eliminada con éxito!', 'Cerrar', {
+          duration: 3000,
+        });
       });
     });
   }

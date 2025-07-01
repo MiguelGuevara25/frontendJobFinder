@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, RouterOutlet } from '@angular/router';
-import { ListarcursoComponent } from './listarcurso/listarcurso.component';
+import { ListarcursoComponent } from "./listarcurso/listarcurso.component";
+
 
 @Component({
   selector: 'app-curso',

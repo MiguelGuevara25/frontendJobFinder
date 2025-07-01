@@ -3,6 +3,7 @@ import {
   FormBuilder,
   FormControl,
   FormGroup,
+  FormsModule,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
@@ -16,6 +17,21 @@ import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { ValidatorFn, AbstractControl } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+const fechasValidator: ValidatorFn = (
+  control: AbstractControl
+): { [key: string]: any } | null => {
+  const inicio = control.get('fecha_inicio')?.value;
+  const fin = control.get('fecha_fin')?.value;
+
+  if (inicio && fin && new Date(fin) < new Date(inicio)) {
+    return { fechaFinInvalida: true };
+  }
+
+  return null;
+};
 
 @Component({
   selector: 'app-insertareditarestudio',
@@ -26,7 +42,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatIconModule,
     ReactiveFormsModule,
     CommonModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    FormsModule,
   ],
   providers: [provideNativeDateAdapter()],
   templateUrl: './insertareditarestudio.component.html',
@@ -43,7 +60,8 @@ export class InsertareditarestudioComponent implements OnInit {
     private eS: EstudioService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -53,13 +71,28 @@ export class InsertareditarestudioComponent implements OnInit {
       this.init();
     });
 
-    this.form = this.formBuilder.group({
-      codigo: [''],
-      titulo: ['', Validators.required],
-      centro: ['', Validators.required],
-      fecha_inicio: ['', Validators.required],
-      fecha_fin: ['', Validators.required],
-    });
+    this.form = this.formBuilder.group(
+      {
+        codigo: [''],
+        titulo: [
+          '',
+          [
+            Validators.required,
+            Validators.pattern('^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$'),
+          ],
+        ],
+        centro: [
+          '',
+          [
+            Validators.required,
+            Validators.pattern('^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$'),
+          ],
+        ],
+        fecha_inicio: ['', Validators.required],
+        fecha_fin: ['', Validators.required],
+      },
+      { validators: fechasValidator }
+    );
   }
 
   aceptar() {
@@ -74,12 +107,22 @@ export class InsertareditarestudioComponent implements OnInit {
         this.eS.update(this.estudio).subscribe(() => {
           this.eS.list().subscribe((data) => {
             this.eS.setList(data);
+            this.snackBar.open(
+              '¡Estudio actualizado con éxito!',
+              'Cerrar',
+              {
+                duration: 3000,
+              }
+            );
           });
         });
       } else {
         this.eS.insert(this.estudio).subscribe(() => {
           this.eS.list().subscribe((data) => {
             this.eS.setList(data);
+            this.snackBar.open('¡Estudio registrado con éxito!', 'Cerrar', {
+              duration: 3000,
+            });
           });
         });
       }
@@ -87,22 +130,38 @@ export class InsertareditarestudioComponent implements OnInit {
       this.router.navigate(['/estudios']);
     } else {
       this.form.markAllAsTouched();
-      // Forzar animación shake si hay error
-      this.triggerShake('name');
-      if (this.edicion) this.triggerShake('id');
+
+      // Temblar los campos con error
+      const controls = ['titulo', 'centro', 'fecha_inicio', 'fecha_fin'];
+      controls.forEach((control) => {
+        if (this.form.get(control)?.invalid) {
+          this.triggerShake(control);
+        }
+      });
     }
   }
 
   init() {
     if (this.edicion) {
       this.eS.listId(this.id).subscribe((data) => {
-        this.form = new FormGroup({
-          codigo: new FormControl(data.id),
-          titulo: new FormControl(data.title_obtained, Validators.required),
-          centro: new FormControl(data.study_center, Validators.required),
-          fecha_inicio: new FormControl(data.start_date, Validators.required),
-          fecha_fin: new FormControl(data.end_date, Validators.required),
-        });
+        this.form = new FormGroup(
+          {
+            codigo: new FormControl({ value: data.id, disabled: true }),
+            titulo: new FormControl(data.title_obtained, [
+              Validators.required,
+              Validators.pattern('^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$'),
+            ]),
+            centro: new FormControl(data.study_center, [
+              Validators.required,
+              Validators.pattern('^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$'),
+            ]),
+            fecha_inicio: new FormControl(data.start_date, Validators.required),
+            fecha_fin: new FormControl(data.end_date, Validators.required),
+          },
+          {
+            validators: fechasValidator,
+          }
+        );
       });
     }
   }
@@ -111,8 +170,25 @@ export class InsertareditarestudioComponent implements OnInit {
     const field = document.querySelector(`.form-control-${controlName}`);
     if (field) {
       field.classList.remove('shake');
-      void (field as HTMLElement).offsetWidth; // Fuerza reflow
-      field.classList.add('shake');
+
+      // Espera a que se quite la clase antes de volver a aplicarla
+      setTimeout(() => {
+        field.classList.add('shake');
+      }, 10); // Tiempo muy corto, suficiente para reiniciar animación
     }
+  }
+
+  soloLetras(event: KeyboardEvent) {
+    const regex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]$/;
+    if (!regex.test(event.key)) {
+      event.preventDefault();
+    }
+  }
+
+  cancelar() {
+    this.snackBar.open('Operación cancelada', 'Cerrar', {
+      duration: 3000,
+    });
+    this.router.navigate(['/estudios']);
   }
 }

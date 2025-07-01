@@ -11,8 +11,15 @@ export class ForumService {
 
   constructor(private http: HttpClient) {}
 
-  buscarPosts(query: string): Observable<any> {
-    const url = `${this.apiUrl}?q=${encodeURIComponent(query)}&restrict_sr=on&sort=relevance&t=all`;
+  buscarPosts(
+    query: string,
+    after: string | null = null,
+    limit: number = 5
+  ): Observable<any> {
+    let url = `https://www.reddit.com/search.json?q=${encodeURIComponent(
+      query
+    )}&limit=${limit}`;
+    if (after) url += `&after=${after}`;
     return this.http.get(url);
   }
 }
