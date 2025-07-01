@@ -1,17 +1,33 @@
 <div class="contenedor-busqueda">
   <label>Buscar Debate:</label>
-  <input type="text" [(ngModel)]="buscarQuery" />
-  <button (click)="buscarDebates()">Buscar</button>
+  <input
+    type="text"
+    [(ngModel)]="buscarQuery"
+    (keyup.enter)="buscarDebates()"
+    placeholder="Ingresa un tema"
+  />
+  <button (click)="buscarDebates()" [disabled]="!buscarQuery.trim()">
+    Buscar
+  </button>
 </div>
 
 <!-- Indicador de carga -->
 <div *ngIf="isLoading" class="loading-text">Cargando...</div>
 
-<!-- Mostrar resultados -->
-<div *ngIf="posts && !isLoading">
+<!-- Resultados -->
+
+<div
+  class="card-container"
+  [ngClass]="{
+    'columns-3': pageSize === 3,
+    'columns-5': pageSize === 5,
+    'columns-10': pageSize === 10
+  }"
+  *ngIf="posts.length > 0 && !isLoading"
+>
   <div *ngFor="let post of posts" class="resultado-post">
     <h3>{{ post.data.title }}</h3>
-    <p>{{ post.data.selftext || 'No hay descripción disponible' }}</p>
+    <p>{{ post.data.selftext || "No hay descripción disponible" }}</p>
     <a [href]="post.data.url" target="_blank">Ver publicación completa</a>
   </div>
 </div>
@@ -20,3 +36,15 @@
 <div *ngIf="noResults && !isLoading" class="no-result">
   <p>No se encontraron resultados para "{{ buscarQuery }}".</p>
 </div>
+
+<!-- Paginador Angular Material -->
+<mat-paginator
+  *ngIf="posts.length > 0 && !isLoading"
+  [length]="lengthSimulada"
+  [pageSize]="pageSize"
+  [pageIndex]="pageIndex"
+  [pageSizeOptions]="[3, 5, 10]"
+  [showFirstLastButtons]="true"
+  (page)="onPageChange($event)"
+>
+</mat-paginator>
