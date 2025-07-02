@@ -1,3 +1,5 @@
+import { InsertarEditarEmpresa } from './components/empresa/insertar-editar-empresa/insertar-editar-empresa';
+import { Component } from '@angular/core';
 import { Routes } from '@angular/router';
 import { CertificadoComponent } from './components/certificado/certificado.component';
 import { HabilidadComponent } from './components/habilidad/habilidad.component';
@@ -32,6 +34,9 @@ import { HomeComponent } from './components/home/home.component';
 import { CurriculumComponent } from './components/curriculum/curriculum.component';
 import { ListarCurriculumComponent } from './components/curriculum/listar-curriculum/listar-curriculum.component';
 import { InsertareditarcurriculumComponent } from './components/curriculum/insertareditarcurriculum/insertareditarcurriculum.component';
+import { Ofertadetrabajo } from './components/ofertadetrabajo/ofertadetrabajo';
+import { ListarOfertadetrabajo } from './components/ofertadetrabajo/listar-ofertadetrabajo/listar-ofertadetrabajo';
+import { Postulacion } from './components/postulacion/postulacion';
 
 
 export const routes: Routes = [
@@ -183,6 +188,50 @@ export const routes: Routes = [
       {
         path: '',
         component: ListarEmpresaComponent,
+      },
+      {
+        path: 'registrar',
+        component: InsertarEditarEmpresaComponent,
+      },
+      {
+        path: 'ediciones/:id',
+        component: InsertarEditarEmpresaComponent,
+      },
+    ],
+  },
+  {
+    path: 'ofertadetrabajo',
+    component: Ofertadetrabajo,
+    children: [
+      {
+        path: '',
+        component: ListarOfertadetrabajoComponent,
+      },
+      {
+        path: 'registrar',
+        component: InsertarEditarOfertadetrabajoComponent,
+      },
+      {
+        path: 'ediciones/:id',
+        component: InsertarEditarOfertadetrabajoComponent,
+      },
+    ],
+  },
+    {
+    path: 'Postulacion',
+    component: Postulacion,
+    children: [
+      {
+        path: '',
+        component: ListarPostulacionComponent,
+      },
+      {
+        path: 'registrar',
+        component: InsertarEditarPostulaciónComponent,
+      },
+      {
+        path: 'ediciones/:id',
+        component: InsertarEditarPostulaciónComponent,
       },
     ],
   },
