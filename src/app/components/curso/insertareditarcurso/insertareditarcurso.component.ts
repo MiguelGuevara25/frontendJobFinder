@@ -54,32 +54,56 @@ export class InsertareditarcursoComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
-  ngOnInit(): void {
-    this.route.params.subscribe((data: Params) => {
-      this.id = data['id'];
-      this.edicion = data['id'] != null;
-      this.init();
-    });
+ ngOnInit(): void {
+    // Siempre creamos el formulario
     this.form = this.formBuilder.group({
-      idCurso: [''],
+      idCurso: [{ value: '', disabled: true }],
       tituloCurso: ['', Validators.required],
       descripcionCurso: ['', Validators.required],
       plataformaCurso: ['', Validators.required],
       linkCurso: ['', Validators.required],
       empresa: ['', Validators.required],
     });
+
+    this.route.params.subscribe((data: Params) => {
+      this.id = data['id'];
+      this.edicion = this.id != null;
+      if (this.edicion) {
+        this.init(); // si es edición, rellenamos con los datos
+      }
+    });
+
     this.eS.list().subscribe((data) => {
       this.listaEmpresas = data;
     });
   }
+
+  init(): void {
+    this.cS.listId(this.id).subscribe((data) => {
+      // rellenamos el formulario sin reemplazarlo
+      this.form.patchValue({
+        idCurso: data.idCurso,
+        tituloCurso: data.tituloCurso,
+        descripcionCurso: data.descripcionCurso,
+        plataformaCurso: data.plataformaCurso,
+        linkCurso: data.linkCurso,
+        empresa: data.empresa.id,
+      });
+    });
+  }
+
   aceptar(): void {
     if (this.form.valid) {
-      this.curso.idCurso = this.form.value.idCurso;
-      this.curso.tituloCurso = this.form.value.tituloCurso;
-      this.curso.descripcionCurso = this.form.value.descripcionCurso;
-      this.curso.plataformaCurso = this.form.value.plataformaCurso;
-      this.curso.linkCurso = this.form.value.linkCurso;
-      this.curso.empresa.id = this.form.value.empresa;
+     
+      this.curso.idCurso = this.edicion ? this.id : this.form.get('idCurso')?.value;
+      this.curso.tituloCurso = this.form.get('tituloCurso')?.value;
+      this.curso.descripcionCurso = this.form.get('descripcionCurso')?.value;
+      this.curso.plataformaCurso = this.form.get('plataformaCurso')?.value;
+      this.curso.linkCurso = this.form.get('linkCurso')?.value;
+
+      // Asegúrate de que empresa esté definida
+      this.curso.empresa = new Empresa();
+      this.curso.empresa.id = this.form.get('empresa')?.value;
 
       if (this.edicion) {
         this.cS.update(this.curso).subscribe(() => {
@@ -97,21 +121,8 @@ export class InsertareditarcursoComponent implements OnInit {
       this.router.navigate(['cursos']);
     }
   }
-  init() {
-    if (this.edicion) {
-      this.cS.listId(this.id).subscribe((data) => {
-        this.form = new FormGroup({
-          idCurso: new FormControl(data.idCurso),
-          tituloCurso: new FormControl(data.tituloCurso),
-          descripcionCurso: new FormControl(data.descripcionCurso),
-          plataformaCurso: new FormControl(data.plataformaCurso),
-          linkCurso: new FormControl(data.linkCurso),
-          empresa: new FormControl(data.empresa.id),
-        });
-      });
-    }
-  }
-  cancelar(){
+
+  cancelar(): void {
     this.router.navigate(['cursos']);
   }
 }
