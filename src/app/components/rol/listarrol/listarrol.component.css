@@ -1,0 +1,14 @@
+.acciones-superiores {
+  width: 100%;
+  display: flex;
+  justify-content: space-between; /* separa los dos elementos */
+  align-items: center;
+  padding: 0 330px; /* margen interno hacia los lados */
+  box-sizing: border-box;
+}
+
+/* Campo de búsqueda con ancho limitado */
+.campo-busqueda {
+  max-width: 300px;
+  width: 100%;
+}

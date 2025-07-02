@@ -1,0 +1,96 @@
+<div class="contenedor-titulo">
+  <h1 class="titulo-centrado">Lista de Curriculum</h1>
+</div>
+<div class="main-content-wrapper">
+  <div class="acciones-superiores">
+    <mat-form-field appearance="outline" class="campo-busqueda">
+      <mat-label>Buscar</mat-label>
+      <mat-icon matPrefix>search</mat-icon>
+      <input matInput (keyup)="filtrar($event)" />
+    </mat-form-field>
+
+    <button
+      mat-raised-button
+      color="primary"
+      [routerLink]="'/usuarios/registrar'"
+    >
+      <mat-icon>person_add</mat-icon>
+      Registrar
+    </button>
+  </div>
+
+  <div class="contenedor-cards">
+    <mat-card
+      class="example-card"
+      appearance="outlined"
+      *ngFor="let element of dataSource.filteredData"
+    >
+      <mat-card-header>
+        <div mat-card-avatar class="large-person-avatar">
+          <mat-icon fontIcon="person"></mat-icon>
+        </div>
+
+        <mat-card-title>
+          {{ element.usuario.nombreUsuario }}
+          {{ element.usuario.apellidoUsuario }}
+        </mat-card-title>
+        <mat-card-subtitle>
+          Edad: {{ element.usuario.edadUsuario }}
+          <br />
+          Creado el {{ element.fechaCurriculum | date : "dd/MM/yyyy" }}
+        </mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <p>
+          <mat-icon fontIcon="email" inline></mat-icon
+          >{{ element.usuario.correoUsuario }}
+        </p>
+        <p>
+          <mat-icon fontIcon="phone" inline></mat-icon
+          >{{ element.usuario.telefonoUsuario }}
+        </p>
+      </mat-card-content>
+
+      <mat-card-content>
+        <p>{{ element.descripcionCurriculum }}</p>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button
+          mat-icon-button
+          color="primary"
+          [routerLink]="['ediciones', element.idCurriculum]"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          color="warn"
+          (click)="eliminar(element.idCurriculum)"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+
+        <div class="spacer"></div>
+
+        <button
+          mat-flat-button
+          color="accent"
+          [routerLink]="'/usuarios'"
+          class="user-id-button"
+        >
+          ID: {{ element.usuario.idUsuario }}
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <div class="paginator-container">
+    <mat-paginator
+      [pageSizeOptions]="[2, 4, 8]"
+      [pageSize]="4"
+      showFirstLastButtons
+    ></mat-paginator>
+  </div>
+</div>
