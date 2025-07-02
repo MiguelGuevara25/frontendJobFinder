@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-listar-usuario',
@@ -21,9 +22,13 @@ export class ListarUsuarioComponent implements OnInit, AfterViewInit {
   dataSource: MatTableDataSource<Usuario> = new MatTableDataSource()
   displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'c9', 'c10'];
 
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private usuServi: UsuarioService) { }
+  constructor(
+    private usuServi: UsuarioService,
+    private _snackBar: MatSnackBar
+  ) { }
 
   ngOnInit(): void {
     this.usuServi.listar().subscribe((us_data) => {
@@ -45,6 +50,10 @@ export class ListarUsuarioComponent implements OnInit, AfterViewInit {
     this.usuServi.delete(id).subscribe((data) => {
       this.usuServi.listar().subscribe((data) => {
         this.usuServi.setList(data);
+        this.dataSource.paginator = this.paginator; // <== aquí lo asignas
+        this._snackBar.open("¡Usuario eliminado con éxito!", "Cerrar", {
+          duration: 3000,
+        });
       });
     });
   }

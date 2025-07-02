@@ -2,7 +2,7 @@
   <button mat-icon-button [matMenuTriggerFor]="mainMenu">
     <mat-icon>menu</mat-icon>
   </button>
-  <span style="margin-right: auto;">Menú Principal</span>
+  <a routerLink="/home" style="margin-right: auto; text-decoration: none; color: inherit; cursor: pointer; font-size: 16px;">Menú Principal</a>
 
   <button mat-button routerLink="/foros">
     <mat-icon>forum</mat-icon>
@@ -16,61 +16,85 @@
 </mat-toolbar>
 
 <mat-menu #mainMenu="matMenu">
-  <button mat-menu-item routerLink="/certificados">
-    <mat-icon>verified</mat-icon>
-    <span>Certificados</span>
-  </button>
-  <button mat-menu-item routerLink="/cursos">
-    <mat-icon>menu_book</mat-icon>
-    <span>Cursos</span>
-  </button>
-  <button mat-menu-item routerLink="/habilidades">
-    <mat-icon>lightbulb</mat-icon>
-    <span>Habilidades</span>
-  </button>
-  <button mat-menu-item routerLink="/estudios">
-    <mat-icon>school</mat-icon>
-    <span>Estudios</span>
-  </button>
-  <button mat-menu-item routerLink="/experiencias">
-    <mat-icon>work</mat-icon>
-    <span>Experiencias</span>
-  </button>
-  <button mat-menu-item routerLink="/entrevista">
-    <mat-icon>record_voice_over</mat-icon>
-    <span>Entrevistas</span>
-  </button>
-  <button mat-menu-item routerLink="/contratos">
-    <mat-icon>description</mat-icon>
-    <span>Contratos</span>
-  </button>
-  <button mat-menu-item routerLink="/detalles">
-    <mat-icon>info</mat-icon>
-    <span>Detalles</span>
-  </button>
+  <!-- Usuarios -->
   <button mat-menu-item routerLink="/usuarios">
     <mat-icon>group</mat-icon>
     <span>Usuarios</span>
   </button>
-  <button mat-menu-item routerLink="/empresa">
-    <mat-icon>business</mat-icon>
-    <span>Empresa</span>
-  </button>
+
+  <!-- Roles -->
   <button mat-menu-item routerLink="/rol">
     <mat-icon>manage_accounts</mat-icon>
     <span>Rol</span>
   </button>
-  <button mat-menu-item routerLink="/foros">
-    <mat-icon>forum</mat-icon>
-    <span>Foros</span>
+
+  <!-- Curriculum -->
+  <button mat-menu-item routerLink="/curriculum">
+    <mat-icon>assignment</mat-icon>
+    <span>Curriculum</span>
   </button>
-  <button mat-menu-item routerLink="/gemini">
-    <mat-icon>forum</mat-icon>
-    <span>Gemini</span>
+
+  <!-- Estudio -->
+  <button mat-menu-item routerLink="/estudios">
+    <mat-icon>school</mat-icon>
+    <span>Estudios</span>
   </button>
+
+  <!-- Experiencia -->
+  <button mat-menu-item routerLink="/experiencias">
+    <mat-icon>work</mat-icon>
+    <span>Experiencias</span>
+  </button>
+
+  <!-- Habilidad -->
+  <button mat-menu-item routerLink="/habilidades">
+    <mat-icon>lightbulb</mat-icon>
+    <span>Habilidades</span>
+  </button>
+
+  <!-- Empresa -->
+  <button mat-menu-item routerLink="/empresa">
+    <mat-icon>business</mat-icon>
+    <span>Empresa</span>
+  </button>
+
+  <!-- Oferta de Trabajo -->
+  <!-- Postulacion -->
+
+  <!-- Certificado -->
+  <button mat-menu-item routerLink="/certificados">
+    <mat-icon>verified</mat-icon>
+    <span>Certificados</span>
+  </button>
+
+  <!-- Curso -->
+  <button mat-menu-item routerLink="/cursos">
+    <mat-icon>menu_book</mat-icon>
+    <span>Cursos</span>
+  </button>
+
+  <!-- Inscripcion Curso -->
   <button mat-menu-item routerLink="/inscripcioncursos">
     <mat-icon>book</mat-icon>
     <span>Inscripcion Curso</span>
+  </button>
+
+  <!-- Entrevista  -->
+  <button mat-menu-item routerLink="/entrevista">
+    <mat-icon>record_voice_over</mat-icon>
+    <span>Entrevistas</span>
+  </button>
+
+  <!-- Contrato  -->
+  <button mat-menu-item routerLink="/contratos">
+    <mat-icon>description</mat-icon>
+    <span>Contratos</span>
+  </button>
+
+  <!-- Detalle  -->
+  <button mat-menu-item routerLink="/detalles">
+    <mat-icon>info</mat-icon>
+    <span>Detalles</span>
   </button>
 </mat-menu>
 

@@ -29,6 +29,9 @@ import { InscripcioncursoComponent } from './components/inscripcioncurso/inscrip
 import { ListarinscripcioncursoComponent } from './components/inscripcioncurso/listarinscripcioncurso/listarinscripcioncurso.component';
 import { InsertareditarinscripcioncursoComponent } from './components/inscripcioncurso/insertareditarinscripcioncurso/insertareditarinscripcioncurso.component';
 import { HomeComponent } from './components/home/home.component';
+import { CurriculumComponent } from './components/curriculum/curriculum.component';
+import { ListarCurriculumComponent } from './components/curriculum/listar-curriculum/listar-curriculum.component';
+import { InsertareditarcurriculumComponent } from './components/curriculum/insertareditarcurriculum/insertareditarcurriculum.component';
 
 
 export const routes: Routes = [
@@ -220,6 +223,24 @@ export const routes: Routes = [
       {
         path: 'registrar',
         component: InsertareditarinscripcioncursoComponent,
+      },
+    ],
+  },
+  {
+    path: 'curriculum',
+    component: CurriculumComponent,
+    children: [
+      {
+        path: '',
+        component: ListarCurriculumComponent,
+      },
+      {
+        path: 'registrar',
+        component: InsertareditarcurriculumComponent,
+      },
+      {
+        path: 'ediciones/:id',
+        component: InsertareditarcurriculumComponent,
       },
     ],
   },
