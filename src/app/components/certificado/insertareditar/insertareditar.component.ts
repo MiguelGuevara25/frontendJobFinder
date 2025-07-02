@@ -52,7 +52,7 @@ export class InsertareditarCertificadoComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private dcssnackBar: MatSnackBar
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -64,14 +64,38 @@ export class InsertareditarCertificadoComponent implements OnInit {
 
     this.form = this.formBuilder.group({
       codigo: [''],
-      certificado: ['', Validators.required],
-      entidad: ['', Validators.required],
+      certificado: ['', [Validators.required,  Validators.minLength(3), Validators.maxLength(150)]],
+      entidad: ['', [Validators.required,  Validators.minLength(3), Validators.maxLength(150)]],
       fecha_emision: ['', Validators.required],
       fecha_vencimiento: ['', Validators.required],
     });
   }
   aceptar() {
     if (this.form.valid) {
+    const fechaEmision = new Date(this.form.value.fecha_emision);
+    const fechaVencimiento = new Date(this.form.value.fecha_vencimiento);
+    const hoy = new Date();
+
+    this.form.get('fecha_emision')?.setErrors(null);
+    this.form.get('fecha_vencimiento')?.setErrors(null);
+
+    let hayError = false;
+
+    // Validación: fecha de emisión no puede ser futura
+    if (fechaEmision > hoy) {
+      this.form.get('fecha_emision')?.setErrors({ fechaFutura: true });
+      hayError = true;
+    }
+
+    // Validación: vencimiento no puede ser antes que emisión
+    if (fechaVencimiento < fechaEmision) {
+      this.form.get('fecha_vencimiento')?.setErrors({ antesDeEmision: true });
+      hayError = true;
+    }
+
+    if (hayError) {
+      return; 
+    }
       this.certificado.idCertificado = this.form.value.codigo;
       this.certificado.nombreCertificado = this.form.value.certificado;
       this.certificado.entidadEmisoraCertificado = this.form.value.entidad;
@@ -82,7 +106,7 @@ export class InsertareditarCertificadoComponent implements OnInit {
         this.cS.update(this.certificado).subscribe(() => {
           this.cS.list().subscribe((data) => {
             this.cS.setList(data);
-            this.dcssnackBar.open('Se actualizó correctamente', 'Cerrar', {
+            this.snackBar.open('Se actualizó correctamente', 'Cerrar', {
               duration: 3000,
             });
             this.router.navigate(['/certificados'], {
@@ -94,7 +118,7 @@ export class InsertareditarCertificadoComponent implements OnInit {
         this.cS.insert(this.certificado).subscribe(() => {
           this.cS.list().subscribe((data) => {
             this.cS.setList(data);
-            this.dcssnackBar.open('Se registró correctamente', 'Cerrar', {
+            this.snackBar.open('Se registró correctamente', 'Cerrar', {
               duration: 3000,
             });
             this.router.navigate(['/certificados'], {
@@ -117,5 +141,11 @@ export class InsertareditarCertificadoComponent implements OnInit {
         });
       });
     }
+  }
+  cancelar() {
+    this.snackBar.open('Operación cancelada', 'Cerrar', {
+      duration: 3000,
+    });
+    this.router.navigate(['/certificados']);
   }
 }

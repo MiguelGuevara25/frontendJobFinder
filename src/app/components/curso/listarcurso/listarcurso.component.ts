@@ -51,4 +51,14 @@ export class ListarcursoComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
   }
+  filtrar(event: Event) {
+    const filtro = (event.target as HTMLInputElement).value
+      .trim()
+      .toLowerCase();
+    this.dataSource.filter = filtro;
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+  
 }
