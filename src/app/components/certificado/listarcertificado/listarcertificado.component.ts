@@ -5,10 +5,17 @@ import { Certificado } from '../../../models/certificado';
 import { CertificadoService } from '../../../services/certificado.service';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
-import { RouterLink } from '@angular/router';
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  Router,
+  RouterLink,
+} from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-listarcertificado',
@@ -28,11 +35,17 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 })
 export class ListarcertificadoComponent implements OnInit, AfterViewInit {
   dataSource: MatTableDataSource<Certificado> = new MatTableDataSource();
+  
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   pageSize = 3;
   pageIndex = 0;
 
-  constructor(private cS: CertificadoService) {}
+  constructor(
+    private cS: CertificadoService,
+    private snackBar: MatSnackBar,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
   get paginados() {
     const start = this.pageIndex * this.pageSize;
     return this.dataSource.filteredData.slice(start, start + this.pageSize);
@@ -42,25 +55,22 @@ export class ListarcertificadoComponent implements OnInit, AfterViewInit {
     this.pageSize = event.pageSize;
   }
   ngOnInit(): void {
-    this.cS.list().subscribe((data) => {
-      this.dataSource.data = data;
-
-      // Filtro
-      this.dataSource.filterPredicate = (cert, filtro) => {
-        const dataStr =
-          `${cert.idCertificado} ${cert.nombreCertificado} ${cert.entidadEmisoraCertificado} ${cert.fechaEmisionCertificado} ${cert.fechaVencimientoCertificado}`.toLowerCase();
-        return dataStr.includes(filtro);
-      };
-
-      // Esperar a que paginator esté disponible
-      setTimeout(() => {
-        this.dataSource.paginator = this.paginator;
+    this.actualizarLista();
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe(() => {
+        this.actualizarLista();
       });
-    });
+
+    const mensaje = history.state.mensaje;
+    if (mensaje) {
+      this.snackBar.open(mensaje, 'Cerrar', {
+        duration: 3000,
+      });
+    }
   }
 
   ngAfterViewInit(): void {
-    // Asegura que no falle, pero la asignación real se hace en setTimeout
     if (this.dataSource && this.paginator) {
       this.dataSource.paginator = this.paginator;
     }
@@ -76,11 +86,25 @@ export class ListarcertificadoComponent implements OnInit, AfterViewInit {
 
   eliminar(id: number) {
     this.cS.delete(id).subscribe(() => {
-      this.cS.list().subscribe((data) => {
-        this.dataSource.data = data;
-        setTimeout(() => {
-          this.dataSource.paginator = this.paginator;
-        });
+      this.actualizarLista();
+      this.snackBar.open('Se eliminó correctamente', 'Cerrar', {
+        duration: 3000,
+      });
+    });
+  }
+
+  actualizarLista() {
+    this.cS.list().subscribe((data) => {
+      this.dataSource.data = data;
+
+      this.dataSource.filterPredicate = (cert, filtro) => {
+        const dataStr =
+          `${cert.idCertificado} ${cert.nombreCertificado} ${cert.entidadEmisoraCertificado} ${cert.fechaEmisionCertificado} ${cert.fechaVencimientoCertificado}`.toLowerCase();
+        return dataStr.includes(filtro);
+      };
+
+      setTimeout(() => {
+        this.dataSource.paginator = this.paginator;
       });
     });
   }

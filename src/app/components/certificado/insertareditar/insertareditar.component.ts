@@ -15,11 +15,12 @@ import {
 } from '@angular/material/core';
 import { Certificado } from '../../../models/certificado';
 import { CertificadoService } from '../../../services/certificado.service';
-import { ActivatedRoute, Params, Router,  RouterOutlet } from '@angular/router';
+import { ActivatedRoute, Params, Router, RouterOutlet } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-insertareditar',
@@ -32,10 +33,10 @@ import { MatButtonModule } from '@angular/material/button';
     MatNativeDateModule,
     MatRadioModule,
     CommonModule,
-    
 
     MatIconModule,
-    MatButtonModule ],
+    MatButtonModule,
+  ],
   templateUrl: './insertareditar.component.html',
   styleUrl: './insertareditar.component.css',
 })
@@ -50,7 +51,8 @@ export class InsertareditarCertificadoComponent implements OnInit {
     private cS: CertificadoService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private dcssnackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -80,16 +82,27 @@ export class InsertareditarCertificadoComponent implements OnInit {
         this.cS.update(this.certificado).subscribe(() => {
           this.cS.list().subscribe((data) => {
             this.cS.setList(data);
+            this.dcssnackBar.open('Se actualizó correctamente', 'Cerrar', {
+              duration: 3000,
+            });
+            this.router.navigate(['/certificados'], {
+              state: { mensaje: 'Se actualizó correctamente', recargar: true },
+            });
           });
         });
       } else {
         this.cS.insert(this.certificado).subscribe(() => {
           this.cS.list().subscribe((data) => {
             this.cS.setList(data);
+            this.dcssnackBar.open('Se registró correctamente', 'Cerrar', {
+              duration: 3000,
+            });
+            this.router.navigate(['/certificados'], {
+              state: { mensaje: 'Se registró correctamente', recargar: true },
+            });
           });
         });
       }
-      this.router.navigate(['certificados']);
     }
   }
   init() {

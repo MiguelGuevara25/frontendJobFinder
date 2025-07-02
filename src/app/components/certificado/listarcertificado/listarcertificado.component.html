@@ -29,7 +29,7 @@
     </mat-card-content>
 
     <mat-card-actions>
-      <button mat-icon-button color="primary" [routerLink]="['/ediciones', certificado.idCertificado]">
+      <button mat-icon-button color="primary" [routerLink]="'/certificados/ediciones/' + certificado.idCertificado">
         <mat-icon>edit</mat-icon>
       </button>
       <button mat-icon-button color="warn" (click)="eliminar(certificado.idCertificado)">
