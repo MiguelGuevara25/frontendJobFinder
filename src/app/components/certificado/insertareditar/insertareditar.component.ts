@@ -64,8 +64,8 @@ export class InsertareditarCertificadoComponent implements OnInit {
 
     this.form = this.formBuilder.group({
       codigo: [''],
-      certificado: ['', Validators.required],
-      entidad: ['', Validators.required],
+      certificado: ['', [Validators.required,  Validators.minLength(3), Validators.maxLength(150)]],
+      entidad: ['', [Validators.required,  Validators.minLength(3), Validators.maxLength(150)]],
       fecha_emision: ['', Validators.required],
       fecha_vencimiento: ['', Validators.required],
     });

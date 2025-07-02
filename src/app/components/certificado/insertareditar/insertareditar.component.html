@@ -34,9 +34,22 @@
         matInput
         placeholder="Nombre del certificado"
         formControlName="certificado"
+        maxlength="150"
+        #certificadoInput
       />
+
+      <!-- Hints (recomendación + contador) -->
+      <mat-hint align="end">
+        {{ certificadoInput.value?.length || 0 }} / 150
+      </mat-hint>
       <mat-error *ngIf="form.get('certificado')?.hasError('required')">
         El certificado es obligatorio
+      </mat-error>
+      <mat-error *ngIf="form.get('certificado')?.hasError('minLength')">
+        Debe tener mínimo 3 caracteres
+      </mat-error>
+      <mat-error *ngIf="form.get('certificado')?.hasError('maxLength')">
+        Debe tener mínimo 150 caracteres
       </mat-error>
     </mat-form-field>
 
@@ -49,9 +62,28 @@
       }"
     >
       <mat-label>Entidad emisora</mat-label>
-      <input matInput placeholder="Entidad emisora" formControlName="entidad" />
+      <input
+        matInput
+        placeholder="Entidad emisora"
+        formControlName="entidad"
+        maxlength="150"
+        #entidadInput
+      />
+
+      <!-- Contador de caracteres -->
+      <mat-hint align="end">
+        {{ entidadInput.value?.length || 0 }} / 150
+      </mat-hint>
+
+      <!-- Errores -->
       <mat-error *ngIf="form.get('entidad')?.hasError('required')">
         La entidad emisora es obligatoria
+      </mat-error>
+      <mat-error *ngIf="form.get('entidad')?.hasError('minlength')">
+        Debe tener mínimo 3 caracteres
+      </mat-error>
+      <mat-error *ngIf="form.get('entidad')?.hasError('maxlength')">
+        Debe tener máximo 150 caracteres
       </mat-error>
     </mat-form-field>
 
