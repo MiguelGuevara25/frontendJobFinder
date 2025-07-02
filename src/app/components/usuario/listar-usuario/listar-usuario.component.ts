@@ -49,6 +49,7 @@ export class ListarUsuarioComponent implements OnInit, AfterViewInit {
     private _snackBar: MatSnackBar
   ) { }
 
+
   ngOnInit(): void {
     this.usuServi.listar().subscribe((us_data) => {
       this.dataSource = new MatTableDataSource(us_data);

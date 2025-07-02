@@ -33,11 +33,11 @@ import { HomeComponent } from './components/home/home.component';
 import { CurriculumComponent } from './components/curriculum/curriculum.component';
 import { ListarCurriculumComponent } from './components/curriculum/listar-curriculum/listar-curriculum.component';
 import { InsertareditarcurriculumComponent } from './components/curriculum/insertareditarcurriculum/insertareditarcurriculum.component';
-import { Ofertadetrabajo } from './components/ofertadetrabajo/ofertadetrabajo';
+import { Ofertadetrabajo } from './models/ofertadetrabajo';
 import { InsertarEditarOfertadetrabajo } from './components/ofertadetrabajo/insertar-editar-ofertadetrabajo/insertar-editar-ofertadetrabajo';
+import { Postulacion } from './models/postulacion';
 import { ListarPostulacion } from './components/postulacion/listar-postulacion/listar-postulacion';
 import { InsertarEditarPostulacion } from './components/postulacion/insertar-editar-postulacion/insertar-editar-postulacion';
-import { Postulacion } from './components/postulacion/postulacion';
 
 
 export const routes: Routes = [
