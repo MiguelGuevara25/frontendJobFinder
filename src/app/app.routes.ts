@@ -29,7 +29,7 @@ import { InscripcioncursoComponent } from './components/inscripcioncurso/inscrip
 import { ListarinscripcioncursoComponent } from './components/inscripcioncurso/listarinscripcioncurso/listarinscripcioncurso.component';
 import { InsertareditarinscripcioncursoComponent } from './components/inscripcioncurso/insertareditarinscripcioncurso/insertareditarinscripcioncurso.component';
 import { HomeComponent } from './components/home/home.component';
-
+import { MapaComponent } from './components/mapa/mapa.component';
 
 export const routes: Routes = [
   {
@@ -222,5 +222,9 @@ export const routes: Routes = [
         component: InsertareditarinscripcioncursoComponent,
       },
     ],
+  },
+  {
+    path: 'mapa',
+    component: MapaComponent,
   },
 ];
