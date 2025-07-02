@@ -13,14 +13,33 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-listar-usuario',
-  imports: [MatTableModule, CommonModule, RouterLink, MatIconModule, MatButtonModule, MatPaginatorModule, MatFormFieldModule, MatInputModule],
+  imports: [
+    MatTableModule,
+    CommonModule,
+    RouterLink,
+    MatIconModule,
+    MatButtonModule,
+    MatPaginatorModule,
+    MatFormFieldModule,
+    MatInputModule,
+  ],
   templateUrl: './listar-usuario.component.html',
-  styleUrl: './listar-usuario.component.css'
+  styleUrl: './listar-usuario.component.css',
 })
 export class ListarUsuarioComponent implements OnInit, AfterViewInit {
-
-  dataSource: MatTableDataSource<Usuario> = new MatTableDataSource()
-  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'c9', 'c10'];
+  dataSource: MatTableDataSource<Usuario> = new MatTableDataSource();
+  displayedColumns: string[] = [
+    'c1',
+    'c2',
+    'c3',
+    'c4',
+    'c5',
+    'c6',
+    'c7',
+    'c8',
+    'c9',
+    'c10',
+  ];
 
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -32,16 +51,16 @@ export class ListarUsuarioComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.usuServi.listar().subscribe((us_data) => {
-      this.dataSource = new MatTableDataSource(us_data)
+      this.dataSource = new MatTableDataSource(us_data);
       this.dataSource.paginator = this.paginator; // <== aquí lo asignas
-
-    })
+    });
     this.usuServi.getList().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator; // <== aquí lo asignas
     });
     this.dataSource.filterPredicate = (data: Usuario, filter: string) => {
-      const dataStr = `${data.idUsuario} ${data.apellidoUsuario} ${data.nombreUsuario} ${data.edadUsuario} ${data.usuarioUsuario}`.toLowerCase();
+      const dataStr =
+        `${data.idUsuario} ${data.apellidoUsuario} ${data.nombreUsuario} ${data.edadUsuario} ${data.usuarioUsuario}`.toLowerCase();
       return dataStr.includes(filter);
     };
   }
@@ -59,7 +78,9 @@ export class ListarUsuarioComponent implements OnInit, AfterViewInit {
   }
 
   filtrar(event: Event) {
-    const filtro = (event.target as HTMLInputElement).value.trim().toLowerCase();
+    const filtro = (event.target as HTMLInputElement).value
+      .trim()
+      .toLowerCase();
     this.dataSource.filter = filtro;
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
@@ -69,4 +90,3 @@ export class ListarUsuarioComponent implements OnInit, AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 }
-

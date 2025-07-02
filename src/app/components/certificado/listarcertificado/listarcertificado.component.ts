@@ -1,46 +1,111 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import {MatInputModule} from '@angular/material/input';
-import { MatTableDataSource, MatTableModule,  } from '@angular/material/table';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatInputModule } from '@angular/material/input';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Certificado } from '../../../models/certificado';
 import { CertificadoService } from '../../../services/certificado.service';
 import { CommonModule } from '@angular/common';
-import { MatButtonModule,  } from '@angular/material/button';
-import { RouterLink } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  Router,
+  RouterLink,
+} from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
-import {MatCardModule} from '@angular/material/card';
-import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
-
-
-
+import { MatCardModule } from '@angular/material/card';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-listarcertificado',
-  imports: [MatInputModule,MatTableModule,CommonModule, MatButtonModule, RouterLink, MatIconModule, MatCardModule ],
+  imports: [
+    MatInputModule,
+    MatTableModule,
+    CommonModule,
+    MatButtonModule,
+    RouterLink,
+    MatIconModule,
+    MatCardModule,
+    MatPaginatorModule,
+  ],
   standalone: true,
   templateUrl: './listarcertificado.component.html',
-  styleUrl: './listarcertificado.component.css'
+  styleUrl: './listarcertificado.component.css',
 })
-export class ListarcertificadoComponent implements OnInit{
+export class ListarcertificadoComponent implements OnInit, AfterViewInit {
   dataSource: MatTableDataSource<Certificado> = new MatTableDataSource();
-  certificados: Certificado[] = [];
-  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7'];
-  constructor(private cS: CertificadoService) {}
-  ngOnInit(): void {
-    this.cS.list().subscribe((data) => {
-      this.certificados = data;
-      this.dataSource = new MatTableDataSource(data);
-    });
-    this.cS.getList().subscribe((data) => {
-      this.dataSource = new MatTableDataSource(data);
-    });
+  
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  pageSize = 3;
+  pageIndex = 0;
+
+  constructor(
+    private cS: CertificadoService,
+    private snackBar: MatSnackBar,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
+  get paginados() {
+    const start = this.pageIndex * this.pageSize;
+    return this.dataSource.filteredData.slice(start, start + this.pageSize);
   }
+  cambiarPagina(event: any) {
+    this.pageIndex = event.pageIndex;
+    this.pageSize = event.pageSize;
+  }
+  ngOnInit(): void {
+    this.actualizarLista();
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe(() => {
+        this.actualizarLista();
+      });
+
+    const mensaje = history.state.mensaje;
+    if (mensaje) {
+      this.snackBar.open(mensaje, 'Cerrar', {
+        duration: 3000,
+      });
+    }
+  }
+
+  ngAfterViewInit(): void {
+    if (this.dataSource && this.paginator) {
+      this.dataSource.paginator = this.paginator;
+    }
+  }
+
+  filtrar(event: Event) {
+    const filtro = (event.target as HTMLInputElement).value
+      .trim()
+      .toLowerCase();
+    this.dataSource.filter = filtro;
+    this.pageIndex = 0;
+  }
+
   eliminar(id: number) {
-    this.cS.delete(id).subscribe((data) => {
-      this.cS.list().subscribe((data) => {
-        this.cS.setList(data);
+    this.cS.delete(id).subscribe(() => {
+      this.actualizarLista();
+      this.snackBar.open('Se eliminó correctamente', 'Cerrar', {
+        duration: 3000,
       });
     });
   }
- 
 
+  actualizarLista() {
+    this.cS.list().subscribe((data) => {
+      this.dataSource.data = data;
+
+      this.dataSource.filterPredicate = (cert, filtro) => {
+        const dataStr =
+          `${cert.idCertificado} ${cert.nombreCertificado} ${cert.entidadEmisoraCertificado} ${cert.fechaEmisionCertificado} ${cert.fechaVencimientoCertificado}`.toLowerCase();
+        return dataStr.includes(filtro);
+      };
+
+      setTimeout(() => {
+        this.dataSource.paginator = this.paginator;
+      });
+    });
+  }
 }
