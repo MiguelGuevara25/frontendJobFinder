@@ -31,7 +31,7 @@ import { ListarinscripcioncursoComponent } from './components/inscripcioncurso/l
 import { InsertareditarinscripcioncursoComponent } from './components/inscripcioncurso/insertareditarinscripcioncurso/insertareditarinscripcioncurso.component';
 import { HomeComponent } from './components/home/home.component';
 
-import { Ofertadetrabajo } from './components/ofertadetrabajo/ofertadetrabajo';
+import { Ofertadetrabajo } from './components/ofertadetrabajo/ofertadetrabajo.component';
 import { ListarOfertadetrabajo } from './components/ofertadetrabajo/listar-ofertadetrabajo/listar-ofertadetrabajo';
 import { Postulacion } from './components/postulacion/postulacion';
 import { InsertareditarempresaComponent } from './components/empresa/insertareditarempresa/insertareditarempresa.component';
@@ -42,6 +42,7 @@ import { InsertareditarcurriculumComponent } from './components/curriculum/inser
 import { InsertarEditarOfertadetrabajo } from './components/ofertadetrabajo/insertar-editar-ofertadetrabajo/insertar-editar-ofertadetrabajo';
 import { ListarPostulacion } from './components/postulacion/listar-postulacion/listar-postulacion';
 import { InsertarEditarPostulacion } from './components/postulacion/insertar-editar-postulacion/insertar-editar-postulacion';
+import { ListarofertadetrabajoComponent } from './components/certificado/listarcertificado/listarcertificado.component';
 
 
 
@@ -210,7 +211,7 @@ export const routes: Routes = [
       },
     ],
   },
-  
+
   //Enrutamiento de Inscripcion Curso
   {
     path: 'inscripcioncursos',
@@ -255,7 +256,7 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        component: Ofertadetrabajo,
+        component: ListarofertadetrabajoComponent,
       },
       {
         path: 'registrar',
