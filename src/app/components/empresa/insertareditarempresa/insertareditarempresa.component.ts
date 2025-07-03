@@ -13,7 +13,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'app-insertareditarempresa',
-  imports: [   MatInputModule,
+  imports: [MatInputModule,
     MatFormFieldModule,
     MatButtonModule,
     MatIconModule,
@@ -25,25 +25,43 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
   styleUrl: './insertareditarempresa.component.css'
 })
 export class InsertareditarempresaComponent implements OnInit {
-form: FormGroup = new FormGroup({});
-Empresa: Empresa = new Empresa();
 
-id: number = 0;
-edicion: boolean = false;
+
+  form: FormGroup = new FormGroup({});
+  Empresa: Empresa = new Empresa();
+
+
+  id: number = 0;
+  edicion: boolean = false;
 
   constructor(
     private eS: EmpresaService,
     private formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe((data: Params) => {
-      this.id = data['id'];
-      this.edicion = data['id'] != null;
-      this.init();
+    this.form = this.formBuilder.group({
+      id: [''],
+      name: ['', Validators.required],
+      description: ['', Validators.required],
+      sector: ['', Validators.required],
+      website: ['', Validators.required],
+      address: ['', Validators.required],
+      telephone: ['', Validators.required],
+      mail: ['', Validators.required],
+      location: ['', Validators.required],
     });
+    aceptar() {
+      if (this.form.valid) {
+        this.Empresa.id = this.form.value.idContrato;
+        this.Empresa.name = this.form.value.startDate;
+        this.Empresa.description = this.form.value.endDate;
+        this.Empresa.sector = this.form.value.salary;
+        this.Empresa.website = this.form.value.contractType;
+        this.Empresa.address = this.form.value.address;
+
 
   this.form = this.formBuilder.group({
   id:[''],
@@ -79,9 +97,12 @@ aceptar() {
         this.eS.insert(this.Empresa).subscribe(() => {
           this.eS.list().subscribe((data) => {
             this.eS.setList(data);
+
           });
-        });
+        }
+        this.router.navigate(['contratos']);
       }
+
       this.router.navigate(['empresa']);
     }
   }
@@ -101,9 +122,11 @@ init() {
            password:  new FormControl(data.password),
         });
       });
+
     }
-  }
+
 
 }
+
 
 
