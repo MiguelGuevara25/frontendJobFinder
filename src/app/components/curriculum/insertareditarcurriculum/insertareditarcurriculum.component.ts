@@ -63,7 +63,7 @@ export class InsertareditarcurriculumComponent implements OnInit{
       this.curriculum.idCurriculum = this.form.value.codigo
       this.curriculum.descripcionCurriculum = this.form.value.descripcion
       this.curriculum.fechaCurriculum = this.form.value.fechaCreacion
-      this.curriculum.usuario = { idUsuario: this.form.value.usuario } as Usuario;
+      this.curriculum.usuario.idUsuario = this.form.value.usuario;
 
       if (this.edicion) {
         this.cS.update(this.curriculum).subscribe(() => {
