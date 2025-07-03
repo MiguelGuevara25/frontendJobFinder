@@ -16,6 +16,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { filter } from 'rxjs';
+import { OfertadetrabajoService } from '../../../services/ofertadetrabajo.service';
+import { Ofertadetrabajo } from '../../ofertadetrabajo/ofertadetrabajo.component';
 
 @Component({
   selector: 'app-listarcertificado',
@@ -35,7 +37,7 @@ import { filter } from 'rxjs';
 })
 export class ListarcertificadoComponent implements OnInit, AfterViewInit {
   dataSource: MatTableDataSource<Certificado> = new MatTableDataSource();
-  
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   pageSize = 3;
   pageIndex = 0;
@@ -106,6 +108,47 @@ export class ListarcertificadoComponent implements OnInit, AfterViewInit {
 
       setTimeout(() => {
         this.dataSource.paginator = this.paginator;
+      });
+    });
+  }
+}
+
+@Component({
+  selector: 'app-listarofertadetrabajo',
+  imports: [
+    MatTableModule,
+    CommonModule,
+    MatButtonModule,
+    RouterLink,
+    MatIconModule,
+  ],
+  templateUrl: './listarofertadetrabajo.component.html',
+  styleUrl: './listarofertadetrabajo.component.css'
+})
+export class ListarofertadetrabajoComponent {
+  dataSource: MatTableDataSource<Ofertadetrabajo> = new MatTableDataSource();
+  displayedColumns: string[] = [
+    'c1',
+    'c2',
+    'c3',
+    'c4',
+    'c5',
+    'c6',
+  ];
+  constructor(private oS: OfertadetrabajoService) { }
+  ngOnInit(): void {
+    this.oS.list().subscribe((data) => {
+      this.dataSource = new MatTableDataSource(data);
+    });
+    this.oS.getList().subscribe((data) => {
+      this.dataSource = new MatTableDataSource(data);
+    });
+  }
+
+  eliminar(id: number) {
+    this.oS.delete(id).subscribe((data) => {
+      this.oS.list().subscribe((data) => {
+        this.oS.setList(data);
       });
     });
   }
