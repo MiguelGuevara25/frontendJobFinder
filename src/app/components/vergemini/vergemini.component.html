@@ -1,14 +1,50 @@
-<div>
-  <label>Escribe tu pregunta:</label>
-  <input type="text" [(ngModel)]="prompt" />
-  <button (click)="enviarPrompt()">Enviar</button>
-</div>
+<div class="gemini-container">
+  <h1 class="gemini-title">Asistente Gemini AI</h1>
 
-<div *ngIf="isLoading">
-  <p>Cargando respuesta...</p>
-</div>
+  <mat-card class="input-card">
+    <mat-card-content>
+      <mat-form-field appearance="outline" class="full-width-input">
+        <mat-label>Escribe tu pregunta o solicitud</mat-label>
+        <textarea
+          matInput
+          placeholder="Ej: ¿Cuál es la capital de Perú?"
+          [(ngModel)]="prompt"
+          rows="4"
+        ></textarea>
+      </mat-form-field>
 
-<div *ngIf="!isLoading && respuesta">
-  <h3>Respuesta:</h3>
-  <p>{{ respuesta }}</p>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="enviarPrompt()"
+        [disabled]="isLoading || !prompt.trim()"
+        class="send-button"
+      >
+        <mat-icon>send</mat-icon>
+        Enviar a Gemini
+      </button>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card *ngIf="isLoading" class="loading-card">
+    <mat-card-content class="loading-content">
+      <mat-spinner [diameter]="40"></mat-spinner>
+      <p>Generando respuesta...</p>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card *ngIf="!isLoading && respuesta" class="response-card">
+    <mat-card-header>
+      <mat-card-title>Respuesta de Gemini:</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p class="response-text">{{ respuesta }}</p>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card *ngIf="!isLoading && !respuesta && !prompt" class="initial-message-card">
+    <mat-card-content>
+      <p>¡Hola! Hazme una pregunta y te responderé.</p>
+    </mat-card-content>
+  </mat-card>
 </div>
