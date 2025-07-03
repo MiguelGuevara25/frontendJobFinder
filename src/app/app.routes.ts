@@ -30,14 +30,19 @@ import { InscripcioncursoComponent } from './components/inscripcioncurso/inscrip
 import { ListarinscripcioncursoComponent } from './components/inscripcioncurso/listarinscripcioncurso/listarinscripcioncurso.component';
 import { InsertareditarinscripcioncursoComponent } from './components/inscripcioncurso/insertareditarinscripcioncurso/insertareditarinscripcioncurso.component';
 import { HomeComponent } from './components/home/home.component';
+
+import { Ofertadetrabajo } from './components/ofertadetrabajo/ofertadetrabajo';
+import { ListarOfertadetrabajo } from './components/ofertadetrabajo/listar-ofertadetrabajo/listar-ofertadetrabajo';
+import { Postulacion } from './components/postulacion/postulacion';
+import { InsertareditarempresaComponent } from './components/empresa/insertareditarempresa/insertareditarempresa.component';
+
 import { CurriculumComponent } from './components/curriculum/curriculum.component';
 import { ListarCurriculumComponent } from './components/curriculum/listar-curriculum/listar-curriculum.component';
 import { InsertareditarcurriculumComponent } from './components/curriculum/insertareditarcurriculum/insertareditarcurriculum.component';
-import { Ofertadetrabajo } from './models/ofertadetrabajo';
 import { InsertarEditarOfertadetrabajo } from './components/ofertadetrabajo/insertar-editar-ofertadetrabajo/insertar-editar-ofertadetrabajo';
-import { Postulacion } from './models/postulacion';
 import { ListarPostulacion } from './components/postulacion/listar-postulacion/listar-postulacion';
 import { InsertarEditarPostulacion } from './components/postulacion/insertar-editar-postulacion/insertar-editar-postulacion';
+
 
 
 export const routes: Routes = [
@@ -233,6 +238,7 @@ export const routes: Routes = [
       },
       {
         path: 'registrar',
+
         component: InsertarEditarEmpresa,
       },
       {
