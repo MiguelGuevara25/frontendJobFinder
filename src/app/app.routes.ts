@@ -1,4 +1,3 @@
-import { InsertarEditarEmpresa } from './components/empresa/insertar-editar-empresa/insertar-editar-empresa';
 import { Routes } from '@angular/router';
 import { CertificadoComponent } from './components/certificado/certificado.component';
 import { HabilidadComponent } from './components/habilidad/habilidad.component';
@@ -32,16 +31,16 @@ import { InsertareditarinscripcioncursoComponent } from './components/inscripcio
 import { HomeComponent } from './components/home/home.component';
 
 import { Ofertadetrabajo } from './components/ofertadetrabajo/ofertadetrabajo';
-import { ListarOfertadetrabajo } from './components/ofertadetrabajo/listar-ofertadetrabajo/listar-ofertadetrabajo';
 import { Postulacion } from './components/postulacion/postulacion';
 import { InsertareditarempresaComponent } from './components/empresa/insertareditarempresa/insertareditarempresa.component';
 
 import { CurriculumComponent } from './components/curriculum/curriculum.component';
 import { ListarCurriculumComponent } from './components/curriculum/listar-curriculum/listar-curriculum.component';
 import { InsertareditarcurriculumComponent } from './components/curriculum/insertareditarcurriculum/insertareditarcurriculum.component';
-import { InsertarEditarOfertadetrabajo } from './components/ofertadetrabajo/insertar-editar-ofertadetrabajo/insertar-editar-ofertadetrabajo';
-import { ListarPostulacion } from './components/postulacion/listar-postulacion/listar-postulacion';
-import { InsertarEditarPostulacion } from './components/postulacion/insertar-editar-postulacion/insertar-editar-postulacion';
+import { InsertareditarofertadetrabajoComponent } from './components/ofertadetrabajo/insertareditarofertadetrabajo/insertareditarofertadetrabajo.component';
+import { InsertareditarpostulacionComponent } from './components/postulacion/insertareditarpostulacion/insertareditarpostulacion.component';
+import { ListarpostulacionComponent } from './components/postulacion/listarpostulacion/listarpostulacion.component';
+
 
 
 
@@ -239,11 +238,11 @@ export const routes: Routes = [
       {
         path: 'registrar',
 
-        component: InsertarEditarEmpresa,
+        component: InsertareditarempresaComponent,
       },
       {
         path: 'ediciones/:id',
-        component: InsertarEditarEmpresa,
+        component: InsertareditarempresaComponent,
       },
     ],
   },
@@ -259,11 +258,11 @@ export const routes: Routes = [
       },
       {
         path: 'registrar',
-        component: InsertarEditarOfertadetrabajo,
+        component: InsertareditarofertadetrabajoComponent,
       },
       {
         path: 'ediciones/:id',
-        component: InsertarEditarOfertadetrabajo,
+        component: InsertareditarofertadetrabajoComponent,
       },
     ],
   },
@@ -275,15 +274,15 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        component: ListarPostulacion,
+        component: ListarpostulacionComponent,
       },
       {
         path: 'registrar',
-        component: InsertarEditarPostulacion,
+        component: InsertareditarpostulacionComponent,
       },
       {
         path: 'ediciones/:id',
-        component: InsertarEditarPostulacion,
+        component: InsertareditarpostulacionComponent,
       },
     ],
   },
