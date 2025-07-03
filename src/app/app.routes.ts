@@ -35,6 +35,7 @@ import { HomeComponent } from './components/home/home.component';
 import { Ofertadetrabajo } from './components/ofertadetrabajo/ofertadetrabajo';
 import { ListarOfertadetrabajo } from './components/ofertadetrabajo/listar-ofertadetrabajo/listar-ofertadetrabajo';
 import { Postulacion } from './components/postulacion/postulacion';
+import { InsertareditarempresaComponent } from './components/empresa/insertareditarempresa/insertareditarempresa.component';
 
 
 export const routes: Routes = [
@@ -189,11 +190,11 @@ export const routes: Routes = [
       },
       {
         path: 'registrar',
-        component: InsertarEditarEmpresaComponent,
+        component: InsertareditarempresaComponent,
       },
       {
         path: 'ediciones/:id',
-        component: InsertarEditarEmpresaComponent,
+        component: InsertareditarempresaComponent,
       },
     ],
   },
