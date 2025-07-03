@@ -1,5 +1,20 @@
 <div class="contenedor-titulo">
   <h1 class="titulo-centrado">Lista de Inscripcion Curso</h1>
+  <div class="acciones-superiores">
+    <mat-form-field appearance="outline" class="campo-busqueda">
+      <mat-label>Buscar</mat-label>
+      <mat-icon matPrefix>search</mat-icon>
+      <input matInput (keyup)="filtrar($event)" />
+    </mat-form-field>
+    <button
+      mat-raised-button
+      color="primary"
+      [routerLink]="'/inscripcioncursos/registrar'"
+    >
+      <mat-icon>person_add</mat-icon>
+      Registrar
+    </button>
+  </div>
 </div>
 <div>
   <div class="contenedor-tabla">
@@ -46,7 +61,7 @@
             <button
               mat-raised-button
               color="primary"
-              [routerLink]="['ediciones', element.idInscripcion]"
+              [routerLink]="['/registrar', element.idInscripcion]"
             >
               <mat-icon>edit</mat-icon>
             </button>
@@ -69,6 +84,11 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
+      <mat-paginator
+      [pageSizeOptions]="[4, 8, 10]"
+      aria-label="Selector de página"
+    >
+    </mat-paginator>
     </form>
   </div>
 </div>

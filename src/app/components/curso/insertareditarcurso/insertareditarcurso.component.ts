@@ -21,6 +21,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { CursoService } from '../../../services/curso.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { EmpresaService } from '../../../services/empresa.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-insertareditarcurso',
@@ -51,19 +52,32 @@ export class InsertareditarcursoComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private eS: EmpresaService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private snackBar: MatSnackBar
   ) {}
 
- ngOnInit(): void {
+  ngOnInit(): void {
     // Siempre creamos el formulario
     this.form = this.formBuilder.group({
-      idCurso: [{ value: '', disabled: true }],
-      tituloCurso: ['', Validators.required],
-      descripcionCurso: ['', Validators.required],
-      plataformaCurso: ['', Validators.required],
-      linkCurso: ['', Validators.required],
-      empresa: ['', Validators.required],
-    });
+  idCurso: [{ value: '', disabled: true }],
+  tituloCurso: [
+    '',
+    [Validators.required, Validators.minLength(3), Validators.maxLength(100)],
+  ],
+  descripcionCurso: [
+    '',
+    [Validators.required, Validators.minLength(3), Validators.maxLength(200)],
+  ],
+  plataformaCurso: [
+    '',
+    [Validators.required, Validators.minLength(3), Validators.maxLength(100)],
+  ],
+  linkCurso: [
+    '',
+    [Validators.required, Validators.pattern(/^www\..+\.com$/)],
+  ],
+  empresa: ['', Validators.required],
+});
 
     this.route.params.subscribe((data: Params) => {
       this.id = data['id'];
@@ -94,8 +108,9 @@ export class InsertareditarcursoComponent implements OnInit {
 
   aceptar(): void {
     if (this.form.valid) {
-     
-      this.curso.idCurso = this.edicion ? this.id : this.form.get('idCurso')?.value;
+      this.curso.idCurso = this.edicion
+        ? this.id
+        : this.form.get('idCurso')?.value;
       this.curso.tituloCurso = this.form.get('tituloCurso')?.value;
       this.curso.descripcionCurso = this.form.get('descripcionCurso')?.value;
       this.curso.plataformaCurso = this.form.get('plataformaCurso')?.value;
@@ -109,6 +124,9 @@ export class InsertareditarcursoComponent implements OnInit {
         this.cS.update(this.curso).subscribe(() => {
           this.cS.list().subscribe((data) => {
             this.cS.setList(data);
+            this.router.navigate(['/cursos'], {
+              state: { mensaje: 'Se actualizó correctamente', recargar: true },
+            });
           });
         });
       } else {
