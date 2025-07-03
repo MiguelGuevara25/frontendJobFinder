@@ -11,6 +11,7 @@ import { Rol } from '../../../models/rol';
 import { Usuario } from '../../../models/usuario';
 import { UsuarioService } from '../../../services/usuario.service';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-insertareditarol',
@@ -31,7 +32,9 @@ export class InsertareditarolComponent {
     private formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private uS: UsuarioService
+    private uS: UsuarioService,
+    private _snackBar: MatSnackBar
+
   ) { }
 
   ngOnInit(): void {
@@ -61,6 +64,9 @@ export class InsertareditarolComponent {
         this.rS.update(this.rol).subscribe(() => {
           this.rS.list().subscribe((data) => {
             this.rS.setList(data);
+            this._snackBar.open("¡Rol actualizado con éxito!", "Cerrar", {
+              duration: 3000,
+            });
           });
         });
 
@@ -68,6 +74,9 @@ export class InsertareditarolComponent {
         this.rS.registrar(this.rol).subscribe(() => {
           this.rS.list().subscribe((data) => {
             this.rS.setList(data);
+            this._snackBar.open("¡Rol registrado con éxito!", "Cerrar", {
+              duration: 3000,
+            });
           });
         });
       }
@@ -81,7 +90,6 @@ export class InsertareditarolComponent {
           id: new FormControl(data.id),
           nombre: new FormControl(data.rol),
           usuario: new FormControl(data.user),
-
         });
       });
     }

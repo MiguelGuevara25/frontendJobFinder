@@ -1,5 +1,4 @@
 import { InsertarEditarEmpresa } from './components/empresa/insertar-editar-empresa/insertar-editar-empresa';
-import { Component } from '@angular/core';
 import { Routes } from '@angular/router';
 import { CertificadoComponent } from './components/certificado/certificado.component';
 import { HabilidadComponent } from './components/habilidad/habilidad.component';
@@ -30,138 +29,49 @@ import { VergeminiComponent } from './components/vergemini/vergemini.component';
 import { InscripcioncursoComponent } from './components/inscripcioncurso/inscripcioncurso.component';
 import { ListarinscripcioncursoComponent } from './components/inscripcioncurso/listarinscripcioncurso/listarinscripcioncurso.component';
 import { InsertareditarinscripcioncursoComponent } from './components/inscripcioncurso/insertareditarinscripcioncurso/insertareditarinscripcioncurso.component';
-
 import { HomeComponent } from './components/home/home.component';
+
 import { Ofertadetrabajo } from './components/ofertadetrabajo/ofertadetrabajo';
 import { ListarOfertadetrabajo } from './components/ofertadetrabajo/listar-ofertadetrabajo/listar-ofertadetrabajo';
 import { Postulacion } from './components/postulacion/postulacion';
 import { InsertareditarempresaComponent } from './components/empresa/insertareditarempresa/insertareditarempresa.component';
 
+import { CurriculumComponent } from './components/curriculum/curriculum.component';
+import { ListarCurriculumComponent } from './components/curriculum/listar-curriculum/listar-curriculum.component';
+import { InsertareditarcurriculumComponent } from './components/curriculum/insertareditarcurriculum/insertareditarcurriculum.component';
+import { InsertarEditarOfertadetrabajo } from './components/ofertadetrabajo/insertar-editar-ofertadetrabajo/insertar-editar-ofertadetrabajo';
+import { ListarPostulacion } from './components/postulacion/listar-postulacion/listar-postulacion';
+import { InsertarEditarPostulacion } from './components/postulacion/insertar-editar-postulacion/insertar-editar-postulacion';
+
+
 
 export const routes: Routes = [
+  //Ejecucion Inicial
   {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full',
   },
 
+  //Enrutamiento de home
   {
     path: 'home',
     component: HomeComponent,
   },
 
+  //Enrutamiento de Api Foro
   {
-    path: 'certificados',
-    component: CertificadoComponent,
-    children: [
-      {
-        path: 'insertareditar',
-        component: InsertareditarCertificadoComponent,
-      },
-      {
-        path: 'ediciones/:id',
-        component: InsertareditarCertificadoComponent,
-      },
-    ],
+    path: 'foros',
+    component: ForumComponent,
   },
+
+  //Enrutamiento de Api Gemini
   {
-    path: 'cursos',
-    component: CursoComponent,
-    children: [
-      {
-        path: 'insertareditarcurso',
-        component: InsertareditarcursoComponent,
-      },
-      {
-        path: 'ediciones/:id',
-        component: InsertareditarcursoComponent,
-      },
-    ],
+    path: 'gemini',
+    component: VergeminiComponent,
   },
-  {
-    path: 'habilidades',
-    component: HabilidadComponent,
-    children: [
-      {
-        path: 'insertar',
-        component: InsertareditarHabilidadComponent,
-      },
-      {
-        path: 'ediciones/:id',
-        component: InsertareditarHabilidadComponent,
-      },
-    ],
-  },
-  {
-    path: 'estudios',
-    component: EstudioComponent,
-    children: [
-      {
-        path: 'insertar',
-        component: InsertareditarestudioComponent,
-      },
-      {
-        path: 'ediciones/:id',
-        component: InsertareditarestudioComponent,
-      },
-    ],
-  },
-  {
-    path: 'experiencias',
-    component: ExperienciaComponent,
-    children: [
-      {
-        path: 'insertar',
-        component: InsertarexperienciaComponent,
-      },
-      {
-        path: 'ediciones/:id',
-        component: InsertarexperienciaComponent,
-      },
-    ],
-  },
-  {
-    path: 'entrevista',
-    component: EntrevistaComponent,
-    children: [
-      {
-        path: 'insertar',
-        component: InsertarEditarEntrevistaComponent,
-      },
-      {
-        path: 'ediciones/:id',
-        component: InsertarEditarEntrevistaComponent,
-      },
-    ],
-  },
-  {
-    path: 'contratos',
-    component: ContratoComponent,
-    children: [
-      {
-        path: 'insertar',
-        component: InsertarEditarContratoComponent,
-      },
-      {
-        path: 'ediciones/:id',
-        component: InsertarEditarContratoComponent,
-      },
-    ],
-  },
-  {
-    path: 'detalles',
-    component: DetalleComponent,
-    children: [
-      {
-        path: 'insertar',
-        component: InsertarEditarDetalleComponent,
-      },
-      {
-        path: 'ediciones/:id',
-        component: InsertarEditarDetalleComponent,
-      },
-    ],
-  },
+
+  //Enrutamiento de Usuario
   {
     path: 'usuarios',
     component: UsuarioComponent,
@@ -180,64 +90,8 @@ export const routes: Routes = [
       },
     ],
   },
-  {
-    path: 'empresa',
-    component: EmpresaComponent,
-    children: [
-      {
-        path: '',
-        component: ListarEmpresaComponent,
-      },
-      {
-        path: 'registrar',
-        component: InsertareditarempresaComponent,
-      },
-      {
-        path: 'ediciones/:id',
-        component: InsertareditarempresaComponent,
-      },
-    ],
-  },
-  {
-    path: 'ofertadetrabajo',
-    component: Ofertadetrabajo,
-    children: [
-      {
-        path: '',
-        component: ListarOfertadetrabajoComponent,
-      },
-      {
-        path: 'registrar',
-        component: InsertarEditarOfertadetrabajoComponent,
-      },
-      {
-        path: 'ediciones/:id',
-        component: InsertarEditarOfertadetrabajoComponent,
-      },
-    ],
-  },
-    {
-    path: 'Postulacion',
-    component: Postulacion,
-    children: [
-      {
-        path: '',
-        component: ListarPostulacionComponent,
-      },
-      {
-        path: 'registrar',
-        component: InsertarEditarPostulaciónComponent,
-      },
-      {
-        path: 'ediciones/:id',
-        component: InsertarEditarPostulaciónComponent,
-      },
-    ],
-  },
-  {
-    path: 'foros',
-    component: ForumComponent,
-  },
+
+  //Enrutamiento de Rol
   {
     path: 'rol',
     component: RolComponent,
@@ -256,10 +110,108 @@ export const routes: Routes = [
       },
     ],
   },
+
+  //Enrutamiento de Curriculum
   {
-    path: 'gemini',
-    component: VergeminiComponent,
+    path: 'curriculum',
+    component: CurriculumComponent,
+    children: [
+      {
+        path: '',
+        component: ListarCurriculumComponent,
+      },
+      {
+        path: 'registrar',
+        component: InsertareditarcurriculumComponent,
+      },
+      {
+        path: 'ediciones/:id',
+        component: InsertareditarcurriculumComponent,
+      },
+    ],
   },
+
+  //Enrutamiento de Estudio
+  {
+    path: 'estudios',
+    component: EstudioComponent,
+    children: [
+      {
+        path: 'insertar',
+        component: InsertareditarestudioComponent,
+      },
+      {
+        path: 'ediciones/:id',
+        component: InsertareditarestudioComponent,
+      },
+    ],
+  },
+
+  //Enrutamiento de Experiencia
+  {
+    path: 'experiencias',
+    component: ExperienciaComponent,
+    children: [
+      {
+        path: 'insertar',
+        component: InsertarexperienciaComponent,
+      },
+      {
+        path: 'ediciones/:id',
+        component: InsertarexperienciaComponent,
+      },
+    ],
+  },
+
+  //Enrutamiento de Habilidad
+  {
+    path: 'habilidades',
+    component: HabilidadComponent,
+    children: [
+      {
+        path: 'insertar',
+        component: InsertareditarHabilidadComponent,
+      },
+      {
+        path: 'ediciones/:id',
+        component: InsertareditarHabilidadComponent,
+      },
+    ],
+  },
+
+  //Enrutamiento de Certificado
+  {
+    path: 'certificados',
+    component: CertificadoComponent,
+    children: [
+      {
+        path: 'insertareditar',
+        component: InsertareditarCertificadoComponent,
+      },
+      {
+        path: 'ediciones/:id',
+        component: InsertareditarCertificadoComponent,
+      },
+    ],
+  },
+
+  //Enrutamiento de Curso
+  {
+    path: 'cursos',
+    component: CursoComponent,
+    children: [
+      {
+        path: 'insertareditarcurso',
+        component: InsertareditarcursoComponent,
+      },
+      {
+        path: 'ediciones/:id',
+        component: InsertareditarcursoComponent,
+      },
+    ],
+  },
+  
+  //Enrutamiento de Inscripcion Curso
   {
     path: 'inscripcioncursos',
     component: InscripcioncursoComponent,
@@ -271,6 +223,115 @@ export const routes: Routes = [
       {
         path: 'registrar',
         component: InsertareditarinscripcioncursoComponent,
+      },
+    ],
+  },
+
+  //Enrutamiento de Empresa
+  {
+    path: 'empresa',
+    component: EmpresaComponent,
+    children: [
+      {
+        path: '',
+        component: ListarEmpresaComponent,
+      },
+      {
+        path: 'registrar',
+
+        component: InsertarEditarEmpresa,
+      },
+      {
+        path: 'ediciones/:id',
+        component: InsertarEditarEmpresa,
+      },
+    ],
+  },
+
+  //Enrutamiento de Oferta de Trabajo
+  {
+    path: 'ofertadetrabajo',
+    component: CurriculumComponent,
+    children: [
+      {
+        path: '',
+        component: Ofertadetrabajo,
+      },
+      {
+        path: 'registrar',
+        component: InsertarEditarOfertadetrabajo,
+      },
+      {
+        path: 'ediciones/:id',
+        component: InsertarEditarOfertadetrabajo,
+      },
+    ],
+  },
+
+  //Enrutamiento de Postulacion
+  {
+    path: 'Postulacion',
+    component: Postulacion,
+    children: [
+      {
+        path: '',
+        component: ListarPostulacion,
+      },
+      {
+        path: 'registrar',
+        component: InsertarEditarPostulacion,
+      },
+      {
+        path: 'ediciones/:id',
+        component: InsertarEditarPostulacion,
+      },
+    ],
+  },
+
+  //Enrutamiento de Entrevista
+  {
+    path: 'entrevista',
+    component: EntrevistaComponent,
+    children: [
+      {
+        path: 'insertar',
+        component: InsertarEditarEntrevistaComponent,
+      },
+      {
+        path: 'ediciones/:id',
+        component: InsertarEditarEntrevistaComponent,
+      },
+    ],
+  },
+
+  //Enrutamiento de Contrato
+  {
+    path: 'contratos',
+    component: ContratoComponent,
+    children: [
+      {
+        path: 'insertar',
+        component: InsertarEditarContratoComponent,
+      },
+      {
+        path: 'ediciones/:id',
+        component: InsertarEditarContratoComponent,
+      },
+    ],
+  },
+
+  //Enrutamiento de Detalle
+  {
+    path: 'detalles',
+    component: DetalleComponent,
+    children: [
+      {
+        path: 'insertar',
+        component: InsertarEditarDetalleComponent,
+      },
+      {
+        path: 'ediciones/:id',
+        component: InsertarEditarDetalleComponent,
       },
     ],
   },

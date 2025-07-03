@@ -56,18 +56,19 @@ export class ListarcertificadoComponent implements OnInit, AfterViewInit {
   }
   ngOnInit(): void {
     this.actualizarLista();
-    this.router.events
-      .pipe(filter((event) => event instanceof NavigationEnd))
-      .subscribe(() => {
-        this.actualizarLista();
-      });
+  this.router.events
+    .pipe(filter((event) => event instanceof NavigationEnd))
+    .subscribe(() => {
+      this.actualizarLista();
+    });
 
-    const mensaje = history.state.mensaje;
-    if (mensaje) {
-      this.snackBar.open(mensaje, 'Cerrar', {
-        duration: 3000,
-      });
-    }
+  const mensaje = window.history.state?.mensaje;
+  if (mensaje && typeof mensaje === 'string') {
+    this.snackBar.open(mensaje, 'Cerrar', {
+      duration: 3000,
+    });
+    window.history.replaceState({}, '');
+  }
   }
 
   ngAfterViewInit(): void {

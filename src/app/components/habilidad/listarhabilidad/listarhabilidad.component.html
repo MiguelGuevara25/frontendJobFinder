@@ -1,5 +1,8 @@
 <div class="contenedor-titulo">
   <h1 class="titulo-centrado">Lista de Habilidades</h1>
+</div>
+
+<div class="contenedor-tabla">
   <div class="acciones-superiores">
     <mat-form-field appearance="outline" class="campo-busqueda">
       <mat-label>Buscar</mat-label>
@@ -17,15 +20,12 @@
       Registrar
     </button>
   </div>
-</div>
 
-<div class="contenedor-tabla">
   <table
     mat-table
     [dataSource]="dataSource"
     class="mat-elevation-z8 tabla-estilizada"
   >
-
     <ng-container matColumnDef="c1">
       <th mat-header-cell *matHeaderCellDef class="th-centrado">ID</th>
       <td mat-cell *matCellDef="let element" class="th-centrado">

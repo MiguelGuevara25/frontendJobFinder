@@ -4,8 +4,7 @@
 </div>
 
 <div class="contenedor-tabla">
-  <form [formGroup]="form" (submit)="aceptar()" class="formulario-estilizado">
-
+<form *ngIf="form" [formGroup]="form" (submit)="aceptar()" class="formulario-estilizado">
     @if (edicion) {
     <mat-form-field
       appearance="fill"

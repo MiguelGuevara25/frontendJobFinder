@@ -1,0 +1,119 @@
+.gemini-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra los elementos horizontalmente */
+  padding: 20px;
+  max-width: 800px; /* Ancho máximo para el contenido principal */
+  margin: 40px auto; /* Centra el contenedor en la página */
+  background-color: #f5f5f5; /* Un fondo suave para la página */
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08); /* Sombra más pronunciada para el contenedor principal */
+  font-family: 'Inter', sans-serif; /* Fuente Inter */
+}
+
+.gemini-title {
+  color: #3f51b5; /* Azul primario de Material Design */
+  font-size: 2.5em;
+  font-weight: 700;
+  margin-bottom: 30px;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+.input-card {
+  width: 100%;
+  margin-bottom: 25px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Sombra más ligera para las cards internas */
+}
+
+.full-width-input {
+  width: 100%;
+  margin-bottom: 15px; /* Espacio debajo del campo de texto */
+}
+
+.full-width-input textarea {
+  resize: vertical; /* Permite redimensionar verticalmente el textarea */
+  min-height: 80px; /* Altura mínima del textarea */
+}
+
+.send-button {
+  width: 100%;
+  padding: 12px 0;
+  font-size: 1.1em;
+  font-weight: 500;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px; /* Espacio entre el icono y el texto del botón */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.send-button:hover {
+  box-shadow: 0 4px 12px rgba(63, 81, 181, 0.3); /* Sombra al pasar el ratón */
+}
+
+.loading-card,
+.response-card,
+.initial-message-card {
+  width: 100%;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.loading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  color: #555;
+  font-size: 1.1em;
+}
+
+.loading-content mat-spinner {
+  margin-bottom: 15px;
+  color: #3f51b5; /* Color del spinner */
+}
+
+.response-card mat-card-title {
+  color: #3f51b5;
+  font-size: 1.3em;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.response-text {
+  font-size: 1.05em;
+  line-height: 1.6;
+  color: #333;
+  white-space: pre-wrap; /* Mantiene saltos de línea y espacios del texto de la respuesta */
+  word-wrap: break-word; /* Rompe palabras largas para evitar desbordamiento */
+}
+
+.initial-message-card {
+  text-align: center;
+  padding: 20px;
+  color: #777;
+  font-style: italic;
+}
+
+/* Responsividad */
+@media (max-width: 600px) {
+  .gemini-container {
+    padding: 15px;
+    margin: 20px auto;
+  }
+
+  .gemini-title {
+    font-size: 2em;
+    margin-bottom: 20px;
+  }
+
+  .send-button {
+    font-size: 1em;
+    padding: 10px 0;
+  }
+}
