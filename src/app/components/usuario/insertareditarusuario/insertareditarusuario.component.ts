@@ -8,6 +8,7 @@ import { UsuarioService } from '../../../services/usuario.service';
 import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-insertareditar',
@@ -26,7 +27,8 @@ export class InsertareditarusuarioComponent implements OnInit {
     private uS: UsuarioService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private _snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -68,6 +70,9 @@ export class InsertareditarusuarioComponent implements OnInit {
         this.uS.actualizar(this.usuario).subscribe(() => {
           this.uS.listar().subscribe((data) => {
             this.uS.setList(data);
+            this._snackBar.open("¡Usuario actualizado con éxito!", "Cerrar", {
+              duration: 3000,
+            });
           });
         });
 
@@ -75,6 +80,9 @@ export class InsertareditarusuarioComponent implements OnInit {
         this.uS.registrar(this.usuario).subscribe(() => {
           this.uS.listar().subscribe((data) => {
             this.uS.setList(data);
+            this._snackBar.open("¡Usuario registrado con éxito!", "Cerrar", {
+              duration: 3000,
+            });
           });
         });
       }
@@ -100,7 +108,7 @@ export class InsertareditarusuarioComponent implements OnInit {
       });
     }
   }
-  cancelar(){
+  cancelar() {
     this.router.navigate(['usuarios']);
   }
 }
