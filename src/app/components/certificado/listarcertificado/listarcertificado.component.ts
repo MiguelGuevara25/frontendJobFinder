@@ -5,17 +5,11 @@ import { Certificado } from '../../../models/certificado';
 import { CertificadoService } from '../../../services/certificado.service';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
-import {
-  ActivatedRoute,
-  NavigationEnd,
-  Router,
-  RouterLink,
-} from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-listarcertificado',
@@ -37,14 +31,15 @@ export class ListarcertificadoComponent implements OnInit, AfterViewInit {
   dataSource: MatTableDataSource<Certificado> = new MatTableDataSource();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  hasData = false;
+  dataFiltradaPaginada: Certificado[] = [];
   pageSize = 3;
   pageIndex = 0;
 
   constructor(
     private cS: CertificadoService,
     private snackBar: MatSnackBar,
-    private router: Router,
-    private route: ActivatedRoute
+    private router: Router
   ) {}
   get paginados() {
     const start = this.pageIndex * this.pageSize;
@@ -55,26 +50,25 @@ export class ListarcertificadoComponent implements OnInit, AfterViewInit {
     this.pageSize = event.pageSize;
   }
   ngOnInit(): void {
-    this.actualizarLista();
-  this.router.events
-    .pipe(filter((event) => event instanceof NavigationEnd))
-    .subscribe(() => {
-      this.actualizarLista();
+    this.cS.list().subscribe((data) => {
+      this.hasData = data.length > 0;
+      this.dataSource = new MatTableDataSource(data);
+      this.dataSource.paginator = this.paginator; // <== aquí lo asignas
     });
-
-  const mensaje = window.history.state?.mensaje;
-  if (mensaje && typeof mensaje === 'string') {
-    this.snackBar.open(mensaje, 'Cerrar', {
-      duration: 3000,
+    this.cS.getList().subscribe((data) => {
+      this.hasData = data.length > 0;
+      this.dataSource = new MatTableDataSource(data);
+      this.dataSource.paginator = this.paginator; // <== aquí lo asignas
     });
-    window.history.replaceState({}, '');
-  }
+    this.dataSource.filterPredicate = (data: Certificado, filter: string) => {
+      const dataStr =
+        `${data.idCertificado} ${data.nombreCertificado} ${data.entidadEmisoraCertificado} ${data.fechaEmisionCertificado} ${data.fechaVencimientoCertificado}`.toLowerCase();
+      return dataStr.includes(filter);
+    };
   }
 
   ngAfterViewInit(): void {
-    if (this.dataSource && this.paginator) {
-      this.dataSource.paginator = this.paginator;
-    }
+    this.dataSource.paginator = this.paginator;
   }
 
   filtrar(event: Event) {
@@ -82,30 +76,19 @@ export class ListarcertificadoComponent implements OnInit, AfterViewInit {
       .trim()
       .toLowerCase();
     this.dataSource.filter = filtro;
-    this.pageIndex = 0;
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   eliminar(id: number) {
     this.cS.delete(id).subscribe(() => {
-      this.actualizarLista();
-      this.snackBar.open('Se eliminó correctamente', 'Cerrar', {
-        duration: 3000,
-      });
-    });
-  }
-
-  actualizarLista() {
-    this.cS.list().subscribe((data) => {
-      this.dataSource.data = data;
-
-      this.dataSource.filterPredicate = (cert, filtro) => {
-        const dataStr =
-          `${cert.idCertificado} ${cert.nombreCertificado} ${cert.entidadEmisoraCertificado} ${cert.fechaEmisionCertificado} ${cert.fechaVencimientoCertificado}`.toLowerCase();
-        return dataStr.includes(filtro);
-      };
-
-      setTimeout(() => {
-        this.dataSource.paginator = this.paginator;
+      this.cS.list().subscribe((data) => {
+        this.cS.setList(data);
+        this.dataSource.data = data;
+        this.snackBar.open('Certificado eliminado con éxito!', 'Cerrar', {
+          duration: 3000,
+        });
       });
     });
   }
