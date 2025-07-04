@@ -8,8 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { Empresa } from '../../../models/empresa';
 import { EmpresaService } from '../../../services/empresa.service';
-import { Router } from 'express';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'app-insertareditarempresa',
@@ -26,7 +25,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 })
 export class InsertareditarempresaComponent implements OnInit {
   form: FormGroup = new FormGroup({});
-  Empresa: Empresa = new Empresa();
+  empresa: Empresa = new Empresa();
 
   id: number = 0;
   edicion: boolean = false;
@@ -50,31 +49,32 @@ export class InsertareditarempresaComponent implements OnInit {
       mail: ['', Validators.required],
       location: ['', Validators.required],
     });
-    aceptar() {
-      if (this.form.valid) {
-        this.Empresa.id = this.form.value.idContrato;
-        this.Empresa.name = this.form.value.startDate;
-        this.Empresa.description = this.form.value.endDate;
-        this.Empresa.sector = this.form.value.salary;
-        this.Empresa.website = this.form.value.contractType;
-        this.Empresa.address = this.form.value.address;
-
-        if (this.edicion) {
-          this.cS.update(this.contrato).subscribe(() => {
-            this.cS.list().subscribe((data) => {
-              this.cS.setList(data);
-            });
-          });
-        } else {
-          this.cS.insert(this.contrato).subscribe(() => {
-            this.cS.list().subscribe((data) => {
-              this.cS.setList(data);
-            });
-          });
-        }
-        this.router.navigate(['contratos']);
-      }
-    }
-
   }
+  aceptar() {
+    if (this.form.valid) {
+      this.empresa.id = this.form.value.idContrato;
+      this.empresa.name = this.form.value.startDate;
+      this.empresa.description = this.form.value.endDate;
+      this.empresa.sector = this.form.value.salary;
+      this.empresa.website = this.form.value.contractType;
+      this.empresa.address = this.form.value.address;
+
+      if (this.edicion) {
+        this.eS.update(this.empresa).subscribe(() => {
+          this.eS.list().subscribe((data) => {
+            this.eS.setList(data);
+          });
+        });
+      } else {
+        this.eS.insert(this.empresa).subscribe(() => {
+          this.eS.list().subscribe((data) => {
+            this.eS.setList(data);
+          });
+        });
+      }
+      this.router.navigate(['contratos']);
+    }
+  }
+
 }
+

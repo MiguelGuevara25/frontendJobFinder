@@ -40,8 +40,7 @@ import { InsertareditarcurriculumComponent } from './components/curriculum/inser
 import { InsertareditarofertadetrabajoComponent } from './components/ofertadetrabajo/insertareditarofertadetrabajo/insertareditarofertadetrabajo.component';
 import { InsertareditarpostulacionComponent } from './components/postulacion/insertareditarpostulacion/insertareditarpostulacion.component';
 import { ListarpostulacionComponent } from './components/postulacion/listarpostulacion/listarpostulacion.component';
-
-
+import { ListarofertadetrabajoComponent } from './components/ofertadetrabajo/listarofertadetrabajo/listarofertadetrabajo.component';
 
 
 export const routes: Routes = [
@@ -250,11 +249,11 @@ export const routes: Routes = [
   //Enrutamiento de Oferta de Trabajo
   {
     path: 'ofertadetrabajo',
-    component: CurriculumComponent,
+    component: Ofertadetrabajo,
     children: [
       {
         path: '',
-        component: Ofertadetrabajo,
+        component: ListarofertadetrabajoComponent,
       },
       {
         path: 'registrar',
