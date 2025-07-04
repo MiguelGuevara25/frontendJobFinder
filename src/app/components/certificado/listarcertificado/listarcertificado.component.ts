@@ -35,7 +35,7 @@ import { filter } from 'rxjs';
 })
 export class ListarcertificadoComponent implements OnInit, AfterViewInit {
   dataSource: MatTableDataSource<Certificado> = new MatTableDataSource();
-  
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   pageSize = 3;
   pageIndex = 0;

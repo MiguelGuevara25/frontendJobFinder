@@ -30,17 +30,20 @@ import { ListarinscripcioncursoComponent } from './components/inscripcioncurso/l
 import { InsertareditarinscripcioncursoComponent } from './components/inscripcioncurso/insertareditarinscripcioncurso/insertareditarinscripcioncurso.component';
 import { HomeComponent } from './components/home/home.component';
 
-import { Ofertadetrabajo } from './components/ofertadetrabajo/ofertadetrabajo';
+
 import { Postulacion } from './components/postulacion/postulacion';
 import { InsertareditarempresaComponent } from './components/empresa/insertareditarempresa/insertareditarempresa.component';
 
 import { CurriculumComponent } from './components/curriculum/curriculum.component';
 import { ListarCurriculumComponent } from './components/curriculum/listar-curriculum/listar-curriculum.component';
 import { InsertareditarcurriculumComponent } from './components/curriculum/insertareditarcurriculum/insertareditarcurriculum.component';
+
 import { InsertareditarofertadetrabajoComponent } from './components/ofertadetrabajo/insertareditarofertadetrabajo/insertareditarofertadetrabajo.component';
 import { InsertareditarpostulacionComponent } from './components/postulacion/insertareditarpostulacion/insertareditarpostulacion.component';
 import { ListarpostulacionComponent } from './components/postulacion/listarpostulacion/listarpostulacion.component';
 import { ListarofertadetrabajoComponent } from './components/ofertadetrabajo/listarofertadetrabajo/listarofertadetrabajo.component';
+import { Ofertadetrabajo } from './components/ofertadetrabajo/ofertadetrabajo.component';
+
 
 
 export const routes: Routes = [
@@ -208,7 +211,7 @@ export const routes: Routes = [
       },
     ],
   },
-  
+
   //Enrutamiento de Inscripcion Curso
   {
     path: 'inscripcioncursos',

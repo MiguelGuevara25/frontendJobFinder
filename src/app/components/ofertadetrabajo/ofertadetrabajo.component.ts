@@ -5,8 +5,8 @@ import { ListarofertadetrabajoComponent } from './listarofertadetrabajo/listarof
 @Component({
   selector: 'app-ofertadetrabajo',
   imports: [RouterOutlet, ListarofertadetrabajoComponent],
-  templateUrl: './ofertadetrabajo.html',
-  styleUrl: './ofertadetrabajo.css'
+  templateUrl: './ofertadetrabajo.component.html',
+  styleUrl: './ofertadetrabajo.component.css'
 })
 export class Ofertadetrabajo {
   constructor (public route: ActivatedRoute){}

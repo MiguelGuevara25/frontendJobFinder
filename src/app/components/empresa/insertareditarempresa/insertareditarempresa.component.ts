@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -24,6 +24,8 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
   styleUrl: './insertareditarempresa.component.css'
 })
 export class InsertareditarempresaComponent implements OnInit {
+
+
   form: FormGroup = new FormGroup({});
   empresa: Empresa = new Empresa();
 
@@ -70,11 +72,35 @@ export class InsertareditarempresaComponent implements OnInit {
           this.eS.list().subscribe((data) => {
             this.eS.setList(data);
           });
-        });
+        })
+        this.router.navigate(['empresa']);
       }
-      this.router.navigate(['contratos']);
     }
   }
-
+  init() {
+    if (this.edicion) {
+      this.eS.listId(this.id).subscribe((data) => {
+        this.form = new FormGroup({
+          id: new FormControl(data.id),
+          name: new FormControl(data.name),
+          description: new FormControl(data.description),
+          sector: new FormControl(data.sector),
+          website: new FormControl(data.website),
+          address: new FormControl(data.address),
+          telephone: new FormControl(data.telephone),
+          mail: new FormControl(data.mail),
+          location: new FormControl(data.location),
+          password: new FormControl(data.password),
+        });
+      });
+    }
+  }
+  cancelar() {
+    this.router.navigate(['empresa']);
+  }
 }
+
+
+
+
 
