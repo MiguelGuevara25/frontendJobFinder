@@ -6,10 +6,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { Ofertadetrabajo } from '../ofertadetrabajo.component';
 import { OfertadetrabajoService } from '../../../services/ofertadetrabajo.service';
-import { Router } from 'express';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Ofertadetrabajo } from '../../../models/ofertadetrabajo';
 
 @Component({
   selector: 'app-insertareditarofertadetrabajo',

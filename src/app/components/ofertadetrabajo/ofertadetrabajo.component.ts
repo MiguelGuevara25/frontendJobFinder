@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, RouterOutlet } from '@angular/router';
-import { ListarofertadetrabajoComponent } from '../certificado/listarcertificado/listarcertificado.component';
+import { ListarofertadetrabajoComponent } from './listarofertadetrabajo/listarofertadetrabajo.component';
 
 @Component({
   selector: 'app-ofertadetrabajo',
   imports: [RouterOutlet, ListarofertadetrabajoComponent],
-  templateUrl: './ofertadetrabajo.html',
-  styleUrl: './ofertadetrabajo.css'
+  templateUrl: './ofertadetrabajo.component.html',
+  styleUrl: './ofertadetrabajo.component.css'
 })
 export class Ofertadetrabajo {
   constructor (public route: ActivatedRoute){}
