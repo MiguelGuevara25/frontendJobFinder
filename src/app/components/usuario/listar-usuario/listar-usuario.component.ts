@@ -36,9 +36,6 @@ export class ListarUsuarioComponent implements OnInit, AfterViewInit {
     'c5',
     'c6',
     'c7',
-    'c8',
-    'c9',
-    'c10',
   ];
 
 
