@@ -77,7 +77,7 @@
         <button
           mat-flat-button
           color="accent"
-          [routerLink]="'/usuarios'"
+          [routerLink]="['/usuarios/verperfil', element.usuario.idUsuario]"
           class="user-id-button"
         >
           ID: {{ element.usuario.idUsuario }}
