@@ -49,6 +49,7 @@ import { VerperfilComponent } from './components/usuario/verperfil/verperfil.com
 import { ReportesComponent } from './components/reportes/reportes.component';
 import { CantidadcertificadosComponent } from './components/reportes/cantidadcertificados/cantidadcertificados.component';
 import { CantidadplataformacursoComponent } from './components/reportes/cantidadplataformacurso/cantidadplataformacurso.component';
+import { CantidadempresacursoComponent } from './components/reportes/cantidadempresacurso/cantidadempresacurso.component';
 
 
 
@@ -238,7 +239,7 @@ export const routes: Routes = [
       },
       {
         path: 'ediciones/:id',
-        component: InsertareditarcursoComponent,
+        component: InsertareditarinscripcioncursoComponent,
       },
     ],
   },
@@ -261,6 +262,7 @@ export const routes: Routes = [
         path: 'ediciones/:id',
         component: InsertareditarempresaComponent,
       },
+      
     ],
   },
 
@@ -360,6 +362,9 @@ export const routes: Routes = [
       },
       {
         path:'cantidadplataformacurso', component: CantidadplataformacursoComponent
+      },
+      {
+        path:'cantidadempresacurso', component: CantidadempresacursoComponent
       }
     ]
   }

@@ -26,7 +26,7 @@ import { EmpresaService } from '../../../services/empresa.service';
 @Component({
   selector: 'app-insertareditarcurso',
   providers: [provideNativeDateAdapter()],
-
+  standalone: true,
   imports: [
     ReactiveFormsModule,
     MatFormFieldModule,
@@ -58,7 +58,6 @@ export class InsertareditarcursoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    
     this.form = this.formBuilder.group({
       idCurso: [{ value: '', disabled: true }],
       tituloCurso: [
@@ -103,23 +102,24 @@ export class InsertareditarcursoComponent implements OnInit {
 
   init(): void {
     if (this.edicion) {
-    this.cS.listId(this.id).subscribe((data) => {
-      this.form.patchValue({
-        idCurso: data.idCurso,
-        tituloCurso: data.tituloCurso,
-        descripcionCurso: data.descripcionCurso,
-        plataformaCurso: data.plataformaCurso,
-        linkCurso: data.linkCurso,
-        
-        empresa: data.empresa.id,
+      this.cS.listId(this.id).subscribe((data) => {
+        this.curso.idCurso = data.idCurso;
+        this.form.patchValue({
+          idCurso: data.idCurso,
+          tituloCurso: data.tituloCurso,
+          descripcionCurso: data.descripcionCurso,
+          plataformaCurso: data.plataformaCurso,
+          linkCurso: data.linkCurso,
+
+          empresa: data.empresa.id,
+        });
       });
-    });
-  }
+    }
   }
 
   aceptar(): void {
     if (this.form.valid) {
-      this.curso.idCurso = this.form.value.idCurso;
+      this.curso.idCurso = this.id;
       this.curso.tituloCurso = this.form.value.tituloCurso;
       this.curso.descripcionCurso = this.form.value.descripcionCurso;
       this.curso.plataformaCurso = this.form.value.plataformaCurso;
@@ -131,7 +131,7 @@ export class InsertareditarcursoComponent implements OnInit {
         this.cS.update(this.curso).subscribe(() => {
           this.cS.list().subscribe((data) => {
             this.cS.setList(data);
-             this.snackBar.open("¡Curso actualizado con éxito!", "Cerrar", {
+            this.snackBar.open('¡Curso actualizado con éxito!', 'Cerrar', {
               duration: 3000,
             });
           });
@@ -140,7 +140,7 @@ export class InsertareditarcursoComponent implements OnInit {
         this.cS.insert(this.curso).subscribe(() => {
           this.cS.list().subscribe((data) => {
             this.cS.setList(data);
-            this.snackBar.open("¡Curso registrado con éxito!", "Cerrar", {
+            this.snackBar.open('¡Curso registrado con éxito!', 'Cerrar', {
               duration: 3000,
             });
           });
