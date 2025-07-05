@@ -18,10 +18,17 @@ export class CantidadcertificadosComponent implements OnInit {
   hasData = false;
   barChartOptions: ChartOptions = {
     responsive: true,
+    scales: {
+    y: {
+      ticks: {
+        precision: 0
+      }
+    }
+  }
   };
 
   barChartLabels: string[] = [];
-  barChartType: ChartType = 'bar';
+  barChartType: ChartType = 'line';
   barChartLegend = true;
   barChartData: ChartDataset[] = [];
 
