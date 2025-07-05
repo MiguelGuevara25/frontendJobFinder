@@ -35,6 +35,7 @@ export class ListarcertificadoComponent implements OnInit, AfterViewInit {
   dataFiltradaPaginada: Certificado[] = [];
   pageSize = 3;
   pageIndex = 0;
+  
 
   constructor(
     private cS: CertificadoService,
@@ -90,6 +91,23 @@ export class ListarcertificadoComponent implements OnInit, AfterViewInit {
           duration: 3000,
         });
       });
+    });
+  }
+  verCertificadosVigentes() {
+    this.cS.mostrarCertificadosVigentes().subscribe((data) => {
+      this.dataSource = new MatTableDataSource(data);
+      this.dataSource.paginator = this.paginator;
+      this.pageIndex = 0;
+      this.snackBar.open('Mostrando certificados vigentes', 'Cerrar', {
+        duration: 3000,
+      });
+    });
+  }
+  cargarCertificados() {
+    this.cS.list().subscribe((data) => {
+      this.dataSource = new MatTableDataSource(data);
+      this.dataSource.paginator = this.paginator;
+      this.pageIndex = 0;
     });
   }
 }
