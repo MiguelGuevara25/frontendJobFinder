@@ -1,0 +1,39 @@
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* dos columnas iguales */
+  gap: 20px; /* espacio entre campos */
+  width: 1000px;
+  justify-items: center;
+}
+
+.example-button-row {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+
+}
+
+.grupo-radio {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 0;
+  align-items: center;
+}
+
+/* Estilo visual del título "Estado" y "¿Favorito?" */
+.titulo-radio {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: #283253; /* Azul Material Design */
+}
+
+.boton-personalizado {
+  background-color: #283253 !important; /* Azul Bootstrap */
+  color: #ffffff !important;
+}
+
+.boton-personalizado:hover {
+  background-color: #ffffff !important; /* Azul Bootstrap */
+  color: #283253!important;
+}

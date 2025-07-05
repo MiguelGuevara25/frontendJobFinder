@@ -24,6 +24,8 @@ export class ListarCurriculumComponent implements OnInit, AfterViewInit {
   dataSource: MatTableDataSource<Curriculum> = new MatTableDataSource()
   displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6'];
   dataFiltradaPaginada: Curriculum[] = [];
+  pageSize = 3;
+  pageIndex = 0;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -68,5 +70,14 @@ export class ListarCurriculumComponent implements OnInit, AfterViewInit {
   }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+  }
+
+  get paginados() {
+    const start = this.pageIndex * this.pageSize;
+    return this.dataSource.filteredData.slice(start, start + this.pageSize);
+  }
+  cambiarPagina(event: any) {
+    this.pageIndex = event.pageIndex;
+    this.pageSize = event.pageSize;
   }
 }
