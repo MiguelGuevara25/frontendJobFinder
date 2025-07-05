@@ -11,12 +11,12 @@
       color="primary"
       [routerLink]="'/inscripcioncursos/registrar'"
     >
-      <mat-icon>person_add</mat-icon>
+      <mat-icon>menu_book</mat-icon>
       Registrar
     </button>
   </div>
 </div>
-<div>
+
   <div class="contenedor-tabla">
     <form class="formulario-estilizado">
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -61,7 +61,7 @@
             <button
               mat-raised-button
               color="primary"
-              [routerLink]="['/registrar', element.idInscripcion]"
+              [routerLink]="['ediciones', element.idInscripcion]"
             >
               <mat-icon>edit</mat-icon>
             </button>
@@ -85,10 +85,10 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
       <mat-paginator
-      [pageSizeOptions]="[4, 8, 10]"
+      [pageSizeOptions]="[3, 6, 9]"
       aria-label="Selector de página"
     >
     </mat-paginator>
     </form>
   </div>
-</div>
+  

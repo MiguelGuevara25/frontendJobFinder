@@ -12,6 +12,7 @@
     <div class="botones-acciones">
       <button
         mat-raised-button
+        class="boton-registrar"
         color="primary"
         [routerLink]="'/certificados/insertareditar'"
       >
@@ -21,6 +22,7 @@
 
       <button
         mat-raised-button
+        class="boton-registrar"
         color="accent"
         (click)="verCertificadosVigentes()"
       >
@@ -28,7 +30,7 @@
         Ver vigentes
       </button>
 
-      <button mat-raised-button color="warn" (click)="cargarCertificados()">
+      <button mat-raised-button class="boton-registrar" color="warn" (click)="cargarCertificados()">
         <mat-icon>restore</mat-icon>
         Ver todos
       </button>

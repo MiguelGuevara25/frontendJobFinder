@@ -141,3 +141,14 @@ mat-paginator {
   background-color: #ffffff !important; /* Azul Bootstrap */
   color: #283253!important;
 }
+
+.boton-registrar {
+  background-color: #283253 !important; /* Azul Bootstrap */
+  color: #ffffff !important;
+}
+
+.boton-registrar:hover {
+  background-color: #ffffff !important; /* Azul Bootstrap */
+  color: #283253!important;
+}
+

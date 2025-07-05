@@ -4,22 +4,12 @@
 </div>
 
 <div class="contenedor-tabla">
-  <form
-    *ngIf="form"
-    [formGroup]="form"
-    (ngSubmit)="aceptar()"
-    class="formulario-estilizado"
-  >
+  <form [formGroup]="form" (ngSubmit)="aceptar()" class="formulario-estilizado">
     <mat-form-field
       *ngIf="edicion"
-      appearance="fill"
-      class="form-control-id"
-      [ngClass]="{
-        shake: form.get('idCurso')?.invalid && form.get('idCurso')?.touched
-      }"
     >
       <mat-label>ID</mat-label>
-      <input matInput placeholder="ID" formControlName="idCurso" />
+      <input matInput formControlName="idCurso" />
       <mat-error *ngIf="form.get('idCurso')?.hasError('required')">
         El código es obligatorio
       </mat-error>
@@ -27,12 +17,6 @@
 
     <!-- Campo: título del curso -->
     <mat-form-field
-      appearance="fill"
-      class="form-control-certificado"
-      [ngClass]="{
-        shake:
-          form.get('tituloCurso')?.invalid && form.get('tituloCurso')?.touched
-      }"
     >
       <mat-label>Curso</mat-label>
       <input
@@ -43,7 +27,7 @@
         #cursoInput
       />
       <mat-hint align="end">
-       {{ cursoInput?.value?.length ?? 0 }} / 100
+        {{ cursoInput?.value?.length ?? 0 }} / 100
       </mat-hint>
       <mat-error *ngIf="form.get('tituloCurso')?.hasError('required')">
         El curso es obligatorio
@@ -57,15 +41,7 @@
     </mat-form-field>
 
     <!-- Campo: descripción -->
-    <mat-form-field
-      appearance="fill"
-      class="form-control-descripcion"
-      [ngClass]="{
-        shake:
-          form.get('descripcionCurso')?.invalid &&
-          form.get('descripcionCurso')?.touched
-      }"
-    >
+    <mat-form-field>
       <mat-label>Descripción curso</mat-label>
       <input
         matInput
@@ -90,13 +66,6 @@
 
     <!-- Campo: plataforma -->
     <mat-form-field
-      appearance="fill"
-      class="form-control-plataforma"
-      [ngClass]="{
-        shake:
-          form.get('plataformaCurso')?.invalid &&
-          form.get('plataformaCurso')?.touched
-      }"
     >
       <mat-label>Plataforma curso</mat-label>
       <input
@@ -122,11 +91,6 @@
 
     <!-- Campo: link -->
     <mat-form-field
-      appearance="fill"
-      class="form-control-entidad"
-      [ngClass]="{
-        shake: form.get('linkCurso')?.invalid && form.get('linkCurso')?.touched
-      }"
     >
       <mat-label>Link curso</mat-label>
       <input matInput placeholder="Link curso" formControlName="linkCurso" />
