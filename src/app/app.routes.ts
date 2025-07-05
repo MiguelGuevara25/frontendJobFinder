@@ -47,6 +47,7 @@ import { Ofertadetrabajo } from './components/ofertadetrabajo/ofertadetrabajo.co
 import { VerperfilComponent } from './components/usuario/verperfil/verperfil.component';
 
 import { ReportesComponent } from './components/reportes/reportes.component';
+import { CantidadcertificadosComponent } from './components/reportes/cantidadcertificados/cantidadcertificados.component';
 
 
 
@@ -352,7 +353,11 @@ export const routes: Routes = [
   {
     path:'reportes',
     component:ReportesComponent,
-   
+    children:[
+      {
+        path:'cantidadcertificadoanio', component: CantidadcertificadosComponent
+      }
+    ]
   }
   
 ];
