@@ -363,5 +363,4 @@ export const routes: Routes = [
       },
     ]
   }
-  
 ];
