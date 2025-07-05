@@ -7,7 +7,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class GeminiService {
-  private apiKey = environment.apikey;
+  private apiKey = 'AIzaSyDHy2S0jtr_jomMW4S8Lez34Q5QHVRCD3c';
   private apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${this.apiKey}`;
 
 

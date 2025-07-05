@@ -14,6 +14,7 @@ import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-listar-curriculum',
+  standalone:true,
   imports: [MatTableModule,
     CommonModule, RouterLink, MatIconModule, MatButtonModule, MatPaginatorModule, MatFormFieldModule, MatInputModule, MatCardModule],
   templateUrl: './listar-curriculum.component.html',

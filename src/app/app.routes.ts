@@ -360,7 +360,7 @@ export const routes: Routes = [
       },
       {
         path:'cantidadplataformacurso', component: CantidadplataformacursoComponent
-      }
+      },
     ]
   }
   
