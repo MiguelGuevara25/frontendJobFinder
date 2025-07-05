@@ -109,7 +109,7 @@ export class InsertareditarCertificadoComponent implements OnInit {
       if (hayError) {
         return;
       }
-      this.certificado.idCertificado = this.form.value.codigo;
+      this.certificado.idCertificado = this.id;
       this.certificado.nombreCertificado = this.form.value.certificado;
       this.certificado.entidadEmisoraCertificado = this.form.value.entidad;
       this.certificado.fechaEmisionCertificado = this.form.value.fecha_emision;
