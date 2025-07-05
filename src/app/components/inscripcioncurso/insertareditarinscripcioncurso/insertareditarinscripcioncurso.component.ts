@@ -59,7 +59,7 @@ export class InsertareditarinscripcioncursoComponent implements OnInit {
     private uS: UsuarioService,
     private snackBar: MatSnackBar
   ) {}
-  noPermitirFechasPasadas = (fecha: Date | null): boolean => {
+  noPermitirFechasFuturas = (fecha: Date | null): boolean => {
   if (!fecha) return false;
   const hoy = new Date();
   hoy.setHours(0, 0, 0, 0);
@@ -67,7 +67,7 @@ export class InsertareditarinscripcioncursoComponent implements OnInit {
   const fechaSeleccionada = new Date(fecha);
   fechaSeleccionada.setHours(0, 0, 0, 0);
 
-  return fechaSeleccionada >= hoy;
+  return fechaSeleccionada <= hoy;
 };
 
   ngOnInit(): void {
@@ -101,14 +101,14 @@ export class InsertareditarinscripcioncursoComponent implements OnInit {
     let hayError = false;
 
     // ❌ Validación: no se permite fecha pasada
-    if (fechaInscripcion < hoy) {
-      this.form.get('fechaInscripcionCurso')?.setErrors({ fechaPasada: true });
-      hayError = true;
-    }
+    if (fechaInscripcion > hoy) {
+  this.form.get('fechaInscripcionCurso')?.setErrors({ fechaFutura: true });
+  hayError = true;
+}
 
     if (hayError) return;
     if (this.form.valid) {
-      this.inscripcionCurso.idInscripcion = this.form.value.idInscripcion;
+      this.inscripcionCurso.idInscripcion = this.id;
       this.inscripcionCurso.fechaInscripcionCurso =
         this.form.value.fechaInscripcionCurso;
       this.inscripcionCurso.progresoInscripcionCurso =
