@@ -53,8 +53,8 @@ export class ListarinscripcioncursoComponent implements OnInit, AfterViewInit {
       this.iCS.list().subscribe((data) => {
         this.iCS.setList(data);
         this.dataSource.data = data;
-        this.snackBar.open("¡Curso eliminado con éxito!", "Cerrar", {
-          duration: 3000,
+        this.snackBar.open("¡Inscripcion Curso eliminado con éxito!", "Cerrar", {
+          duration: 5000,
         });
       });
     });

@@ -42,18 +42,20 @@ export class ListarcursoComponent implements OnInit, AfterViewInit {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;
     });
+
   }
   eliminar(id: number) {
-    
-  
     this.cS.delete(id).subscribe((data) => {
       this.cS.list().subscribe((data) => {
         this.cS.setList(data);
         this.dataSource.data = data;
-        this.snackBar.open("¡Curso eliminado con éxito!", "Cerrar", {
-          duration: 3000,
-        });
+          
+          this.snackBar.open("¡Curso eliminado con éxito!", "Cerrar", {
+      duration: 3000,
+    });
+         
       });
+      
       
     },);
     

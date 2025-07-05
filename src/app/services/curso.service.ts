@@ -4,6 +4,7 @@ import { Curso } from '../models/curso';
 import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { CantidadCursosPlataformaDTO } from '../models/CantidadCursosPlataformaDTO';
+import { CantidadCursoPorEmpresaDTO } from '../models/CantidadCursoPorEmpresaDTO';
 const base_url = environment.base;
 
 @Injectable({
@@ -36,5 +37,8 @@ export class CursoService {
     }
   getcantidadCursosPlataforma(): Observable<CantidadCursosPlataformaDTO[]> {
       return this.http.get<CantidadCursosPlataformaDTO[]>(`${this.url}/cantidades`);
+  }
+  getcantidadCursosEmpresa(): Observable<CantidadCursoPorEmpresaDTO[]> {
+      return this.http.get<CantidadCursoPorEmpresaDTO[]>(`${this.url}/cantidadporempresas`);
   }
 }
