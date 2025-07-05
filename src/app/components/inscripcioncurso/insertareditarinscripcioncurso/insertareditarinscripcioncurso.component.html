@@ -1,73 +1,120 @@
 <div class="contenedor-titulo">
-  <h1 class="titulo-centrado" *ngIf="!edicion">Registro de Inscripcion Cursos</h1>
+  <h1 class="titulo-centrado" *ngIf="!edicion">
+    Registro de Inscripcion Cursos
+  </h1>
   <h1 class="titulo-centrado" *ngIf="edicion">Actualizar Inscripcion Curso</h1>
 </div>
 
 <div class="contenedor-tabla">
-  <form [formGroup]="form" (submit)="aceptar()" class="formulario-estilizado">
-
+  <form [formGroup]="form" (ngSubmit)="aceptar()" class="formulario-estilizado">
     @if (edicion) {
     <mat-form-field
       appearance="fill"
       class="form-control-id"
-      [ngClass]="{ shake: form.get('idInscripcion')?.invalid && form.get('idInscripcion')?.touched }"
+      [ngClass]="{
+        shake:
+          form.get('idInscripcion')?.invalid &&
+          form.get('idInscripcion')?.touched
+      }"
     >
       <mat-label>ID</mat-label>
-      <input matInput placeholder="ID" formControlName="idCurso" />
+      <input matInput placeholder="ID" formControlName="idInscripcion" />
       @if (form.get('idInscripcion')?.hasError('idInscripcion')) {
       <mat-error>El código es obligatorio</mat-error>
       }
     </mat-form-field>
     }
 
+    <mat-form-field appearance="fill">
+      <mat-label>Fecha de Inscripción</mat-label>
+      <input
+        matInput
+        [matDatepicker]="pickerFecha"
+        [matDatepickerFilter]="noPermitirFechasFuturas"
+        formControlName="fechaInscripcionCurso"
+      />
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="pickerFecha"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #pickerFecha></mat-datepicker>
+      <mat-error
+        *ngIf="form.get('fechaInscripcionCurso')?.hasError('required')"
+      >
+        La fecha de inscripción es obligatoria
+      </mat-error>
+      <mat-error
+        *ngIf="form.get('fechaInscripcionCurso')?.hasError('fechaFutura')"
+      >
+        No se permiten fechas futuras.
+      </mat-error>
+    </mat-form-field>
 
-    
-    
-
-   <mat-form-field appearance="fill">
-  <mat-label>Fecha de Inscripción</mat-label>
-  <input matInput [matDatepicker]="pickerFecha" formControlName="fechaInscripcionCurso" />
-  <mat-datepicker-toggle matSuffix [for]="pickerFecha"></mat-datepicker-toggle>
-  <mat-datepicker #pickerFecha></mat-datepicker>
-  <mat-error *ngIf="form.get('fechaInscripcionCurso')?.hasError('required')">
-    La fecha de inscripción es obligatoria
-  </mat-error>
-</mat-form-field>
-
-<mat-form-field
-  appearance="fill"
-  class="form-control-progresoInscripcionCurso"
-  [ngClass]="{ shake: form.get('progresoInscripcionCurso')?.invalid && form.get('progresoInscripcionCurso')?.touched }"
->
-  <mat-label>Progreso</mat-label> 
-  <input matInput placeholder="Progreso" formControlName="progresoInscripcionCurso" />
-  <mat-error *ngIf="form.get('progresoInscripcionCurso')?.hasError('required')">
-    El progreso es obligatorio
-  </mat-error>
-</mat-form-field>
+    <mat-form-field
+      appearance="fill"
+      class="form-control-progresoInscripcionCurso"
+      [ngClass]="{
+        shake:
+          form.get('progresoInscripcionCurso')?.invalid &&
+          form.get('progresoInscripcionCurso')?.touched
+      }"
+    >
+      <mat-label>Progreso</mat-label>
+      <input
+        type="number"
+        min="1"
+        max="100"
+        matInput
+        placeholder="Progreso"
+        formControlName="progresoInscripcionCurso"
+      />
+      <mat-error
+        *ngIf="form.get('progresoInscripcionCurso')?.hasError('required')"
+      >
+        El progreso es obligatorio
+      </mat-error>
+      <mat-error *ngIf="form.get('progresoInscripcionCurso')?.hasError('min')">
+        El progreso debe ser al menos 1%
+      </mat-error>
+      <mat-error *ngIf="form.get('progresoInscripcionCurso')?.hasError('max')">
+        El progreso no puede superar el 100%
+      </mat-error>
+    </mat-form-field>
 
     <mat-form-field>
-        <mat-label>Curso</mat-label>
-        <mat-select formControlName="curso">
-          @for (food of listaCursos; track food) {
-          <mat-option [value]="food.idCurso">{{ food.tituloCurso }}</mat-option>
-          }
-        </mat-select>
-      </mat-form-field>
+      <mat-label>Curso</mat-label>
+      <mat-select formControlName="curso">
+        @for (food of listaCursos; track food) {
+        <mat-option [value]="food.idCurso">{{ food.tituloCurso }}</mat-option>
+        }
+      </mat-select>
+      <mat-error
+        *ngIf="form.get('curso')?.hasError('required')"
+      >
+        El curso es obligatorio
+      </mat-error>
+    </mat-form-field>
 
-      <mat-form-field>
-        <mat-label>Usuario</mat-label>
-        <mat-select formControlName="usuario">
-          @for (food of listaUsuarios; track food) {
-          <mat-option [value]="food.idUsuario">{{ food.nombreUsuario }}</mat-option>
-          }
-        </mat-select>
-      </mat-form-field>
+    <mat-form-field>
+      <mat-label>Usuario</mat-label>
+      <mat-select formControlName="usuario">
+        @for (food of listaUsuarios; track food) {
+        <mat-option [value]="food.idUsuario">{{
+          food.nombreUsuario
+        }}</mat-option>
+        }
+      </mat-select>
+      <mat-error
+        *ngIf="form.get('usuario')?.hasError('required')"
+      >
+        El usuario es obligatorio
+      </mat-error>
+    </mat-form-field>
     <div class="example-button-row">
       <button mat-raised-button color="primary" type="submit">Guardar</button>
-      <button mat-raised-button color="warn" type="button" (click)="cancelar()">Cancelar</button>
+      <button mat-raised-button color="warn" type="button" (click)="cancelar()">
+        Cancelar
+      </button>
     </div>
-
   </form>
 </div>
-
