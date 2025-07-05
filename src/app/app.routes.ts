@@ -226,6 +226,10 @@ export const routes: Routes = [
         path: 'registrar',
         component: InsertareditarinscripcioncursoComponent,
       },
+      {
+        path: 'ediciones/:id',
+        component: InsertareditarcursoComponent,
+      },
     ],
   },
 
