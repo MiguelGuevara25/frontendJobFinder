@@ -1,16 +1,8 @@
-/* Fondo general para resaltar el blur */
-body {
-  background: url('https://wallpapercave.com/wp/wp2786119.jpg') no-repeat center center fixed;
-  background-size: cover;
-  margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', sans-serif;
-}
 
 /* --------- Toolbar con efecto blur --------- */
 .toolbar-transparente {
   padding: 0 16px;
-  background-color: rgba(30, 30, 30, 0.5);
+  background-color: #5468ad;
   backdrop-filter: blur(8px); /* El efecto glass */
   color: white;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
@@ -22,48 +14,10 @@ body {
   align-items: center;
 }
 
-/* Botón del menú */
-.toolbar-transparente button[mat-icon-button] {
-  margin-right: 12px;
-}
-
-/* Texto del título */
-.toolbar-transparente span {
-  font-size: 1.2rem;
-  font-weight: 500; /* o 400 si lo quieres más fino aún */
-  color: white;
-}
-
-/* --------- Menú desplegable con blur --------- */
-.mat-menu-panel {
-  background-color: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(6px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-  border-radius: 10px;
-}
-
-/* Ítems del menú */
-.mat-menu-item {
-  font-size: 15px;
-  color: #333;
-  padding: 10px 16px;
-}
-
-/* Íconos en el menú */
-.mat-menu-item mat-icon {
-  margin-right: 10px;
-  color: #444;
-}
-
-/* Hover elegante */
-.mat-menu-item:hover {
-  background-color: rgba(0, 123, 255, 0.15);
-  color: #000;
-}
-
 
 /* Estilo para los botones "Foros" y "Gemini" */
 .toolbar-transparente button[mat-button] {
+  background-color: #43538a;
   color: white;
   font-weight: 500;
   text-transform: none;
@@ -74,3 +28,28 @@ body {
   padding: 6px 12px;
   transition: background-color 0.3s ease;
 }
+
+.toolbar-transparente button[mat-icon-button] mat-icon {
+  color: white; /* Cambia 'white' por el color que desees, por ejemplo, #FFD700 para dorado */
+}
+
+.toolbar-transparente button[mat-button]:hover {
+  background-color: #ffffff; /* Un azul pizarra oscuro para el hover */
+  /* Si el color del texto debe cambiar, añádelo aquí también */
+  color: #43538a;
+}
+.toolbar-transparente button[mat-button] {
+  background-color: #43538a; /* Un azul acero */
+  color: #ffffff; /* Asegúrate de que el texto contraste con el fondo */
+  font-weight: 500;
+  text-transform: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 6px;
+  padding: 6px 12px;
+  transition: background-color 0.3s ease;
+}
+
+
+

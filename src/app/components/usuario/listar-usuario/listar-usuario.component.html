@@ -2,7 +2,7 @@
   <h1 class="titulo-centrado">Lista de Usuarios</h1>
 </div>
 
-<div class="contenedor-tabla1">
+<div class="contenedor-tabla">
   <form class="formulario-estilizado">
     <div class="acciones-superiores">
       <mat-form-field appearance="outline" class="campo-busqueda">
@@ -14,6 +14,7 @@
       <button
         mat-raised-button
         color="primary"
+        class="boton-registrar"
         [routerLink]="'/usuarios/registrar'"
       >
         <mat-icon>person_add</mat-icon>
@@ -83,12 +84,8 @@
           Actualizar
         </th>
         <td mat-cell *matCellDef="let element" class="th-centrado">
-          <button
-            mat-icon-button
-            color="primary"
-            [routerLink]="['ediciones', element.idUsuario]"
-          >
-            <mat-icon>edit</mat-icon>
+          <button mat-icon-button color="primary" class="boton-editar" [routerLink]="['ediciones', element.idUsuario]">
+            <mat-icon class="color-icono">edit</mat-icon>
           </button>
         </td>
       </ng-container>
@@ -98,10 +95,11 @@
         <td mat-cell *matCellDef="let element" class="th-centrado">
           <button
             mat-icon-button
+            class="boton-eliminar"
             color="warn"
             (click)="eliminar(element.idUsuario)"
           >
-            <mat-icon>delete</mat-icon>
+            <mat-icon class="color-icono-eliminar">delete</mat-icon>
           </button>
         </td>
       </ng-container>
