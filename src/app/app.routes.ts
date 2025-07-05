@@ -43,7 +43,11 @@ import { InsertareditarpostulacionComponent } from './components/postulacion/ins
 import { ListarpostulacionComponent } from './components/postulacion/listarpostulacion/listarpostulacion.component';
 import { ListarofertadetrabajoComponent } from './components/ofertadetrabajo/listarofertadetrabajo/listarofertadetrabajo.component';
 import { Ofertadetrabajo } from './components/ofertadetrabajo/ofertadetrabajo.component';
+
 import { VerperfilComponent } from './components/usuario/verperfil/verperfil.component';
+
+import { ReportesComponent } from './components/reportes/reportes.component';
+
 
 
 
@@ -230,6 +234,10 @@ export const routes: Routes = [
         path: 'registrar',
         component: InsertareditarinscripcioncursoComponent,
       },
+      {
+        path: 'ediciones/:id',
+        component: InsertareditarcursoComponent,
+      },
     ],
   },
 
@@ -341,4 +349,10 @@ export const routes: Routes = [
       },
     ],
   },
+  {
+    path:'reportes',
+    component:ReportesComponent,
+   
+  }
+  
 ];
