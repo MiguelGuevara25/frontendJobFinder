@@ -31,14 +31,17 @@ export class ListarcursoComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8'];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   dataFiltradaPaginada: Curso[] = [];
+  hasData = false;
 
   constructor(private cS: CursoService, private snackBar: MatSnackBar) {}
   ngOnInit(): void {
     this.cS.list().subscribe((data) => {
+      this.hasData = data.length > 0;
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;
     });
     this.cS.getList().subscribe((data) => {
+      this.hasData = data.length > 0;
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;
     });

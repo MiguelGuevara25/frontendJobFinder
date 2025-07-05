@@ -3,7 +3,7 @@
 </div>
 
 <div class="contenedor-tabla">
-  <form class="formulario-estilizado">
+  <form class="formulario-estilizado" *ngIf="hasData; else sinDatos">
     <div class="acciones-superiores">
       <mat-form-field appearance="outline" class="campo-busqueda">
         <mat-label>Buscar</mat-label>
@@ -101,4 +101,10 @@
       </mat-paginator>
     </div>
   </form>
+  <ng-template #sinDatos>
+      <div class="no-data">
+        <mat-icon class="no-data-icon">info_outline</mat-icon>
+        <p class="no-data-message">No hay certificados registrados.</p>
+      </div>
+    </ng-template>
 </div>
