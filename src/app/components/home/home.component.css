@@ -177,3 +177,92 @@ button {
 .self-start {
   align-self: flex-start;
 }
+
+/* home.component.css */
+
+/* Estilos para el contenedor flotante de la derecha (Gemini) */
+.floating-button-right {
+  position: fixed;
+  bottom: 20px;
+  right: 20px; /* Posicionado a la derecha */
+  z-index: 999; /* Puede ser el mismo o diferente que el de la izquierda */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  border-radius: 50%; /* Esto hará que el contenedor sea circular */
+  background-color: #43538a; /* Color de fondo del botón (azul primario) */
+  display: flex; /* Para centrar el icono */
+  justify-content: center; /* Centrar horizontalmente el icono */
+  align-items: center; /* Centrar verticalmente el icono */
+  width: 56px; /* Ancho del círculo */
+  height: 56px; /* Alto del círculo */
+  transition: background-color 0.3s ease; /* Transición para el hover */
+}
+
+
+/* Estilos para el botón mat-icon-button dentro del contenedor flotante derecho */
+.floating-button-right button[mat-icon-button] {
+  background-color: transparent; /* Fondo transparente para que el color lo dé el div padre */
+  color: white; /* Color del icono */
+  width: 100%; /* El botón ocupa todo el contenedor circular */
+  height: 100%;
+  border-radius: 50%; /* Asegura que el botón también sea circular si es necesario */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0; /* Sin padding interno en el botón */
+}
+
+.floating-button-right button[mat-icon-button] mat-icon {
+  font-size: 28px; /* Tamaño del icono */
+  width: 28px;
+  height: 28px;
+  color: #ffffff; /* Color del icono */
+}
+
+/* Efecto hover para el botón flotante de la derecha */
+.floating-button-right:hover {
+  background-color: #283253; /* Color de fondo más oscuro al pasar el ratón */
+}
+
+/* ------------------------------------------------------------------------- */
+
+/* Estilos para el contenedor flotante de la izquierda (Foros) */
+.floating-button-left {
+  position: fixed;
+  bottom: 20px;
+  left: 20px; /* Posicionado a la izquierda */
+  z-index: 999;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  border-radius: 50%; /* Esto hará que el contenedor sea circular */
+  background-color: #ffffff; /* Color de fondo del botón (azul secundario) */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 56px; /* Ancho del círculo */
+  height: 56px; /* Alto del círculo */
+  transition: background-color 0.3s ease;
+}
+
+/* Estilos para el botón mat-icon-button dentro del contenedor flotante izquierdo */
+.floating-button-left button[mat-icon-button] {
+  background-color: transparent;
+  color: #43538a; /* Color del icono (el azul oscuro de tu paleta) */
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+
+.floating-button-left button[mat-icon-button] mat-icon {
+  font-size: 28px; /* Tamaño del icono */
+  width: 28px;
+  height: 28px;
+  color: #43538a; /* Color del icono */
+}
+
+/* Efecto hover para el botón flotante de la izquierda */
+.floating-button-left:hover {
+  background-color: #9A9492; /* Un tono más oscuro del secundario al pasar el ratón */
+}
