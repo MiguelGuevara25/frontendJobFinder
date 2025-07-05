@@ -1,8 +1,27 @@
 <mat-toolbar class="toolbar-transparente">
-  <button mat-icon-button [matMenuTriggerFor]="mainMenu">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <a routerLink="/home" style="margin-right: auto; text-decoration: none; color: inherit; cursor: pointer; font-size: 16px;">Menú Principal</a>
+  <div class="toolbar-izquierda">
+    <button mat-icon-button [matMenuTriggerFor]="mainMenu">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <a
+      routerLink="/home"
+      style="
+        margin-right: auto;
+        text-decoration: none;
+        color: inherit;
+        cursor: pointer;
+        font-size: 16px;
+      "
+      >Menú Principal</a
+    >
+  </div>
+
+  <div class="toolbar-derecha">
+    <button mat-button routerLink="/reportes">
+      <mat-icon>assessment</mat-icon>
+      Reportes
+    </button>
+  </div>
 </mat-toolbar>
 
 <mat-menu #mainMenu="matMenu">
@@ -49,13 +68,13 @@
   </button>
 
   <!-- Oferta de Trabajo -->
-   <button mat-menu-item routerLink="/ofertadetrabajo">
+  <button mat-menu-item routerLink="/ofertadetrabajo">
     <mat-icon>work</mat-icon>
     <span>Oferta de Trabajo</span>
   </button>
 
   <!-- Postulacion -->
-   <button mat-menu-item routerLink="/Postulacion">
+  <button mat-menu-item routerLink="/Postulacion">
     <mat-icon>how_to_reg</mat-icon>
     <span>Postulacion</span>
   </button>
@@ -95,13 +114,7 @@
     <mat-icon>info</mat-icon>
     <span>Detalles</span>
   </button>
-
- 
 </mat-menu>
-
-
-
-
 
 <mat-menu #menuCertificado="matMenu">
   <button mat-menu-item>Listar</button>
@@ -159,4 +172,3 @@
     Registrar
   </button>
 </mat-menu>
-

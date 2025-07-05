@@ -51,5 +51,24 @@
   transition: background-color 0.3s ease;
 }
 
+/* Hace que el contenido se reparta bien en la barra */
+.toolbar-transparente {
+  justify-content: space-between;
+}
+
+/* Parte izquierda (menú + texto) */
+.toolbar-izquierda {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Parte derecha (botón Reportes) */
+.toolbar-derecha {
+  display: flex;
+  align-items: center;
+}
+
+
 
 
