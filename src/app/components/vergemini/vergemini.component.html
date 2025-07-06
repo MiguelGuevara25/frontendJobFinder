@@ -1,5 +1,17 @@
 <div class="gemini-container">
-  <h1 class="gemini-title">Asistente Gemini AI</h1>
+  <div class="title-container">
+    <button
+      mat-raised-button
+      color="warn"
+      class="boton-personalizado"
+      type="button"
+      (click)="cancelar()"
+    >
+      <mat-icon>arrow_back</mat-icon>
+      Volver
+    </button>
+    <h1 class="gemini-title">Asistente Gemini AI</h1>
+  </div>
 
   <mat-card class="input-card">
     <mat-card-content>
@@ -42,7 +54,10 @@
     </mat-card-content>
   </mat-card>
 
-  <mat-card *ngIf="!isLoading && !respuesta && !prompt" class="initial-message-card">
+  <mat-card
+    *ngIf="!isLoading && !respuesta && !prompt"
+    class="initial-message-card"
+  >
     <mat-card-content>
       <p>¡Hola! Hazme una pregunta y te responderé.</p>
     </mat-card-content>

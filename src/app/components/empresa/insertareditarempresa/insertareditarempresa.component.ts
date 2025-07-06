@@ -8,7 +8,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { Empresa } from '../../../models/empresa';
 import { EmpresaService } from '../../../services/empresa.service';
-
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
@@ -28,8 +27,7 @@ export class InsertareditarempresaComponent implements OnInit {
 
 
   form: FormGroup = new FormGroup({});
-  Empresa: Empresa = new Empresa();
-
+  empresa: Empresa = new Empresa();
 
   id: number = 0;
   edicion: boolean = false;
@@ -53,80 +51,56 @@ export class InsertareditarempresaComponent implements OnInit {
       mail: ['', Validators.required],
       location: ['', Validators.required],
     });
-    aceptar() {
-      if (this.form.valid) {
-        this.Empresa.id = this.form.value.idContrato;
-        this.Empresa.name = this.form.value.startDate;
-        this.Empresa.description = this.form.value.endDate;
-        this.Empresa.sector = this.form.value.salary;
-        this.Empresa.website = this.form.value.contractType;
-        this.Empresa.address = this.form.value.address;
-
-
-  this.form = this.formBuilder.group({
-  id:[''],
-  name:['', Validators.required],
-  description:['', Validators.required],
-  sector: ['', Validators.required],
-  website: ['', Validators.required],
-  address:['', Validators.required],
-  telephone:['', Validators.required],
-  mail: ['', Validators.required],
-  location: ['', Validators.required],
-    });
-}
-aceptar() {
+  }
+  aceptar() {
     if (this.form.valid) {
-      this.Empresa.id = this.form.value.idContrato;
-      this.Empresa.name = this.form.value.startDate;
-      this.Empresa.description = this.form.value.endDate;
-      this.Empresa.sector = this.form.value.salary;
-      this.Empresa.website = this.form.value.contractType;
-      this.Empresa.address = this.form.value.address;
-      this.Empresa.telephone = this.form.value.telephone;
-      this.Empresa.mail = this.form.value.mail;
-      this.Empresa.location = this.form.value.location;
+      this.empresa.id = this.form.value.idContrato;
+      this.empresa.name = this.form.value.startDate;
+      this.empresa.description = this.form.value.endDate;
+      this.empresa.sector = this.form.value.salary;
+      this.empresa.website = this.form.value.contractType;
+      this.empresa.address = this.form.value.address;
 
       if (this.edicion) {
-        this.eS.update(this.Empresa).subscribe(() => {
+        this.eS.update(this.empresa).subscribe(() => {
           this.eS.list().subscribe((data) => {
             this.eS.setList(data);
           });
         });
       } else {
-        this.eS.insert(this.Empresa).subscribe(() => {
+        this.eS.insert(this.empresa).subscribe(() => {
           this.eS.list().subscribe((data) => {
             this.eS.setList(data);
-
           });
-        }
-        this.router.navigate(['contratos']);
+        })
+        this.router.navigate(['empresa']);
       }
-
-      this.router.navigate(['empresa']);
     }
   }
-init() {
+  init() {
     if (this.edicion) {
       this.eS.listId(this.id).subscribe((data) => {
         this.form = new FormGroup({
-           id:new FormControl(data.id),
-           name: new FormControl(data.name),
-           description: new FormControl(data.description),
-           sector:new FormControl(data.sector),
-           website: new FormControl(data.website),
-           address: new FormControl(data.address),
-           telephone:new FormControl(data.telephone),
-           mail: new FormControl(data.mail),
-           location: new FormControl(data.location),
-           password:  new FormControl(data.password),
+          id: new FormControl(data.id),
+          name: new FormControl(data.name),
+          description: new FormControl(data.description),
+          sector: new FormControl(data.sector),
+          website: new FormControl(data.website),
+          address: new FormControl(data.address),
+          telephone: new FormControl(data.telephone),
+          mail: new FormControl(data.mail),
+          location: new FormControl(data.location),
+          password: new FormControl(data.password),
         });
       });
-
     }
-
-
+  }
+  cancelar() {
+    this.router.navigate(['empresa']);
+  }
 }
+
+
 
 
 

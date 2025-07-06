@@ -8,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-vergemini',
@@ -29,7 +30,10 @@ export class VergeminiComponent {
   respuesta: string = '';
   isLoading = false;
 
-  constructor(private geminiService: GeminiService) {}
+  constructor(
+    private geminiService: GeminiService,
+    private router: Router,
+  ) { }
 
   enviarPrompt() {
     if (!this.prompt.trim()) {
@@ -48,6 +52,10 @@ export class VergeminiComponent {
         this.isLoading = false;
       },
     });
+  }
+
+  cancelar() {
+    this.router.navigate(['home']);
   }
 
 }

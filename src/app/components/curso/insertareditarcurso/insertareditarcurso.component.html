@@ -4,83 +4,130 @@
 </div>
 
 <div class="contenedor-tabla">
-<form *ngIf="form" [formGroup]="form" (submit)="aceptar()" class="formulario-estilizado">
-    @if (edicion) {
+  <form [formGroup]="form" (ngSubmit)="aceptar()" class="formulario-estilizado">
     <mat-form-field
-      appearance="fill"
-      class="form-control-id"
-      [ngClass]="{ shake: form.get('idCurso')?.invalid && form.get('idCurso')?.touched }"
+      *ngIf="edicion"
     >
       <mat-label>ID</mat-label>
-      <input matInput placeholder="ID" formControlName="idCurso" />
-      @if (form.get('idCurso')?.hasError('required')) {
-      <mat-error>El código es obligatorio</mat-error>
-      }
+      <input matInput formControlName="idCurso" />
+      <mat-error *ngIf="form.get('idCurso')?.hasError('required')">
+        El código es obligatorio
+      </mat-error>
     </mat-form-field>
-    }
 
+    <!-- Campo: título del curso -->
     <mat-form-field
-      appearance="fill"
-      class="form-control-certificado"
-      [ngClass]="{ shake: form.get('tituloCurso')?.invalid && form.get('tituloCurso')?.touched }"
     >
       <mat-label>Curso</mat-label>
-      <input matInput placeholder="Nombre del curso" formControlName="tituloCurso" />
-      @if (form.get('tituloCurso')?.hasError('required')) {
-      <mat-error>El curso es obligatorio</mat-error>
-      }
+      <input
+        matInput
+        placeholder="Nombre del curso"
+        formControlName="tituloCurso"
+        maxlength="100"
+        #cursoInput
+      />
+      <mat-hint align="end">
+        {{ cursoInput?.value?.length ?? 0 }} / 100
+      </mat-hint>
+      <mat-error *ngIf="form.get('tituloCurso')?.hasError('required')">
+        El curso es obligatorio
+      </mat-error>
+      <mat-error *ngIf="form.get('tituloCurso')?.hasError('minlength')">
+        Debe tener mínimo 3 caracteres
+      </mat-error>
+      <mat-error *ngIf="form.get('tituloCurso')?.hasError('maxlength')">
+        Debe tener máximo 100 caracteres
+      </mat-error>
     </mat-form-field>
 
-    <mat-form-field
-      appearance="fill"
-      class="form-control-entidad"
-      [ngClass]="{ shake: form.get('descripcionCurso')?.invalid && form.get('descripcionCurso')?.touched }"
-    >
-      <mat-label>Descripcion curso</mat-label>
-      <input matInput placeholder="Descripcion curso" formControlName="descripcionCurso" />
-      @if (form.get('descripcionCurso')?.hasError('required')) {
-      <mat-error>La descripcion del curso es obligatoria</mat-error>
-      }
+    <!-- Campo: descripción -->
+    <mat-form-field>
+      <mat-label>Descripción curso</mat-label>
+      <input
+        matInput
+        placeholder="Descripción curso"
+        formControlName="descripcionCurso"
+        maxlength="200"
+        #descripcionInput
+      />
+      <mat-hint align="end">
+        {{ descripcionInput.value.length || 0 }} / 200
+      </mat-hint>
+      <mat-error *ngIf="form.get('descripcionCurso')?.hasError('required')">
+        La descripción del curso es obligatoria
+      </mat-error>
+      <mat-error *ngIf="form.get('descripcionCurso')?.hasError('minlength')">
+        Debe tener mínimo 3 caracteres
+      </mat-error>
+      <mat-error *ngIf="form.get('descripcionCurso')?.hasError('maxlength')">
+        Debe tener máximo 200 caracteres
+      </mat-error>
     </mat-form-field>
 
+    <!-- Campo: plataforma -->
     <mat-form-field
-      appearance="fill"
-      class="form-control-entidad"
-      [ngClass]="{ shake: form.get('plataformaCurso')?.invalid && form.get('plataformaCurso')?.touched }"
     >
       <mat-label>Plataforma curso</mat-label>
-      <input matInput placeholder="Plataforma curso" formControlName="plataformaCurso" />
-      @if (form.get('plataformaCurso')?.hasError('required')) {
-      <mat-error>La plataforma del curso es obligatoria</mat-error>
-      }
+      <input
+        matInput
+        placeholder="Plataforma curso"
+        formControlName="plataformaCurso"
+        maxlength="100"
+        #plataformaInput
+      />
+      <mat-hint align="end">
+        {{ plataformaInput.value.length || 0 }} / 100
+      </mat-hint>
+      <mat-error *ngIf="form.get('plataformaCurso')?.hasError('required')">
+        La plataforma del curso es obligatoria
+      </mat-error>
+      <mat-error *ngIf="form.get('plataformaCurso')?.hasError('minlength')">
+        Debe tener mínimo 3 caracteres
+      </mat-error>
+      <mat-error *ngIf="form.get('plataformaCurso')?.hasError('maxlength')">
+        Debe tener máximo 100 caracteres
+      </mat-error>
     </mat-form-field>
 
-    
+    <!-- Campo: link -->
     <mat-form-field
-      appearance="fill"
-      class="form-control-entidad"
-      [ngClass]="{ shake: form.get('linkCurso')?.invalid && form.get('linkCurso')?.touched }"
     >
       <mat-label>Link curso</mat-label>
       <input matInput placeholder="Link curso" formControlName="linkCurso" />
-      @if (form.get('linkCurso')?.hasError('required')) {
-      <mat-error>El link del curso es obligatoria</mat-error>
-      }
+      <mat-error *ngIf="form.get('linkCurso')?.hasError('required')">
+        El link del curso es obligatorio
+      </mat-error>
+      <mat-error *ngIf="form.get('linkCurso')?.hasError('pattern')">
+        El link debe empezar con <strong>www.</strong> y terminar en
+        <strong>.com</strong>
+      </mat-error>
     </mat-form-field>
 
-    <mat-form-field>
-        <mat-label>Empresa</mat-label>
-        <mat-select formControlName="empresa">
-          @for (food of listaEmpresas; track food) {
-          <mat-option [value]="food.id">{{ food.name }}</mat-option>
-          }
-        </mat-select>
-      </mat-form-field>
+    <!-- Campo: empresa -->
+    <mat-form-field appearance="fill">
+      <mat-label>Empresa</mat-label>
+      <mat-select formControlName="empresa">
+        <mat-option *ngFor="let food of listaEmpresas" [value]="food.id">
+          {{ food.name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('empresa')?.hasError('required')">
+        Es obligatorio elegir una empresa
+      </mat-error>
+    </mat-form-field>
 
+    <!-- Botones -->
     <div class="example-button-row">
       <button mat-raised-button color="primary" type="submit">Guardar</button>
-      <button mat-raised-button color="warn" type="button" (click)="cancelar()">Cancelar</button>
+      <button
+        mat-raised-button
+        color="warn"
+        type="button"
+        (click)="cancelar()"
+        style="margin-left: 16px"
+      >
+        Cancelar
+      </button>
     </div>
-
   </form>
 </div>

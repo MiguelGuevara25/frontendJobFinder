@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, RouterOutlet } from '@angular/router';
-import { ListarofertadetrabajoComponent } from '../certificado/listarcertificado/listarcertificado.component';
+import { ListarofertadetrabajoComponent } from './listarofertadetrabajo/listarofertadetrabajo.component';
 
 @Component({
   selector: 'app-ofertadetrabajo',

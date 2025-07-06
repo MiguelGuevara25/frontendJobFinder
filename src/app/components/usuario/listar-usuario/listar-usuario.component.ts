@@ -4,12 +4,12 @@ import { Usuario } from '../../../models/usuario';
 import { UsuarioService } from '../../../services/usuario.service';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-listar-usuario',
@@ -36,9 +36,6 @@ export class ListarUsuarioComponent implements OnInit, AfterViewInit {
     'c5',
     'c6',
     'c7',
-    'c8',
-    'c9',
-    'c10',
   ];
 
 

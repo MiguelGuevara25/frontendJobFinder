@@ -3,9 +3,9 @@ import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { Ofertadetrabajo } from '../ofertadetrabajo.component';
 import { OfertadetrabajoService } from '../../../services/ofertadetrabajo.service';
 import { RouterLink } from '@angular/router';
+import { Ofertadetrabajo } from '../../../models/ofertadetrabajo';
 
 @Component({
   selector: 'app-listarofertadetrabajo',
@@ -13,7 +13,7 @@ import { RouterLink } from '@angular/router';
     MatTableModule,
     CommonModule,
     MatButtonModule,
-    RouterLink,
+    // RouterLink,
     MatIconModule,
   ],
   templateUrl: './listarofertadetrabajo.component.html',

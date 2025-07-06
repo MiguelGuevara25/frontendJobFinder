@@ -2,17 +2,18 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Certificado } from '../models/certificado';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { CantidadCertificadosPorAnioDTO } from '../models/CantidadCertificadosPorAnioDTO';
 
 const base_url = environment.base;
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CertificadoService {
   private url = `${base_url}/certificados`;
   private listaCambio = new Subject<Certificado[]>();
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
   list() {
     return this.http.get<Certificado[]>(this.url);
   }
@@ -34,5 +35,10 @@ export class CertificadoService {
   delete(id: number) {
     return this.http.delete(`${this.url}/${id}`);
   }
-
+  mostrarCertificadosVigentes() {
+    return this.http.get<Certificado[]>(`${this.url}/vigentes`);
+  }
+  getcantidadCertificados(): Observable<CantidadCertificadosPorAnioDTO[]> {
+    return this.http.get<CantidadCertificadosPorAnioDTO[]>(`${this.url}/cantidades`);
+  }
 }
