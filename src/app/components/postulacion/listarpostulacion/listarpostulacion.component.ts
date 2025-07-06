@@ -29,7 +29,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class ListarpostulacionComponent {
   dataSource: MatTableDataSource<Postulacion> = new MatTableDataSource();
-  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5'];
+  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7'];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 

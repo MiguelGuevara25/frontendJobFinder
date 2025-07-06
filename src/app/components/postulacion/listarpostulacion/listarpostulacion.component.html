@@ -53,6 +53,37 @@
       </td>
     </ng-container>
 
+    <ng-container matColumnDef="c6">
+      <th mat-header-cell *matHeaderCellDef class="th-centrado">Actualizar</th>
+      <td mat-cell *matCellDef="let element" class="th-centrado">
+        <button
+          mat-icon-button
+          color="primary"
+          class="boton-editar"
+          [routerLink]="['/postulacion/ediciones', element.id]"
+          aria-label="Editar estudio"
+        >
+          <mat-icon class="color-icono">edit</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="c7">
+      <th mat-header-cell *matHeaderCellDef class="th-centrado">Eliminar</th>
+      <td mat-cell *matCellDef="let element" class="th-centrado">
+        <button
+          type="button"
+          mat-icon-button
+          class="boton-eliminar"
+          color="warn"
+          (click)="eliminar(element.id)"
+          aria-label="Eliminar estudio"
+        >
+          <mat-icon class="color-icono-eliminar">delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>

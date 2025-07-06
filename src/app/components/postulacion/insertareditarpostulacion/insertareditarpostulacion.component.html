@@ -1,100 +1,111 @@
-<div class="container">
-  <div style="text-align: center; margin: 5%">
-    <h1>Registro de Postulacion</h1>
-  </div>
+<div class="contenedor-titulo">
+  <h1 class="titulo-centrado">
+    {{ edicion ? "Actualizar Estudio" : "Registro de Postulación" }}
+  </h1>
+</div>
 
-  <div style="text-align: center; margin: 5%">
-    <form [formGroup]="form" (submit)="aceptar()">
-      <!-- Campo ID  -->
-      <mat-form-field class="example-full-width" *ngIf="edicion">
+<div class="contenedor-tabla">
+  <form [formGroup]="form" (ngSubmit)="aceptar()" class="formulario-estilizado">
+    <!-- Campo ID (condicional) -->
+    <div *ngIf="edicion">
+      <mat-form-field
+        appearance="fill"
+        class="form-control-id"
+        [ngClass]="{
+          shake: form.get('id')?.invalid && form.get('id')?.touched
+        }"
+      >
         <mat-label>ID</mat-label>
-        <input matInput formControlName="idEmpresa" />
-        <mat-error *ngIf="form.get('idEmpresa')?.hasError('required')">
+        <input matInput placeholder="ID" formControlName="id" />
+        <mat-error *ngIf="form.get('id')?.hasError('required')">
           El código es obligatorio
         </mat-error>
       </mat-form-field>
+    </div>
 
-      <br />
+    <!-- Campo Fecha -->
+    <mat-form-field
+      class="form-control-date"
+      [ngClass]="{
+        shake: form.get('date')?.invalid && form.get('date')?.touched
+      }"
+    >
+      <mat-label>Fecha</mat-label>
+      <input
+        matInput
+        [matDatepicker]="pickerInicio"
+        formControlName="date"
+        readonly
+      />
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="pickerInicio"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #pickerInicio></mat-datepicker>
+      <mat-error *ngIf="form.get('date')?.hasError('required')">
+        La fecha es obligatoria
+      </mat-error>
+    </mat-form-field>
 
-      <!-- Campo Dia -->
-      <mat-form-field
-        appearance="fill"
-        class="form-control-date"
-        [ngClass]="{
-          shake: form.get('date')?.invalid && form.get('date')?.touched
-        }"
-      >
-        <mat-label>Dia</mat-label>
-        <input matInput placeholder="date" formControlName="date" />
-        @if (form.get('date')?.hasError('required')) {
-        <mat-error>El dia es obligatorio</mat-error>
+    <mat-form-field
+      [ngClass]="{
+        shake: form.get('state')?.invalid && form.get('state')?.touched
+      }"
+    >
+      <mat-label>Estado</mat-label>
+      <mat-select formControlName="state">
+        @for (estado of estados; track estado) {
+        <mat-option [value]="estado.value">{{ estado.viewValue }}</mat-option>
         }
-      </mat-form-field>
+      </mat-select>
 
-      <br />
+      <mat-error *ngIf="form.get('state')?.hasError('required')">
+        El estado es obligatoria
+      </mat-error>
+    </mat-form-field>
 
-      <!-- Campo Salary -->
-
-      <mat-form-field
-        appearance="fill"
-        class="form-control-salary"
-        [ngClass]="{
-          shake: form.get('Salary')?.invalid && form.get('Descripcion')?.touched
-        }"
-      >
-        <mat-label>Descripcion de Salario</mat-label>
-        <input matInput placeholder="Salario" formControlName="state" />
-        @if (form.get('state')?.hasError('required')) {
-        <mat-error>El Salarioes obligatorio</mat-error>
+    <mat-form-field
+      [ngClass]="{
+        shake:
+          form.get('ofertaTrabajo')?.invalid &&
+          form.get('ofertaTrabajo')?.touched
+      }"
+    >
+      <mat-label>Estado</mat-label>
+      <mat-select formControlName="ofertaTrabajo">
+        @for (ofertaTrabajo of listOfertaTrabajo; track ofertaTrabajo) {
+        <mat-option [value]="ofertaTrabajo.id">{{
+          ofertaTrabajo.name
+        }}</mat-option>
         }
-      </mat-form-field>
+      </mat-select>
 
-      <br />
+      <mat-error *ngIf="form.get('ofertaTrabajo')?.hasError('required')">
+        El estado es obligatoria
+      </mat-error>
+    </mat-form-field>
 
-      <!-- Campo Tipo de Contrato-->
+    <div class="favorito-radio grupo-radio">
+      <mat-label class="titulo-radio">¿Seleccionado?</mat-label>
+      <mat-radio-group formControlName="acceptedcandidate">
+        <mat-radio-button [value]="true">Sí</mat-radio-button>
+        <mat-radio-button [value]="false">No</mat-radio-button>
+      </mat-radio-group>
+    </div>
 
-      <mat-form-field
-        appearance="fill"
-        class="form-control-contractType"
-        [ngClass]="{
-          shake:
-            form.get('contracType')?.invalid && form.get('contracType')?.touched
-        }"
+    <!-- Botón Guardar -->
+    <div class="example-button-row">
+      <button mat-raised-button color="primary">Guardar</button>
+      <button
+        mat-raised-button
+        color="warn"
+        type="button"
+        (click)="cancelar()"
+        style="margin-left: 16px"
       >
-        <mat-label>Tipo de Contrato</mat-label>
-        <input
-          matInput
-          placeholder="contracType"
-          formControlName="acceptedcandidate"
-        />
-        @if (form.get('acceptedcandidate')?.hasError('required')) {
-        <mat-error>El tipo de contrato es obligatorio</mat-error>}
-      </mat-form-field>
-      <br />
-
-      <br />
-      <mat-form-field class="example-full-width">
-        <mat-label>Proveedor</mat-label>
-        <input matInput formControlName="proveedor" />
-      </mat-form-field>
-      <br />
-      <mat-form-field>
-        <mat-label>Aplicaciones</mat-label>
-        <mat-select formControlName="apli">
-          @for (food of listaofertadetrabajo; track food) {
-          <mat-option [value]="food.id">{{ food.location }}</mat-option>
-          }
-        </mat-select>
-      </mat-form-field>
-      <br />
-
-      <!-- Botón Aceptar-->
-      <button mat-raised-button color="primary" type="submit">Aceptar</button>
-
-      <!-- Botón Cancelar-->
-      <button mat-raised-button color="warn" type="button" (click)="cancelar()">
         Cancelar
       </button>
-    </form>
-  </div>
+    </div>
+  </form>
 </div>

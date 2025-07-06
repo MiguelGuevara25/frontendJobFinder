@@ -76,7 +76,6 @@ export class InsertareditarofertadetrabajoComponent {
     });
 
     this.eS.list().subscribe((data) => {
-      console.log(data);
       this.listEmpresa = data;
     });
   }

@@ -53,6 +53,7 @@ import { MapaComponent } from './components/mapa/mapa.component';
 import { UsuariosactivosComponent } from './components/reportes/usuariosactivos/usuariosactivos.component';
 import { TotalregistroscursosComponent } from './components/reportes/totalregistroscursos/totalregistroscursos.component';
 import { PromedioinscripcioncursosComponent } from './components/reportes/promedioinscripcioncursos/promedioinscripcioncursos.component';
+import { ContratosactivosComponent } from './components/reportes/contratosactivos/contratosactivos.component';
 
 export const routes: Routes = [
   //Ejecucion Inicial
@@ -103,6 +104,9 @@ export const routes: Routes = [
       },
       {
         path: 'activosusuarios', component: UsuariosactivosComponent
+      },
+      {
+        path: 'contratosactivos', component: ContratosactivosComponent
       },
     ],
   },
