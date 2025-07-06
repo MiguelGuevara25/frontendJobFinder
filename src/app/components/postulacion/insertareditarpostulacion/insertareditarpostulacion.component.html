@@ -82,7 +82,7 @@
         <mat-label>Aplicaciones</mat-label>
         <mat-select formControlName="apli">
           @for (food of listaofertadetrabajo; track food) {
-          <mat-option [value]="food.id">{{ food.location}}</mat-option>
+          <mat-option [value]="food.id">{{ food.location }}</mat-option>
           }
         </mat-select>
       </mat-form-field>
@@ -96,6 +96,5 @@
         Cancelar
       </button>
     </form>
-      
   </div>
 </div>

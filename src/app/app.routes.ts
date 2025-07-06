@@ -291,7 +291,7 @@ export const routes: Routes = [
 
   //Enrutamiento de Postulacion
   {
-    path: 'Postulacion',
+    path: 'postulacion',
     component: Postulacion,
     children: [
       {

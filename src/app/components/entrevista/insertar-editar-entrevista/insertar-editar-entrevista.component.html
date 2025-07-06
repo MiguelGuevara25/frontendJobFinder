@@ -71,6 +71,10 @@
           }}</mat-option>
           }
         </mat-select>
+
+        <mat-error *ngIf="form.get('usuario')?.hasError('required')">
+          El usuario es obligatorio
+        </mat-error>
       </mat-form-field>
 
       <br />

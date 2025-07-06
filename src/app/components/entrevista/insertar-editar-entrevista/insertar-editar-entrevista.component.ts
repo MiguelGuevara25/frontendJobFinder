@@ -60,7 +60,7 @@ export class InsertarEditarEntrevistaComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      idEntrevista: [''],
+      id: [''],
       date: ['', Validators.required],
       hour: ['', Validators.required],
       postulacion: ['', Validators.required],
@@ -86,9 +86,13 @@ export class InsertarEditarEntrevistaComponent implements OnInit {
 
   aceptar() {
     if (this.form.valid) {
-      this.entrevista.id = this.form.value.idEntrevista;
+      console.log(Object.values(this.form.value));
+
+      this.entrevista.id = this.form.value.id;
       this.entrevista.date = this.form.value.date;
-      this.entrevista.hour = this.form.value.hour;
+      const horaDate: Date = this.form.value.hour;
+      const horaString = horaDate.toTimeString().split(' ')[0]; // convierte a "HH:mm:ss"
+      this.entrevista.hour = horaString;
       this.entrevista.modality = this.form.value.modality;
       this.entrevista.result = this.form.value.result;
 
@@ -113,7 +117,7 @@ export class InsertarEditarEntrevistaComponent implements OnInit {
     if (this.edicion) {
       this.eS.listId(this.id).subscribe((data) => {
         this.form = new FormGroup({
-          idEntrevista: new FormControl(data.id),
+          id: new FormControl(data.id),
           date: new FormControl(data.date),
           hour: new FormControl(data.hour),
           modality: new FormControl(data.modality),
