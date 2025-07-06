@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-insertareditar',
@@ -28,7 +29,8 @@ export class InsertareditarusuarioComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private location: Location
   ) { }
 
   ngOnInit(): void {
@@ -110,5 +112,9 @@ export class InsertareditarusuarioComponent implements OnInit {
   }
   cancelar() {
     this.router.navigate(['usuarios']);
+  }
+
+  volver() {
+    this.location.back(); // ← Esto te lleva a la página anterior
   }
 }

@@ -1,5 +1,5 @@
 <div class="contenedor-titulo">
-  <h1 class="titulo-centrado">Lista de Usuarios</h1>
+  <h1 class="titulo-centrado">Lista de Usuarios Activos</h1>
 </div>
 
 <div class="contenedor-tabla">
@@ -10,6 +10,18 @@
         <mat-icon matPrefix>search</mat-icon>
         <input matInput (keyup)="filtrar($event)" />
       </mat-form-field>
+
+      <div class="spacer"></div>
+
+      <button
+        mat-raised-button
+        color="primary"
+        class="boton-registrar"
+        [routerLink]="'/usuarios'"
+      >
+        <mat-icon>list</mat-icon>
+        Ver Todos
+      </button>
 
       <button
         mat-raised-button
@@ -68,7 +80,7 @@
             mat-icon-button
             color="primary"
             class="boton-editar"
-            [routerLink]="['ediciones', element.idUsuario]"
+            [routerLink]="['/usuarios/ediciones', element.idUsuario]"
           >
             <mat-icon class="color-icono">edit</mat-icon>
           </button>
