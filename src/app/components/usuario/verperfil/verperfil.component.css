@@ -98,3 +98,13 @@ mat-card-content p mat-icon {
   background-color: #ffffff !important; /* Azul Bootstrap */
   color: #283253!important;
 }
+
+.titulo-detalles {
+  text-align: center;
+  margin-top: 20px;
+}
+
+table {
+  width: 100%;
+  margin-top: 15px;
+}
