@@ -3,107 +3,112 @@
 </div>
 
 <div class="contenedor-tabla">
-  <div class="acciones-superiores">
-    <mat-form-field appearance="outline" class="campo-busqueda">
-      <mat-label>Buscar</mat-label>
-      <mat-icon matPrefix>search</mat-icon>
-      <input matInput (keyup)="filtrar($event)" />
-    </mat-form-field>
-    <button
-      mat-raised-button
-      color="primary"
-      [routerLink]="'/estudios/insertar'"
-    >
-      <mat-icon>add</mat-icon>
-      <mat-icon>school</mat-icon>
-      Registrar
-    </button>
-  </div>
-  
-  <table
-    mat-table
-    [dataSource]="dataSource"
-    class="mat-elevation-z8 tabla-estilizada"
-  >
-    <ng-container matColumnDef="c1">
-      <th mat-header-cell *matHeaderCellDef class="th-centrado">ID</th>
-      <td mat-cell *matCellDef="let element" class="th-centrado">
-        {{ element.id }}
-      </td>
-    </ng-container>
+  <form class="formulario-estilizado">
+    <div class="acciones-superiores">
+      <mat-form-field appearance="outline" class="campo-busqueda">
+        <mat-label>Buscar</mat-label>
+        <mat-icon matPrefix>search</mat-icon>
+        <input matInput (keyup)="filtrar($event)" />
+      </mat-form-field>
 
-    <ng-container matColumnDef="c2">
-      <th mat-header-cell *matHeaderCellDef class="th-centrado">
-        Titulo obtenido
-      </th>
-      <td mat-cell *matCellDef="let element" class="th-centrado">
-        {{ element.title_obtained }}
-      </td>
-    </ng-container>
+      <div class="spacer"></div>
 
-    <ng-container matColumnDef="c3">
-      <th mat-header-cell *matHeaderCellDef class="th-centrado">
-        Centro de estudio
-      </th>
-      <td mat-cell *matCellDef="let element" class="th-centrado">
-        {{ element.study_center }}
-      </td>
-    </ng-container>
+      <button
+        mat-raised-button
+        class="boton-registrar"
+        color="primary"
+        [routerLink]="'/estudios/insertar'"
+      >
+        <mat-icon>add</mat-icon>
+        <mat-icon>school</mat-icon>
+        Registrar
+      </button>
+    </div>
 
-    <ng-container matColumnDef="c4">
-      <th mat-header-cell *matHeaderCellDef class="th-centrado">
-        Fecha de inicio
-      </th>
-      <td mat-cell *matCellDef="let element" class="th-centrado">
-        {{ element.start_date | date : "dd/MM/yyyy" }}
-      </td>
-    </ng-container>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="c1">
+        <th mat-header-cell *matHeaderCellDef class="th-centrado">ID</th>
+        <td mat-cell *matCellDef="let element" class="th-centrado">
+          {{ element.id }}
+        </td>
+      </ng-container>
 
-    <ng-container matColumnDef="c5">
-      <th mat-header-cell *matHeaderCellDef class="th-centrado">Fecha fin</th>
-      <td mat-cell *matCellDef="let element" class="th-centrado">
-        {{ element.end_date | date : "dd/MM/yyyy" }}
-      </td>
-    </ng-container>
+      <ng-container matColumnDef="c2">
+        <th mat-header-cell *matHeaderCellDef class="th-centrado">
+          Titulo obtenido
+        </th>
+        <td mat-cell *matCellDef="let element" class="th-centrado">
+          {{ element.title_obtained }}
+        </td>
+      </ng-container>
 
-    <!-- Botón de editar -->
-    <ng-container matColumnDef="c6">
-      <th mat-header-cell *matHeaderCellDef class="th-centrado">Actualizar</th>
-      <td mat-cell *matCellDef="let element" class="th-centrado">
-        <button
-          mat-icon-button
-          color="primary"
-          [routerLink]="['/estudios/ediciones', element.id]"
-          aria-label="Editar estudio"
-        >
-          <mat-icon>edit</mat-icon>
-        </button>
-      </td>
-    </ng-container>
+      <ng-container matColumnDef="c3">
+        <th mat-header-cell *matHeaderCellDef class="th-centrado">
+          Centro de estudio
+        </th>
+        <td mat-cell *matCellDef="let element" class="th-centrado">
+          {{ element.study_center }}
+        </td>
+      </ng-container>
 
-    <!-- Botón de eliminar -->
-    <ng-container matColumnDef="c7">
-      <th mat-header-cell *matHeaderCellDef class="th-centrado">Eliminar</th>
-      <td mat-cell *matCellDef="let element" class="th-centrado">
-        <button
-          mat-icon-button
-          color="warn"
-          (click)="eliminar(element.id)"
-          aria-label="Eliminar estudio"
-        >
-          <mat-icon>delete</mat-icon>
-        </button>
-      </td>
-    </ng-container>
+      <ng-container matColumnDef="c4">
+        <th mat-header-cell *matHeaderCellDef class="th-centrado">
+          Fecha de inicio
+        </th>
+        <td mat-cell *matCellDef="let element" class="th-centrado">
+          {{ element.start_date | date : "dd/MM/yyyy" }}
+        </td>
+      </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-  </table>
-  <div class="paginador-derecha">
-    <mat-paginator
-      [pageSizeOptions]="[2, 4, 8]"
-      [pageSize]="4"
-      showFirstLastButtons
-    ></mat-paginator>
-  </div>
+      <ng-container matColumnDef="c5">
+        <th mat-header-cell *matHeaderCellDef class="th-centrado">Fecha fin</th>
+        <td mat-cell *matCellDef="let element" class="th-centrado">
+          {{ element.end_date | date : "dd/MM/yyyy" }}
+        </td>
+      </ng-container>
+
+      <!-- Botón de editar -->
+      <ng-container matColumnDef="c6">
+        <th mat-header-cell *matHeaderCellDef class="th-centrado">
+          Actualizar
+        </th>
+        <td mat-cell *matCellDef="let element" class="th-centrado">
+          <button
+            mat-icon-button
+            color="primary"
+            class="boton-editar"
+            [routerLink]="['/estudios/ediciones', element.id]"
+            aria-label="Editar estudio"
+          >
+            <mat-icon class="color-icono">edit</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="c7">
+        <th mat-header-cell *matHeaderCellDef class="th-centrado">Eliminar</th>
+        <td mat-cell *matCellDef="let element" class="th-centrado">
+          <button
+            mat-icon-button
+            class="boton-eliminar"
+            color="warn"
+            (click)="eliminar(element.id)"
+            aria-label="Eliminar estudio"
+          >
+            <mat-icon class="color-icono-eliminar">delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+    <div class="paginator-container">
+      <mat-paginator
+        [pageSizeOptions]="[2, 4, 8]"
+        [pageSize]="4"
+        showFirstLastButtons
+      ></mat-paginator>
+    </div>
+  </form>
 </div>
