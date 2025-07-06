@@ -22,7 +22,7 @@ import { MatInputModule } from '@angular/material/input';
     MatPaginatorModule,
     RouterLink,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
   ],
   templateUrl: './listarestudio.component.html',
   styleUrl: './listarestudio.component.css',
@@ -46,7 +46,7 @@ export class ListarestudioComponent implements OnInit {
   }
 
   eliminar(id: number) {
-    this.eS.delete(id).subscribe((data) => {
+    this.eS.delete(id).subscribe(() => {
       this.eS.list().subscribe((data) => {
         this.eS.setList(data);
         this.dataSource.data = data;

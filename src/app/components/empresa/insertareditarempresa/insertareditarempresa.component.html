@@ -1,6 +1,8 @@
 <div class="container">
-  <div style="text-align: center; margin: 5%">
-    <h1>Registro de empresa</h1>
+  <div class="contenedor-titulo">
+    <h1 class="titulo-centrado">
+      {{ edicion ? "Actualizar Empresa" : "Registro de Empresa" }}
+    </h1>
   </div>
 
   <div style="text-align: center; margin: 5%">
@@ -8,8 +10,8 @@
       <!-- Campo ID  -->
       <mat-form-field class="example-full-width" *ngIf="edicion">
         <mat-label>ID</mat-label>
-        <input matInput formControlName="idEmpresa" />
-        <mat-error *ngIf="form.get('idEmpresa')?.hasError('required')">
+        <input matInput formControlName="id" />
+        <mat-error *ngIf="form.get('id')?.hasError('required')">
           El código es obligatorio
         </mat-error>
       </mat-form-field>
@@ -21,13 +23,13 @@
         appearance="fill"
         class="form-control-nombre"
         [ngClass]="{
-          shake: form.get('Nombre')?.invalid && form.get('Nombre')?.touched
+          shake: form.get('name')?.invalid && form.get('name')?.touched
         }"
       >
         <mat-label>Nombre Empresa</mat-label>
-        <input matInput placeholder="Nombre" formControlName="Nombre" />
-        @if (form.get('Nombre')?.hasError('required')) {
-        <mat-error>El nombre de la empresa es obligatoria</mat-error>
+        <input matInput placeholder="name" formControlName="name" />
+        @if (form.get('name')?.hasError('required')) {
+        <mat-error>El nombre de la empresa es obligatorio</mat-error>
         }
       </mat-form-field>
 
@@ -37,20 +39,20 @@
 
       <mat-form-field
         appearance="fill"
-        class="form-control-descripcion"
+        class="form-control-description"
         [ngClass]="{
           shake:
-            form.get('Descripcion')?.invalid && form.get('Descripcion')?.touched
+            form.get('description')?.invalid && form.get('description')?.touched
         }"
       >
         <mat-label>Descripcion de la Empresa</mat-label>
         <input
           matInput
           placeholder="Descripcion"
-          formControlName="Descripcion"
+          formControlName="description"
         />
-        @if (form.get('Descripcion')?.hasError('required')) {
-        <mat-error>El descripcion de la empresa es obligatoria</mat-error>
+        @if (form.get('description')?.hasError('required')) {
+        <mat-error>La descripcion de la empresa es obligatoria</mat-error>
         }
       </mat-form-field>
 
@@ -62,13 +64,13 @@
         appearance="fill"
         class="form-control-sector"
         [ngClass]="{
-          shake: form.get('Sector')?.invalid && form.get('Sector')?.touched
+          shake: form.get('sector')?.invalid && form.get('sector')?.touched
         }"
       >
         <mat-label>Sector de la Empresa</mat-label>
-        <input matInput placeholder="Sector" formControlName="Sector" />
-        @if (form.get('Sector')?.hasError('required')) {
-        <mat-error>El sector de la empresa es obligatoria</mat-error>}
+        <input matInput placeholder="Sector" formControlName="sector" />
+        @if (form.get('sector')?.hasError('required')) {
+        <mat-error>El sector de la empresa es obligatorio</mat-error>}
       </mat-form-field>
 
       <br />
@@ -78,13 +80,13 @@
         appearance="fill"
         class="form-control-website"
         [ngClass]="{
-          shake: form.get('Website')?.invalid && form.get('Website')?.touched
+          shake: form.get('website')?.invalid && form.get('website')?.touched
         }"
       >
-        <mat-label>Sector de la Empresa</mat-label>
-        <input matInput placeholder="Website" formControlName="Website" />
-        @if (form.get('Website')?.hasError('required')) {
-        <mat-error>El Website de la empresa es obligatoria</mat-error>}
+        <mat-label>Website de la Empresa</mat-label>
+        <input matInput placeholder="Website" formControlName="website" />
+        @if (form.get('website')?.hasError('required')) {
+        <mat-error>La Website de la empresa es obligatoria</mat-error>}
       </mat-form-field>
 
       <br />
@@ -97,10 +99,10 @@
           shake: form.get('address')?.invalid && form.get('address')?.touched
         }"
       >
-        <mat-label>Direccion de la Empresa</mat-label>
+        <mat-label>Dirección de la Empresa</mat-label>
         <input matInput placeholder="address" formControlName="address" />
         @if (form.get('address')?.hasError('required')) {
-        <mat-error>El Website de la empresa es obligatoria</mat-error>}
+        <mat-error>La dirección de la empresa es obligatoria</mat-error>}
       </mat-form-field>
 
       <br />
@@ -143,7 +145,7 @@
         <mat-label>Locacion de la Empresa</mat-label>
         <input matInput placeholder="location" formControlName="location" />
         @if (form.get('location')?.hasError('required')) {
-        <mat-error>El locacion de la empresa es obligatoria</mat-error>}
+        <mat-error>La locacion de la empresa es obligatoria</mat-error>}
       </mat-form-field>
 
       <br />

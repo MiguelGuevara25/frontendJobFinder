@@ -1,1 +1,159 @@
-<p>insertareditarofertadetrabajo works!</p>
+<div class="contenedor-titulo">
+  <h1 class="titulo-centrado">
+    {{
+      edicion ? "Actualizar Oferta de trabajo" : "Registro de Oferta de trabajo"
+    }}
+  </h1>
+</div>
+
+<div class="contenedor-tabla">
+  <form [formGroup]="form" (ngSubmit)="aceptar()" class="formulario-estilizado">
+    <!-- Campo ID (condicional) -->
+    <div *ngIf="edicion">
+      <mat-form-field
+        appearance="fill"
+        class="form-control-id"
+        [ngClass]="{
+          shake: form.get('id')?.invalid && form.get('id')?.touched
+        }"
+      >
+        <mat-label>ID</mat-label>
+        <input matInput placeholder="ID" formControlName="id" />
+        <mat-error *ngIf="form.get('id')?.hasError('required')">
+          El código es obligatorio
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Campo Nombre de la oferta -->
+    <mat-form-field
+      appearance="fill"
+      class="form-control-titulo"
+      [ngClass]="{
+        shake: form.get('name')?.invalid && form.get('name')?.touched
+      }"
+    >
+      <mat-label>Nombre</mat-label>
+      <input matInput #message maxlength="100" formControlName="name" />
+      <mat-hint align="end">{{ message.value.length }} / 100</mat-hint>
+      <mat-error *ngIf="form.get('name')?.hasError('required')">
+        El nombre es obligatorio
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="fill"
+      class="form-control-titulo"
+      [ngClass]="{
+        shake: form.get('salary')?.invalid && form.get('salary')?.touched
+      }"
+    >
+      <mat-label>Salario</mat-label>
+      <input matInput type="number" #message formControlName="salary" />
+      <mat-error *ngIf="form.get('salary')?.hasError('required')">
+        El salario es obligatorio
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="fill"
+      class="form-control-titulo"
+      [ngClass]="{
+        shake:
+          form.get('typeofcontract')?.invalid &&
+          form.get('typeofcontract')?.touched
+      }"
+    >
+      <mat-label>Tipo de contrato</mat-label>
+      <input
+        matInput
+        #message1
+        maxlength="100"
+        formControlName="typeofcontract"
+      />
+      <mat-hint align="end">{{ message1.value.length }} / 100</mat-hint>
+      <mat-error *ngIf="form.get('typeofcontract')?.hasError('required')">
+        El tipo de contrato es obligatorio
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="fill"
+      class="form-control-experience"
+      [ngClass]="{
+        shake:
+          form.get('experience')?.invalid && form.get('experience')?.touched
+      }"
+    >
+      <mat-label>Experiencia</mat-label>
+      <input matInput #message maxlength="100" formControlName="experience" />
+      <mat-error *ngIf="form.get('experience')?.hasError('required')">
+        La experiencia es obligatoria
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="fill"
+      class="form-control-location"
+      [ngClass]="{
+        shake: form.get('location')?.invalid && form.get('location')?.touched
+      }"
+    >
+      <mat-label>Locación</mat-label>
+      <input matInput #message maxlength="100" formControlName="location" />
+      <mat-error *ngIf="form.get('location')?.hasError('required')">
+        La locación es obligatoria
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      [ngClass]="{
+        shake: form.get('empresa')?.invalid && form.get('empresa')?.touched
+      }"
+    >
+      <mat-label>Empresa</mat-label>
+      <mat-select formControlName="empresa">
+        @for (empresa of listEmpresa; track empresa) {
+        <mat-option [value]="empresa.id">{{ empresa.name }}</mat-option>
+        }
+      </mat-select>
+
+      <mat-error *ngIf="form.get('empresa')?.hasError('required')">
+        La empresa es obligatoria
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      class="example-full-width"
+      [ngClass]="{
+        shake:
+          form.get('description')?.invalid && form.get('description')?.touched
+      }"
+    >
+      <mat-label>Descripción</mat-label>
+      <textarea
+        matInput
+        formControlName="description"
+        placeholder="Escribe una descripción..."
+      ></textarea>
+
+      <mat-error *ngIf="form.get('description')?.hasError('required')">
+        La descripción es obligatoria
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Botón Guardar -->
+    <div class="example-button-row">
+      <button mat-raised-button color="primary">Guardar</button>
+      <button
+        mat-raised-button
+        color="warn"
+        type="button"
+        (click)="cancelar()"
+        style="margin-left: 16px"
+      >
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>

@@ -4,18 +4,18 @@ import { Postulacion } from '../models/postulacion';
 import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
-
 const base_url = environment.base;
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PostulacionService {
-  private url = `${base_url}/detalles`;
+  private url = `${base_url}/postulacion`;
   private listaCambio = new Subject<Postulacion[]>();
 
   constructor(private http: HttpClient) {}
- list() {
+
+  list() {
     return this.http.get<Postulacion[]>(this.url);
   }
 
@@ -42,11 +42,4 @@ export class PostulacionService {
   delete(id: number) {
     return this.http.delete(`${this.url}/${id}`);
   }
-
-
-
-
-
-
-
 }
