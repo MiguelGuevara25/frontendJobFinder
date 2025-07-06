@@ -54,6 +54,7 @@ import { UsuariosactivosComponent } from './components/reportes/usuariosactivos/
 import { TotalregistroscursosComponent } from './components/reportes/totalregistroscursos/totalregistroscursos.component';
 import { PromedioinscripcioncursosComponent } from './components/reportes/promedioinscripcioncursos/promedioinscripcioncursos.component';
 import { ContratosactivosComponent } from './components/reportes/contratosactivos/contratosactivos.component';
+import { CurriculumpromedioComponent } from './components/reportes/curriculumpromedio/curriculumpromedio.component';
 
 
 
@@ -383,7 +384,7 @@ export const routes: Routes = [
       },
       {
         path: 'promedioinscripcioncurso', component: PromedioinscripcioncursosComponent
-      }
+      },
     ]
   }
 ];

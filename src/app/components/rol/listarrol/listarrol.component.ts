@@ -35,7 +35,8 @@ export class ListarrolComponent {
     'c2',
     'c3',
     'c4',
-    'c5'
+    'c5',
+    'c6'
   ];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
