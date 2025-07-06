@@ -28,7 +28,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class ListarofertadetrabajoComponent {
   dataSource: MatTableDataSource<Ofertadetrabajo> = new MatTableDataSource();
-  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6'];
+  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8'];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 

@@ -107,6 +107,7 @@ export class InsertareditarofertadetrabajoComponent {
       this.router.navigate(['ofertadetrabajo']);
     }
   }
+  
   init() {
     if (this.edicion) {
       this.oS.listId(this.id).subscribe((data) => {
@@ -117,6 +118,8 @@ export class InsertareditarofertadetrabajoComponent {
           typeofcontract: new FormControl(data.typeofcontract),
           experience: new FormControl(data.experience),
           location: new FormControl(data.location),
+          empresa: new FormControl(data.empresa.id),
+          description: new FormControl(data.description),
         });
       });
     }
