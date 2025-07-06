@@ -25,6 +25,7 @@
     </div>
 
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <!-- Columnas -->
       <ng-container matColumnDef="c1">
         <th mat-header-cell *matHeaderCellDef class="th-centrado">ID</th>
         <td mat-cell *matCellDef="let element" class="th-centrado">
@@ -47,9 +48,7 @@
       </ng-container>
 
       <ng-container matColumnDef="c4">
-        <th mat-header-cell *matHeaderCellDef class="th-centrado">
-          Fecha de inicio
-        </th>
+        <th mat-header-cell *matHeaderCellDef class="th-centrado">Fecha de inicio</th>
         <td mat-cell *matCellDef="let element" class="th-centrado">
           {{ element.startDate | date : "dd/MM/yyyy" }}
         </td>
@@ -63,18 +62,14 @@
       </ng-container>
 
       <ng-container matColumnDef="c6">
-        <th mat-header-cell *matHeaderCellDef class="th-centrado">
-          Descripcion
-        </th>
+        <th mat-header-cell *matHeaderCellDef class="th-centrado">Descripción</th>
         <td mat-cell *matCellDef="let element" class="th-centrado">
           {{ element.description }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="c7">
-        <th mat-header-cell *matHeaderCellDef class="th-centrado">
-          Actualizar
-        </th>
+        <th mat-header-cell *matHeaderCellDef class="th-centrado">Actualizar</th>
         <td mat-cell *matCellDef="let element" class="th-centrado">
           <button
             mat-icon-button
@@ -104,9 +99,18 @@
         </td>
       </ng-container>
 
+      <!-- Filas -->
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
+
+    <!-- MENSAJE SI NO HAY DATOS (fuera de la tabla para evitar errores de hydration) -->
+    <div *ngIf="dataSource.data.length === 0" class="no-data">
+      <mat-icon class="no-data-icon">info_outline</mat-icon>
+      <p class="no-data-message">No hay experiencias registradas.</p>
+    </div>
+
+    <!-- Paginador -->
     <div class="paginator-container">
       <mat-paginator
         [pageSizeOptions]="[2, 4, 8]"

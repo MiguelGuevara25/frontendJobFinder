@@ -14,8 +14,8 @@
 
       <button
         mat-raised-button
-        class="boton-registrar"
         color="primary"
+        class="boton-registrar"
         [routerLink]="'/estudios/insertar'"
       >
         <mat-icon>add</mat-icon>
@@ -24,6 +24,7 @@
       </button>
     </div>
 
+    <!-- Tabla -->
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
       <ng-container matColumnDef="c1">
         <th mat-header-cell *matHeaderCellDef class="th-centrado">ID</th>
@@ -33,27 +34,21 @@
       </ng-container>
 
       <ng-container matColumnDef="c2">
-        <th mat-header-cell *matHeaderCellDef class="th-centrado">
-          Titulo obtenido
-        </th>
+        <th mat-header-cell *matHeaderCellDef class="th-centrado">Titulo obtenido</th>
         <td mat-cell *matCellDef="let element" class="th-centrado">
           {{ element.title_obtained }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="c3">
-        <th mat-header-cell *matHeaderCellDef class="th-centrado">
-          Centro de estudio
-        </th>
+        <th mat-header-cell *matHeaderCellDef class="th-centrado">Centro de estudio</th>
         <td mat-cell *matCellDef="let element" class="th-centrado">
           {{ element.study_center }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="c4">
-        <th mat-header-cell *matHeaderCellDef class="th-centrado">
-          Fecha de inicio
-        </th>
+        <th mat-header-cell *matHeaderCellDef class="th-centrado">Fecha de inicio</th>
         <td mat-cell *matCellDef="let element" class="th-centrado">
           {{ element.start_date | date : "dd/MM/yyyy" }}
         </td>
@@ -66,11 +61,8 @@
         </td>
       </ng-container>
 
-      <!-- Botón de editar -->
       <ng-container matColumnDef="c6">
-        <th mat-header-cell *matHeaderCellDef class="th-centrado">
-          Actualizar
-        </th>
+        <th mat-header-cell *matHeaderCellDef class="th-centrado">Actualizar</th>
         <td mat-cell *matCellDef="let element" class="th-centrado">
           <button
             mat-icon-button
@@ -103,6 +95,14 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
+
+    <!-- MENSAJE SI NO HAY DATOS -->
+    <div *ngIf="dataSource.data.length === 0" class="no-data">
+      <mat-icon class="no-data-icon">info_outline</mat-icon>
+      <p class="no-data-message">No hay estudios registrados.</p>
+    </div>
+
+    <!-- Paginador -->
     <div class="paginator-container">
       <mat-paginator
         [pageSizeOptions]="[2, 4, 8]"
