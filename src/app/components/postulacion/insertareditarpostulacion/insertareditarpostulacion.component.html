@@ -1,1 +1,101 @@
-<p>insertareditarpostulacion works!</p>
+<div class="container">
+  <div style="text-align: center; margin: 5%">
+    <h1>Registro de Postulacion</h1>
+  </div>
+
+  <div style="text-align: center; margin: 5%">
+    <form [formGroup]="form" (submit)="aceptar()">
+      <!-- Campo ID  -->
+      <mat-form-field class="example-full-width" *ngIf="edicion">
+        <mat-label>ID</mat-label>
+        <input matInput formControlName="idEmpresa" />
+        <mat-error *ngIf="form.get('idEmpresa')?.hasError('required')">
+          El código es obligatorio
+        </mat-error>
+      </mat-form-field>
+
+      <br />
+
+      <!-- Campo Dia -->
+      <mat-form-field
+        appearance="fill"
+        class="form-control-date"
+        [ngClass]="{
+          shake: form.get('date')?.invalid && form.get('date')?.touched
+        }"
+      >
+        <mat-label>Dia</mat-label>
+        <input matInput placeholder="date" formControlName="date" />
+        @if (form.get('date')?.hasError('required')) {
+        <mat-error>El dia es obligatorio</mat-error>
+        }
+      </mat-form-field>
+
+      <br />
+
+      <!-- Campo Salary -->
+
+      <mat-form-field
+        appearance="fill"
+        class="form-control-salary"
+        [ngClass]="{
+          shake: form.get('Salary')?.invalid && form.get('Descripcion')?.touched
+        }"
+      >
+        <mat-label>Descripcion de Salario</mat-label>
+        <input matInput placeholder="Salario" formControlName="state" />
+        @if (form.get('state')?.hasError('required')) {
+        <mat-error>El Salarioes obligatorio</mat-error>
+        }
+      </mat-form-field>
+
+      <br />
+
+      <!-- Campo Tipo de Contrato-->
+
+      <mat-form-field
+        appearance="fill"
+        class="form-control-contractType"
+        [ngClass]="{
+          shake:
+            form.get('contracType')?.invalid && form.get('contracType')?.touched
+        }"
+      >
+        <mat-label>Tipo de Contrato</mat-label>
+        <input
+          matInput
+          placeholder="contracType"
+          formControlName="acceptedcandidate"
+        />
+        @if (form.get('acceptedcandidate')?.hasError('required')) {
+        <mat-error>El tipo de contrato es obligatorio</mat-error>}
+      </mat-form-field>
+      <br />
+
+      <br />
+      <mat-form-field class="example-full-width">
+        <mat-label>Proveedor</mat-label>
+        <input matInput formControlName="proveedor" />
+      </mat-form-field>
+      <br />
+      <mat-form-field>
+        <mat-label>Aplicaciones</mat-label>
+        <mat-select formControlName="apli">
+          @for (food of listaofertadetrabajo; track food) {
+          <mat-option [value]="food.id">{{ food.location}}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <br />
+
+      <!-- Botón Aceptar-->
+      <button mat-raised-button color="primary" type="submit">Aceptar</button>
+
+      <!-- Botón Cancelar-->
+      <button mat-raised-button color="warn" type="button" (click)="cancelar()">
+        Cancelar
+      </button>
+    </form>
+      
+  </div>
+</div>

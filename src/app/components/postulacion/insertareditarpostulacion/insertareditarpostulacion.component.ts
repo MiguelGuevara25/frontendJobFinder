@@ -6,11 +6,11 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { Postulacion } from '../postulacion';
 import { Postulacion } from '../../../models/postulacion';
 import { PostulacionService } from '../../../services/postulacion.service';
-import { Router } from 'express';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Ofertadetrabajo } from '../../../models/ofertadetrabajo';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-insertareditarpostulacion',
@@ -19,6 +19,7 @@ import { ActivatedRoute, Params } from '@angular/router';
     MatButtonModule,
     MatIconModule,
     ReactiveFormsModule,
+    MatSelectModule,
     CommonModule,
     MatDatepickerModule,
     FormsModule,],
@@ -27,68 +28,76 @@ import { ActivatedRoute, Params } from '@angular/router';
 })
 export class InsertareditarpostulacionComponent {
   form: FormGroup = new FormGroup({});
-Postulacion: Postulacion = new Postulacion();
+  postulacion: Postulacion = new Postulacion();
+  listaofertadetrabajo: Ofertadetrabajo[]=[]
 
 
-id: number = 0;
-edicion: boolean = false;
+  id: number = 0;
+  edicion: boolean = false;
 
   constructor(
     private pS: PostulacionService,
     private FormBuilder: FormBuilder,
-    private Router: Router,
-    private route: ActivatedRoute
-  ) {}
+    private router: Router,
+    private route: ActivatedRoute,
+    private oS: Ofertadetrabajo
+  ) { }
 
-ngOnInit(): void {
+  ngOnInit(): void {
     this.route.params.subscribe((data: Params) => {
       this.id = data['id'];
       this.edicion = data['id'] != null;
       this.init();
     });
 
-  this.form = this.FormBuilder.group({
-  id:[''],
-  date:['', Validators.required],
-  state:['', Validators.required],
-  acceptedcandidate: ['', Validators.required],
-  });
-}
+    this.form = this.FormBuilder.group({
+      id: [''],
+      date: ['', Validators.required],
+      state: ['', Validators.required],
+      acceptedcandidate: ['', Validators.required],
+      oferta: ['', Validators.required]
+    });
+  }
 
   aceptar() {
     if (this.form.valid) {
-      this.Postulacion.id = this.form.value.id;
-      this.Postulacion.date = this.form.value.date;
-      this.Postulacion.salary = this.form.value.salary;
-      this.Postulacion.contractType = this.form.value.contractType;
+      this.postulacion.id = this.form.value.id;
+      this.postulacion.date = this.form.value.date;
+      this.postulacion.state = this.form.value.salary;
+      this.postulacion.acceptedcandidate = this.form.value.contractType;
+      this.postulacion.ofertaTrabajo.id = this.form.value.oferta
+    
 
       if (this.edicion) {
-        this.pS.update(this.Postulacion).subscribe(() => {
+        this.pS.update(this.postulacion).subscribe(() => {
           this.pS.list().subscribe((data) => {
             this.pS.setList(data);
           });
         });
       } else {
-        this.pS.insert(this.Postulacion).subscribe(() => {
+        this.pS.insert(this.postulacion).subscribe(() => {
           this.pS.list().subscribe((data) => {
             this.pS.setList(data);
           });
         });
       }
-      this.Router.navigate(['postulacion']);
+      this.router.navigate(['postulacion']);
     }
   }
-init() {
+  init() {
     if (this.edicion) {
       this.pS.listId(this.id).subscribe((data) => {
         this.form = new FormGroup({
-           id:new FormControl(data.id),
-           date: new FormControl(data.date),
-           state: new FormControl(data.state),
-           acceptedcandidate:new FormControl(data.acceptedcandidate),
+          id: new FormControl(data.id),
+          date: new FormControl(data.date),
+          state: new FormControl(data.state),
+          acceptedcandidate: new FormControl(data.acceptedcandidate),
         });
       });
     }
+  }
+  cancelar() {
+    this.router.navigate(['postulacion']);
   }
 }
 
