@@ -41,17 +41,18 @@ export class InsertareditarcurriculumComponent implements OnInit{
   ) { }
 
   ngOnInit(): void {
+    
+
+    this.form = this.formBuilder.group({
+      codigo: [{ value: '', disabled: true }],
+      descripcion: ['', [Validators.required]],
+      fechaCreacion: ['', [Validators.required]],
+      usuario: ['', [Validators.required]],
+    });
     this.route.params.subscribe((data: Params) => {
       this.id = data['id'];
       this.edicion = data['id'] != null;
       this.init();
-    });
-
-    this.form = this.formBuilder.group({
-      codigo: [''],
-      descripcion: ['', [Validators.required]],
-      fechaCreacion: ['', [Validators.required]],
-      usuario: ['', [Validators.required]],
     });
 
     this.uS.listar().subscribe(data => {
@@ -60,10 +61,10 @@ export class InsertareditarcurriculumComponent implements OnInit{
   }
   aceptar() {
     if (this.form.valid) {
-      this.curriculum.idCurriculum = this.form.value.codigo
+      this.curriculum.idCurriculum = this.id
       this.curriculum.descripcionCurriculum = this.form.value.descripcion
       this.curriculum.fechaCurriculum = this.form.value.fechaCreacion
-      this.curriculum.usuario.idUsuario = this.form.value.usuario;
+      this.curriculum.usuario = { idUsuario: this.form.value.usuario } as Usuario;
       console.log(this.edicion)
       if (this.edicion) {
         this.cS.update(this.curriculum).subscribe(() => {
@@ -79,7 +80,7 @@ export class InsertareditarcurriculumComponent implements OnInit{
         this.cS.insertar(this.curriculum).subscribe(() => {
           this.cS.listar().subscribe((data) => {
             this.cS.setList(data);
-            this._snackBar.open("¡Curriculum registrao con éxito!", "Cerrar", {
+            this._snackBar.open("¡Curriculum registrado con éxito!", "Cerrar", {
               duration: 3000,
             });
           });
@@ -91,11 +92,11 @@ export class InsertareditarcurriculumComponent implements OnInit{
   init() {
     if (this.edicion) {
       this.cS.listarId(this.id).subscribe((data) => {
-        this.form = new FormGroup({
-          codigo: new FormControl(data.idCurriculum),
-          descripcion: new FormControl(data.descripcionCurriculum),
-          fechaCreacion: new FormControl(data.fechaCurriculum),
-          usuario: new FormControl(data.usuario.idUsuario),
+        this.form.patchValue({
+          codigo: data.idCurriculum,
+          descripcion:data.descripcionCurriculum,
+          fechaCreacion: data.fechaCurriculum,
+          usuario: data.usuario.idUsuario,
         });
       });
     }

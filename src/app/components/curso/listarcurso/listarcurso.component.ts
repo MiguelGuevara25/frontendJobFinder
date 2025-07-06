@@ -46,17 +46,37 @@ export class ListarcursoComponent implements OnInit, AfterViewInit {
       this.dataSource.paginator = this.paginator;
     });
   }
-  eliminar(id: number) {
-    this.cS.delete(id).subscribe((data) => {
-      this.cS.list().subscribe((data) => {
+  eliminar(id: number): void {
+  this.cS.delete(id).subscribe({
+    next: () => {
+      this.cS.list().subscribe(data => {
         this.cS.setList(data);
-        this.dataSource.data = data;
-        this.snackBar.open('¡Inscripción Curso eliminado con éxito!', 'Cerrar', {
-          duration: 5000,
+        this.snackBar.open('Curso eliminado correctamente', 'Cerrar', {
+          duration: 3000
         });
       });
-    });
-  }
+    },
+    error: (error) => {
+      console.error(error); // Para ver el detalle en consola
+      if (
+        error.status === 500 &&
+        error.error?.message?.includes('violates foreign key constraint')
+      ) {
+        this.snackBar.open(
+          'No se puede eliminar el curso porque tiene inscripciones registradas.',
+          'Cerrar',
+          { duration: 4000 }
+        );
+      } else {
+        this.snackBar.open(
+          'Ocurrió un error al intentar eliminar el curso.',
+          'Cerrar',
+          { duration: 3000 }
+        );
+      }
+    }
+  });
+}
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
   }
