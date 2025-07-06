@@ -5,7 +5,6 @@
 
   <div style="text-align: center; margin: 5%">
     <form [formGroup]="form" (submit)="aceptar()">
-      <!-- Campo ID (solo si está en edición) -->
       <mat-form-field class="example-full-width" *ngIf="edicion">
         <mat-label>ID</mat-label>
         <input matInput formControlName="id" />
@@ -16,7 +15,6 @@
 
       <br />
 
-      <!-- Campo Date -->
       <mat-form-field class="example-full-width">
         <mat-label>Fecha</mat-label>
         <input
@@ -36,7 +34,6 @@
 
       <br />
 
-      <!-- Campo Hour -->
       <mat-form-field class="example-full-width">
         <mat-label>Hora</mat-label>
         <input matInput [matTimepicker]="timepicker" formControlName="hour" />
@@ -79,7 +76,6 @@
 
       <br />
 
-      <!-- Campo Modality -->
       <mat-form-field class="example-full-width">
         <mat-label>Modalidad</mat-label>
         <input matInput formControlName="modality" />
@@ -90,7 +86,6 @@
 
       <br />
 
-      <!-- Campo Result -->
       <mat-form-field class="example-full-width">
         <mat-label>Resultado</mat-label>
         <input matInput formControlName="result" />
@@ -101,7 +96,6 @@
 
       <br />
 
-      <!-- Botón -->
       <div class="example-button-row">
         <button mat-raised-button color="primary">Guardar</button>
         <button

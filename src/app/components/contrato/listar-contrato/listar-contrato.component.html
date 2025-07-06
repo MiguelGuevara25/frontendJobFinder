@@ -3,75 +3,112 @@
 </div>
 
 <div class="contenedor-tabla">
-  <form class="formulario-estilizado">
+  <div class="acciones-superiores">
+    <mat-form-field appearance="outline" class="campo-busqueda">
+      <mat-icon matPrefix>search</mat-icon>
+      <input matInput (keyup)="filtrar($event)" />
+    </mat-form-field>
 
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <div class="spacer"></div>
 
-      <ng-container matColumnDef="c1">
-        <th mat-header-cell *matHeaderCellDef>ID</th>
-        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
-      </ng-container>
+    <button
+      mat-raised-button
+      color="primary"
+      class="boton-registrar"
+      [routerLink]="'/contratos/insertar'"
+    >
+      <mat-icon>add</mat-icon>
+      <mat-icon>school</mat-icon>
+      Registrar
+    </button>
+  </div>
 
-      <ng-container matColumnDef="c2">
-        <th mat-header-cell *matHeaderCellDef>Fecha de Inicio</th>
-        <td mat-cell *matCellDef="let element">{{ element.startDate }}</td>
-      </ng-container>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="c1">
+      <th mat-header-cell *matHeaderCellDef>ID</th>
+      <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+    </ng-container>
 
-      <ng-container matColumnDef="c3">
-        <th mat-header-cell *matHeaderCellDef>Fecha de Término</th>
-        <td mat-cell *matCellDef="let element">{{ element.endDate }}</td>
-      </ng-container>
+    <ng-container matColumnDef="c2">
+      <th mat-header-cell *matHeaderCellDef>Fecha de Inicio</th>
+      <td mat-cell *matCellDef="let element">{{ element.startDate }}</td>
+    </ng-container>
 
-      <ng-container matColumnDef="c4">
-        <th mat-header-cell *matHeaderCellDef>Salario</th>
-        <td mat-cell *matCellDef="let element">{{ element.salary }}</td>
-      </ng-container>
+    <ng-container matColumnDef="c3">
+      <th mat-header-cell *matHeaderCellDef>Fecha de Término</th>
+      <td mat-cell *matCellDef="let element">{{ element.endDate }}</td>
+    </ng-container>
 
-      <ng-container matColumnDef="c5">
-        <th mat-header-cell *matHeaderCellDef>Tipo de Contrato</th>
-        <td mat-cell *matCellDef="let element">{{ element.contractType }}</td>
-      </ng-container>
+    <ng-container matColumnDef="c4">
+      <th mat-header-cell *matHeaderCellDef>Salario</th>
+      <td mat-cell *matCellDef="let element">{{ element.salary }}</td>
+    </ng-container>
 
-      <ng-container matColumnDef="c6">
-        <th mat-header-cell *matHeaderCellDef>Empresa</th>
-        <td mat-cell *matCellDef="let element">{{ element.empresa.name }}</td>
-      </ng-container>
+    <ng-container matColumnDef="c5">
+      <th mat-header-cell *matHeaderCellDef>Tipo de Contrato</th>
+      <td mat-cell *matCellDef="let element">{{ element.contractType }}</td>
+    </ng-container>
 
-      <!-- Campos adicionales comentados si los necesitas -->
-      <!--
-      <ng-container matColumnDef="c7">
-        <th mat-header-cell *matHeaderCellDef>Usuarios</th>
-        <td mat-cell *matCellDef="let element">{{ element.user }}</td>
-      </ng-container>
+    <ng-container matColumnDef="c6">
+      <th mat-header-cell *matHeaderCellDef>Empresa</th>
+      <td mat-cell *matCellDef="let element">{{ element.empresa.name }}</td>
+    </ng-container>
 
-      <ng-container matColumnDef="c8">
-        <th mat-header-cell *matHeaderCellDef>Postulación</th>
-        <td mat-cell *matCellDef="let element">{{ element.postulacion }}</td>
-      </ng-container>
-      -->
+    <ng-container matColumnDef="c7">
+      <th mat-header-cell *matHeaderCellDef>Usuarios</th>
+      <td mat-cell *matCellDef="let element">
+        {{
+          element.usuarios.nombreUsuario +
+            " " +
+            element.usuarios.apellidoUsuario
+        }}
+      </td>
+    </ng-container>
 
-      <ng-container matColumnDef="c7">
-        <th mat-header-cell *matHeaderCellDef>Actualizar</th>
-        <td mat-cell *matCellDef="let element">
-          <button mat-raised-button color="primary" [routerLink]="['ediciones', element.id]">
-            <mat-icon>edit</mat-icon>
-          </button>
-        </td>
-      </ng-container>
+    <ng-container matColumnDef="c8">
+      <th mat-header-cell *matHeaderCellDef>Postulación</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.postulacion.ofertaTrabajo.name }}
+      </td>
+    </ng-container>
 
-      <ng-container matColumnDef="c8">
-        <th mat-header-cell *matHeaderCellDef>Eliminar</th>
-        <td mat-cell *matCellDef="let element">
-          <button mat-raised-button color="warn" (click)="eliminar(element.id)">
-            <mat-icon>delete</mat-icon>
-          </button>
-        </td>
-      </ng-container>
+    <ng-container matColumnDef="c9">
+      <th mat-header-cell *matHeaderCellDef>Actualizar</th>
+      <td mat-cell *matCellDef="let element">
+        <button
+          mat-icon-button
+          color="primary"
+          [routerLink]="['ediciones', element.id]"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+      </td>
+    </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    <ng-container matColumnDef="c10">
+      <th mat-header-cell *matHeaderCellDef>Eliminar</th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button color="warn" (click)="eliminar(element.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
 
-    </table>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
 
-  </form>
+  <div *ngIf="dataSource.data.length === 0" class="no-data">
+    <mat-icon class="no-data-icon">info_outline</mat-icon>
+    <p class="no-data-message">No hay estudios registrados.</p>
+  </div>
+
+  <!-- Paginador -->
+  <div class="paginator-container">
+    <mat-paginator
+      [pageSizeOptions]="[2, 4, 8]"
+      [pageSize]="4"
+      showFirstLastButtons
+    ></mat-paginator>
+  </div>
 </div>

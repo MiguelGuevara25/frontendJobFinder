@@ -9,6 +9,9 @@
       <mat-icon matPrefix>search</mat-icon>
       <input matInput (keyup)="filtrar($event)" />
     </mat-form-field>
+
+    <div class="spacer"></div>
+
     <button
       mat-raised-button
       color="primary"
@@ -97,6 +100,11 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
+
+  <div *ngIf="dataSource.data.length === 0" class="no-data">
+    <mat-icon class="no-data-icon">info_outline</mat-icon>
+    <p class="no-data-message">No hay estudios registrados.</p>
+  </div>
 
   <div class="paginador-derecha">
     <mat-paginator

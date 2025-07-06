@@ -6,7 +6,10 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { MatNativeDateModule } from '@angular/material/core';
+import {
+  MatNativeDateModule,
+  provideNativeDateAdapter,
+} from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -38,6 +41,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     CommonModule,
     MatButton,
   ],
+  providers: [provideNativeDateAdapter()],
   templateUrl: './insertar-editar-entrevista.component.html',
   styleUrl: './insertar-editar-entrevista.component.css',
 })
@@ -109,13 +113,9 @@ export class InsertarEditarEntrevistaComponent implements OnInit {
           this.eS.list().subscribe((data) => {
             this.eS.setList(data);
 
-            this.snackBar.open(
-              '¡Postulación actualizada con éxito!',
-              'Cerrar',
-              {
-                duration: 3000,
-              }
-            );
+            this.snackBar.open('¡Entrevista actualizada con éxito!', 'Cerrar', {
+              duration: 3000,
+            });
           });
         });
       } else {
@@ -123,7 +123,7 @@ export class InsertarEditarEntrevistaComponent implements OnInit {
           this.eS.list().subscribe((data) => {
             this.eS.setList(data);
 
-            this.snackBar.open('¡Postulación registrada con éxito!', 'Cerrar', {
+            this.snackBar.open('¡Entrevista registrada con éxito!', 'Cerrar', {
               duration: 3000,
             });
           });
