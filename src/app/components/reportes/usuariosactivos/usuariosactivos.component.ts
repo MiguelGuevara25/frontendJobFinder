@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -26,7 +26,7 @@ import { usuariosActivosDTO } from '../../../models/usuariosActivosDTO';
   templateUrl: './usuariosactivos.component.html',
   styleUrl: './usuariosactivos.component.css'
 })
-export class UsuariosactivosComponent  implements OnInit{
+export class UsuariosactivosComponent  implements OnInit, AfterViewInit{
 
 
   dataSource: MatTableDataSource<usuariosActivosDTO> = new MatTableDataSource();
@@ -35,9 +35,7 @@ export class UsuariosactivosComponent  implements OnInit{
     'c2',
     'c3',
     'c4',
-    'c5',
-    'c6',
-    'c7',
+    'c5'
   ];
 
 

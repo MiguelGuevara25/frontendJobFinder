@@ -99,4 +99,8 @@ mat-paginator {
   color: #f30715;
 }
 
+/* Espaciador para empujar los botones a los lados */
+.spacer {
+  flex-grow: 0.9; /* Ocupa todo el espacio disponible */
+}
 
