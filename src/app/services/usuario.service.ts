@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Usuario } from '../models/usuario';
 import { Observable, Subject } from 'rxjs';
 import { usuariosActivosDTO } from '../models/usuariosActivosDTO';
+import { UsuariosContratoActivoDTO } from '../models/usuariosContratoActivoDTO';
 
 const us_base_url = environment.base
 @Injectable({
@@ -37,5 +38,8 @@ export class UsuarioService {
   }
   listarActivos(estado: boolean): Observable<usuariosActivosDTO[]> {
     return this.http.get<usuariosActivosDTO[]>(`${this.url}/activos?estado=${estado}`);
+  }
+  getContratosActivos(): Observable<UsuariosContratoActivoDTO[]> {
+    return this.http.get<UsuariosContratoActivoDTO[]>(`${this.url}/contratosactivos`);
   }
 }

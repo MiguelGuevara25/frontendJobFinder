@@ -11,7 +11,19 @@
         <input matInput (keyup)="filtrar($event)" />
       </mat-form-field>
 
+      
+
       <div class="spacer"></div>
+
+      <button
+        mat-raised-button
+        class="boton-registrar"
+        color="primary"
+        [routerLink]="['contratosactivos']"
+      >
+        <mat-icon>assignment</mat-icon>
+        Contratos Activos
+      </button>
       
       <button
         mat-raised-button

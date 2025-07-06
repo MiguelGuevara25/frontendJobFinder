@@ -8,7 +8,6 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { RouterLink } from '@angular/router';
 import { UsuarioService } from '../../../services/usuario.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { usuariosActivosDTO } from '../../../models/usuariosActivosDTO';
 
 @Component({
@@ -26,8 +25,7 @@ import { usuariosActivosDTO } from '../../../models/usuariosActivosDTO';
   templateUrl: './usuariosactivos.component.html',
   styleUrl: './usuariosactivos.component.css'
 })
-export class UsuariosactivosComponent  implements OnInit, AfterViewInit{
-
+export class UsuariosactivosComponent implements OnInit, AfterViewInit {
 
   dataSource: MatTableDataSource<usuariosActivosDTO> = new MatTableDataSource();
   displayedColumns: string[] = [
@@ -43,7 +41,6 @@ export class UsuariosactivosComponent  implements OnInit, AfterViewInit{
 
   constructor(
     private usuServi: UsuarioService,
-    private _snackBar: MatSnackBar
   ) { }
 
 
