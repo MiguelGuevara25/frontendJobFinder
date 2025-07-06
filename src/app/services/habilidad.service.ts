@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Habilidad } from '../models/habilidad';
 import { environment } from '../../environments/environment';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { HabilidadVacia } from '../models/habilidadvacia';
+import { FrecuenciaHabilidadDTO } from '../models/FrecuenciaHabilidadDTO';
 
 const base_url = environment.base;
 
@@ -47,4 +48,8 @@ export class HabilidadService {
   habilidadesSinUsuarios() {
     return this.http.get<HabilidadVacia[]>(`${this.url}/habilidad_nulas`);
   }
+
+  getFrecuenciaHabilidad(): Observable<FrecuenciaHabilidadDTO[]> {
+  return this.http.get<FrecuenciaHabilidadDTO[]>(`${this.url}/frecuencia_por_usuario`);
+}
 }
