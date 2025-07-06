@@ -1,1 +1,47 @@
-<p>listarofertadetrabajo works!</p>
+<div class="contenedor-titulo">
+  <h1 class="titulo-centrado">Lista de Ofertas de Trabajo</h1>
+</div>
+
+<div class="contenedor-tabla">
+  <form class="formulario-estilizado">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="c1">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="c2">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="c3">
+        <th mat-header-cell *matHeaderCellDef>Salary</th>
+        <td mat-cell *matCellDef="let element">{{ element.description }}</td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="c4">
+        <th mat-header-cell *matHeaderCellDef>contractType</th>
+        <td mat-cell *matCellDef="let element">{{ element.contractType }}</td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="c5">
+        <th mat-header-cell *matHeaderCellDef>experience</th>
+        <td mat-cell *matCellDef="let element">{{ element.experience }}</td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="c6">
+        <th mat-header-cell *matHeaderCellDef>location>
+        <td mat-cell *matCellDef="let element">{{ element.location }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </form>
+</div>

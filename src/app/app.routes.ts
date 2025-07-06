@@ -30,7 +30,6 @@ import { ListarinscripcioncursoComponent } from './components/inscripcioncurso/l
 import { InsertareditarinscripcioncursoComponent } from './components/inscripcioncurso/insertareditarinscripcioncurso/insertareditarinscripcioncurso.component';
 import { HomeComponent } from './components/home/home.component';
 
-
 import { Postulacion } from './components/postulacion/postulacion';
 import { InsertareditarempresaComponent } from './components/empresa/insertareditarempresa/insertareditarempresa.component';
 
@@ -51,9 +50,9 @@ import { CantidadcertificadosComponent } from './components/reportes/cantidadcer
 import { CantidadplataformacursoComponent } from './components/reportes/cantidadplataformacurso/cantidadplataformacurso.component';
 import { CantidadempresacursoComponent } from './components/reportes/cantidadempresacurso/cantidadempresacurso.component';
 import { MapaComponent } from './components/mapa/mapa.component';
-
-
-
+import { UsuariosactivosComponent } from './components/reportes/usuariosactivos/usuariosactivos.component';
+import { TotalregistroscursosComponent } from './components/reportes/totalregistroscursos/totalregistroscursos.component';
+import { PromedioinscripcioncursosComponent } from './components/reportes/promedioinscripcioncursos/promedioinscripcioncursos.component';
 
 export const routes: Routes = [
   //Ejecucion Inicial
@@ -353,8 +352,40 @@ export const routes: Routes = [
       },
     ],
   },
+
+  //Enrutamiento de Reportes
   {
     path: 'mapa',
     component: MapaComponent,
+  },
+  {
+    path: 'reportes',
+    component: ReportesComponent,
+    children: [
+      {
+        path: 'cantidadcertificadoanio',
+        component: CantidadcertificadosComponent,
+      },
+      {
+        path: 'cantidadplataformacurso',
+        component: CantidadplataformacursoComponent,
+      },
+      {
+        path: 'cantidadempresacurso',
+        component: CantidadempresacursoComponent,
+      },
+      {
+        path: 'activosusuarios',
+        component: UsuariosactivosComponent,
+      },
+      {
+        path: 'totalregistrocurso',
+        component: TotalregistroscursosComponent,
+      },
+      {
+        path: 'promedioinscripcioncurso',
+        component: PromedioinscripcioncursosComponent,
+      },
+    ],
   },
 ];

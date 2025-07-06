@@ -10,5 +10,9 @@ import { routes } from '../../app.routes';
   styleUrl: './postulacion.css'
 })
 export class Postulacion {
+id: any;
+  date: any;
+  salary: any;
+  contractType: any;
 constructor (public route: ActivatedRoute){}
 }

@@ -11,10 +11,13 @@
         <input matInput (keyup)="filtrar($event)" />
       </mat-form-field>
 
+      <div class="spacer"></div>
+      
       <button
         mat-raised-button
+        class="boton-registrar"
         color="accent"
-        [routerLink]="'/reportes/usuariosactivos'"
+        [routerLink]="'/reportes/activosusuarios'"
       >
         <mat-icon>visibility</mat-icon>
         Ver Activos
