@@ -48,12 +48,6 @@ export class InsertareditarHabilidadComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe((data: Params) => {
-      this.id = data['id'];
-      this.edicion = this.id != null;
-      this.init();
-    });
-
     this.form = this.formBuilder.group({
       id: [''],
       name: [
@@ -61,13 +55,19 @@ export class InsertareditarHabilidadComponent implements OnInit {
         [Validators.required, Validators.pattern('^[a-zA-ZáéíóúÉÁÍÓÚñÑ\\s]+$')],
       ],
     });
+
+    this.route.params.subscribe((data: Params) => {
+      this.id = data['id'];
+      this.edicion = this.id != null;
+      this.init();
+    });
   }
 
   aceptar() {
     if (this.form.valid) {
-      // Asignar el ID según modo
-      this.habilidad.id_habilidad = this.edicion ? this.id : this.form.value.id;
-      this.habilidad.nombre = this.form.value.name;
+      const formValues = this.form.getRawValue();
+      this.habilidad.id_habilidad = this.edicion ? this.id : formValues.id;
+      this.habilidad.nombre = formValues.name;
 
       if (this.edicion) {
         this.hS.update(this.habilidad).subscribe(() => {
@@ -76,7 +76,7 @@ export class InsertareditarHabilidadComponent implements OnInit {
             this.snackBar.open('¡Habilidad actualizada con éxito!', 'Cerrar', {
               duration: 3000,
             });
-          });
+          }); 
         });
       } else {
         this.hS.insert(this.habilidad).subscribe(() => {
@@ -102,13 +102,11 @@ export class InsertareditarHabilidadComponent implements OnInit {
   init() {
     if (this.edicion) {
       this.hS.listId(this.id).subscribe((data) => {
-        this.form = new FormGroup({
-          id: new FormControl({ value: data.id_habilidad, disabled: true }),
-          name: new FormControl(data.nombre, [
-            Validators.required,
-            Validators.pattern('^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$'),
-          ]),
+        this.form.patchValue({
+          id: data.id_habilidad,
+          name: data.nombre,
         });
+        this.form.get('id')?.disable();
       });
     }
   }

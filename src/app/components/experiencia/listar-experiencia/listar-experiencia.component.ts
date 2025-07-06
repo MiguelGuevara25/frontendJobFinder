@@ -35,15 +35,15 @@ export class ListarExperienciaComponent implements OnInit {
 
   constructor(private exS: ExperienciaService, private snackBar: MatSnackBar) {}
   ngOnInit(): void {
-    this.exS.list().subscribe((data) => {
-      this.dataSource = new MatTableDataSource(data);
-      this.dataSource.paginator = this.paginator;
-    });
-    this.exS.getList().subscribe((data) => {
-      this.dataSource = new MatTableDataSource(data);
-      this.dataSource.paginator = this.paginator;
-    });
-  }
+  this.exS.getList().subscribe((data) => {
+    this.dataSource = new MatTableDataSource(data);
+    this.dataSource.paginator = this.paginator;
+  });
+
+  this.exS.list().subscribe((data) => {
+    this.exS.setList(data);
+  });
+}
 
   eliminar(id: number) {
     this.exS.delete(id).subscribe((data) => {

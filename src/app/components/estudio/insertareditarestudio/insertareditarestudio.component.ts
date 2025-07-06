@@ -65,12 +65,7 @@ export class InsertareditarestudioComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe((data: Params) => {
-      this.id = data['id'];
-      this.edicion = this.id != null;
-      this.init();
-    });
-
+    // Primero crea el formulario
     this.form = this.formBuilder.group(
       {
         codigo: [''],
@@ -93,27 +88,32 @@ export class InsertareditarestudioComponent implements OnInit {
       },
       { validators: fechasValidator }
     );
+
+    // Luego analiza si es edición y carga los datos
+    this.route.params.subscribe((data: Params) => {
+      this.id = data['id'];
+      this.edicion = this.id != null;
+      this.init();
+    });
   }
 
   aceptar() {
     if (this.form.valid) {
-      this.estudio.id = this.form.value.codigo;
-      this.estudio.title_obtained = this.form.value.titulo;
-      this.estudio.study_center = this.form.value.centro;
-      this.estudio.start_date = this.form.value.fecha_inicio;
-      this.estudio.end_date = this.form.value.fecha_fin;
+      const formValues = this.form.getRawValue(); // para incluir campos deshabilitados
+
+      this.estudio.id = formValues.codigo;
+      this.estudio.title_obtained = formValues.titulo;
+      this.estudio.study_center = formValues.centro;
+      this.estudio.start_date = formValues.fecha_inicio;
+      this.estudio.end_date = formValues.fecha_fin;
 
       if (this.edicion) {
         this.eS.update(this.estudio).subscribe(() => {
           this.eS.list().subscribe((data) => {
             this.eS.setList(data);
-            this.snackBar.open(
-              '¡Estudio actualizado con éxito!',
-              'Cerrar',
-              {
-                duration: 3000,
-              }
-            );
+            this.snackBar.open('¡Estudio actualizado con éxito!', 'Cerrar', {
+              duration: 3000,
+            });
           });
         });
       } else {
@@ -130,8 +130,6 @@ export class InsertareditarestudioComponent implements OnInit {
       this.router.navigate(['/estudios']);
     } else {
       this.form.markAllAsTouched();
-
-      // Temblar los campos con error
       const controls = ['titulo', 'centro', 'fecha_inicio', 'fecha_fin'];
       controls.forEach((control) => {
         if (this.form.get(control)?.invalid) {
@@ -144,24 +142,14 @@ export class InsertareditarestudioComponent implements OnInit {
   init() {
     if (this.edicion) {
       this.eS.listId(this.id).subscribe((data) => {
-        this.form = new FormGroup(
-          {
-            codigo: new FormControl({ value: data.id, disabled: true }),
-            titulo: new FormControl(data.title_obtained, [
-              Validators.required,
-              Validators.pattern('^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$'),
-            ]),
-            centro: new FormControl(data.study_center, [
-              Validators.required,
-              Validators.pattern('^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$'),
-            ]),
-            fecha_inicio: new FormControl(data.start_date, Validators.required),
-            fecha_fin: new FormControl(data.end_date, Validators.required),
-          },
-          {
-            validators: fechasValidator,
-          }
-        );
+        this.form.patchValue({
+          codigo: data.id,
+          titulo: data.title_obtained,
+          centro: data.study_center,
+          fecha_inicio: data.start_date,
+          fecha_fin: data.end_date,
+        });
+        this.form.get('codigo')?.disable(); // deshabilitar después del patchValue
       });
     }
   }

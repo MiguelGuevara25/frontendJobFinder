@@ -51,7 +51,6 @@ export class ListarestudioComponent implements OnInit {
         this.eS.setList(data);
         this.dataSource.data = data;
         this.dataSource.paginator = this.paginator;
-
         this.snackBar.open('¡Estudio eliminado con éxito!', 'Cerrar', {
           duration: 3000,
         });
