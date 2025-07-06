@@ -1,6 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormGroup, FormsModule, ReactiveFormsModule, FormBuilder, Validators, FormControl } from '@angular/forms';
+import {
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  FormBuilder,
+  Validators,
+  FormControl,
+} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -10,24 +17,33 @@ import { OfertadetrabajoService } from '../../../services/ofertadetrabajo.servic
 
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Ofertadetrabajo } from '../../../models/ofertadetrabajo';
-
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { provideNativeDateAdapter } from '@angular/material/core';
+import { EmpresaService } from '../../../services/empresa.service';
+import { MatSelectModule } from '@angular/material/select';
+import { Empresa } from '../../../models/empresa';
 
 @Component({
   selector: 'app-insertareditarofertadetrabajo',
-  imports: [MatInputModule,
+  imports: [
+    ReactiveFormsModule,
+    MatDatepickerModule,
     MatFormFieldModule,
     MatButtonModule,
+    MatSelectModule,
+    MatInputModule,
     MatIconModule,
-    ReactiveFormsModule,
     CommonModule,
-    MatDatepickerModule,
-    FormsModule,],
+    FormsModule,
+  ],
   templateUrl: './insertareditarofertadetrabajo.component.html',
-  styleUrl: './insertareditarofertadetrabajo.component.css'
+  styleUrl: './insertareditarofertadetrabajo.component.css',
+  providers: [provideNativeDateAdapter()],
 })
 export class InsertareditarofertadetrabajoComponent {
   form: FormGroup = new FormGroup({});
-  Ofertadetrabajo: Ofertadetrabajo = new Ofertadetrabajo();
+  ofertaTrabajo: Ofertadetrabajo = new Ofertadetrabajo();
+  listEmpresa: Empresa[] = [];
 
   id: number = 0;
   edicion: boolean = false;
@@ -35,9 +51,11 @@ export class InsertareditarofertadetrabajoComponent {
   constructor(
     private oS: OfertadetrabajoService,
     private FormBuilder: FormBuilder,
-    private Router: Router,
-    private route: ActivatedRoute
-  ) { }
+    private router: Router,
+    private route: ActivatedRoute,
+    private snackBar: MatSnackBar,
+    private eS: EmpresaService
+  ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((data: Params) => {
@@ -49,40 +67,45 @@ export class InsertareditarofertadetrabajoComponent {
     this.form = this.FormBuilder.group({
       id: [''],
       name: ['', Validators.required],
-      descripcion: ['',Validators.required],
+      description: ['', Validators.required],
       salary: ['', Validators.required],
-      contractType: ['', Validators.required],
+      typeofcontract: ['', Validators.required],
       experience: ['', Validators.required],
       location: ['', Validators.required],
-      oferta: ['', Validators.required],
+      empresa: ['', Validators.required],
+    });
+
+    this.eS.list().subscribe((data) => {
+      console.log(data);
+      this.listEmpresa = data;
     });
   }
 
   aceptar() {
     if (this.form.valid) {
-      this.Ofertadetrabajo.id = this.form.value.id;
-      this.Ofertadetrabajo.name = this.form.value.startDate;
-      this.Ofertadetrabajo.description = this.form.value.startDate;
-      this.Ofertadetrabajo.salary = this.form.value.endDate;
-      this.Ofertadetrabajo.typeofcontract = this.form.value.salary;
-      this.Ofertadetrabajo.experience = this.form.value.contractType;
-      this.Ofertadetrabajo.location = this.form.value.address;
-      this.Ofertadetrabajo.empresa.id = this.form.value.oferta;
+      this.ofertaTrabajo.id = this.form.value.id;
+      this.ofertaTrabajo.name = this.form.value.name;
+      this.ofertaTrabajo.description = this.form.value.description;
+      this.ofertaTrabajo.salary = this.form.value.salary;
+      this.ofertaTrabajo.typeofcontract = this.form.value.typeofcontract;
+      this.ofertaTrabajo.experience = this.form.value.experience;
+      this.ofertaTrabajo.location = this.form.value.location;
+      this.ofertaTrabajo.empresa.id = this.form.value.empresa;
 
       if (this.edicion) {
-        this.oS.update(this.Ofertadetrabajo).subscribe(() => {
+        this.oS.update(this.ofertaTrabajo).subscribe(() => {
           this.oS.list().subscribe((data) => {
             this.oS.setList(data);
           });
         });
       } else {
-        this.oS.insert(this.Ofertadetrabajo).subscribe(() => {
+        this.oS.insert(this.ofertaTrabajo).subscribe(() => {
           this.oS.list().subscribe((data) => {
             this.oS.setList(data);
           });
         });
       }
-      this.Router.navigate(['ofertadetrabajo']);
+      this.router.navigate(['ofertadetrabajo']);
     }
   }
   init() {
@@ -92,14 +115,18 @@ export class InsertareditarofertadetrabajoComponent {
           id: new FormControl(data.id),
           name: new FormControl(data.name),
           salary: new FormControl(data.salary),
-          contractType: new FormControl(data.typeofcontract),
+          typeofcontract: new FormControl(data.typeofcontract),
           experience: new FormControl(data.experience),
           location: new FormControl(data.location),
-
         });
       });
     }
   }
+
+  cancelar() {
+    this.snackBar.open('Operación cancelada', 'Cerrar', {
+      duration: 3000,
+    });
+    this.router.navigate(['/ofertadetrabajo']);
+  }
 }
-
-

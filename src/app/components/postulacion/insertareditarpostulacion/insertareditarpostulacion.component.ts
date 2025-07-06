@@ -66,7 +66,7 @@ export class InsertareditarpostulacionComponent {
       this.postulacion.state = this.form.value.salary;
       this.postulacion.acceptedcandidate = this.form.value.contractType;
       this.postulacion.ofertaTrabajo.id = this.form.value.oferta
-    
+
 
       if (this.edicion) {
         this.pS.update(this.postulacion).subscribe(() => {

@@ -16,6 +16,12 @@ import { Entrevista } from '../../../models/entrevista';
 import { EntrevistaService } from '../../../services/entrevista.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MatButton } from '@angular/material/button';
+import { MatTimepickerModule } from '@angular/material/timepicker';
+import { MatSelectModule } from '@angular/material/select';
+import { Usuario } from '../../../models/usuario';
+import { UsuarioService } from '../../../services/usuario.service';
+import { Postulacion } from '../../../models/postulacion';
+import { PostulacionService } from '../../../services/postulacion.service';
 
 @Component({
   selector: 'app-insertar-editar-entrevista',
@@ -23,7 +29,9 @@ import { MatButton } from '@angular/material/button';
     ReactiveFormsModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatTimepickerModule,
     MatFormFieldModule,
+    MatSelectModule,
     MatInputModule,
     MatRadioModule,
     CommonModule,
@@ -35,30 +43,44 @@ import { MatButton } from '@angular/material/button';
 export class InsertarEditarEntrevistaComponent implements OnInit {
   form: FormGroup = new FormGroup({});
   entrevista: Entrevista = new Entrevista();
+  listUsuario: Usuario[] = [];
+  listPostulacion: Postulacion[] = [];
 
   id: number = 0;
   edicion: boolean = false;
 
   constructor(
-    private eS: EntrevistaService,
     private formBuilder: FormBuilder,
-    private router: Router,
-    private route: ActivatedRoute
+    private pS: PostulacionService,
+    private eS: EntrevistaService,
+    private route: ActivatedRoute,
+    private uS: UsuarioService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
+    this.form = this.formBuilder.group({
+      idEntrevista: [''],
+      date: ['', Validators.required],
+      hour: ['', Validators.required],
+      postulacion: ['', Validators.required],
+      usuario: ['', Validators.required],
+      modality: ['', Validators.required],
+      result: ['', Validators.required],
+    });
+
     this.route.params.subscribe((data: Params) => {
       this.id = data['id'];
       this.edicion = data['id'] != null;
       this.init();
     });
 
-    this.form = this.formBuilder.group({
-      idEntrevista: [''],
-      date: ['', Validators.required],
-      hour: ['', Validators.required],
-      modality: ['', Validators.required],
-      result: ['', Validators.required],
+    this.pS.list().subscribe((data) => {
+      this.listPostulacion = data;
+    });
+
+    this.uS.listar().subscribe((data) => {
+      this.listUsuario = data;
     });
   }
 

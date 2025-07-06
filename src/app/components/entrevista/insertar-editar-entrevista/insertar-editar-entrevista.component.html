@@ -39,15 +39,38 @@
       <!-- Campo Hour -->
       <mat-form-field class="example-full-width">
         <mat-label>Hora</mat-label>
-        <input
-          matInput
-          formControlName="hour"
-          type="time"
-          placeholder="HH:mm"
-        />
+        <input matInput [matTimepicker]="timepicker" formControlName="hour" />
+        <mat-timepicker #timepicker />
+        <mat-timepicker-toggle [for]="timepicker" matSuffix />
         <mat-error *ngIf="form.get('hour')?.hasError('required')">
           La hora es obligatoria
         </mat-error>
+      </mat-form-field>
+
+      <br />
+
+      <mat-form-field>
+        <mat-label>Postulacion</mat-label>
+        <mat-select formControlName="postulacion">
+          @for (postulacion of listPostulacion; track postulacion) {
+          <mat-option [value]="postulacion.id">{{
+            postulacion.ofertaTrabajo.name
+          }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <br />
+
+      <mat-form-field>
+        <mat-label>Usuario</mat-label>
+        <mat-select formControlName="usuario">
+          @for (user of listUsuario; track user) {
+          <mat-option [value]="user.idUsuario">{{
+            user.nombreUsuario
+          }}</mat-option>
+          }
+        </mat-select>
       </mat-form-field>
 
       <br />

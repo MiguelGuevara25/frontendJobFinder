@@ -101,6 +101,9 @@ export const routes: Routes = [
         path: 'verperfil/:id',
         component: VerperfilComponent,
       },
+      {
+        path: 'activosusuarios', component: UsuariosactivosComponent
+      },
     ],
   },
 
@@ -262,6 +265,7 @@ export const routes: Routes = [
         path: 'ediciones/:id',
         component: InsertareditarempresaComponent,
       },
+
     ],
   },
 
@@ -359,33 +363,29 @@ export const routes: Routes = [
     component: MapaComponent,
   },
   {
-    path: 'reportes',
-    component: ReportesComponent,
-    children: [
+    path:  'reportes',
+    component:  ReportesComponent,
+    children:  [
       {
-        path: 'cantidadcertificadoanio',
+        path:  'cantidadcertificadoanio',
         component: CantidadcertificadosComponent,
       },
       {
-        path: 'cantidadplataformacurso',
+        path:  'cantidadplataformacurso',
         component: CantidadplataformacursoComponent,
       },
       {
-        path: 'cantidadempresacurso',
-        component: CantidadempresacursoComponent,
+        path:'cantidadempresacurso', component: CantidadempresacursoComponent
       },
       {
-        path: 'activosusuarios',
-        component: UsuariosactivosComponent,
+        path:'activosusuarios', component: UsuariosactivosComponent
       },
       {
-        path: 'totalregistrocurso',
-        component: TotalregistroscursosComponent,
+        path:'totalregistrocurso', component: TotalregistroscursosComponent
       },
       {
-        path: 'promedioinscripcioncurso',
-        component: PromedioinscripcioncursosComponent,
-      },
-    ],
-  },
+        path:'promedioinscripcioncurso', component: PromedioinscripcioncursosComponent
+      }
+    ]
+  }
 ];
