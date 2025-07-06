@@ -5,20 +5,20 @@
 <div class="contenedor-tabla">
   <form [formGroup]="form" (ngSubmit)="aceptar()" class="formulario-estilizado">
     <!-- Campo ID (solo si está en edición) -->
+    <div *ngIf="edicion">
+
     <mat-form-field
-      *ngIf="edicion"
+
       appearance="fill"
       class="form-control-id"
-      [ngClass]="{
-        shake: form.get('codigo')?.invalid && form.get('codigo')?.touched
-      }"
     >
       <mat-label>ID</mat-label>
-      <input matInput placeholder="ID" formControlName="codigo" />
+      <input matInput placeholder="ID" formControlName="codigo" readonly />
       <mat-error *ngIf="form.get('codigo')?.hasError('required')">
         El código es obligatorio
       </mat-error>
     </mat-form-field>
+    </div>
 
     <!-- Campo Certificado -->
     <mat-form-field
@@ -37,6 +37,7 @@
         maxlength="150"
         #certificadoInput
       />
+      
 
       <!-- Hints (recomendación + contador) -->
       <mat-hint align="end">
@@ -103,6 +104,7 @@
         [matDatepicker]="pickerEmision"
         formControlName="fecha_emision"
         placeholder="Selecciona fecha"
+        [matDatepickerFilter]="filtrarFechaEmision"
       />
       <mat-datepicker-toggle
         matIconSuffix
@@ -133,6 +135,7 @@
         [matDatepicker]="pickerVencimiento"
         formControlName="fecha_vencimiento"
         placeholder="Selecciona fecha"
+        [matDatepickerFilter]="filtrarFechaVencimiento"
       />
       <mat-datepicker-toggle
         matIconSuffix

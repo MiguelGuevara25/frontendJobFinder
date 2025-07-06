@@ -33,7 +33,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     MatNativeDateModule,
     MatRadioModule,
     CommonModule,
-
     MatIconModule,
     MatButtonModule,
   ],
@@ -63,40 +62,54 @@ export class InsertareditarCertificadoComponent implements OnInit {
     });
 
     this.form = this.formBuilder.group({
-      codigo: [''],
-      certificado: ['', [Validators.required,  Validators.minLength(3), Validators.maxLength(150)]],
-      entidad: ['', [Validators.required,  Validators.minLength(3), Validators.maxLength(150)]],
+      codigo: [{ value: '', disabled: true }],
+      certificado: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(150),
+        ],
+      ],
+      entidad: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(150),
+        ],
+      ],
       fecha_emision: ['', Validators.required],
       fecha_vencimiento: ['', Validators.required],
     });
   }
   aceptar() {
     if (this.form.valid) {
-    const fechaEmision = new Date(this.form.value.fecha_emision);
-    const fechaVencimiento = new Date(this.form.value.fecha_vencimiento);
-    const hoy = new Date();
+      const fechaEmision = new Date(this.form.value.fecha_emision);
+      const fechaVencimiento = new Date(this.form.value.fecha_vencimiento);
+      const hoy = new Date();
 
-    this.form.get('fecha_emision')?.setErrors(null);
-    this.form.get('fecha_vencimiento')?.setErrors(null);
+      this.form.get('fecha_emision')?.setErrors(null);
+      this.form.get('fecha_vencimiento')?.setErrors(null);
 
-    let hayError = false;
+      let hayError = false;
 
-    // Validación: fecha de emisión no puede ser futura
-    if (fechaEmision > hoy) {
-      this.form.get('fecha_emision')?.setErrors({ fechaFutura: true });
-      hayError = true;
-    }
+      // Validación: fecha de emisión no puede ser futura
+      if (fechaEmision > hoy) {
+        this.form.get('fecha_emision')?.setErrors({ fechaFutura: true });
+        hayError = true;
+      }
 
-    // Validación: vencimiento no puede ser antes que emisión
-    if (fechaVencimiento < fechaEmision) {
-      this.form.get('fecha_vencimiento')?.setErrors({ antesDeEmision: true });
-      hayError = true;
-    }
+      // Validación: vencimiento no puede ser antes que emisión
+      if (fechaVencimiento < fechaEmision) {
+        this.form.get('fecha_vencimiento')?.setErrors({ antesDeEmision: true });
+        hayError = true;
+      }
 
-    if (hayError) {
-      return; 
-    }
-      this.certificado.idCertificado = this.form.value.codigo;
+      if (hayError) {
+        return;
+      }
+      this.certificado.idCertificado = this.id;
       this.certificado.nombreCertificado = this.form.value.certificado;
       this.certificado.entidadEmisoraCertificado = this.form.value.entidad;
       this.certificado.fechaEmisionCertificado = this.form.value.fecha_emision;
@@ -132,12 +145,12 @@ export class InsertareditarCertificadoComponent implements OnInit {
   init() {
     if (this.edicion) {
       this.cS.listId(this.id).subscribe((data) => {
-        this.form = new FormGroup({
-          codigo: new FormControl(data.idCertificado),
-          certificado: new FormControl(data.nombreCertificado),
-          entidad: new FormControl(data.entidadEmisoraCertificado),
-          fecha_emision: new FormControl(data.fechaEmisionCertificado),
-          fecha_vencimiento: new FormControl(data.fechaVencimientoCertificado),
+        this.form.patchValue({
+          codigo: data.idCertificado,
+          certificado: data.nombreCertificado,
+          entidad: data.entidadEmisoraCertificado,
+          fecha_emision: data.fechaEmisionCertificado,
+          fecha_vencimiento: data.fechaVencimientoCertificado,
         });
       });
     }
@@ -148,4 +161,30 @@ export class InsertareditarCertificadoComponent implements OnInit {
     });
     this.router.navigate(['/certificados']);
   }
+  filtrarFechaEmision = (fecha: Date | null): boolean => {
+  if (!fecha) return false;
+  const hoy = new Date();
+  hoy.setHours(0, 0, 0, 0); // quitamos hora
+
+  const fechaSeleccionada = new Date(fecha);
+
+  return fechaSeleccionada <= hoy;
+};
+
+
+filtrarFechaVencimiento = (fecha: Date | null): boolean => {
+  if (!fecha) return false;
+
+  const fechaEmisionRaw = this.form.get('fecha_emision')?.value;
+  if (!fechaEmisionRaw) return true;
+
+  const fechaSeleccionada = new Date(fecha);
+  fechaSeleccionada.setHours(0, 0, 0, 0);
+
+  const fechaEmision = new Date(fechaEmisionRaw);
+  fechaEmision.setHours(0, 0, 0, 0);
+
+  return fechaSeleccionada > fechaEmision;
+};
+
 }

@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Usuario } from '../models/usuario';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { usuariosActivosDTO } from '../models/usuariosActivosDTO';
 
 const us_base_url = environment.base
 @Injectable({
@@ -33,5 +34,8 @@ export class UsuarioService {
   }
   delete(id: number) {
     return this.http.delete(`${this.url}/${id}`);
+  }
+  listarActivos(estado: boolean): Observable<usuariosActivosDTO[]> {
+    return this.http.get<usuariosActivosDTO[]>(`${this.url}/activos?estado=${estado}`);
   }
 }

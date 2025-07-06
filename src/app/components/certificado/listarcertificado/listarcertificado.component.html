@@ -1,52 +1,109 @@
 <div class="contenedor-titulo">
   <h1 class="titulo-centrado">Lista de Certificados</h1>
+</div>
+<div class="main-content-wrapper">
   <div class="acciones-superiores">
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" class="campo-busqueda">
       <mat-label>Buscar</mat-label>
       <mat-icon matPrefix>search</mat-icon>
       <input matInput (keyup)="filtrar($event)" />
     </mat-form-field>
 
-    <button mat-raised-button color="primary" [routerLink]="'/certificados/insertareditar'">
-      <mat-icon>person_add</mat-icon>
-      Registrar
-    </button>
+    <div class="botones-acciones">
+      <button
+        mat-raised-button
+        class="boton-registrar"
+        color="primary"
+        [routerLink]="'/certificados/insertareditar'"
+      >
+        <mat-icon>verified</mat-icon>
+        Registrar
+      </button>
+
+      <button
+        mat-raised-button
+        class="boton-registrar"
+        color="accent"
+        (click)="verCertificadosVigentes()"
+      >
+        <mat-icon>visibility</mat-icon>
+        Ver vigentes
+      </button>
+
+      <button mat-raised-button class="boton-registrar" color="warn" (click)="cargarCertificados()">
+        <mat-icon>restore</mat-icon>
+        Ver todos
+      </button>
+    </div>
   </div>
-</div>
 
-<!-- Cards horizontales -->
-<div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-bottom: 1rem;">
-  <mat-card *ngFor="let certificado of paginados" style="width: 300px;" class="mat-elevation-z4">
-    <mat-card-header>
-      <mat-card-title>{{ certificado.nombreCertificado }}</mat-card-title>
-      <mat-card-subtitle>{{ certificado.entidadEmisoraCertificado }}</mat-card-subtitle>
-    </mat-card-header>
+  <!-- Cards horizontales -->
+  <div class="contenedor-cards">
+    <ng-container *ngIf="hasData; else sinDatos">
+      <mat-card
+        class="example-card"
+        appearance="outlined"
+        *ngFor="let certificado of paginados"
+      >
+        <mat-card-header>
+          <div mat-card-avatar class="large-person-avatar">
+            <mat-icon fontIcon="verified"></mat-icon>
+          </div>
+          <mat-card-title>{{ certificado.nombreCertificado }}</mat-card-title>
+          <mat-card-subtitle
+            >{{ certificado.entidadEmisoraCertificado }}
+            <br />
+            Creado el
+            {{ certificado.fechaEmisionCertificado | date : "dd/MM/yyyy" }}
+          </mat-card-subtitle>
+        </mat-card-header>
 
-    <mat-card-content>
-      <p><strong>ID:</strong> {{ certificado.idCertificado }}</p>
-      <p><strong>Fecha Emisión:</strong> {{ certificado.fechaEmisionCertificado | date }}</p>
-      <p><strong>Fecha Vencimiento:</strong> {{ certificado.fechaVencimientoCertificado | date }}</p>
-    </mat-card-content>
+        <mat-card-content>
+          <p>ID: {{ certificado.idCertificado }}</p>
+          <p>Fecha Emisión:{{ certificado.fechaEmisionCertificado | date }}</p>
+          <p>
+            Fecha Vencimiento:{{
+              certificado.fechaVencimientoCertificado | date
+            }}
+          </p>
+        </mat-card-content>
 
-    <mat-card-actions>
-      <button mat-icon-button color="primary" [routerLink]="'/certificados/ediciones/' + certificado.idCertificado">
-        <mat-icon>edit</mat-icon>
-      </button>
-      <button mat-icon-button color="warn" (click)="eliminar(certificado.idCertificado)">
-        <mat-icon>delete</mat-icon>
-      </button>
-    </mat-card-actions>
-  </mat-card>
-</div>
+        <mat-card-actions>
+          <button
+            mat-icon-button
+            color="primary"
+            [routerLink]="['ediciones', certificado.idCertificado]"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            color="warn"
+            (click)="eliminar(certificado.idCertificado)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </ng-container>
+    <ng-template #sinDatos>
+      <div class="no-data">
+        <mat-icon class="no-data-icon">info_outline</mat-icon>
+        <p class="no-data-message">No hay certificados registrados.</p>
+      </div>
+    </ng-template>
+  </div>
 
-<!-- Paginador centrado abajo -->
-<div style="display: flex; justify-content: center;">
-  <mat-paginator
-    [length]="dataSource.filteredData.length"
-    [pageSize]="pageSize"
-    [pageIndex]="pageIndex"
-    [pageSizeOptions]="[3, 6, 9]"
-    [showFirstLastButtons]="true"
-    (page)="cambiarPagina($event)">
-  </mat-paginator>
+  <!-- Paginador centrado abajo -->
+  <div class="paginator-container">
+    <mat-paginator
+      [length]="dataSource.filteredData.length"
+      [pageSize]="pageSize"
+      [pageIndex]="pageIndex"
+      [pageSizeOptions]="[3, 6, 9]"
+      [showFirstLastButtons]="true"
+      (page)="cambiarPagina($event)"
+    >
+    </mat-paginator>
+  </div>
 </div>

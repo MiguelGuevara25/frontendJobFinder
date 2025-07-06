@@ -1,0 +1,160 @@
+<div class="container">
+  <div style="text-align: center; margin: 5%">
+    <h1>Registro de empresa</h1>
+  </div>
+
+  <div style="text-align: center; margin: 5%">
+    <form [formGroup]="form" (submit)="aceptar()">
+      <!-- Campo ID  -->
+      <mat-form-field class="example-full-width" *ngIf="edicion">
+        <mat-label>ID</mat-label>
+        <input matInput formControlName="idEmpresa" />
+        <mat-error *ngIf="form.get('idEmpresa')?.hasError('required')">
+          El código es obligatorio
+        </mat-error>
+      </mat-form-field>
+
+      <br />
+
+      <!-- Campo Nombre -->
+      <mat-form-field
+        appearance="fill"
+        class="form-control-nombre"
+        [ngClass]="{
+          shake: form.get('Nombre')?.invalid && form.get('Nombre')?.touched
+        }"
+      >
+        <mat-label>Nombre Empresa</mat-label>
+        <input matInput placeholder="Nombre" formControlName="Nombre" />
+        @if (form.get('Nombre')?.hasError('required')) {
+        <mat-error>El nombre de la empresa es obligatoria</mat-error>
+        }
+      </mat-form-field>
+
+      <br />
+
+      <!-- Campo Descripcion -->
+
+      <mat-form-field
+        appearance="fill"
+        class="form-control-descripcion"
+        [ngClass]="{
+          shake:
+            form.get('Descripcion')?.invalid && form.get('Descripcion')?.touched
+        }"
+      >
+        <mat-label>Descripcion de la Empresa</mat-label>
+        <input
+          matInput
+          placeholder="Descripcion"
+          formControlName="Descripcion"
+        />
+        @if (form.get('Descripcion')?.hasError('required')) {
+        <mat-error>El descripcion de la empresa es obligatoria</mat-error>
+        }
+      </mat-form-field>
+
+      <br />
+
+      <!-- Campo Sector-->
+
+      <mat-form-field
+        appearance="fill"
+        class="form-control-sector"
+        [ngClass]="{
+          shake: form.get('Sector')?.invalid && form.get('Sector')?.touched
+        }"
+      >
+        <mat-label>Sector de la Empresa</mat-label>
+        <input matInput placeholder="Sector" formControlName="Sector" />
+        @if (form.get('Sector')?.hasError('required')) {
+        <mat-error>El sector de la empresa es obligatoria</mat-error>}
+      </mat-form-field>
+
+      <br />
+      <!-- Campo Website-->
+
+      <mat-form-field
+        appearance="fill"
+        class="form-control-website"
+        [ngClass]="{
+          shake: form.get('Website')?.invalid && form.get('Website')?.touched
+        }"
+      >
+        <mat-label>Sector de la Empresa</mat-label>
+        <input matInput placeholder="Website" formControlName="Website" />
+        @if (form.get('Website')?.hasError('required')) {
+        <mat-error>El Website de la empresa es obligatoria</mat-error>}
+      </mat-form-field>
+
+      <br />
+      <!-- Campo Direccion-->
+
+      <mat-form-field
+        appearance="fill"
+        class="form-control-address"
+        [ngClass]="{
+          shake: form.get('address')?.invalid && form.get('address')?.touched
+        }"
+      >
+        <mat-label>Direccion de la Empresa</mat-label>
+        <input matInput placeholder="address" formControlName="address" />
+        @if (form.get('address')?.hasError('required')) {
+        <mat-error>El Website de la empresa es obligatoria</mat-error>}
+      </mat-form-field>
+
+      <br />
+
+      <!-- Campo Telefono -->
+      <mat-form-field class="example-full-width">
+        <mat-label>Telefono</mat-label>
+        <input matInput formControlName="telephone" type="number" />
+        <mat-error *ngIf="form.get('telephone')?.hasError('required')">
+          El numero de telefono es obligatorio
+        </mat-error>
+      </mat-form-field>
+
+      <br />
+      <!-- Campo Mail-->
+
+      <mat-form-field
+        appearance="fill"
+        class="form-control-mail"
+        [ngClass]="{
+          shake: form.get('mail')?.invalid && form.get('mail')?.touched
+        }"
+      >
+        <mat-label>Mail de la Empresa</mat-label>
+        <input matInput placeholder="mail" formControlName="mail" />
+        @if (form.get('mail')?.hasError('required')) {
+        <mat-error>El mail de la empresa es obligatoria</mat-error>}
+      </mat-form-field>
+
+      <br />
+
+      <!-- Campo Location -->
+      <mat-form-field
+        appearance="fill"
+        class="form-control-location"
+        [ngClass]="{
+          shake: form.get('location')?.invalid && form.get('location')?.touched
+        }"
+      >
+        <mat-label>Locacion de la Empresa</mat-label>
+        <input matInput placeholder="location" formControlName="location" />
+        @if (form.get('location')?.hasError('required')) {
+        <mat-error>El locacion de la empresa es obligatoria</mat-error>}
+      </mat-form-field>
+
+      <br />
+
+      <!-- Botón Aceptar-->
+      <button mat-raised-button color="primary" type="submit">Aceptar</button>
+
+      <!-- Botón Cancelar-->
+      <button mat-raised-button color="warn" type="button" (click)="cancelar()">
+        Cancelar
+      </button>
+    </form>
+  </div>
+</div>

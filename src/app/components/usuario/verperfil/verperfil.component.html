@@ -1,0 +1,55 @@
+<div class="contenedor-titulo">
+  <h1 class="titulo-centrado">Perfil de Usuario</h1>
+</div>
+
+<div class="main-content-wrapper" *ngIf="usuario">
+  <div class="contenedor-cards">
+    <mat-card class="perfil-card" appearance="outlined">
+      <mat-card-header>
+        <!-- Avatar tipo foto de perfil -->
+        <div class="avatar-con-foto">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/847/847969.png"
+            alt="Foto de usuario"
+          />
+        </div>
+
+        <div class="perfil-nombre">
+          <mat-card-title>
+            {{ usuario.nombreUsuario }} {{ usuario.apellidoUsuario }}
+          </mat-card-title>
+          <mat-card-subtitle>
+            Edad: {{ usuario.edadUsuario }}
+          </mat-card-subtitle>
+        </div>
+      </mat-card-header>
+
+      <mat-card-content>
+        <p>
+          <mat-icon fontIcon="email" inline></mat-icon>
+          {{ usuario.correoUsuario }}
+        </p>
+        <p>
+          <mat-icon fontIcon="phone" inline></mat-icon>
+          {{ usuario.telefonoUsuario }}
+        </p>
+        <p>
+          <mat-icon fontIcon="home" inline></mat-icon>
+          {{ usuario.direccionUsuario }}
+        </p>
+        <p>
+          <mat-icon fontIcon="person_outline" inline></mat-icon>
+          Usuario: {{ usuario.usuarioUsuario }}
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="acciones-inferiores">
+    <button mat-stroked-button class="boton-registrar" color="primary" (click)="volver()">
+      <mat-icon>arrow_back</mat-icon>
+      Volver
+    </button>
+  </div>
+</div>
+
