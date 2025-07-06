@@ -34,21 +34,27 @@
       </ng-container>
 
       <ng-container matColumnDef="c2">
-        <th mat-header-cell *matHeaderCellDef class="th-centrado">Titulo obtenido</th>
+        <th mat-header-cell *matHeaderCellDef class="th-centrado">
+          Titulo obtenido
+        </th>
         <td mat-cell *matCellDef="let element" class="th-centrado">
           {{ element.title_obtained }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="c3">
-        <th mat-header-cell *matHeaderCellDef class="th-centrado">Centro de estudio</th>
+        <th mat-header-cell *matHeaderCellDef class="th-centrado">
+          Centro de estudio
+        </th>
         <td mat-cell *matCellDef="let element" class="th-centrado">
           {{ element.study_center }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="c4">
-        <th mat-header-cell *matHeaderCellDef class="th-centrado">Fecha de inicio</th>
+        <th mat-header-cell *matHeaderCellDef class="th-centrado">
+          Fecha de inicio
+        </th>
         <td mat-cell *matCellDef="let element" class="th-centrado">
           {{ element.start_date | date : "dd/MM/yyyy" }}
         </td>
@@ -62,7 +68,9 @@
       </ng-container>
 
       <ng-container matColumnDef="c6">
-        <th mat-header-cell *matHeaderCellDef class="th-centrado">Actualizar</th>
+        <th mat-header-cell *matHeaderCellDef class="th-centrado">
+          Actualizar
+        </th>
         <td mat-cell *matCellDef="let element" class="th-centrado">
           <button
             mat-icon-button

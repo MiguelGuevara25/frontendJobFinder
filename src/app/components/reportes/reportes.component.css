@@ -11,21 +11,41 @@
   color: #3f51b5;
 }
 
-.grid-dashboard {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-  gap: 30px;
+/* Estilo para mat-tab */
+::ng-deep .mat-tab-group {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
+  padding: 20px;
 }
 
+/* Estilo para las etiquetas de las pestañas */
+::ng-deep .mat-tab-label {
+  font-weight: bold;
+  color: #3f51b5;
+}
+
+/* Estilo al seleccionar pestaña */
+::ng-deep .mat-tab-label.mat-tab-label-active {
+  color: #1a237e;
+}
+
+/* Tarjeta que contiene cada reporte */
 .card-estadistica {
   border: 1.5px solid #e0e0e0;
   border-radius: 16px;
   padding: 20px;
   background: #ffffff;
-  box-shadow: 0px 4px 12px rgba(0,0,0,0.05);
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
   transition: transform 0.2s ease;
+  margin-top: 20px;
 }
 
 .card-estadistica:hover {
   transform: scale(1.02);
+}
+
+/* Responsive si algún contenido es muy grande */
+mat-card {
+  overflow-x: auto;
 }

@@ -1,4 +1,6 @@
 import { Empresa } from './empresa';
+import { Postulacion } from './postulacion';
+import { Usuario } from './usuario';
 
 export class Contrato {
   id: number = 0;
@@ -6,7 +8,7 @@ export class Contrato {
   endDate: Date = new Date();
   salary: number = 0;
   contractType: string = '';
-  // user: Usuario = new Usuario();
-  // postulacion: Postulacion = new Postulacion();
+  usuarios: Usuario = new Usuario();
+  postulacion: Postulacion = new Postulacion();
   empresa: Empresa = new Empresa();
 }
