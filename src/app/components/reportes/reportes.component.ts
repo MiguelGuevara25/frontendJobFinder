@@ -1,14 +1,17 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, RouterOutlet } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { CantidadcertificadosComponent } from './cantidadcertificados/cantidadcertificados.component';
 import { CantidadempresacursoComponent } from './cantidadempresacurso/cantidadempresacurso.component';
 import { CantidadplataformacursoComponent } from './cantidadplataformacurso/cantidadplataformacurso.component';
 import { MatCardModule } from '@angular/material/card';
+import { CurriculumpromedioComponent } from "./curriculumpromedio/curriculumpromedio.component";
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatTabsModule } from '@angular/material/tabs';
 
 
 @Component({
   selector: 'app-reportes',
-  imports: [CantidadcertificadosComponent,CantidadempresacursoComponent,CantidadplataformacursoComponent,MatCardModule],
+  imports: [MatTabsModule,MatExpansionModule,CantidadcertificadosComponent, CantidadempresacursoComponent, CantidadplataformacursoComponent, MatCardModule, CurriculumpromedioComponent],
   templateUrl: './reportes.component.html',
   styleUrl: './reportes.component.css',
 })

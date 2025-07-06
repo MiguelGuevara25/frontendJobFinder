@@ -54,6 +54,10 @@ import { UsuariosactivosComponent } from './components/reportes/usuariosactivos/
 import { TotalregistroscursosComponent } from './components/reportes/totalregistroscursos/totalregistroscursos.component';
 import { PromedioinscripcioncursosComponent } from './components/reportes/promedioinscripcioncursos/promedioinscripcioncursos.component';
 import { ContratosactivosComponent } from './components/reportes/contratosactivos/contratosactivos.component';
+import { CurriculumpromedioComponent } from './components/reportes/curriculumpromedio/curriculumpromedio.component';
+
+
+
 
 export const routes: Routes = [
   //Ejecucion Inicial
@@ -367,28 +371,31 @@ export const routes: Routes = [
     component: MapaComponent,
   },
   {
-    path:  'reportes',
-    component:  ReportesComponent,
-    children:  [
+    path: 'reportes',
+    component: ReportesComponent,
+    children: [
       {
-        path:  'cantidadcertificadoanio',
+        path: 'cantidadcertificadoanio',
         component: CantidadcertificadosComponent,
       },
       {
-        path:  'cantidadplataformacurso',
+        path: 'cantidadplataformacurso',
         component: CantidadplataformacursoComponent,
       },
       {
-        path:'cantidadempresacurso', component: CantidadempresacursoComponent
+        path: 'cantidadempresacurso', component: CantidadempresacursoComponent
       },
       {
-        path:'activosusuarios', component: UsuariosactivosComponent
+        path: 'activosusuarios', component: UsuariosactivosComponent
       },
       {
-        path:'totalregistrocurso', component: TotalregistroscursosComponent
+        path: 'totalregistrocurso', component: TotalregistroscursosComponent
       },
       {
-        path:'promedioinscripcioncurso', component: PromedioinscripcioncursosComponent
+        path: 'promedioinscripcioncurso', component: PromedioinscripcioncursosComponent
+      },
+      {
+        path: 'promediocurriculum', component: CurriculumpromedioComponent
       }
     ]
   }
