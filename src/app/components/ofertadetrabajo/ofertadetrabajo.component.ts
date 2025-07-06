@@ -5,10 +5,16 @@ import { ListarofertadetrabajoComponent } from '../certificado/listarcertificado
 @Component({
   selector: 'app-ofertadetrabajo',
   imports: [RouterOutlet, ListarofertadetrabajoComponent],
-  templateUrl: './ofertadetrabajo.html',
-  styleUrl: './ofertadetrabajo.css'
+  templateUrl: './ofertadetrabajo.component.html',
+  styleUrl: './ofertadetrabajo.component.css'
 })
 export class Ofertadetrabajo {
+  id: any;
+  name: any;
+  salary: any;
+  contractType: any;
+  experience: any;
+  location: any;
   constructor (public route: ActivatedRoute){}
 
 }
