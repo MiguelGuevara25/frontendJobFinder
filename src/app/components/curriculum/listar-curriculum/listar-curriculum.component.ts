@@ -23,7 +23,6 @@ import { MatCardModule } from '@angular/material/card';
 export class ListarCurriculumComponent implements OnInit, AfterViewInit {
 
   dataSource: MatTableDataSource<Curriculum> = new MatTableDataSource()
-  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6'];
   dataFiltradaPaginada: Curriculum[] = [];
   pageSize = 3;
   pageIndex = 0;
@@ -36,10 +35,10 @@ export class ListarCurriculumComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit(): void {
-    this.curricuServi.listar().subscribe((us_data) => {
-      this.dataSource = new MatTableDataSource(us_data)
+    this.curricuServi.listar().subscribe((data) => {
+      this.dataSource = new MatTableDataSource(data)
       this.dataSource.paginator = this.paginator; // <== aquí lo asignas
-    })
+    });
     this.curricuServi.getList().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator; // <== aquí lo asignas

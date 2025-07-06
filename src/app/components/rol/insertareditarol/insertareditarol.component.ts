@@ -24,7 +24,7 @@ export class InsertareditarolComponent {
   rol: Rol = new Rol();
   id: number = 0;
   edicion: boolean = false;
-
+  usuario: Usuario= new Usuario();
   listaUsuario: Usuario[] = []
 
   constructor(
@@ -38,16 +38,17 @@ export class InsertareditarolComponent {
   ) { }
 
   ngOnInit(): void {
+    
+
+    this.form = this.formBuilder.group({
+      id: [{ value: '', disabled: true }],
+      nombre: ['', [Validators.required]],
+      usuario: ['', [Validators.required]],
+    });
     this.route.params.subscribe((data: Params) => {
       this.id = data['id'];
       this.edicion = data['id'] != null;
       this.init();
-    });
-
-    this.form = this.formBuilder.group({
-      id: [''],
-      nombre: ['', [Validators.required]],
-      usuario: ['', [Validators.required]],
     });
 
     this.uS.listar().subscribe(data => {
@@ -56,7 +57,7 @@ export class InsertareditarolComponent {
   }
   aceptar() {
     if (this.form.valid) {
-      this.rol.id = this.form.value.id
+      this.rol.id = this.id
       this.rol.rol = this.form.value.nombre
       this.rol.user = { idUsuario: this.form.value.usuario } as Usuario;
 
@@ -78,18 +79,20 @@ export class InsertareditarolComponent {
               duration: 3000,
             });
           });
-        });
+        
+    });
       }
       this.router.navigate(['rol']);
+    
     }
   }
   init() {
     if (this.edicion) {
       this.rS.listId(this.id).subscribe((data) => {
-        this.form = new FormGroup({
-          id: new FormControl(data.id),
-          nombre: new FormControl(data.rol),
-          usuario: new FormControl(data.user),
+        this.form.patchValue({
+          id: data.id,
+          nombre: data.rol,
+          usuario: data.user.idUsuario,
         });
       });
     }

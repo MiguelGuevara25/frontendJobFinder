@@ -4,3 +4,9 @@
   margin: 0 auto;
   padding: 1rem;
 }
+.no-data-message {
+  margin-top: 1rem;
+  font-size: 1.25rem;
+  color: #555;
+  text-align: center;
+}
