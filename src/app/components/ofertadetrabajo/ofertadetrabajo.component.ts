@@ -9,6 +9,12 @@ import { ListarofertadetrabajoComponent } from './listarofertadetrabajo/listarof
   styleUrl: './ofertadetrabajo.component.css'
 })
 export class Ofertadetrabajo {
+  id: any;
+  name: any;
+  salary: any;
+  contractType: any;
+  experience: any;
+  location: any;
   constructor (public route: ActivatedRoute){}
 
 }
