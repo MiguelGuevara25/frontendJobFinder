@@ -51,6 +51,8 @@ import { CantidadcertificadosComponent } from './components/reportes/cantidadcer
 import { CantidadplataformacursoComponent } from './components/reportes/cantidadplataformacurso/cantidadplataformacurso.component';
 import { CantidadempresacursoComponent } from './components/reportes/cantidadempresacurso/cantidadempresacurso.component';
 import { UsuariosactivosComponent } from './components/reportes/usuariosactivos/usuariosactivos.component';
+import { TotalregistroscursosComponent } from './components/reportes/totalregistroscursos/totalregistroscursos.component';
+import { PromedioinscripcioncursosComponent } from './components/reportes/promedioinscripcioncursos/promedioinscripcioncursos.component';
 
 
 
@@ -371,6 +373,12 @@ export const routes: Routes = [
       },
       {
         path:'activosusuarios', component: UsuariosactivosComponent
+      },
+      {
+        path:'totalregistrocurso', component: TotalregistroscursosComponent
+      }, 
+      {
+        path:'promedioinscripcioncurso', component: PromedioinscripcioncursosComponent
       }
     ]
   }
