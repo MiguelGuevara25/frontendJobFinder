@@ -8,7 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { OfertadetrabajoService } from '../../../services/ofertadetrabajo.service';
 
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Ofertadetrabajo } from '../../../models/ofertadetrabajo';
 
 
@@ -26,44 +26,48 @@ import { Ofertadetrabajo } from '../../../models/ofertadetrabajo';
   styleUrl: './insertareditarofertadetrabajo.component.css'
 })
 export class InsertareditarofertadetrabajoComponent {
-form: FormGroup = new FormGroup({});
-Ofertadetrabajo: Ofertadetrabajo = new Ofertadetrabajo();
+  form: FormGroup = new FormGroup({});
+  Ofertadetrabajo: Ofertadetrabajo = new Ofertadetrabajo();
 
-id: number = 0;
-edicion: boolean = false;
+  id: number = 0;
+  edicion: boolean = false;
 
   constructor(
     private oS: OfertadetrabajoService,
     private FormBuilder: FormBuilder,
     private Router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
-ngOnInit(): void {
+  ngOnInit(): void {
     this.route.params.subscribe((data: Params) => {
       this.id = data['id'];
       this.edicion = data['id'] != null;
       this.init();
     });
 
-  this.form = this.FormBuilder.group({
-  id:[''],
-  name:['', Validators.required],
-  salary:['', Validators.required],
-  contractType: ['', Validators.required],
-  experience: ['', Validators.required],
-  location:['', Validators.required],
-  });
-}
+    this.form = this.FormBuilder.group({
+      id: [''],
+      name: ['', Validators.required],
+      descripcion: ['',Validators.required],
+      salary: ['', Validators.required],
+      contractType: ['', Validators.required],
+      experience: ['', Validators.required],
+      location: ['', Validators.required],
+      oferta: ['', Validators.required],
+    });
+  }
 
   aceptar() {
     if (this.form.valid) {
       this.Ofertadetrabajo.id = this.form.value.id;
       this.Ofertadetrabajo.name = this.form.value.startDate;
+      this.Ofertadetrabajo.description = this.form.value.startDate;
       this.Ofertadetrabajo.salary = this.form.value.endDate;
-      this.Ofertadetrabajo.contractType = this.form.value.salary;
+      this.Ofertadetrabajo.typeofcontract = this.form.value.salary;
       this.Ofertadetrabajo.experience = this.form.value.contractType;
       this.Ofertadetrabajo.location = this.form.value.address;
+      this.Ofertadetrabajo.empresa.id = this.form.value.oferta;
 
       if (this.edicion) {
         this.oS.update(this.Ofertadetrabajo).subscribe(() => {
@@ -81,16 +85,16 @@ ngOnInit(): void {
       this.Router.navigate(['ofertadetrabajo']);
     }
   }
-init() {
+  init() {
     if (this.edicion) {
       this.oS.listId(this.id).subscribe((data) => {
         this.form = new FormGroup({
-           id:new FormControl(data.id),
-           name: new FormControl(data.name),
-           salary: new FormControl(data.salary),
-           contractType:new FormControl(data.contractType),
-           experience: new FormControl(data.experience),
-           location: new FormControl(data.location),
+          id: new FormControl(data.id),
+          name: new FormControl(data.name),
+          salary: new FormControl(data.salary),
+          contractType: new FormControl(data.typeofcontract),
+          experience: new FormControl(data.experience),
+          location: new FormControl(data.location),
 
         });
       });
