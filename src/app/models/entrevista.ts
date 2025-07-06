@@ -7,6 +7,6 @@ export class Entrevista {
   hour: string = '';
   modality: string = '';
   result: string = '';
-  user: Usuario = new Usuario();
+  usuario: Usuario = new Usuario();
   postulacion: Postulacion = new Postulacion();
 }

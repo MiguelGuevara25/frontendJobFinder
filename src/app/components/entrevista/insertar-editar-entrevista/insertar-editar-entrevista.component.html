@@ -8,8 +8,8 @@
       <!-- Campo ID (solo si está en edición) -->
       <mat-form-field class="example-full-width" *ngIf="edicion">
         <mat-label>ID</mat-label>
-        <input matInput formControlName="idEntrevista" />
-        <mat-error *ngIf="form.get('idEntrevista')?.hasError('required')">
+        <input matInput formControlName="id" />
+        <mat-error *ngIf="form.get('id')?.hasError('required')">
           El código es obligatorio
         </mat-error>
       </mat-form-field>
@@ -65,9 +65,9 @@
       <mat-form-field>
         <mat-label>Usuario</mat-label>
         <mat-select formControlName="usuario">
-          @for (user of listUsuario; track user) {
-          <mat-option [value]="user.idUsuario">{{
-            user.nombreUsuario
+          @for (usuario of listUsuario; track usuario) {
+          <mat-option [value]="usuario.idUsuario">{{
+            usuario.nombreUsuario
           }}</mat-option>
           }
         </mat-select>
@@ -102,7 +102,18 @@
       <br />
 
       <!-- Botón -->
-      <button mat-raised-button color="primary" type="submit">Aceptar</button>
+      <div class="example-button-row">
+        <button mat-raised-button color="primary">Guardar</button>
+        <button
+          mat-raised-button
+          color="warn"
+          type="button"
+          (click)="cancelar()"
+          style="margin-left: 16px"
+        >
+          Cancelar
+        </button>
+      </div>
     </form>
   </div>
 </div>

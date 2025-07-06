@@ -29,7 +29,17 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class ListarEntrevistaComponent implements OnInit {
   dataSource: MatTableDataSource<Entrevista> = new MatTableDataSource();
-  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7'];
+  displayedColumns: string[] = [
+    'c1',
+    'c2',
+    'c3',
+    'c4',
+    'c5',
+    'c6',
+    'c7',
+    'c8',
+    'c9',
+  ];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -40,6 +50,7 @@ export class ListarEntrevistaComponent implements OnInit {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;
     });
+
     this.eS.getList().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;
@@ -54,7 +65,7 @@ export class ListarEntrevistaComponent implements OnInit {
         this.dataSource.data = data;
         this.dataSource.paginator = this.paginator;
 
-        this.snackBar.open('¡Estudio eliminado con éxito!', 'Cerrar', {
+        this.snackBar.open('Entrevista eliminada con éxito!', 'Cerrar', {
           duration: 3000,
         });
       });

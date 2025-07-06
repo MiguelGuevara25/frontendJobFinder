@@ -22,6 +22,7 @@ import { Usuario } from '../../../models/usuario';
 import { UsuarioService } from '../../../services/usuario.service';
 import { Postulacion } from '../../../models/postulacion';
 import { PostulacionService } from '../../../services/postulacion.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-insertar-editar-entrevista',
@@ -54,11 +55,18 @@ export class InsertarEditarEntrevistaComponent implements OnInit {
     private pS: PostulacionService,
     private eS: EntrevistaService,
     private route: ActivatedRoute,
+    private snackBar: MatSnackBar,
     private uS: UsuarioService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
+    this.route.params.subscribe((data: Params) => {
+      this.id = data['id'];
+      this.edicion = data['id'] != null;
+      this.init();
+    });
+
     this.form = this.formBuilder.group({
       id: [''],
       date: ['', Validators.required],
@@ -86,31 +94,54 @@ export class InsertarEditarEntrevistaComponent implements OnInit {
 
   aceptar() {
     if (this.form.valid) {
-      console.log(Object.values(this.form.value));
-
       this.entrevista.id = this.form.value.id;
       this.entrevista.date = this.form.value.date;
       const horaDate: Date = this.form.value.hour;
-      const horaString = horaDate.toTimeString().split(' ')[0]; // convierte a "HH:mm:ss"
+      const horaString = horaDate.toTimeString().split(' ')[0];
       this.entrevista.hour = horaString;
       this.entrevista.modality = this.form.value.modality;
       this.entrevista.result = this.form.value.result;
+      this.entrevista.usuario.idUsuario = this.form.value.usuario;
+      this.entrevista.postulacion.id = this.form.value.postulacion;
 
       if (this.edicion) {
         this.eS.update(this.entrevista).subscribe(() => {
           this.eS.list().subscribe((data) => {
             this.eS.setList(data);
+
+            this.snackBar.open(
+              '¡Postulación actualizada con éxito!',
+              'Cerrar',
+              {
+                duration: 3000,
+              }
+            );
           });
         });
       } else {
         this.eS.insert(this.entrevista).subscribe(() => {
           this.eS.list().subscribe((data) => {
             this.eS.setList(data);
+
+            this.snackBar.open('¡Postulación registrada con éxito!', 'Cerrar', {
+              duration: 3000,
+            });
           });
         });
       }
+
       this.router.navigate(['entrevista']);
     }
+  }
+
+  parseTimeStringToDate(timeString: string): Date {
+    const [hours, minutes, seconds] = timeString.split(':').map(Number);
+    const date = new Date();
+    date.setHours(hours);
+    date.setMinutes(minutes);
+    date.setSeconds(seconds || 0);
+    date.setMilliseconds(0);
+    return date;
   }
 
   init() {
@@ -119,11 +150,20 @@ export class InsertarEditarEntrevistaComponent implements OnInit {
         this.form = new FormGroup({
           id: new FormControl(data.id),
           date: new FormControl(data.date),
-          hour: new FormControl(data.hour),
+          hour: new FormControl(this.parseTimeStringToDate(data.hour)),
           modality: new FormControl(data.modality),
           result: new FormControl(data.result),
+          usuario: new FormControl(data.usuario.idUsuario),
+          postulacion: new FormControl(data.postulacion.id),
         });
       });
     }
+  }
+
+  cancelar() {
+    this.snackBar.open('Operación cancelada', 'Cerrar', {
+      duration: 3000,
+    });
+    this.router.navigate(['/entrevista']);
   }
 }
