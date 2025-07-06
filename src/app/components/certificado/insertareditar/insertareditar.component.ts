@@ -114,7 +114,7 @@ export class InsertareditarCertificadoComponent implements OnInit {
       this.certificado.entidadEmisoraCertificado = this.form.value.entidad;
       this.certificado.fechaEmisionCertificado = this.form.value.fecha_emision;
       this.certificado.fechaVencimientoCertificado =
-        this.form.value.fecha_vencimiento;
+      this.form.value.fecha_vencimiento;
       if (this.edicion) {
         this.cS.update(this.certificado).subscribe(() => {
           this.cS.list().subscribe((data) => {

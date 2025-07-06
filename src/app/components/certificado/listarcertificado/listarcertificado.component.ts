@@ -29,7 +29,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class ListarcertificadoComponent implements OnInit, AfterViewInit {
   dataSource: MatTableDataSource<Certificado> = new MatTableDataSource();
-
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   hasData = false;
   dataFiltradaPaginada: Certificado[] = [];
