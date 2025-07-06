@@ -5,18 +5,16 @@
 
   <div style="text-align: center; margin: 5%">
     <form [formGroup]="form" (submit)="aceptar()">
-      <!-- Campo ID (solo si está en edición) -->
       <mat-form-field class="example-full-width" *ngIf="edicion">
         <mat-label>ID</mat-label>
-        <input matInput formControlName="idEntrevista" />
-        <mat-error *ngIf="form.get('idEntrevista')?.hasError('required')">
+        <input matInput formControlName="id" />
+        <mat-error *ngIf="form.get('id')?.hasError('required')">
           El código es obligatorio
         </mat-error>
       </mat-form-field>
 
       <br />
 
-      <!-- Campo Date -->
       <mat-form-field class="example-full-width">
         <mat-label>Fecha</mat-label>
         <input
@@ -36,15 +34,11 @@
 
       <br />
 
-      <!-- Campo Hour -->
       <mat-form-field class="example-full-width">
         <mat-label>Hora</mat-label>
-        <input
-          matInput
-          formControlName="hour"
-          type="time"
-          placeholder="HH:mm"
-        />
+        <input matInput [matTimepicker]="timepicker" formControlName="hour" />
+        <mat-timepicker #timepicker />
+        <mat-timepicker-toggle [for]="timepicker" matSuffix />
         <mat-error *ngIf="form.get('hour')?.hasError('required')">
           La hora es obligatoria
         </mat-error>
@@ -52,7 +46,36 @@
 
       <br />
 
-      <!-- Campo Modality -->
+      <mat-form-field>
+        <mat-label>Postulacion</mat-label>
+        <mat-select formControlName="postulacion">
+          @for (postulacion of listPostulacion; track postulacion) {
+          <mat-option [value]="postulacion.id">{{
+            postulacion.ofertaTrabajo.name
+          }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <br />
+
+      <mat-form-field>
+        <mat-label>Usuario</mat-label>
+        <mat-select formControlName="usuario">
+          @for (usuario of listUsuario; track usuario) {
+          <mat-option [value]="usuario.idUsuario">{{
+            usuario.nombreUsuario
+          }}</mat-option>
+          }
+        </mat-select>
+
+        <mat-error *ngIf="form.get('usuario')?.hasError('required')">
+          El usuario es obligatorio
+        </mat-error>
+      </mat-form-field>
+
+      <br />
+
       <mat-form-field class="example-full-width">
         <mat-label>Modalidad</mat-label>
         <input matInput formControlName="modality" />
@@ -63,7 +86,6 @@
 
       <br />
 
-      <!-- Campo Result -->
       <mat-form-field class="example-full-width">
         <mat-label>Resultado</mat-label>
         <input matInput formControlName="result" />
@@ -74,8 +96,18 @@
 
       <br />
 
-      <!-- Botón -->
-      <button mat-raised-button color="primary" type="submit">Aceptar</button>
+      <div class="example-button-row">
+        <button mat-raised-button color="primary">Guardar</button>
+        <button
+          mat-raised-button
+          color="warn"
+          type="button"
+          (click)="cancelar()"
+          style="margin-left: 16px"
+        >
+          Cancelar
+        </button>
+      </div>
     </form>
   </div>
 </div>

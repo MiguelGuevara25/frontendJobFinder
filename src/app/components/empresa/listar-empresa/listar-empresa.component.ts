@@ -1,28 +1,35 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { RouterLink } from '@angular/router';
 import { Empresa } from '../../../models/empresa';
 import { EmpresaService } from '../../../services/empresa.service';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-listar-empresa',
   imports: [
     MatTableModule,
     CommonModule,
+    MatIconModule,
     MatButtonModule,
     RouterLink,
-    MatIconModule,
+    MatPaginatorModule,
+    RouterLink,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   templateUrl: './listar-empresa.component.html',
   styleUrl: './listar-empresa.component.css',
 })
 export class ListarEmpresaComponent {
   dataSource: MatTableDataSource<Empresa> = new MatTableDataSource();
-
-    displayedColumns: string[] = [
+  displayedColumns: string[] = [
     'c1',
     'c2',
     'c3',
@@ -36,21 +43,41 @@ export class ListarEmpresaComponent {
     'c11',
   ];
 
-  constructor(private eS: EmpresaService) {}
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  constructor(private eS: EmpresaService, private snackBar: MatSnackBar) {}
   ngOnInit(): void {
     this.eS.list().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
+      this.dataSource.paginator = this.paginator;
     });
     this.eS.getList().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
+      this.dataSource.paginator = this.paginator;
     });
   }
 
-    eliminar(id: number) {
-    this.eS.delete(id).subscribe((data) => {
+  eliminar(id: number) {
+    this.eS.delete(id).subscribe(() => {
       this.eS.list().subscribe((data) => {
         this.eS.setList(data);
+
+        this.dataSource.data = data;
+        this.dataSource.paginator = this.paginator;
+        this.snackBar.open('Empresa eliminada con éxito!', 'Cerrar', {
+          duration: 3000,
+        });
       });
     });
+  }
+
+  filtrar(event: Event) {
+    const filtro = (event.target as HTMLInputElement).value
+      .trim()
+      .toLowerCase();
+    this.dataSource.filter = filtro;
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 }

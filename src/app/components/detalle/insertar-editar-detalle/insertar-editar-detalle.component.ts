@@ -25,6 +25,9 @@ import { Certificado } from '../../../models/certificado';
 import { EstudioService } from '../../../services/estudio.service';
 import { HabilidadService } from '../../../services/habilidad.service';
 import { CertificadoService } from '../../../services/certificado.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { CurriculumService } from '../../../services/curriculum.service';
+import { Curriculum } from '../../../models/curriculum';
 
 @Component({
   selector: 'app-insertar-editar-detalle',
@@ -48,6 +51,7 @@ export class InsertarEditarDetalleComponent {
   experiencias: Experiencia[] = [];
   estudios: Estudio[] = [];
   habilidades: Habilidad[] = [];
+  curriculums: Curriculum[] = [];
   certificados: Certificado[] = [];
 
   id: number = 0;
@@ -58,10 +62,12 @@ export class InsertarEditarDetalleComponent {
     private eS: ExperienciaService,
     private esS: EstudioService,
     private hS: HabilidadService,
+    private cuS: CurriculumService,
     private ceS: CertificadoService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -72,10 +78,11 @@ export class InsertarEditarDetalleComponent {
     });
 
     this.form = this.formBuilder.group({
-      idDetalle: [''],
+      id: [''],
       experiencias: ['', Validators.required],
       estudios: ['', Validators.required],
       habilidades: ['', Validators.required],
+      curriculums: ['', Validators.required],
       certificados: ['', Validators.required],
     });
 
@@ -94,15 +101,20 @@ export class InsertarEditarDetalleComponent {
     this.ceS.list().subscribe((data) => {
       this.certificados = data;
     });
+
+    this.cuS.listar().subscribe((data) => {
+      this.curriculums = data;
+    });
   }
 
   aceptar() {
     if (this.form.valid) {
-      this.detalle.id = this.form.value.idDetalle;
-      this.detalle.experiencias = this.form.value.experiencias;
-      this.detalle.estudios = this.form.value.estudios;
-      this.detalle.habilidades = this.form.value.habilidades;
-      this.detalle.certificados = this.form.value.certificados;
+      this.detalle.id = this.form.value.id;
+      this.detalle.experiencias.id = this.form.value.experiencias;
+      this.detalle.estudios.id = this.form.value.estudios;
+      this.detalle.habilidades.id_habilidad = this.form.value.habilidades;
+      this.detalle.curriculums.idCurriculum = this.form.value.curriculums;
+      this.detalle.certificados.idCertificado = this.form.value.certificados;
 
       if (this.edicion) {
         this.cS.update(this.detalle).subscribe(() => {
@@ -125,13 +137,21 @@ export class InsertarEditarDetalleComponent {
     if (this.edicion) {
       this.cS.listId(this.id).subscribe((data) => {
         this.form = new FormGroup({
-          idDetalle: new FormControl(data.id),
+          id: new FormControl(data.id),
           experiencias: new FormControl(data.experiencias.id),
           estudios: new FormControl(data.estudios.id),
           habilidades: new FormControl(data.habilidades.id_habilidad),
+          curriculums: new FormControl(data.curriculums.idCurriculum),
           certificados: new FormControl(data.certificados.idCertificado),
         });
       });
     }
+  }
+
+  cancelar() {
+    this.snackBar.open('Operación cancelada', 'Cerrar', {
+      duration: 3000,
+    });
+    this.router.navigate(['/detalles']);
   }
 }

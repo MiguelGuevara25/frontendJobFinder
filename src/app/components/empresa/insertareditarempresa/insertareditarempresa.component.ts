@@ -1,6 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -9,23 +16,24 @@ import { MatInputModule } from '@angular/material/input';
 import { Empresa } from '../../../models/empresa';
 import { EmpresaService } from '../../../services/empresa.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-insertareditarempresa',
-  imports: [MatInputModule,
+  imports: [
+    MatInputModule,
     MatFormFieldModule,
     MatButtonModule,
     MatIconModule,
     ReactiveFormsModule,
     CommonModule,
     MatDatepickerModule,
-    FormsModule,],
+    FormsModule,
+  ],
   templateUrl: './insertareditarempresa.component.html',
-  styleUrl: './insertareditarempresa.component.css'
+  styleUrl: './insertareditarempresa.component.css',
 })
 export class InsertareditarempresaComponent implements OnInit {
-
-
   form: FormGroup = new FormGroup({});
   empresa: Empresa = new Empresa();
 
@@ -36,10 +44,17 @@ export class InsertareditarempresaComponent implements OnInit {
     private eS: EmpresaService,
     private formBuilder: FormBuilder,
     private router: Router,
+    private snackBar: MatSnackBar,
     private route: ActivatedRoute
-  ) { }
+  ) {}
 
   ngOnInit(): void {
+    this.route.params.subscribe((data: Params) => {
+      this.id = data['id'];
+      this.edicion = data['id'] != null;
+      this.init();
+    });
+
     this.form = this.formBuilder.group({
       id: [''],
       name: ['', Validators.required],
@@ -52,14 +67,18 @@ export class InsertareditarempresaComponent implements OnInit {
       location: ['', Validators.required],
     });
   }
+
   aceptar() {
     if (this.form.valid) {
-      this.empresa.id = this.form.value.idContrato;
-      this.empresa.name = this.form.value.startDate;
-      this.empresa.description = this.form.value.endDate;
-      this.empresa.sector = this.form.value.salary;
-      this.empresa.website = this.form.value.contractType;
+      this.empresa.id = this.form.value.id;
+      this.empresa.name = this.form.value.name;
+      this.empresa.description = this.form.value.description;
+      this.empresa.sector = this.form.value.sector;
+      this.empresa.website = this.form.value.website;
       this.empresa.address = this.form.value.address;
+      this.empresa.telephone = this.form.value.telephone;
+      this.empresa.mail = this.form.value.mail;
+      this.empresa.location = this.form.value.location;
 
       if (this.edicion) {
         this.eS.update(this.empresa).subscribe(() => {
@@ -72,11 +91,12 @@ export class InsertareditarempresaComponent implements OnInit {
           this.eS.list().subscribe((data) => {
             this.eS.setList(data);
           });
-        })
-        this.router.navigate(['empresa']);
+        });
       }
+      this.router.navigate(['empresa']);
     }
   }
+
   init() {
     if (this.edicion) {
       this.eS.listId(this.id).subscribe((data) => {
@@ -90,17 +110,16 @@ export class InsertareditarempresaComponent implements OnInit {
           telephone: new FormControl(data.telephone),
           mail: new FormControl(data.mail),
           location: new FormControl(data.location),
-          password: new FormControl(data.password),
         });
       });
     }
   }
+
   cancelar() {
+    this.snackBar.open('Operación cancelada', 'Cerrar', {
+      duration: 3000,
+    });
+
     this.router.navigate(['empresa']);
   }
 }
-
-
-
-
-
