@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Habilidad } from '../models/habilidad';
 import { environment } from '../../environments/environment';
 import { Subject } from 'rxjs';
+import { HabilidadVacia } from '../models/habilidadvacia';
 
 const base_url = environment.base;
 
@@ -41,5 +42,9 @@ export class HabilidadService {
 
   delete(id: number) {
     return this.http.delete(`${this.url}/${id}`);
+  }
+
+  habilidadesSinUsuarios() {
+    return this.http.get<HabilidadVacia[]>(`${this.url}/habilidad_nulas`);
   }
 }
