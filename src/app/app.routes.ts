@@ -50,6 +50,7 @@ import { ReportesComponent } from './components/reportes/reportes.component';
 import { CantidadcertificadosComponent } from './components/reportes/cantidadcertificados/cantidadcertificados.component';
 import { CantidadplataformacursoComponent } from './components/reportes/cantidadplataformacurso/cantidadplataformacurso.component';
 import { CantidadempresacursoComponent } from './components/reportes/cantidadempresacurso/cantidadempresacurso.component';
+import { MapaComponent } from './components/mapa/mapa.component';
 
 
 
@@ -262,7 +263,6 @@ export const routes: Routes = [
         path: 'ediciones/:id',
         component: InsertareditarempresaComponent,
       },
-
     ],
   },
 
@@ -357,20 +357,4 @@ export const routes: Routes = [
     path: 'mapa',
     component: MapaComponent,
   },
-  {
-    path:'reportes',
-    component:ReportesComponent,
-    children:[
-      {
-        path:'cantidadcertificadoanio', component: CantidadcertificadosComponent
-      },
-      {
-        path:'cantidadplataformacurso', component: CantidadplataformacursoComponent
-      },
-      {
-        path:'cantidadempresacurso', component: CantidadempresacursoComponent
-      }
-    ]
-  }
-
 ];
