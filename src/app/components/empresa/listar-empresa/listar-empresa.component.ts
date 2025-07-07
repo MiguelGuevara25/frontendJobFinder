@@ -44,10 +44,14 @@ export class ListarEmpresaComponent {
   ];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  listEmpresa: Empresa[] = [];
+  selectedSector: string = '';
 
   constructor(private eS: EmpresaService, private snackBar: MatSnackBar) {}
+
   ngOnInit(): void {
     this.eS.list().subscribe((data) => {
+      this.listEmpresa = data;
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;
     });
@@ -71,13 +75,21 @@ export class ListarEmpresaComponent {
     });
   }
 
-  filtrar(event: Event) {
-    const filtro = (event.target as HTMLInputElement).value
+  filtrarSector(event: Event) {
+    const sector = (event.target as HTMLInputElement).value
       .trim()
       .toLowerCase();
-    this.dataSource.filter = filtro;
+
+    if (sector) {
+      this.dataSource.data = this.listEmpresa.filter(
+        (empresa) => empresa.sector.toLowerCase().includes(sector) // Filtra por el sector
+      );
+    } else {
+      this.dataSource.data = this.listEmpresa; // Si no hay filtro, muestra todos los datos
+    }
+
     if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
+      this.dataSource.paginator.firstPage(); // Si hay paginador, vuelve a la primera página
     }
   }
 }
