@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Empresa } from '../models/empresa';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
@@ -12,6 +12,7 @@ const base_url = environment.base;
 export class EmpresaService {
   private url = `${base_url}/empresas`;
   private listaCambio = new Subject<Empresa[]>();
+  private apiKey = 'AIzaSyBq2XjM7lJdCs7iEhDx_w1_ipvuENqdinU';
 
   constructor(private http: HttpClient) {}
 
@@ -41,5 +42,12 @@ export class EmpresaService {
 
   delete(id: number) {
     return this.http.delete(`${this.url}/${id}`);
+  }
+
+  obtenerCoordenadas(direccion: string): Observable<any> {
+    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
+      direccion
+    )}&key=${this.apiKey}`;
+    return this.http.get(url);
   }
 }
