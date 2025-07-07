@@ -8,6 +8,7 @@ import { CurriculumpromedioComponent } from './curriculumpromedio/curriculumprom
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTabsModule } from '@angular/material/tabs';
 import { FrecuenciahabilidadesComponent } from './frecuenciahabilidades/frecuenciahabilidades.component';
+import { InstitucionfrecuenteComponent } from "./institucionfrecuente/institucionfrecuente.component";
 
 @Component({
   selector: 'app-reportes',
@@ -20,7 +21,8 @@ import { FrecuenciahabilidadesComponent } from './frecuenciahabilidades/frecuenc
     MatCardModule,
     CurriculumpromedioComponent,
     FrecuenciahabilidadesComponent,
-  ],
+    InstitucionfrecuenteComponent
+],
   templateUrl: './reportes.component.html',
   styleUrl: './reportes.component.css',
 })
