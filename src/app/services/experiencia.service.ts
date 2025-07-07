@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Experiencia } from '../models/experiencia';
 import { Subject } from 'rxjs';
 import { PromedioExperienciaLaboral } from '../models/PromedioExperienciaLaboral';
+import { DuracionPromedioPorPuesto } from '../models/DuracionPromedioPorPuesto';
 
 const base_url = environment.base;
 
@@ -44,6 +45,14 @@ export class ExperienciaService {
   }
 
   getPromedioExperienciaLaboral() {
-  return this.http.get<PromedioExperienciaLaboral[]>(`${this.url}/Promedio_experiencia_laboral`);
-}
+    return this.http.get<PromedioExperienciaLaboral[]>(
+      `${this.url}/Promedio_experiencia_laboral`
+    );
+  }
+
+  getDuracionPromedioPorPuesto() {
+    return this.http.get<DuracionPromedioPorPuesto[]>(
+      `${this.url}/duracion_promedio`
+    );
+  }
 }

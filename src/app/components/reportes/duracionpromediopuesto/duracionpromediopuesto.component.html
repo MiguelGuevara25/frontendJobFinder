@@ -1,0 +1,18 @@
+<div class="title-container">
+  <h1 style="text-align: center;">Duración Promedio por Puesto</h1>
+
+  <div class="chart-container" *ngIf="hasData">
+    <canvas
+      baseChart
+      [data]="{ labels: barChartLabels, datasets: barChartData }"
+      [options]="barChartOptions"
+      [type]="barChartType"
+      [legend]="barChartLegend"
+    ></canvas>
+  </div>
+
+  <div class="no-data" *ngIf="!hasData">
+    <mat-icon class="no-data-icon">info_outline</mat-icon>
+    <p class="no-data-message">No hay datos disponibles para mostrar.</p>
+  </div>
+</div>

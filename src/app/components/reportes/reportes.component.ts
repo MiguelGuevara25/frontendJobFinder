@@ -10,6 +10,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { FrecuenciahabilidadesComponent } from './frecuenciahabilidades/frecuenciahabilidades.component';
 import { InstitucionfrecuenteComponent } from "./institucionfrecuente/institucionfrecuente.component";
 import { ExperienciafrecuenciaComponent } from "./experienciafrecuencia/experienciafrecuencia.component";
+import { DuracionpromediopuestoComponent } from "./duracionpromediopuesto/duracionpromediopuesto.component";
 
 @Component({
   selector: 'app-reportes',
@@ -23,7 +24,8 @@ import { ExperienciafrecuenciaComponent } from "./experienciafrecuencia/experien
     CurriculumpromedioComponent,
     FrecuenciahabilidadesComponent,
     InstitucionfrecuenteComponent,
-    ExperienciafrecuenciaComponent
+    ExperienciafrecuenciaComponent,
+    DuracionpromediopuestoComponent
 ],
   templateUrl: './reportes.component.html',
   styleUrl: './reportes.component.css',

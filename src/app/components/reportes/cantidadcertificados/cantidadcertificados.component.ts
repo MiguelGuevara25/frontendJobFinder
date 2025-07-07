@@ -5,12 +5,9 @@ import { ChartDataset, ChartOptions, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import { CertificadoService } from '../../../services/certificado.service';
 
-
-
-
 @Component({
   selector: 'app-cantidadcertificados',
-  imports: [BaseChartDirective, CommonModule, MatIconModule, ],
+  imports: [BaseChartDirective, CommonModule, MatIconModule],
   templateUrl: './cantidadcertificados.component.html',
   styleUrl: './cantidadcertificados.component.css',
 })
@@ -19,12 +16,12 @@ export class CantidadcertificadosComponent implements OnInit {
   barChartOptions: ChartOptions = {
     responsive: true,
     scales: {
-    y: {
-      ticks: {
-        precision: 0
-      }
-    }
-  }
+      y: {
+        ticks: {
+          precision: 0,
+        },
+      },
+    },
   };
 
   barChartLabels: string[] = [];
