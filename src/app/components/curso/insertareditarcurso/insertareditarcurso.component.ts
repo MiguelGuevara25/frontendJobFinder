@@ -22,6 +22,7 @@ import { CursoService } from '../../../services/curso.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { EmpresaService } from '../../../services/empresa.service';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-insertareditarcurso',
@@ -36,6 +37,7 @@ import { EmpresaService } from '../../../services/empresa.service';
     MatRadioModule,
     CommonModule,
     MatSelectModule,
+    MatButtonModule,
   ],
   templateUrl: './insertareditarcurso.component.html',
   styleUrl: './insertareditarcurso.component.css',
@@ -151,6 +153,9 @@ export class InsertareditarcursoComponent implements OnInit {
   }
 
   cancelar(): void {
+    this.snackBar.open('Operación cancelada', 'Cerrar', {
+      duration: 3000,
+    });
     this.router.navigate(['cursos']);
   }
 }

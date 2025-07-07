@@ -111,10 +111,16 @@ export class InsertareditarusuarioComponent implements OnInit {
     }
   }
   cancelar() {
+    this._snackBar.open('Operación cancelada', 'Cerrar', {
+      duration: 3000,
+    });
     this.router.navigate(['usuarios']);
   }
 
   volver() {
+    this._snackBar.open('Operación cancelada', 'Cerrar', {
+      duration: 3000,
+    });
     this.location.back(); // ← Esto te lleva a la página anterior
   }
 }
