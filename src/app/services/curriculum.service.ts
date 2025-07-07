@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Curriculum } from '../models/curriculum';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { CuriculumPromedioDTO } from '../models/CuriculumPromedioDTO';
 const base_url = environment.base;
 
 @Injectable({
@@ -36,5 +37,8 @@ export class CurriculumService {
   }
   delete(id: number) {
     return this.http.delete(`${this.url}/${id}`);
+  }
+  getPromedio(): Observable<CuriculumPromedioDTO[]> {
+    return this.http.get<CuriculumPromedioDTO[]>(`${this.url}/Promedio`);
   }
 }

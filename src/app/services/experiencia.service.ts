@@ -3,6 +3,8 @@ import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Experiencia } from '../models/experiencia';
 import { Subject } from 'rxjs';
+import { PromedioExperienciaLaboral } from '../models/PromedioExperienciaLaboral';
+import { DuracionPromedioPorPuesto } from '../models/DuracionPromedioPorPuesto';
 
 const base_url = environment.base;
 
@@ -40,5 +42,17 @@ export class ExperienciaService {
 
   delete(id: number) {
     return this.http.delete(`${this.url}/${id}`);
+  }
+
+  getPromedioExperienciaLaboral() {
+    return this.http.get<PromedioExperienciaLaboral[]>(
+      `${this.url}/Promedio_experiencia_laboral`
+    );
+  }
+
+  getDuracionPromedioPorPuesto() {
+    return this.http.get<DuracionPromedioPorPuesto[]>(
+      `${this.url}/duracion_promedio`
+    );
   }
 }

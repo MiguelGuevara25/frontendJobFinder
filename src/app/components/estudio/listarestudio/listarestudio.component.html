@@ -7,7 +7,11 @@
     <div class="acciones-superiores">
       <mat-form-field appearance="outline" class="campo-busqueda">
         <mat-icon matPrefix>search</mat-icon>
-        <input matInput (keyup)="filtrar($event)" />
+        <input
+          matInput
+          (keyup)="filtrar($event)"
+          placeholder="Buscar centro de estudio..."
+        />
       </mat-form-field>
 
       <div class="spacer"></div>

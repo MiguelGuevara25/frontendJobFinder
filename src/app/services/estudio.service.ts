@@ -3,6 +3,7 @@ import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Estudio } from '../models/estudio';
 import { Subject } from 'rxjs';
+import { FrecuenciaInstitucionDTO } from '../models/frecuencia-institucion.dto';
 
 const base_url = environment.base;
 @Injectable({
@@ -40,5 +41,9 @@ export class EstudioService {
 
   delete(id: Number) {
     return this.http.delete(`${this.url}/${id}`);
+  }
+
+  getFrecuenciaInstituciones() {
+  return this.http.get<FrecuenciaInstitucionDTO[]>(`${this.url}/institucion_mas_frecuente`);
   }
 }

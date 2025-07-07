@@ -159,7 +159,7 @@ mat-card-actions button[mat-icon-button]:hover {
 mat-paginator {
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(211, 4, 4, 0.08);
-  background-color: #283253;
+  background-color: #5468ad;
   color:#ffffff; /* Color de texto general para todo el paginador (ej. blanco) */
   font-family: 'Roboto', sans-serif; /* Puedes especificar una fuente */
   font-size: 14px; /* Tamaño de fuente para el texto general */
@@ -197,3 +197,45 @@ mat-paginator {
   display: flex;
   gap: 10px;
 }
+
+.boton-registrar {
+  background-color: #283253 !important; /* Azul Bootstrap */
+  color: #ffffff !important;
+}
+
+.boton-registrar:hover {
+  background-color: #ffffff !important; /* Azul Bootstrap */
+  color: #283253!important;
+}
+
+/* Boton editar */
+.boton-editar:hover {
+  background-color: #ffffff84;
+}
+
+.color-icono{
+  color: #43538a;
+}
+
+.boton-editar:hover .color-icono{
+  color: #283253;
+}
+
+/* Boton eliminar) */
+.boton-eliminar:hover {
+  background-color: #ffffff84;
+}
+
+.color-icono-eliminar{
+  color: #43538a;
+}
+
+.boton-eliminar:hover .color-icono-eliminar{
+  color: #f30715;
+}
+
+/* Espaciador para empujar los botones a los lados */
+.spacer {
+  flex-grow: 0.9; /* Ocupa todo el espacio disponible */
+}
+

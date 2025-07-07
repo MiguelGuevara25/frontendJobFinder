@@ -71,17 +71,19 @@
         <mat-card-actions>
           <button
             mat-icon-button
+            class="boton-editar"
             color="primary"
             [routerLink]="['ediciones', certificado.idCertificado]"
           >
-            <mat-icon>edit</mat-icon>
+            <mat-icon class="color-icono">edit</mat-icon>
           </button>
           <button
             mat-icon-button
+            class="boton-eliminar"
             color="warn"
             (click)="eliminar(certificado.idCertificado)"
           >
-            <mat-icon>delete</mat-icon>
+            <mat-icon class="color-icono-eliminar">delete</mat-icon>
           </button>
         </mat-card-actions>
       </mat-card>

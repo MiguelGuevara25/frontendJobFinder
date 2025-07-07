@@ -24,6 +24,7 @@ import { CursoService } from '../../../services/curso.service';
 import { UsuarioService } from '../../../services/usuario.service';
 import { InscripcionCurso } from '../../../models/inscripcionCurso';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-insertareditarinscripcioncurso',
@@ -38,6 +39,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     MatRadioModule,
     CommonModule,
     MatSelectModule,
+    MatButtonModule 
   ],
   templateUrl: './insertareditarinscripcioncurso.component.html',
   styleUrl: './insertareditarinscripcioncurso.component.css',
@@ -151,6 +153,9 @@ export class InsertareditarinscripcioncursoComponent implements OnInit {
     }
   }
   cancelar() {
+    this.snackBar.open('Operación cancelada', 'Cerrar', {
+      duration: 3000,
+    });
     this.router.navigate(['inscripcioncursos']);
   }
 }

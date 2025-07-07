@@ -38,10 +38,21 @@ export class ListarestudioComponent implements OnInit {
     this.eS.list().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;
+      this.dataSource.filterPredicate = (data: Estudio, filtro: string) => {
+        return data.study_center
+          .toLowerCase()
+          .startsWith(filtro.trim().toLowerCase());
+      };
     });
+
     this.eS.getList().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;
+      this.dataSource.filterPredicate = (data: Estudio, filtro: string) => {
+        return data.study_center
+          .toLowerCase()
+          .startsWith(filtro.trim().toLowerCase());
+      };
     });
   }
 

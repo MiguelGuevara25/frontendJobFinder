@@ -3,7 +3,7 @@
   display: flex;
   justify-content: space-between; /* separa los dos elementos */
   align-items: center;
-  padding: 0 330px; /* margen interno hacia los lados */
+  padding: 0 20px; /* margen interno hacia los lados */
   box-sizing: border-box;
 }
 
@@ -11,4 +11,55 @@
 .campo-busqueda {
   max-width: 300px;
   width: 100%;
+}
+
+/* Espaciador para empujar los botones a los lados */
+.spacer {
+  flex-grow: 0.9; /* Ocupa todo el espacio disponible */
+}
+
+/* Boton editar */
+.boton-editar:hover {
+  background-color: #ffffff84;
+}
+
+.color-icono{
+  color: #43538a;
+}
+
+.boton-editar:hover .color-icono{
+  color: #283253;
+}
+
+/* Boton eliminar) */
+.boton-eliminar:hover {
+  background-color: #ffffff84;
+}
+
+.color-icono-eliminar{
+  color: #43538a;
+}
+
+.boton-eliminar:hover .color-icono-eliminar{
+  color: #f30715;
+}
+
+.paginator-container {
+  display: flex; /* Habilita Flexbox */
+  justify-content: flex-end; /* Alinea el contenido (el paginador) a la derecha */
+  width: 100%; /* Asegura que el contenedor ocupe todo el ancho disponible */
+  padding: 0 20px; /* Un poco de padding horizontal para que no se pegue a los bordes */
+  margin-left: auto; /* Para centrar el contenedor si hay espacio extra */
+  margin-right: auto; /* Para centrar el contenedor si hay espacio extra */
+}
+
+
+/* Estilos para el paginador mismo */
+mat-paginator {
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(211, 4, 4, 0.08);
+  background-color: #5468ad;
+  color:#ffffff; /* Color de texto general para todo el paginador (ej. blanco) */
+  font-family: 'Roboto', sans-serif; /* Puedes especificar una fuente */
+  font-size: 14px; /* Tamaño de fuente para el texto general */
 }

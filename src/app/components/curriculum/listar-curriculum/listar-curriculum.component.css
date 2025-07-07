@@ -1,0 +1,240 @@
+/* Estilos generales del contenedor */
+.contenedor-titulo {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.acciones-superiores {
+  display: flex;
+  flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
+  gap: 150px; /* Espacio entre los elementos */
+  justify-content: center; /* Centra los elementos horizontalmente */
+  align-items: center;
+  padding: 10px 0;
+}
+
+.campo-busqueda {
+  width: 500px; /* Ancho fijo para el campo de búsqueda */
+  max-width: 90%; /* Asegura que no se desborde en pantallas muy pequeñas */
+}
+
+/* Contenedor de las tarjetas */
+.contenedor-cards {
+  display: grid;
+  /* Utiliza grid para un diseño responsivo de las tarjetas */
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* 300px min-width, expande hasta llenar el espacio */
+  gap: 20px; /* Espacio entre las tarjetas */
+  padding: 20px;
+  justify-content: center; /* Centra las tarjetas si no llenan toda la fila */
+  align-items: start; /* Alinea las tarjetas en la parte superior */
+  max-width: 1200px; /* Ancho máximo para el contenedor de tarjetas */
+  margin: 20px auto; /* Centra el contenedor de tarjetas en la página */
+}
+
+/* Estilos para cada tarjeta */
+.example-card {
+  width: 100%; /* La tarjeta ocupa el 100% del espacio de su celda en el grid */
+  border-radius: 8px; /* Bordes ligeramente redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave para un efecto de elevación */
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Transición suave al pasar el ratón */
+}
+
+.example-card:hover {
+  transform: translateY(-5px); /* Pequeño levantamiento al pasar el ratón */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Sombra un poco más pronunciada */
+}
+
+/* Estilos del encabezado de la tarjeta */
+mat-card-header {
+  padding: 16px;
+  display: flex; /* Asegura que el avatar y el texto estén en flexbox */
+  align-items: center; /* Alinea los ítems verticalmente */
+}
+
+/* Estilos para el ícono de persona grande (Avatar) */
+.large-person-avatar {
+  background-color: #e8eaf6; /* Un azul muy claro */
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 64px; /* Tamaño del círculo del avatar */
+  height: 64px;
+  min-width: 64px; /* Asegura que el tamaño no se reduzca */
+  margin-right: 16px; /* Espacio entre el avatar y el texto */
+}
+
+.large-person-avatar mat-icon {
+  font-size: 40px; /* Tamaño del ícono, un poco más pequeño para que no se vea tan apretado */
+  width: 40px;
+  height: 40px;
+  color: #3f51b5; /* Color del ícono (azul primario de Material) */
+}
+
+/* Ajustes para el texto del encabezado */
+mat-card-title {
+  font-size: 1.4em;
+  font-weight: 600; /* Un poco más de grosor para el nombre */
+  color: #333;
+  margin-bottom: 4px; /* Espacio entre el título y el subtítulo */
+  line-height: 1.2; /* Reduce el espacio de línea si el nombre es largo */
+}
+
+mat-card-subtitle {
+  font-size: 0.9em;
+  color: #666;
+  line-height: 1.4; /* Espaciado de línea para el subtítulo */
+}
+
+mat-card-content {
+  padding: 0 16px 16px; /* Ajusta el padding para que no se vea tan pegado */
+}
+
+mat-card-content p {
+  margin: 8px 0; /* Espacio vertical entre los párrafos */
+  display: flex;
+  align-items: center;
+  color: #444;
+  font-size: 0.95em;
+}
+
+mat-card-content p mat-icon {
+  margin-right: 8px; /* Espacio entre el ícono y el texto */
+  color: #555; /* Color sutil para los íconos de contacto */
+  font-size: 18px; /* Tamaño más pequeño para los íconos de contacto */
+}
+
+/* Acciones de la tarjeta (botones) */
+mat-card-actions {
+  display: flex;
+  justify-content: flex-start; /* Alinea los botones al final (derecha) */
+  gap: 8px; /* Espacio entre los botones */
+  padding: 8px 16px 16px; /* Padding para separar de abajo y lados */
+}
+
+/* Estilo para el botón de ID */
+.user-id-button {
+  min-width: unset; /* Permite que el botón se ajuste al contenido */
+  padding: 0 12px; /* Padding horizontal */
+  font-size: 0.85em; /* Tamaño de fuente un poco más pequeño */
+  height: 36px; /* Altura estándar de un botón */
+  border-radius: 20px; /* Bordes más redondeados para un aspecto de "pastilla" */
+}
+.spacer {
+  flex-grow: 1; /* Ocupa todo el espacio disponible */
+}
+
+/* Estilo para los botones de ícono (edit, delete) */
+mat-card-actions button[mat-icon-button] {
+  width: 40px; /* Tamaño fijo para el botón de ícono */
+  height: 40px;
+  border-radius: 50%; /* Los hace circulares */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.2s ease-in-out; /* Suave transición de color de fondo */
+}
+
+mat-card-actions button[mat-icon-button]:hover {
+  background-color: rgba(0, 0, 0, 0.04); /* Un ligero fondo al pasar el ratón */
+}
+
+/* Espaciador para empujar los botones a los lados */
+.spacer {
+  flex-grow: 1; /* Ocupa todo el espacio disponible */
+}
+
+/* Estilos para el paginador mismo */
+
+
+.paginator-container {
+  display: flex; /* Habilita Flexbox */
+  justify-content: flex-end; /* Alinea el contenido (el paginador) a la derecha */
+  width: 100%; /* Asegura que el contenedor ocupe todo el ancho disponible */
+  padding: 0 20px; /* Un poco de padding horizontal para que no se pegue a los bordes */
+  margin-left: auto; /* Para centrar el contenedor si hay espacio extra */
+  margin-right: auto; /* Para centrar el contenedor si hay espacio extra */
+}
+
+mat-paginator {
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(211, 4, 4, 0.08);
+  background-color: #5468ad;
+  color:#ffffff; /* Color de texto general para todo el paginador (ej. blanco) */
+  font-family: 'Roboto', sans-serif; /* Puedes especificar una fuente */
+  font-size: 14px; /* Tamaño de fuente para el texto general */
+}
+
+/* EL CONTENEDOR PRINCIPAL QUE SERÁ EL "CUADRO GRANDE" */
+.main-content-wrapper {
+  max-width: 1200px; /* Ancho máximo para el contenido */
+  margin: 20px auto; /* Centra el cuadro y le da margen arriba/abajo */
+  background-color: white; /* Fondo blanco para el cuadro */
+  border-radius: 8px; /* Bordes redondeados para el cuadro */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra suave para darle "elevación" */
+  padding: 24px; /* Un padding interno general para todo el contenido dentro del cuadro */
+  box-sizing: border-box; /* Incluye el padding en el cálculo del ancho */
+}
+
+/* Ajuste para las acciones superiores (Buscar y Registrar) */
+.acciones-superiores {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px; /* Espacio debajo de esta sección */
+  /* Quita cualquier padding horizontal de aquí para que el padding del .main-content-wrapper lo maneje */
+  padding: 0;
+}
+
+/* Estilos para el campo de búsqueda */
+.campo-busqueda {
+  width: 350px; /* O el ancho que prefieras */
+  max-width: 100%; /* Para responsividad */
+}
+
+.botones-acciones{
+  display: flex;
+  gap: 10px;
+}
+
+.boton-registrar {
+  background-color: #283253 !important; /* Azul Bootstrap */
+  color: #ffffff !important;
+}
+
+.boton-registrar:hover {
+  background-color: #ffffff !important; /* Azul Bootstrap */
+  color: #283253!important;
+}
+
+/* Boton editar */
+.boton-editar:hover {
+  background-color: #ffffff84;
+}
+
+.color-icono{
+  color: #43538a;
+}
+
+.boton-editar:hover .color-icono{
+  color: #283253;
+}
+
+/* Boton eliminar) */
+.boton-eliminar:hover {
+  background-color: #ffffff84;
+}
+
+.color-icono-eliminar{
+  color: #43538a;
+}
+
+.boton-eliminar:hover .color-icono-eliminar{
+  color: #f30715;
+}
+
+/* Espaciador para empujar los botones a los lados */
+.spacer {
+  flex-grow: 0.9; /* Ocupa todo el espacio disponible */
+}

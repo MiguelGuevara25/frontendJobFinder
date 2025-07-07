@@ -3,7 +3,7 @@
 </div>
 
 <div class="contenedor-tabla">
-  <form class="formulario-estilizado">
+  <div class="formulario-estilizado">
     <div class="acciones-superiores">
       <mat-form-field appearance="outline" class="campo-busqueda">
         <mat-label>Buscar</mat-label>
@@ -11,8 +11,7 @@
         <input matInput (keyup)="filtrar($event)" />
       </mat-form-field>
 
-      
-
+    
       <div class="spacer"></div>
 
       <button
@@ -130,5 +129,5 @@
         showFirstLastButtons
       ></mat-paginator>
     </div>
-  </form>
+  </div>
 </div>

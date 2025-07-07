@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Rol } from '../../../models/rol';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { RolService } from '../../../services/rol.service';
@@ -26,7 +26,7 @@ import { MatInputModule } from '@angular/material/input';
   templateUrl: './listarrol.component.html',
   styleUrl: './listarrol.component.css'
 })
-export class ListarrolComponent {
+export class ListarrolComponent implements OnInit, AfterViewInit {
 
   dataSource: MatTableDataSource<Rol> = new MatTableDataSource();
 
@@ -35,7 +35,8 @@ export class ListarrolComponent {
     'c2',
     'c3',
     'c4',
-    'c5'
+    'c5',
+    'c6'
   ];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -44,6 +45,7 @@ export class ListarrolComponent {
     private rS: RolService,
     private _snackBar: MatSnackBar
   ) { }
+  
   ngOnInit(): void {
     this.rS.list().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
@@ -59,37 +61,37 @@ export class ListarrolComponent {
     };
   }
   eliminar(id: number): void {
-  this.rS.delete(id).subscribe({
-    next: () => {
-      this.rS.list().subscribe(data => {
-        this.rS.setList(data);
-        this._snackBar.open('Curso eliminado correctamente', 'Cerrar', {
-          duration: 3000
+    this.rS.delete(id).subscribe({
+      next: () => {
+        this.rS.list().subscribe(data => {
+          this.rS.setList(data);
+          this._snackBar.open('Curso eliminado correctamente', 'Cerrar', {
+            duration: 3000
+          });
         });
-      });
-    },
-    error: (error) => {
-      console.error(error); // Para ver el detalle en consola
-      if (
-        error.status === 500 &&
-        error.error?.message?.includes('violates foreign key constraint')
-      ) {
-        this._snackBar.open(
-          'No se puede eliminar el curso porque tiene inscripciones registradas.',
-          'Cerrar',
-          { duration: 4000 }
-        );
-      } else {
-        this._snackBar.open(
-          'Ocurrió un error al intentar eliminar el curso.',
-          'Cerrar',
-          { duration: 3000 }
-        );
+      },
+      error: (error) => {
+        console.error(error); // Para ver el detalle en consola
+        if (
+          error.status === 500 &&
+          error.error?.message?.includes('violates foreign key constraint')
+        ) {
+          this._snackBar.open(
+            'No se puede eliminar el rol porque esta asociado.',
+            'Cerrar',
+            { duration: 4000 }
+          );
+        } else {
+          this._snackBar.open(
+            'Ocurrió un error al intentar eliminar el curso.',
+            'Cerrar',
+            { duration: 3000 }
+          );
+        }
       }
-    }
-  });
-}
- 
+    });
+  }
+
 
   filtrar(event: Event) {
     const filtro = (event.target as HTMLInputElement).value.trim().toLowerCase();

@@ -54,6 +54,10 @@ import { UsuariosactivosComponent } from './components/reportes/usuariosactivos/
 import { TotalregistroscursosComponent } from './components/reportes/totalregistroscursos/totalregistroscursos.component';
 import { PromedioinscripcioncursosComponent } from './components/reportes/promedioinscripcioncursos/promedioinscripcioncursos.component';
 import { ContratosactivosComponent } from './components/reportes/contratosactivos/contratosactivos.component';
+import { CurriculumpromedioComponent } from './components/reportes/curriculumpromedio/curriculumpromedio.component';
+import { FrecuenciahabilidadesComponent } from './components/reportes/frecuenciahabilidades/frecuenciahabilidades.component';
+import { PromedioExperienciaLaboral } from './models/PromedioExperienciaLaboral';
+import { DuracionpromediopuestoComponent } from './components/reportes/duracionpromediopuesto/duracionpromediopuesto.component';
 
 export const routes: Routes = [
   //Ejecucion Inicial
@@ -395,6 +399,22 @@ export const routes: Routes = [
         path: 'promedioinscripcioncurso',
         component: PromedioinscripcioncursosComponent,
       },
+      {
+        path: 'promediocurriculum',
+        component: CurriculumpromedioComponent,
+      },
+      {
+        path: 'frecuenciahabilidad',
+        component: FrecuenciahabilidadesComponent,
+      },
+      {
+        path: 'promedioexperiencia',
+        component: PromedioExperienciaLaboral
+      },
+      {
+        path: 'duracionpuesto',
+        component: DuracionpromediopuestoComponent
+      }
     ],
   },
 ];
