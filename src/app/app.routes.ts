@@ -56,6 +56,7 @@ import { PromedioinscripcioncursosComponent } from './components/reportes/promed
 import { ContratosactivosComponent } from './components/reportes/contratosactivos/contratosactivos.component';
 import { CurriculumpromedioComponent } from './components/reportes/curriculumpromedio/curriculumpromedio.component';
 import { FrecuenciahabilidadesComponent } from './components/reportes/frecuenciahabilidades/frecuenciahabilidades.component';
+import { PromedioExperienciaLaboral } from './models/PromedioExperienciaLaboral';
 
 export const routes: Routes = [
   //Ejecucion Inicial
@@ -405,6 +406,10 @@ export const routes: Routes = [
         path: 'frecuenciahabilidad',
         component: FrecuenciahabilidadesComponent,
       },
+      {
+        path: 'promedioexperiencia',
+        component: PromedioExperienciaLaboral
+      }
     ],
   },
 ];

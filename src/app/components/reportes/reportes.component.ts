@@ -9,6 +9,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTabsModule } from '@angular/material/tabs';
 import { FrecuenciahabilidadesComponent } from './frecuenciahabilidades/frecuenciahabilidades.component';
 import { InstitucionfrecuenteComponent } from "./institucionfrecuente/institucionfrecuente.component";
+import { ExperienciafrecuenciaComponent } from "./experienciafrecuencia/experienciafrecuencia.component";
 
 @Component({
   selector: 'app-reportes',
@@ -21,7 +22,8 @@ import { InstitucionfrecuenteComponent } from "./institucionfrecuente/institucio
     MatCardModule,
     CurriculumpromedioComponent,
     FrecuenciahabilidadesComponent,
-    InstitucionfrecuenteComponent
+    InstitucionfrecuenteComponent,
+    ExperienciafrecuenciaComponent
 ],
   templateUrl: './reportes.component.html',
   styleUrl: './reportes.component.css',
