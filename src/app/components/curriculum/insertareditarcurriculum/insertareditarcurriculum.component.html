@@ -21,12 +21,22 @@
       <mat-error *ngIf="form.get('descripcion')?.hasError('required')">
         la descripcion es obligatorio
       </mat-error>
+      <mat-error *ngIf="form.get('descripcion')?.hasError('minlength')">
+        Mínimo 5 caracteres
+      </mat-error>
+      <mat-error *ngIf="form.get('descripcion')?.hasError('pattern')">
+        No se permiten caracteres especiales
+      </mat-error>
     </mat-form-field>
 
     <!-- FechaCreaccion -->
     <mat-form-field>
       <mat-label>Fecha:</mat-label>
-      <input matInput [matDatepicker]="picker" formControlName="fechaCreacion" />
+      <input
+        matInput
+        [matDatepicker]="picker"
+        formControlName="fechaCreacion"
+      />
       <mat-hint>MM/DD/YYYY</mat-hint>
       <mat-datepicker-toggle
         matIconSuffix
@@ -35,6 +45,9 @@
       <mat-datepicker #picker></mat-datepicker>
       <mat-error *ngIf="form.get('fechaCreacion')?.hasError('required')">
         La fecha es obligatoria!!
+      </mat-error>
+      <mat-error *ngIf="form.get('fechaCreacion')?.hasError('fechaInvalida')">
+        La fecha no puede ser menor que la fecha actual
       </mat-error>
     </mat-form-field>
 
@@ -53,8 +66,21 @@
 
     <!-- Botones -->
     <div class="example-button-row">
-      <button mat-raised-button class="boton-personalizado" color="primary" type="submit">Aceptar</button>
-      <button mat-raised-button class="boton-personalizado" olor="warn" type="button" (click)="cancelar()">
+      <button
+        mat-raised-button
+        class="boton-personalizado"
+        color="primary"
+        type="submit"
+      >
+        Aceptar
+      </button>
+      <button
+        mat-raised-button
+        class="boton-personalizado"
+        olor="warn"
+        type="button"
+        (click)="cancelar()"
+      >
         Cancelar
       </button>
     </div>

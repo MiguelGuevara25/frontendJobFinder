@@ -15,31 +15,49 @@
     </mat-form-field>
 
     <!-- Nombre -->
+    <br />
     <mat-form-field>
-      <mat-label>Nombre</mat-label>
-      <input matInput formControlName="nombre" />
-      <mat-error *ngIf="form.get('nombre')?.hasError('required')">
-        El nombre es obligatorio
-      </mat-error>
+      <mat-label>Tipo</mat-label>
+      <mat-select formControlName="nombre">
+        @for (t of tipos; track t) {
+        <mat-option [value]="t.value">{{ t.viewValue }}</mat-option>
+        }
+      </mat-select>
     </mat-form-field>
+    <br />
 
     <!-- Usuario -->
     <mat-form-field>
       <mat-label>Usuario</mat-label>
-       <mat-select formControlName="usuario">
-          @for (food of listaUsuario; track food) {
-          <mat-option [value]="food.idUsuario">{{ food.idUsuario }}</mat-option>
-          }
-        </mat-select>
+      <mat-select formControlName="usuario">
+        @for (food of listaUsuario; track food) {
+        <mat-option [value]="food.idUsuario">{{ food.idUsuario }}</mat-option>
+        }
+      </mat-select>
       <mat-error *ngIf="form.get('usuario')?.hasError('required')">
         El usuario es obligatorio
       </mat-error>
     </mat-form-field>
 
-     <!-- Botones -->
+    <!-- Botones -->
     <div class="example-button-row">
-      <button mat-raised-button class="boton-personalizado" color="primary" type="submit">Aceptar</button>
-      <button mat-raised-button class="boton-personalizado" color="warn" type="button" (click)="cancelar()">Cancelar</button>
+      <button
+        mat-raised-button
+        class="boton-personalizado"
+        color="primary"
+        type="submit"
+      >
+        Aceptar
+      </button>
+      <button
+        mat-raised-button
+        class="boton-personalizado"
+        color="warn"
+        type="button"
+        (click)="cancelar()"
+      >
+        Cancelar
+      </button>
     </div>
   </form>
 </div>

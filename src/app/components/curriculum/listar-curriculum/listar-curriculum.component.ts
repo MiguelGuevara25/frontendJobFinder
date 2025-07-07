@@ -80,4 +80,6 @@ export class ListarCurriculumComponent implements OnInit, AfterViewInit {
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
   }
+
+  
 }

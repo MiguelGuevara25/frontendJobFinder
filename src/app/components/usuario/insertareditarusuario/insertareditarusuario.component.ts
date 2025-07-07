@@ -42,16 +42,16 @@ export class InsertareditarusuarioComponent implements OnInit {
 
     this.form = this.formBuilder.group({
       codigo: [''],
-      nombre: ['', [Validators.required]],
-      apellido: ['', [Validators.required]],
+      nombre: ['', [Validators.required, Validators.minLength(3), Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/)]],
+      apellido: ['', [Validators.required, Validators.minLength(3), Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/)]],
       correo: ['', [Validators.required, Validators.email]],
       telefono: ['', [Validators.required, Validators.pattern(/^9\d{8}$/)]],
-      direccion: ['', [Validators.required]],
+      direccion: ['', [Validators.required, Validators.minLength(5)]],
       estado: ['', [Validators.required]],
       usuario: ['', [Validators.required, Validators.minLength(3)]],
-      contraseña: ['', [Validators.required]],
+      contraseña: ['', [Validators.required, Validators.minLength(6), Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]).{6,}$/)]],
       favorito: ['', [Validators.required]],
-      edad: ['', [Validators.required, Validators.pattern(/^[0-9]+$/), Validators.min(1), Validators.max(100)]],
+      edad: ['', [Validators.required, Validators.min(1), Validators.max(100), Validators.pattern(/^\d+$/)]],
     });
   }
   aceptar() {

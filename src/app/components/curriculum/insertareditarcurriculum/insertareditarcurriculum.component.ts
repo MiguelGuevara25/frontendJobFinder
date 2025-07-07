@@ -22,7 +22,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './insertareditarcurriculum.component.html',
   styleUrl: './insertareditarcurriculum.component.css'
 })
-export class InsertareditarcurriculumComponent implements OnInit{
+export class InsertareditarcurriculumComponent implements OnInit {
 
   form: FormGroup = new FormGroup({});
   curriculum: Curriculum = new Curriculum();
@@ -41,12 +41,12 @@ export class InsertareditarcurriculumComponent implements OnInit{
   ) { }
 
   ngOnInit(): void {
-    
+
 
     this.form = this.formBuilder.group({
       codigo: [{ value: '', disabled: true }],
-      descripcion: ['', [Validators.required]],
-      fechaCreacion: ['', [Validators.required]],
+      descripcion: ['', [Validators.required, Validators.minLength(5), Validators.pattern(/^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s.,:;()'"-]+$/)]],
+      fechaCreacion: ['', [Validators.required, this.validarFechaActual]],
       usuario: ['', [Validators.required]],
     });
     this.route.params.subscribe((data: Params) => {
@@ -94,7 +94,7 @@ export class InsertareditarcurriculumComponent implements OnInit{
       this.cS.listarId(this.id).subscribe((data) => {
         this.form.patchValue({
           codigo: data.idCurriculum,
-          descripcion:data.descripcionCurriculum,
+          descripcion: data.descripcionCurriculum,
           fechaCreacion: data.fechaCurriculum,
           usuario: data.usuario.idUsuario,
         });
@@ -106,5 +106,16 @@ export class InsertareditarcurriculumComponent implements OnInit{
       duration: 3000,
     });
     this.router.navigate(['curriculum']);
+  }
+
+  validarFechaActual(control: FormControl) {
+    const fechaSeleccionada = new Date(control.value);
+    const fechaActual = new Date();
+
+    // Limpiamos la hora para comparar solo fechas
+    fechaSeleccionada.setHours(0, 0, 0, 0);
+    fechaActual.setHours(0, 0, 0, 0);
+
+    return fechaSeleccionada >= fechaActual ? null : { fechaInvalida: true };
   }
 }
