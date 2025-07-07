@@ -61,6 +61,24 @@ export class InsertarEditarContratoComponent {
   listUsuario: Usuario[] = [];
   listPostulacion: Postulacion[] = [];
 
+  listContractTypes = [
+    { value: 'Indefinido', label: 'Contrato a Término Indefinido' },
+    { value: 'Fijo', label: 'Contrato a Término Fijo' },
+    { value: 'Obra', label: 'Contrato de Obra o Labor' },
+    { value: 'Prestacion', label: 'Contrato por Prestación de Servicios' },
+    { value: 'Practicas', label: 'Contrato de Prácticas o Pasantías' },
+    { value: 'TiempoParcial', label: 'Contrato de Trabajo a Tiempo Parcial' },
+    { value: 'Temporal', label: 'Contrato de Trabajo Temporal' },
+    { value: 'Comision', label: 'Contrato de Comisión' },
+    { value: 'Arrendamiento', label: 'Contrato de Arrendamiento' },
+    { value: 'Sociedad', label: 'Contrato de Sociedad o Asociaciones' },
+    { value: 'Confidencialidad', label: 'Contrato de Confidencialidad (NDA)' },
+    { value: 'Distribucion', label: 'Contrato de Distribución' },
+    { value: 'Franquicia', label: 'Contrato de Franquicia' },
+    { value: 'Licencia', label: 'Contrato de Licencia' },
+    { value: 'Voluntariado', label: 'Contrato de Voluntariado' },
+  ];
+
   id: number = 0;
   edicion: boolean = false;
 

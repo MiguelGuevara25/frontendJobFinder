@@ -85,7 +85,11 @@
     <!-- Campo Tipo de contrato -->
     <mat-form-field class="example-full-width">
       <mat-label>Tipo de contrato</mat-label>
-      <input matInput formControlName="contractType" />
+      <mat-select formControlName="contractType">
+        @for (contract of listContractTypes; track contract) {
+        <mat-option [value]="contract.value">{{ contract.label }}</mat-option>
+        }
+      </mat-select>
       <mat-error *ngIf="form.get('contractType')?.hasError('required')">
         El tipo de contrato es obligatorio
       </mat-error>

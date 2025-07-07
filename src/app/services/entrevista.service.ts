@@ -3,6 +3,7 @@ import { Entrevista } from '../models/entrevista';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { CantidadEntrevistasDTO } from '../models/CantidadEntrevistasDTO';
 
 const base_url = environment.base;
 
@@ -41,5 +42,9 @@ export class EntrevistaService {
 
   delete(id: number) {
     return this.http.delete(`${this.url}/${id}`);
+  }
+
+  cantidadEntrevistas() {
+    return this.http.get<CantidadEntrevistasDTO[]>(`${this.url}/cantidades`);
   }
 }
