@@ -55,9 +55,9 @@ import { TotalregistroscursosComponent } from './components/reportes/totalregist
 import { PromedioinscripcioncursosComponent } from './components/reportes/promedioinscripcioncursos/promedioinscripcioncursos.component';
 import { ContratosactivosComponent } from './components/reportes/contratosactivos/contratosactivos.component';
 import { CurriculumpromedioComponent } from './components/reportes/curriculumpromedio/curriculumpromedio.component';
-
-
-
+import { FrecuenciahabilidadesComponent } from './components/reportes/frecuenciahabilidades/frecuenciahabilidades.component';
+import { PromedioExperienciaLaboral } from './models/PromedioExperienciaLaboral';
+import { DuracionpromediopuestoComponent } from './components/reportes/duracionpromediopuesto/duracionpromediopuesto.component';
 
 export const routes: Routes = [
   //Ejecucion Inicial
@@ -107,10 +107,12 @@ export const routes: Routes = [
         component: VerperfilComponent,
       },
       {
-        path: 'activosusuarios', component: UsuariosactivosComponent
+        path: 'activosusuarios',
+        component: UsuariosactivosComponent,
       },
       {
-        path: 'contratosactivos', component: ContratosactivosComponent
+        path: 'contratosactivos',
+        component: ContratosactivosComponent,
       },
     ],
   },
@@ -273,7 +275,6 @@ export const routes: Routes = [
         path: 'ediciones/:id',
         component: InsertareditarempresaComponent,
       },
-
     ],
   },
 
@@ -383,20 +384,37 @@ export const routes: Routes = [
         component: CantidadplataformacursoComponent,
       },
       {
-        path: 'cantidadempresacurso', component: CantidadempresacursoComponent
+        path: 'cantidadempresacurso',
+        component: CantidadempresacursoComponent,
       },
       {
-        path: 'activosusuarios', component: UsuariosactivosComponent
+        path: 'activosusuarios',
+        component: UsuariosactivosComponent,
       },
       {
-        path: 'totalregistrocurso', component: TotalregistroscursosComponent
+        path: 'totalregistrocurso',
+        component: TotalregistroscursosComponent,
       },
       {
-        path: 'promedioinscripcioncurso', component: PromedioinscripcioncursosComponent
+        path: 'promedioinscripcioncurso',
+        component: PromedioinscripcioncursosComponent,
       },
       {
-        path: 'promediocurriculum', component: CurriculumpromedioComponent
+        path: 'promediocurriculum',
+        component: CurriculumpromedioComponent,
+      },
+      {
+        path: 'frecuenciahabilidad',
+        component: FrecuenciahabilidadesComponent,
+      },
+      {
+        path: 'promedioexperiencia',
+        component: PromedioExperienciaLaboral
+      },
+      {
+        path: 'duracionpuesto',
+        component: DuracionpromediopuestoComponent
       }
-    ]
-  }
+    ],
+  },
 ];

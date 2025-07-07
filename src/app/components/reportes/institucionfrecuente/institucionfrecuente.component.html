@@ -1,0 +1,19 @@
+<div class="title-container">
+  <h1 style="text-align: center;">Instituciones más frecuentes</h1>
+
+  <div class="chart-container" *ngIf="hasData">
+    <canvas
+      baseChart
+      [datasets]="barChartData"
+      [labels]="barChartLabels"
+      [options]="barChartOptions"
+      [type]="barChartType"
+      [legend]="barChartLegend"
+    ></canvas>
+  </div>
+
+  <div class="no-data" *ngIf="!hasData">
+    <mat-icon class="no-data-icon">info_outline</mat-icon>
+    <p class="no-data-message">No hay datos disponibles para mostrar.</p>
+  </div>
+</div>

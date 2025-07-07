@@ -10,6 +10,7 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { HabilidadVacia } from '../../../models/habilidadvacia';
 
 @Component({
   selector: 'app-listarhabilidad',
@@ -33,39 +34,69 @@ export class ListarhabilidadComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
+  vistaActual: 'general' | 'filtro' = 'general'; 
+
   constructor(private hS: HabilidadService, private snackBar: MatSnackBar) {}
+
   ngOnInit(): void {
+    this.cargarHabilidades();
+    this.escucharCambios();
+  }
+
+  cargarHabilidades() {
+    this.vistaActual = 'general';
     this.hS.list().subscribe((data) => {
-      this.dataSource = new MatTableDataSource(data);
-      this.dataSource.paginator = this.paginator;
-    });
-    this.hS.getList().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;
     });
   }
 
-  eliminar(id: number) {
-    this.hS.delete(id).subscribe((data) => {
-      this.hS.list().subscribe((data) => {
-        this.hS.setList(data);
+  escucharCambios() {
+    this.hS.getList().subscribe((data) => {
+      if (this.vistaActual === 'general') {
         this.dataSource.data = data;
-        this.dataSource.paginator = this.paginator;
+      }
+    });
+  }
 
-        this.snackBar.open('¡Habilidad eliminada con éxito!', 'Cerrar', {
-          duration: 3000,
-        });
+  eliminar(id: number) {
+    this.hS.delete(id).subscribe(() => {
+      if (this.vistaActual === 'general') {
+        this.cargarHabilidades();
+      } else {
+        this.mostrarHabilidadesSinUsuarios();
+      }
+
+      this.snackBar.open('¡Habilidad eliminada con éxito!', 'Cerrar', {
+        duration: 3000,
       });
     });
   }
 
   filtrar(event: Event) {
-    const filtro = (event.target as HTMLInputElement).value
-      .trim()
-      .toLowerCase();
+    const filtro = (event.target as HTMLInputElement).value.trim().toLowerCase();
     this.dataSource.filter = filtro;
+
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  mostrarHabilidadesSinUsuarios() {
+    this.vistaActual = 'filtro';
+
+    this.hS.habilidadesSinUsuarios().subscribe((data: HabilidadVacia[]) => {
+      const habilidades: Habilidad[] = data.map((item) => ({
+        id_habilidad: item.id_habilidad,
+        nombre: item.nombre,
+      }));
+
+      this.dataSource = new MatTableDataSource(habilidades);
+      this.dataSource.paginator = this.paginator;
+    });
+  }
+
+  refrescarLista() {
+    this.cargarHabilidades();
   }
 }
