@@ -27,6 +27,12 @@ export class InsertareditarolComponent {
   usuario: Usuario= new Usuario();
   listaUsuario: Usuario[] = []
 
+  tipos: { value: string; viewValue: string }[] = [
+    { value: 'ADMIN', viewValue: 'ADMIN' },
+    { value: 'EMPRESA', viewValue: 'EMPRESA' },
+    { value: 'POSTULANTE', viewValue: 'POSTULANTE' },
+  ];
+
   constructor(
     private rS: RolService,
     private formBuilder: FormBuilder,
