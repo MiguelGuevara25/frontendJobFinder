@@ -31,6 +31,8 @@ export class InsertareditarcurriculumComponent implements OnInit {
 
   listausuario: Usuario[] = []
 
+  minFecha: Date = new Date(); 
+
   constructor(
     private cS: CurriculumService,
     private formBuilder: FormBuilder,
