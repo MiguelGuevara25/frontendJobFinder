@@ -10,6 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { CantidadEntrevistasDTO } from '../../../models/CantidadEntrevistasDTO';
 
 @Component({
   selector: 'app-listar-entrevista',
@@ -28,6 +29,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrl: './listar-entrevista.component.css',
 })
 export class ListarEntrevistaComponent implements OnInit {
+  quantityInterview: CantidadEntrevistasDTO[] = [];
   dataSource: MatTableDataSource<Entrevista> = new MatTableDataSource();
   displayedColumns: string[] = [
     'c1',
@@ -42,6 +44,7 @@ export class ListarEntrevistaComponent implements OnInit {
   ];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  isFilterActive = false;
 
   constructor(private eS: EntrevistaService, private snackBar: MatSnackBar) {}
 
@@ -54,6 +57,10 @@ export class ListarEntrevistaComponent implements OnInit {
     this.eS.getList().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;
+    });
+
+    this.eS.cantidadEntrevistas().subscribe((data) => {
+      this.quantityInterview = data;
     });
   }
 
@@ -72,13 +79,34 @@ export class ListarEntrevistaComponent implements OnInit {
     });
   }
 
-  filtrar(event: Event) {
-    const filtro = (event.target as HTMLInputElement).value
-      .trim()
-      .toLowerCase();
-    this.dataSource.filter = filtro;
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
+  filtrarUltimos30Dias(): void {
+    const today = new Date();
+    const last30Days = new Date();
+    last30Days.setDate(today.getDate() - 30);
+
+    const filteredData = this.dataSource.data.filter((interview) => {
+      const interviewDate = new Date(interview.date);
+      return interviewDate >= last30Days && interviewDate <= today;
+    });
+
+    this.dataSource.data = filteredData;
+    this.isFilterActive = true;
+
+    if (filteredData.length === 0) {
+      this.snackBar.open(
+        'No hay entrevistas en los últimos 30 días',
+        'Cerrar',
+        {
+          duration: 3000,
+        }
+      );
     }
+  }
+
+  limpiarFiltro(): void {
+    this.eS.list().subscribe((data) => {
+      this.dataSource.data = data;
+      this.isFilterActive = false;
+    });
   }
 }
