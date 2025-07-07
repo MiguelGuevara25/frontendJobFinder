@@ -1,1 +1,12 @@
-<p>mapa works!</p>,
+<div>
+  <label for="empresa-select">Selecciona una empresa:</label>
+  <select id="empresa-select" (change)="onSelectDireccion($event)">
+    <option *ngFor="let empresa of empresas" [value]="empresa.location">
+      {{ empresa.name }} - {{ empresa.location }}
+    </option>
+  </select>
+</div>
+
+<google-map *ngIf="center" [center]="center" [zoom]="zoom">
+  <map-marker [position]="center"></map-marker>
+</google-map>
