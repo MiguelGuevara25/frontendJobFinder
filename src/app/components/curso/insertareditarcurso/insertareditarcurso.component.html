@@ -5,9 +5,7 @@
 
 <div class="contenedor-tabla">
   <form [formGroup]="form" (ngSubmit)="aceptar()" class="formulario-estilizado">
-    <mat-form-field
-      *ngIf="edicion"
-    >
+    <mat-form-field *ngIf="edicion">
       <mat-label>ID</mat-label>
       <input matInput formControlName="idCurso" />
       <mat-error *ngIf="form.get('idCurso')?.hasError('required')">
@@ -16,8 +14,7 @@
     </mat-form-field>
 
     <!-- Campo: título del curso -->
-    <mat-form-field
-    >
+    <mat-form-field>
       <mat-label>Curso</mat-label>
       <input
         matInput
@@ -65,8 +62,7 @@
     </mat-form-field>
 
     <!-- Campo: plataforma -->
-    <mat-form-field
-    >
+    <mat-form-field>
       <mat-label>Plataforma curso</mat-label>
       <input
         matInput
@@ -90,8 +86,7 @@
     </mat-form-field>
 
     <!-- Campo: link -->
-    <mat-form-field
-    >
+    <mat-form-field>
       <mat-label>Link curso</mat-label>
       <input matInput placeholder="Link curso" formControlName="linkCurso" />
       <mat-error *ngIf="form.get('linkCurso')?.hasError('required')">
@@ -118,13 +113,19 @@
 
     <!-- Botones -->
     <div class="example-button-row">
-      <button mat-raised-button color="primary" type="submit">Guardar</button>
       <button
         mat-raised-button
+        color="primary"
+        class="boton-personalizado"
+        type="submit"
+      >
+        Guardar
+      </button>
+      <button mat-raised-button
         color="warn"
         type="button"
+        class="boton-personalizado"
         (click)="cancelar()"
-        style="margin-left: 16px"
       >
         Cancelar
       </button>

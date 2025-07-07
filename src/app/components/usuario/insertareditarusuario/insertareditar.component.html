@@ -4,7 +4,7 @@
 </div>
 
 <div class="contenedor-tabla">
-  <form [formGroup]="form" (ngSubmit)="aceptar()" class="formulario-estilizado">
+  <div [formGroup]="form" (ngSubmit)="aceptar()" class="formulario-estilizado">
     <div class="form-grid">
       <!-- Campo ID (solo en edición) -->
       <mat-form-field *ngIf="edicion">
@@ -57,8 +57,6 @@
         </mat-error>
       </mat-form-field>
 
-      
-
       <!-- Dirección -->
       <mat-form-field>
         <mat-label>Dirección</mat-label>
@@ -67,8 +65,6 @@
           La dirección es obligatoria
         </mat-error>
       </mat-form-field>
-
-      
 
       <!-- Usuario -->
       <mat-form-field>
@@ -91,7 +87,6 @@
         </mat-error>
       </mat-form-field>
 
-
       <!-- Edad -->
       <mat-form-field>
         <mat-label>Edad</mat-label>
@@ -109,9 +104,8 @@
           No puede superar 100
         </mat-error>
       </mat-form-field>
-      
 
-       <!-- Favorito -->
+      <!-- Favorito -->
       <div class="favorito-radio grupo-radio">
         <mat-label class="titulo-radio">¿Favorito?</mat-label>
         <mat-radio-group formControlName="favorito">
@@ -129,14 +123,26 @@
         </mat-radio-group>
       </div>
     </div>
-    
 
     <!-- Botones -->
     <div class="example-button-row">
-      <button mat-raised-button color="primary" class="boton-personalizado" type="submit">Aceptar</button>
-      <button mat-raised-button color="warn"  class="boton-personalizado" type="button" (click)="volver()">
+      <button
+        mat-raised-button
+        color="primary"
+        class="boton-personalizado"
+        type="submit"
+      >
+        Aceptar
+      </button>
+      <button
+        mat-raised-button
+        color="warn"
+        class="boton-personalizado"
+        type="button"
+        (click)="volver()"
+      >
         Cancelar
       </button>
     </div>
-  </form>
+  </div>
 </div>
