@@ -9,6 +9,7 @@
       color="primary"
       (click)="isFilterActive ? limpiarFiltro() : filtrarUltimos30Dias()"
     >
+      <mat-icon>calendar_month</mat-icon>
       {{ isFilterActive ? "Limpiar filtro" : "Últimos 30 días" }}
     </button>
 
@@ -21,6 +22,7 @@
     >
       <mat-icon>add</mat-icon>
       <mat-icon>school</mat-icon>
+
       Registrar
     </button>
   </div>
