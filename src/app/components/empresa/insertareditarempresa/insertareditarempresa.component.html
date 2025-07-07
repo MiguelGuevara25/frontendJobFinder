@@ -5,20 +5,24 @@
     </h1>
   </div>
 
-  <div style="text-align: center; margin: 5%">
-    <form [formGroup]="form" (submit)="aceptar()">
-      <!-- Campo ID  -->
-      <mat-form-field class="example-full-width" *ngIf="edicion">
-        <mat-label>ID</mat-label>
-        <input matInput formControlName="id" />
-        <mat-error *ngIf="form.get('id')?.hasError('required')">
-          El código es obligatorio
-        </mat-error>
-      </mat-form-field>
+  <div class="contenedor-tabla">
+    <form [formGroup]="form" (submit)="aceptar()" class="formulario-estilizado">
+      <div *ngIf="edicion">
+        <mat-form-field
+          appearance="fill"
+          class="form-control-id"
+          [ngClass]="{
+            shake: form.get('id')?.invalid && form.get('id')?.touched
+          }"
+        >
+          <mat-label>ID</mat-label>
+          <input matInput placeholder="ID" formControlName="id" />
+          <mat-error *ngIf="form.get('id')?.hasError('required')">
+            El código es obligatorio
+          </mat-error>
+        </mat-form-field>
+      </div>
 
-      <br />
-
-      <!-- Campo Nombre -->
       <mat-form-field
         appearance="fill"
         class="form-control-nombre"
@@ -26,16 +30,85 @@
           shake: form.get('name')?.invalid && form.get('name')?.touched
         }"
       >
-        <mat-label>Nombre Empresa</mat-label>
+        <mat-label>Nombre</mat-label>
         <input matInput placeholder="name" formControlName="name" />
         @if (form.get('name')?.hasError('required')) {
-        <mat-error>El nombre de la empresa es obligatorio</mat-error>
+        <mat-error>El nombre es obligatorio</mat-error>
         }
       </mat-form-field>
 
-      <br />
+      <mat-form-field
+        appearance="fill"
+        class="form-control-sector"
+        [ngClass]="{
+          shake: form.get('sector')?.invalid && form.get('sector')?.touched
+        }"
+      >
+        <mat-label>Sector</mat-label>
+        <input matInput placeholder="Sector" formControlName="sector" />
+        @if (form.get('sector')?.hasError('required')) {
+        <mat-error>El sector es obligatorio</mat-error>}
+      </mat-form-field>
 
-      <!-- Campo Descripcion -->
+      <mat-form-field
+        appearance="fill"
+        class="form-control-website"
+        [ngClass]="{
+          shake: form.get('website')?.invalid && form.get('website')?.touched
+        }"
+      >
+        <mat-label>Website</mat-label>
+        <input matInput placeholder="Website" formControlName="website" />
+        @if (form.get('website')?.hasError('required')) {
+        <mat-error>La Website es obligatoria</mat-error>}
+      </mat-form-field>
+
+      <mat-form-field
+        appearance="fill"
+        class="form-control-address"
+        [ngClass]="{
+          shake: form.get('address')?.invalid && form.get('address')?.touched
+        }"
+      >
+        <mat-label>Dirección</mat-label>
+        <input matInput placeholder="address" formControlName="address" />
+        @if (form.get('address')?.hasError('required')) {
+        <mat-error>La dirección es obligatoria</mat-error>}
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Telefono</mat-label>
+        <input matInput formControlName="telephone" type="number" />
+        <mat-error *ngIf="form.get('telephone')?.hasError('required')">
+          El numero de telefono es obligatorio
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field
+        appearance="fill"
+        class="form-control-mail"
+        [ngClass]="{
+          shake: form.get('mail')?.invalid && form.get('mail')?.touched
+        }"
+      >
+        <mat-label>Mail</mat-label>
+        <input matInput placeholder="mail" formControlName="mail" />
+        @if (form.get('mail')?.hasError('required')) {
+        <mat-error>El mail es obligatoria</mat-error>}
+      </mat-form-field>
+
+      <mat-form-field
+        appearance="fill"
+        class="form-control-location"
+        [ngClass]="{
+          shake: form.get('location')?.invalid && form.get('location')?.touched
+        }"
+      >
+        <mat-label>Locacion</mat-label>
+        <input matInput placeholder="location" formControlName="location" />
+        @if (form.get('location')?.hasError('required')) {
+        <mat-error>La locacion es obligatoria</mat-error>}
+      </mat-form-field>
 
       <mat-form-field
         appearance="fill"
@@ -45,118 +118,29 @@
             form.get('description')?.invalid && form.get('description')?.touched
         }"
       >
-        <mat-label>Descripcion de la Empresa</mat-label>
-        <input
+        <mat-label>Descripcion</mat-label>
+        <textarea
           matInput
           placeholder="Descripcion"
           formControlName="description"
-        />
+        ></textarea>
         @if (form.get('description')?.hasError('required')) {
-        <mat-error>La descripcion de la empresa es obligatoria</mat-error>
+        <mat-error>La descripcion es obligatoria</mat-error>
         }
       </mat-form-field>
 
-      <br />
-
-      <!-- Campo Sector-->
-
-      <mat-form-field
-        appearance="fill"
-        class="form-control-sector"
-        [ngClass]="{
-          shake: form.get('sector')?.invalid && form.get('sector')?.touched
-        }"
-      >
-        <mat-label>Sector de la Empresa</mat-label>
-        <input matInput placeholder="Sector" formControlName="sector" />
-        @if (form.get('sector')?.hasError('required')) {
-        <mat-error>El sector de la empresa es obligatorio</mat-error>}
-      </mat-form-field>
-
-      <br />
-      <!-- Campo Website-->
-
-      <mat-form-field
-        appearance="fill"
-        class="form-control-website"
-        [ngClass]="{
-          shake: form.get('website')?.invalid && form.get('website')?.touched
-        }"
-      >
-        <mat-label>Website de la Empresa</mat-label>
-        <input matInput placeholder="Website" formControlName="website" />
-        @if (form.get('website')?.hasError('required')) {
-        <mat-error>La Website de la empresa es obligatoria</mat-error>}
-      </mat-form-field>
-
-      <br />
-      <!-- Campo Direccion-->
-
-      <mat-form-field
-        appearance="fill"
-        class="form-control-address"
-        [ngClass]="{
-          shake: form.get('address')?.invalid && form.get('address')?.touched
-        }"
-      >
-        <mat-label>Dirección de la Empresa</mat-label>
-        <input matInput placeholder="address" formControlName="address" />
-        @if (form.get('address')?.hasError('required')) {
-        <mat-error>La dirección de la empresa es obligatoria</mat-error>}
-      </mat-form-field>
-
-      <br />
-
-      <!-- Campo Telefono -->
-      <mat-form-field class="example-full-width">
-        <mat-label>Telefono</mat-label>
-        <input matInput formControlName="telephone" type="number" />
-        <mat-error *ngIf="form.get('telephone')?.hasError('required')">
-          El numero de telefono es obligatorio
-        </mat-error>
-      </mat-form-field>
-
-      <br />
-      <!-- Campo Mail-->
-
-      <mat-form-field
-        appearance="fill"
-        class="form-control-mail"
-        [ngClass]="{
-          shake: form.get('mail')?.invalid && form.get('mail')?.touched
-        }"
-      >
-        <mat-label>Mail de la Empresa</mat-label>
-        <input matInput placeholder="mail" formControlName="mail" />
-        @if (form.get('mail')?.hasError('required')) {
-        <mat-error>El mail de la empresa es obligatoria</mat-error>}
-      </mat-form-field>
-
-      <br />
-
-      <!-- Campo Location -->
-      <mat-form-field
-        appearance="fill"
-        class="form-control-location"
-        [ngClass]="{
-          shake: form.get('location')?.invalid && form.get('location')?.touched
-        }"
-      >
-        <mat-label>Locacion de la Empresa</mat-label>
-        <input matInput placeholder="location" formControlName="location" />
-        @if (form.get('location')?.hasError('required')) {
-        <mat-error>La locacion de la empresa es obligatoria</mat-error>}
-      </mat-form-field>
-
-      <br />
-
-      <!-- Botón Aceptar-->
-      <button mat-raised-button color="primary" type="submit">Aceptar</button>
-
-      <!-- Botón Cancelar-->
-      <button mat-raised-button color="warn" type="button" (click)="cancelar()">
-        Cancelar
-      </button>
+      <div class="example-button-row">
+        <button mat-raised-button color="primary">Guardar</button>
+        <button
+          mat-raised-button
+          color="warn"
+          type="button"
+          (click)="cancelar()"
+          style="margin-left: 16px"
+        >
+          Cancelar
+        </button>
+      </div>
     </form>
   </div>
 </div>
