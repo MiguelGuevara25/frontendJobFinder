@@ -98,6 +98,9 @@ export class InsertareditarolComponent {
     }
   }
   cancelar() {
+    this._snackBar.open('Operación cancelada', 'Cerrar', {
+      duration: 3000,
+    });
     this.router.navigate(['rol']);
   }
 }

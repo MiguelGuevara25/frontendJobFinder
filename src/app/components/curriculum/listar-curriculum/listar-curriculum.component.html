@@ -11,6 +11,7 @@
 
     <button
       mat-raised-button
+      class="boton-registrar"
       color="primary"
       [routerLink]="'/curriculum/registrar'"
     >
@@ -59,18 +60,20 @@
       <mat-card-actions>
         <button
           mat-icon-button
+          class="boton-editar"
           color="primary"
           [routerLink]="['ediciones', element.idCurriculum]"
         >
-          <mat-icon>edit</mat-icon>
+          <mat-icon class="color-icono">edit</mat-icon>
         </button>
         <button
           mat-icon-button
+          class="boton-eliminar"
           type="button"
           color="warn"
           (click)="eliminar(element.idCurriculum)"
         >
-          <mat-icon>delete</mat-icon>
+          <mat-icon class="color-icono-eliminar">delete</mat-icon>
         </button>
 
         <div class="spacer"></div>

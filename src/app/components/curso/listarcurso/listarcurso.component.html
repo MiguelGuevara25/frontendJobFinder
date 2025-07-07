@@ -3,25 +3,24 @@
 </div>
 
 <div class="contenedor-tabla">
-  <button
-        mat-raised-button
-        class="boton-registrar"
-        color="primary"
-        [routerLink]="'/cursos/insertareditarcurso'"
-      >
-      <mat-icon>add</mat-icon>
-        <mat-icon>menu_book</mat-icon>
-        Registrar
-      </button>
-  <form class="formulario-estilizado" *ngIf="hasData; else sinDatos">
+  <div class="formulario-estilizado" *ngIf="hasData; else sinDatos">
     <div class="acciones-superiores">
-      
       <mat-form-field appearance="outline" class="campo-busqueda">
         <mat-label>Buscar</mat-label>
         <mat-icon matPrefix>search</mat-icon>
         <input matInput (keyup)="filtrar($event)" />
       </mat-form-field>
-      
+
+      <button
+        mat-raised-button
+        class="boton-registrar"
+        color="primary"
+        [routerLink]="'/cursos/insertareditarcurso'"
+      >
+        <mat-icon>add</mat-icon>
+        <mat-icon>menu_book</mat-icon>
+        Registrar
+      </button>
     </div>
 
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -72,7 +71,7 @@
             color="primary"
             [routerLink]="['ediciones', element.idCurso]"
           >
-            <mat-icon>edit</mat-icon>
+            <mat-icon class="color-icono">edit</mat-icon>
           </button>
         </td>
       </ng-container>
@@ -87,7 +86,7 @@
             color="warn"
             (click)="eliminar(element.idCurso)"
           >
-            <mat-icon>delete</mat-icon>
+            <mat-icon class="color-icono-eliminar">delete</mat-icon>
           </button>
         </td>
       </ng-container>
@@ -102,11 +101,11 @@
       >
       </mat-paginator>
     </div>
-  </form>
+  </div>
   <ng-template #sinDatos>
-      <div class="no-data">
-        <mat-icon class="no-data-icon">info_outline</mat-icon>
-        <p class="no-data-message">No hay certificados registrados.</p>
-      </div>
-    </ng-template>
+    <div class="no-data">
+      <mat-icon class="no-data-icon">info_outline</mat-icon>
+      <p class="no-data-message">No hay certificados registrados.</p>
+    </div>
+  </ng-template>
 </div>

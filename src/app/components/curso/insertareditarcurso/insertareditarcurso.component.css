@@ -1,0 +1,23 @@
+.example-button-row {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+
+}
+
+.grupo-radio {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 0;
+  align-items: center;
+}
+
+.boton-personalizado {
+  background-color: #283253 !important; /* Azul Bootstrap */
+  color: #ffffff !important;
+}
+
+.boton-personalizado:hover {
+  background-color: #ffffff !important; /* Azul Bootstrap */
+  color: #283253!important;
+}
