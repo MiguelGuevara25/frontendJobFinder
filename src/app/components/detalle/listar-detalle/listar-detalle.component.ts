@@ -53,7 +53,7 @@ export class ListarDetalleComponent {
 
         this.dataSource.data = data;
         this.dataSource.paginator = this.paginator;
-        this.snackBar.open('¡Estudio eliminado con éxito!', 'Cerrar', {
+        this.snackBar.open('Detalle eliminado con éxito!', 'Cerrar', {
           duration: 3000,
         });
       });

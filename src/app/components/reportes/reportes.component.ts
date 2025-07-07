@@ -5,10 +5,14 @@ import { CantidadempresacursoComponent } from './cantidadempresacurso/cantidadem
 import { CantidadplataformacursoComponent } from './cantidadplataformacurso/cantidadplataformacurso.component';
 import { MatCardModule } from '@angular/material/card';
 
-
 @Component({
   selector: 'app-reportes',
-  imports: [CantidadcertificadosComponent,CantidadempresacursoComponent,CantidadplataformacursoComponent,MatCardModule],
+  imports: [
+    CantidadcertificadosComponent,
+    CantidadempresacursoComponent,
+    CantidadplataformacursoComponent,
+    MatCardModule,
+  ],
   templateUrl: './reportes.component.html',
   styleUrl: './reportes.component.css',
 })

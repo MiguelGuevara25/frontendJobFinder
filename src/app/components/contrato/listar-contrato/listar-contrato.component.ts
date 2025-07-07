@@ -10,19 +10,21 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-listar-contrato',
   imports: [
+    MatFormFieldModule,
+    MatPaginatorModule,
     MatTableModule,
-    CommonModule,
     MatIconModule,
     MatButtonModule,
-    RouterLink,
-    MatPaginatorModule,
-    RouterLink,
-    MatFormFieldModule,
+    MatSelectModule,
     MatInputModule,
+    CommonModule,
+    RouterLink,
+    RouterLink,
   ],
   templateUrl: './listar-contrato.component.html',
   styleUrl: './listar-contrato.component.css',
@@ -42,6 +44,9 @@ export class ListarContratoComponent {
     'c10',
   ];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  listContrato: Contrato[] = [];
+  selectedContractType: string = '';
+  listContractTypes: string[] = [];
 
   constructor(private cS: ContratoService, private snackBar: MatSnackBar) {}
 
@@ -50,8 +55,20 @@ export class ListarContratoComponent {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;
     });
+
     this.cS.getList().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
+      this.dataSource.paginator = this.paginator;
+    });
+
+    this.cS.list().subscribe((data) => {
+      this.listContrato = data;
+
+      this.listContractTypes = [
+        ...new Set(data.map((contrato) => contrato.contractType)),
+      ];
+
+      this.dataSource = new MatTableDataSource(this.listContrato);
       this.dataSource.paginator = this.paginator;
     });
   }
@@ -70,11 +87,37 @@ export class ListarContratoComponent {
     });
   }
 
-  filtrar(event: Event) {
-    const filtro = (event.target as HTMLInputElement).value
+  filtrarSalario(event: Event) {
+    const salario = (event.target as HTMLInputElement).value
       .trim()
       .toLowerCase();
-    this.dataSource.filter = filtro;
+
+    if (salario) {
+      this.dataSource.data = this.listContrato.filter((contrato) =>
+        contrato.salary.toString().toLowerCase().includes(salario)
+      );
+    } else {
+      this.dataSource.data = this.listContrato;
+    }
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
+  onContractTypeChange(): void {
+    if (this.selectedContractType) {
+      const filteredData = this.listContrato.filter(
+        (contrato) =>
+          contrato.contractType.toLowerCase() ===
+          this.selectedContractType.toLowerCase()
+      );
+
+      this.dataSource.data = filteredData;
+    } else {
+      this.dataSource.data = this.listContrato;
+    }
+
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
