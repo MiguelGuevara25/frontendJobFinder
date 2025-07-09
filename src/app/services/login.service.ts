@@ -12,10 +12,12 @@ export class LoginService {
   login(request: JwtRequest) {
     return this.http.post('http://localhost:8082/login', request);
   }
+
   verificar() {
     let token = sessionStorage.getItem('token');
     return token != null;
   }
+
   showRole() {
     let token = sessionStorage.getItem('token');
     if (!token) {

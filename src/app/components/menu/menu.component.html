@@ -17,9 +17,14 @@
   </div>
 
   <div class="toolbar-derecha">
-    <button mat-button routerLink="/reportes">
+    <button mat-button routerLink="/reportes" style="margin-right: 10px">
       <mat-icon>assessment</mat-icon>
       Reportes
+    </button>
+
+    <button mat-button *ngIf="isLoggedIn()" (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      Cerrar sesión
     </button>
   </div>
 </mat-toolbar>
