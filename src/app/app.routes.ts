@@ -49,7 +49,6 @@ import { ReportesComponent } from './components/reportes/reportes.component';
 import { CantidadcertificadosComponent } from './components/reportes/cantidadcertificados/cantidadcertificados.component';
 import { CantidadplataformacursoComponent } from './components/reportes/cantidadplataformacurso/cantidadplataformacurso.component';
 import { CantidadempresacursoComponent } from './components/reportes/cantidadempresacurso/cantidadempresacurso.component';
-import { MapaComponent } from './components/mapa/mapa.component';
 import { UsuariosactivosComponent } from './components/reportes/usuariosactivos/usuariosactivos.component';
 import { TotalregistroscursosComponent } from './components/reportes/totalregistroscursos/totalregistroscursos.component';
 import { PromedioinscripcioncursosComponent } from './components/reportes/promedioinscripcioncursos/promedioinscripcioncursos.component';
@@ -58,19 +57,25 @@ import { CurriculumpromedioComponent } from './components/reportes/curriculumpro
 import { FrecuenciahabilidadesComponent } from './components/reportes/frecuenciahabilidades/frecuenciahabilidades.component';
 import { PromedioExperienciaLaboral } from './models/PromedioExperienciaLaboral';
 import { DuracionpromediopuestoComponent } from './components/reportes/duracionpromediopuesto/duracionpromediopuesto.component';
+import { seguridadGuard } from './guards/seguridad.guard';
+import { LoginComponent } from './components/login/login.component';
 
 export const routes: Routes = [
-  //Ejecucion Inicial
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'login',
     pathMatch: 'full',
   },
+  
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
 
-  //Enrutamiento de home
   {
     path: 'home',
     component: HomeComponent,
+    canActivate: [seguridadGuard],
   },
 
   //Enrutamiento de Api Foro
@@ -368,10 +373,6 @@ export const routes: Routes = [
 
   //Enrutamiento de Reportes
   {
-    path: 'mapa',
-    component: MapaComponent,
-  },
-  {
     path: 'reportes',
     component: ReportesComponent,
     children: [
@@ -409,12 +410,12 @@ export const routes: Routes = [
       },
       {
         path: 'promedioexperiencia',
-        component: PromedioExperienciaLaboral
+        component: PromedioExperienciaLaboral,
       },
       {
         path: 'duracionpuesto',
-        component: DuracionpromediopuestoComponent
-      }
+        component: DuracionpromediopuestoComponent,
+      },
     ],
   },
 ];
