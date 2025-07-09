@@ -3,28 +3,28 @@
 </div>
 
 <div class="contenedor-tabla">
-  <div class="formulario-estilizado">
-    <div class="acciones-superiores">
-      <mat-form-field appearance="outline" class="campo-busqueda">
-        <mat-label>Buscar</mat-label>
-        <mat-icon matPrefix>search</mat-icon>
-        <input matInput (keyup)="filtrar($event)" />
-      </mat-form-field>
+  <div class="acciones-superiores">
+    <mat-form-field appearance="outline" class="campo-busqueda">
+      <mat-label>Buscar</mat-label>
+      <mat-icon matPrefix>search</mat-icon>
+      <input matInput (keyup)="filtrar($event)" />
+    </mat-form-field>
 
-      <div class="spacer"></div>
+    <div class="spacer"></div>
 
-      <button
-        mat-raised-button
-        color="primary"
-        class="boton-registrar"
-        [routerLink]="'/rol/registrar'"
-      >
-        <mat-icon>add</mat-icon>
-        <mat-icon>manage_accounts</mat-icon>
-        Registrar
-      </button>
-    </div>
+    <button
+      mat-raised-button
+      color="primary"
+      class="boton-registrar"
+      [routerLink]="'/rol/registrar'"
+    >
+      <mat-icon>add</mat-icon>
+      <mat-icon>manage_accounts</mat-icon>
+      Registrar
+    </button>
+  </div>
 
+  <div class="formulario-estilizado" *ngIf="hasData; else sinDatos">
     <table
       mat-table
       [dataSource]="dataSource"
@@ -105,4 +105,10 @@
       ></mat-paginator>
     </div>
   </div>
+  <ng-template #sinDatos>
+    <div class="no-data">
+      <mat-icon class="no-data-icon">info_outline</mat-icon>
+      <p class="no-data-message">No hay roles registrados.</p>
+    </div>
+  </ng-template>
 </div>

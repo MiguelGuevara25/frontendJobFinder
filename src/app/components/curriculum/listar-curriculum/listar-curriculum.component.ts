@@ -14,14 +14,14 @@ import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-listar-curriculum',
-  standalone:true,
+  standalone: true,
   imports: [MatTableModule,
     CommonModule, RouterLink, MatIconModule, MatButtonModule, MatPaginatorModule, MatFormFieldModule, MatInputModule, MatCardModule],
   templateUrl: './listar-curriculum.component.html',
   styleUrl: './listar-curriculum.component.css'
 })
 export class ListarCurriculumComponent implements OnInit, AfterViewInit {
-
+  hasData = false;
   dataSource: MatTableDataSource<Curriculum> = new MatTableDataSource()
   dataFiltradaPaginada: Curriculum[] = [];
   pageSize = 3;
@@ -36,10 +36,14 @@ export class ListarCurriculumComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.curricuServi.listar().subscribe((data) => {
+      this.hasData = data.length > 0;
+
       this.dataSource = new MatTableDataSource(data)
       this.dataSource.paginator = this.paginator; // <== aquí lo asignas
     });
     this.curricuServi.getList().subscribe((data) => {
+      this.hasData = data.length > 0;
+
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator; // <== aquí lo asignas
     });
@@ -81,5 +85,5 @@ export class ListarCurriculumComponent implements OnInit, AfterViewInit {
     this.pageSize = event.pageSize;
   }
 
-  
+
 }

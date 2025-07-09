@@ -21,73 +21,81 @@
   </div>
 
   <div class="contenedor-cards">
-    <mat-card
-      class="example-card"
-      appearance="outlined"
-      *ngFor="let element of paginados"
-    >
-      <mat-card-header>
-        <div mat-card-avatar class="large-person-avatar">
-          <mat-icon fontIcon="person"></mat-icon>
-        </div>
+    <ng-container *ngIf="hasData; else sinDatos">
+      <mat-card
+        class="example-card"
+        appearance="outlined"
+        *ngFor="let element of paginados"
+      >
+        <mat-card-header>
+          <div mat-card-avatar class="large-person-avatar">
+            <mat-icon fontIcon="person"></mat-icon>
+          </div>
 
-        <mat-card-title>
-          {{ element.usuario.nombreUsuario }}
-          {{ element.usuario.apellidoUsuario }}
-        </mat-card-title>
-        <mat-card-subtitle>
-          Edad: {{ element.usuario.edadUsuario }}
-          <br />
-          Creado el {{ element.fechaCurriculum | date : "dd/MM/yyyy" }}
-        </mat-card-subtitle>
-      </mat-card-header>
+          <mat-card-title>
+            {{ element.usuario.nombreUsuario }}
+            {{ element.usuario.apellidoUsuario }}
+          </mat-card-title>
+          <mat-card-subtitle>
+            Edad: {{ element.usuario.edadUsuario }}
+            <br />
+            Creado el {{ element.fechaCurriculum | date : "dd/MM/yyyy" }}
+          </mat-card-subtitle>
+        </mat-card-header>
 
-      <mat-card-content>
-        <p>
-          <mat-icon fontIcon="email" inline></mat-icon
-          >{{ element.usuario.correoUsuario }}
-        </p>
-        <p>
-          <mat-icon fontIcon="phone" inline></mat-icon
-          >{{ element.usuario.telefonoUsuario }}
-        </p>
-      </mat-card-content>
+        <mat-card-content>
+          <p>
+            <mat-icon fontIcon="email" inline></mat-icon
+            >{{ element.usuario.correoUsuario }}
+          </p>
+          <p>
+            <mat-icon fontIcon="phone" inline></mat-icon
+            >{{ element.usuario.telefonoUsuario }}
+          </p>
+        </mat-card-content>
 
-      <mat-card-content>
-        <p>{{ element.descripcionCurriculum }}</p>
-      </mat-card-content>
+        <mat-card-content>
+          <p>{{ element.descripcionCurriculum }}</p>
+        </mat-card-content>
 
-      <mat-card-actions>
-        <button
-          mat-icon-button
-          class="boton-editar"
-          color="primary"
-          [routerLink]="['ediciones', element.idCurriculum]"
-        >
-          <mat-icon class="color-icono">edit</mat-icon>
-        </button>
-        <button
-          mat-icon-button
-          class="boton-eliminar"
-          type="button"
-          color="warn"
-          (click)="eliminar(element.idCurriculum)"
-        >
-          <mat-icon class="color-icono-eliminar">delete</mat-icon>
-        </button>
+        <mat-card-actions>
+          <button
+            mat-icon-button
+            class="boton-editar"
+            color="primary"
+            [routerLink]="['ediciones', element.idCurriculum]"
+          >
+            <mat-icon class="color-icono">edit</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            class="boton-eliminar"
+            type="button"
+            color="warn"
+            (click)="eliminar(element.idCurriculum)"
+          >
+            <mat-icon class="color-icono-eliminar">delete</mat-icon>
+          </button>
 
-        <div class="spacer"></div>
+          <div class="spacer"></div>
 
-        <button
-          mat-flat-button
-          color="accent"
-          [routerLink]="['/usuarios/verperfil', element.usuario.idUsuario]"
-          class="user-id-button"
-        >
-          ID: {{ element.usuario.idUsuario }}
-        </button>
-      </mat-card-actions>
-    </mat-card>
+          <button
+            mat-flat-button
+            color="accent"
+            [routerLink]="['/usuarios/verperfil', element.usuario.idUsuario]"
+            class="user-id-button"
+          >
+            ID: {{ element.usuario.idUsuario }}
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </ng-container>
+    <ng-template #sinDatos>
+      <div class="no-data">
+        <mat-icon class="no-data-icon">info_outline</mat-icon>
+        <p class="no-data-message">No hay curriculums registrados.</p>
+      </div>
+    </ng-template>
   </div>
 
   <div class="paginator-container">

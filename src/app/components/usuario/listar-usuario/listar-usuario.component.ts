@@ -28,6 +28,7 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class ListarUsuarioComponent implements OnInit, AfterViewInit {
   dataSource: MatTableDataSource<Usuario> = new MatTableDataSource();
+  hasData = false;
   displayedColumns: string[] = [
     'c1',
     'c2',
@@ -49,10 +50,12 @@ export class ListarUsuarioComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.usuServi.listar().subscribe((us_data) => {
+      this.hasData = us_data.length > 0;
       this.dataSource = new MatTableDataSource(us_data);
       this.dataSource.paginator = this.paginator; // <== aquí lo asignas
     });
     this.usuServi.getList().subscribe((data) => {
+      this.hasData = data.length > 0;
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator; // <== aquí lo asignas
     });
