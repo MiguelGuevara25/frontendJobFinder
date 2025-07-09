@@ -3,26 +3,26 @@
 </div>
 
 <div class="contenedor-tabla">
+  <div class="acciones-superiores">
+    <mat-form-field appearance="outline" class="campo-busqueda">
+      <mat-label>Buscar</mat-label>
+      <mat-icon matPrefix>search</mat-icon>
+      <input matInput (keyup)="filtrar($event)" />
+    </mat-form-field>
+
+    <button
+      mat-raised-button
+      class="boton-registrar"
+      color="primary"
+      [routerLink]="'/cursos/insertareditarcurso'"
+    >
+      <mat-icon>add</mat-icon>
+      <mat-icon>menu_book</mat-icon>
+      Registrar
+    </button>
+  </div>
+
   <div class="formulario-estilizado" *ngIf="hasData; else sinDatos">
-    <div class="acciones-superiores">
-      <mat-form-field appearance="outline" class="campo-busqueda">
-        <mat-label>Buscar</mat-label>
-        <mat-icon matPrefix>search</mat-icon>
-        <input matInput (keyup)="filtrar($event)" />
-      </mat-form-field>
-
-      <button
-        mat-raised-button
-        class="boton-registrar"
-        color="primary"
-        [routerLink]="'/cursos/insertareditarcurso'"
-      >
-        <mat-icon>add</mat-icon>
-        <mat-icon>menu_book</mat-icon>
-        Registrar
-      </button>
-    </div>
-
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
       <ng-container matColumnDef="c1">
         <th mat-header-cell *matHeaderCellDef>ID</th>
@@ -105,7 +105,7 @@
   <ng-template #sinDatos>
     <div class="no-data">
       <mat-icon class="no-data-icon">info_outline</mat-icon>
-      <p class="no-data-message">No hay certificados registrados.</p>
+      <p class="no-data-message">No hay cursos registrados.</p>
     </div>
   </ng-template>
 </div>

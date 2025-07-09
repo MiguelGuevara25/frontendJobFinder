@@ -27,6 +27,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrl: './listarofertadetrabajo.component.css',
 })
 export class ListarofertadetrabajoComponent {
+  hasData = false;
+
   dataSource: MatTableDataSource<Ofertadetrabajo> = new MatTableDataSource();
   displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8'];
 
@@ -35,7 +37,7 @@ export class ListarofertadetrabajoComponent {
   constructor(
     private oS: OfertadetrabajoService,
     private snackBar: MatSnackBar
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.oS.list().subscribe((data) => {

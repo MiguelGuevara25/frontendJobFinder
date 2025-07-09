@@ -27,7 +27,7 @@ import { MatInputModule } from '@angular/material/input';
   styleUrl: './listarrol.component.css'
 })
 export class ListarrolComponent implements OnInit, AfterViewInit {
-
+  hasData = false;
   dataSource: MatTableDataSource<Rol> = new MatTableDataSource();
 
   displayedColumns: string[] = [
@@ -45,13 +45,17 @@ export class ListarrolComponent implements OnInit, AfterViewInit {
     private rS: RolService,
     private _snackBar: MatSnackBar
   ) { }
-  
+
   ngOnInit(): void {
     this.rS.list().subscribe((data) => {
+      this.hasData = data.length > 0;
+
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator; // <== aquí lo asignas
     });
     this.rS.getList().subscribe((data) => {
+      this.hasData = data.length > 0;
+
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator; // <== aquí lo asignas
     });

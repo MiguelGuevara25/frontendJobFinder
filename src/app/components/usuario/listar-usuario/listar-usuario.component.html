@@ -3,48 +3,47 @@
 </div>
 
 <div class="contenedor-tabla">
-  <div class="formulario-estilizado">
-    <div class="acciones-superiores">
-      <mat-form-field appearance="outline" class="campo-busqueda">
-        <mat-label>Buscar</mat-label>
-        <mat-icon matPrefix>search</mat-icon>
-        <input matInput (keyup)="filtrar($event)" />
-      </mat-form-field>
+  <div class="acciones-superiores">
+    <mat-form-field appearance="outline" class="campo-busqueda">
+      <mat-label>Buscar</mat-label>
+      <mat-icon matPrefix>search</mat-icon>
+      <input matInput (keyup)="filtrar($event)" />
+    </mat-form-field>
 
-    
-      <div class="spacer"></div>
+    <div class="spacer"></div>
 
-      <button
-        mat-raised-button
-        class="boton-registrar"
-        color="primary"
-        [routerLink]="['contratosactivos']"
-      >
-        <mat-icon>assignment</mat-icon>
-        Contratos Activos
-      </button>
-      
-      <button
-        mat-raised-button
-        class="boton-registrar"
-        color="accent"
-        [routerLink]="'activosusuarios'"
-      >
-        <mat-icon>visibility</mat-icon>
-        Ver Activos
-      </button>
+    <button
+      mat-raised-button
+      class="boton-registrar"
+      color="primary"
+      [routerLink]="['contratosactivos']"
+    >
+      <mat-icon>assignment</mat-icon>
+      Contratos Activos
+    </button>
 
-      <button
-        mat-raised-button
-        color="primary"
-        class="boton-registrar"
-        [routerLink]="'registrar'"
-      >
-        <mat-icon>person_add</mat-icon>
-        Registrar
-      </button>
-    </div>
+    <button
+      mat-raised-button
+      class="boton-registrar"
+      color="accent"
+      [routerLink]="'activosusuarios'"
+    >
+      <mat-icon>visibility</mat-icon>
+      Ver Activos
+    </button>
 
+    <button
+      mat-raised-button
+      color="primary"
+      class="boton-registrar"
+      [routerLink]="'registrar'"
+    >
+      <mat-icon>person_add</mat-icon>
+      Registrar
+    </button>
+  </div>
+
+  <div class="formulario-estilizado" *ngIf="hasData; else sinDatos">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
       <ng-container matColumnDef="c1">
         <th mat-header-cell *matHeaderCellDef class="th-centrado">
@@ -130,4 +129,10 @@
       ></mat-paginator>
     </div>
   </div>
+  <ng-template #sinDatos>
+    <div class="no-data">
+      <mat-icon class="no-data-icon">info_outline</mat-icon>
+      <p class="no-data-message">No hay usuarios registrados.</p>
+    </div>
+  </ng-template>
 </div>

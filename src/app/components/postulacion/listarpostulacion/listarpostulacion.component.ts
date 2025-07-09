@@ -30,16 +30,21 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class ListarpostulacionComponent {
   dataSource: MatTableDataSource<Postulacion> = new MatTableDataSource();
   displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7'];
+  hasData = false;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private pS: PostulacionService, private snackBar: MatSnackBar) {}
+  constructor(private pS: PostulacionService, private snackBar: MatSnackBar) { }
   ngOnInit(): void {
     this.pS.list().subscribe((data) => {
+      this.hasData = data.length > 0;
+
       this.dataSource = new MatTableDataSource(data);
     });
 
     this.pS.getList().subscribe((data) => {
+      this.hasData = data.length > 0;
+
       this.dataSource = new MatTableDataSource(data);
     });
   }

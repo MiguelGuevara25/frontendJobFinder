@@ -1,0 +1,19 @@
+mat-paginator {
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(211, 4, 4, 0.08);
+  background-color: #5468ad;
+  color:#ffffff; /* Color de texto general para todo el paginador (ej. blanco) */
+  font-family: 'Roboto', sans-serif; /* Puedes especificar una fuente */
+  font-size: 14px; /* Tamaño de fuente para el texto general */
+}
+
+/* EL CONTENEDOR PRINCIPAL QUE SERÁ EL "CUADRO GRANDE" */
+.main-content-wrapper {
+  max-width: 1200px; /* Ancho máximo para el contenido */
+  margin: 20px auto; /* Centra el cuadro y le da margen arriba/abajo */
+  background-color: white; /* Fondo blanco para el cuadro */
+  border-radius: 8px; /* Bordes redondeados para el cuadro */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra suave para darle "elevación" */
+  padding: 24px; /* Un padding interno general para todo el contenido dentro del cuadro */
+  box-sizing: border-box; /* Incluye el padding en el cálculo del ancho */
+}
